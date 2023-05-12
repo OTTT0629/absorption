@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.ottt.ottt.dao.CommunityMapper">
+
+	<select id="select" parameterType="int" resultType="ArticleDTO">
+		select *
+		from tb_article
+		where article_index_no = '1' and article_no = #{article_no} 
+	</select>
+	
+	<select id="selectAll" resultType="ArticleDTO">
+		SELECT article_no, b.user_no, article_index_no, article_content, article_image, article_title
+		, article_create_dt, article_mod_dt, article_like_count, a.report_cnt, b.user_nicknm
+		FROM tb_article a, tb_user b
+		where article_index_no = '1' and a.user_no = b.user_no 
+		order by article_create_dt desc, article_no desc
+	</select>
+	
+	
+	<select id="count" parameterType="int" resultType="int">
+		select count(*) from tb_article
+		where article_index_no = '1'
+	</select>
+	
+	
+	<select id="selectcollection" parameterType="int" resultType="ArticleDTO">
+		select article_no, b.user_no,  article_index_no, article_content, article_image, article_create_dt, article_like_count, a.report_cnt, b.user_nicknm 
+		from tb_article a, tb_user b
+		where article_index_no = '1' and b.user_no =#{user_no}
+	</select>
+
+
+
+
+	<insert id="insert" parameterType="ArticleDTO">
+		INSERT INTO tb_article (article_content, article_image, user_no ,article_create_dt, article_index_no)
+		VALUES(#{article_content},#{article_image} ,#{user_no},now(),'1')
+	</insert>
+	
+	
+	<delete id="delete" parameterType="map">
+		delete from tb_article
+		where article_no = #{article_no} and user_no = #{user_no}
+	</delete>
+	
+	
+	<delete id="deleteAll" parameterType="int">
+		delete from tb_article
+		where
+	</delete>
+
+	<update id="update">
+		UPDATE tb_article
+		SET article_content=#{article_content}, article_image=#{article_image}, article_mod_dt=now()
+		WHERE article_no=#{article_no}, user_no=#{user_no}
+	</update>
+	
+
+
+
+
+
+
+</mapper>
