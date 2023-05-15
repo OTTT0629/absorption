@@ -327,9 +327,46 @@ header{
     /* border: 3px solid #33ff33; */
   }
 
+  .gender{
+  
+  position: absolute;
+  right: 40px;
+  top: 209px;
+  
+  
+  }
+  
+  /* 중복아이디 존재하지 않는경우 */
+	.id_input_re_1{
+		color : green;
+		display : none;
+		font-size: small;
+	}
+	/* 중복아이디 존재하는 경우 */
+	.id_input_re_2{
+		color : red;
+		display : none;
+		font-size: small;
+	}
+  
   .errorMsg {
-    color: red; 
-    position: absolute;
-    margin-top: 5px;
-    }
+  color: red; 
+  font-size: small; 
+  position: absolute;
+  margin-top: 5px;
+  }
+
+  /* 중복닉네임 존재하지 않는경우 */
+	.nickname_input_re_1{
+		color : green;
+		display : none;
+		font-size: small;
+	}
+	/* 중복닉네임 존재하는 경우 */
+	.nickname_input_re_2{
+		color : red;
+		display : none;
+		font-size: small;
+	}
+    
   

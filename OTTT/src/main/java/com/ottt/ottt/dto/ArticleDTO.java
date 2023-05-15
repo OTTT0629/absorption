@@ -4,7 +4,8 @@ import java.util.Date;
  * 	article_no				bigint			generated always as identity primary key
 	,user_no				bigint			not null
 	,article_index_no		char(1)			not null
-	,article_content_no		bigint			not null	
+	,article_content		text			not null
+	,article_image			text			
 	,article_title			varchar(255)
 	,article_create_dt		timestamptz		not null
 	,article_mod_dt			timestamptz
@@ -18,7 +19,7 @@ public class ArticleDTO {
 	private	Integer	article_no;
 	private int		user_no;
 	private char	article_index_no;
-	private int		article_content_no;
+	private String	article_content;
 	private String	article_title;
 	private Date	article_create_dt;
 	private Date	article_mod_dt;
@@ -58,14 +59,13 @@ public class ArticleDTO {
 		this.article_index_no = article_index_no;
 	}
 
-
-	public int getArticle_content_no() {
-		return article_content_no;
+	public String getArticle_content() {
+		return article_content;
 	}
 
 
-	public void setArticle_content_no(int article_content_no) {
-		this.article_content_no = article_content_no;
+	public void setArticle_content(String article_content) {
+		this.article_content = article_content;
 	}
 
 
@@ -121,7 +121,7 @@ public class ArticleDTO {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(article_content_no, article_index_no, article_no, article_title, user_no);
+		return Objects.hash(article_content, article_index_no, article_no, article_title, user_no);
 	}
 
 
@@ -134,7 +134,7 @@ public class ArticleDTO {
 		if (getClass() != obj.getClass())
 			return false;
 		ArticleDTO other = (ArticleDTO) obj;
-		return article_content_no == other.article_content_no && article_index_no == other.article_index_no
+		return article_content == other.article_content && article_index_no == other.article_index_no
 				&& Objects.equals(article_no, other.article_no) && Objects.equals(article_title, other.article_title)
 				&& user_no == other.user_no;
 	}
@@ -143,16 +143,9 @@ public class ArticleDTO {
 	@Override
 	public String toString() {
 		return "ArticleDTO [article_no=" + article_no + ", user_no=" + user_no + ", article_index_no="
-				+ article_index_no + ", article_content_no=" + article_content_no + ", article_title=" + article_title
+				+ article_index_no + ", article_content_no=" + article_content + ", article_title=" + article_title
 				+ ", article_create_dt=" + article_create_dt + ", article_mod_dt=" + article_mod_dt
 				+ ", article_like_count=" + article_like_count + ", report_cnt=" + report_cnt + "]";
 	}
 	
-	
-	
-	
-	
-	
-	
-
 }

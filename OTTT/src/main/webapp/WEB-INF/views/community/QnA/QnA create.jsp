@@ -114,10 +114,6 @@
         </div>
       </div>
 
-
- 
-
-
         <!-- 글목록 배너-->
         <div class="title-region">
           <div class="title-mainline">

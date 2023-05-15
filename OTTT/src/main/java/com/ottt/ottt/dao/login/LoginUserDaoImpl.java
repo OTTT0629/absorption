@@ -24,5 +24,10 @@ public class LoginUserDaoImpl implements LoginUserDao {
 		// TODO Auto-generated method stub
 		return session.insert(namespace+"insert", user);
 	}
+	
+	public UserDTO selectNickname(String user_nicknm) {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace+"selectNickname", user_nicknm);
+	}
 
 }

@@ -34,23 +34,16 @@ public class LoginController {
 	public String login(String user_id, String user_pwd, String toURL, boolean rememberId,
 			HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
 
-		//1. id와 pw를 확인
 		if(!loginCheck(user_id, user_pwd)) {
-		//2-1. 일치하지 않으면, loginForm으로 이동
 		String msg = URLEncoder.encode("id 또는 pwd가 일치하지 않습니다", "utf-8");
 		return "redirect:/login?msg="+msg;
 		}
-		
-		//2-2. 일치하면 로그인 후 home으로 이동
-		//2-2-1. 쿠키를 생성
-		//2-2-2. 응답헤더에 저장
+
 		if(rememberId) {
 		Cookie cookie = new Cookie("id", user_id);
 		response.addCookie(cookie);
 		}
 		else {
-		//2-3-1. 쿠키를 삭제
-		//2-3-2. 응답헤더에 저장
 		Cookie cookie = new Cookie("id", user_id);
 		cookie.setMaxAge(0);
 		response.addCookie(cookie);
@@ -70,6 +63,13 @@ public class LoginController {
 		}
 		
 		//4. 뷰 이동
+
+		UserDTO userDTO = userDao.select(user_id);		
+		HttpSession session = request.getSession();
+		session.setAttribute("id", user_id);
+		session.setAttribute("admin", userDTO.getAdmin());
+		session.setAttribute("no", userDTO.getUser_no());
+
 		toURL = toURL == null || toURL.equals("") ? "/" : toURL;
 				
 		return "redirect:" +toURL;
@@ -86,13 +86,15 @@ public class LoginController {
 			e.printStackTrace();
 			return false;
 		}
+	private boolean loginCheck(String id, String pwd) {
+		UserDTO user = userDao.select(id);
+		if(user == null) return false;
+		return user.getUser_pwd().equals(pwd);
 	}
 	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
-		//세션 종료
 		session.invalidate();
-		//홈으로 이동
 		return "redirect:/";
 		
 	}
