@@ -43,7 +43,6 @@ public class UserDTO {
 	private String user_nicknm;
 	private int user_gen;
 	private String user_email;
-	private Date reg_date;
 	private char admin;
 	private String image;
 	private int following;
@@ -51,6 +50,14 @@ public class UserDTO {
 	private int report_cnt;
 	
 	public UserDTO() {}
+
+	@Override
+	public String toString() {
+		return "UserDTO [user_no=" + user_no + ", gr_no=" + gr_no + ", user_id=" + user_id + ", user_pwd=" + user_pwd
+				+ ", user_nm=" + user_nm + ", user_nicknm=" + user_nicknm + ", user_gen=" + user_gen + ", user_email="
+				+ user_email + ", admin=" + admin + ", image=" + image + ", following=" + following + ", followers="
+				+ followers + ", report_cnt=" + report_cnt + "]";
+	}
 
 	public Integer getUser_no() {
 		return user_no;
@@ -115,16 +122,6 @@ public class UserDTO {
 	public void setUser_email(String user_email) {
 		this.user_email = user_email;
 	}
-	
-	
-
-	public Date getReg_date() {
-		return reg_date;
-	}
-
-	public void setReg_date(Date reg_date) {
-		this.reg_date = reg_date;
-	}
 
 	public char getAdmin() {
 		return admin;
@@ -166,33 +163,7 @@ public class UserDTO {
 		this.report_cnt = report_cnt;
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(user_email, user_gen, user_id, user_nicknm, user_nm, user_no, user_pwd);
-	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		UserDTO other = (UserDTO) obj;
-		return Objects.equals(user_email, other.user_email) && user_gen == other.user_gen
-				&& Objects.equals(user_id, other.user_id) && Objects.equals(user_nicknm, other.user_nicknm)
-				&& Objects.equals(user_nm, other.user_nm) && Objects.equals(user_no, other.user_no)
-				&& Objects.equals(user_pwd, other.user_pwd);
-	}
-
-	@Override
-	public String toString() {
-		return "UserDTO [user_no=" + user_no + ", gr_no=" + gr_no + ", user_id=" + user_id + ", user_pwd=" + user_pwd
-				+ ", user_nm=" + user_nm + ", user_nicknm=" + user_nicknm + ", user_gen=" + user_gen + ", user_email="
-				+ user_email + ", admin=" + admin + ", image=" + image + ", following=" + following + ", followers="
-				+ followers + ", report_cnt=" + report_cnt + "]";
-	}
 	
 	
 }

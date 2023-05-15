@@ -56,16 +56,15 @@ public class LoginController {
 		response.addCookie(cookie);
 		}
 		
-	      //3. 세션
-	      //   객체 얻어오기
-		UserDTO userDTO = userDao.select(user_id);
-	      Integer user_no = userDTO.getUser_no();
-	      String user_nicknm = userDTO.getUser_nicknm();
-	      HttpSession session = request.getSession();
-	      //   세션 객체에 id를 저장
-	      session.setAttribute("id", user_id);
-	      session.setAttribute("user_no", user_no);
-	      session.setAttribute("user_nicknm", user_nicknm);
+		//3. 세션
+		//   객체 얻어오기
+		
+		UserDTO userDTO  = userDao.select(user_id);
+		Integer user_no = userDTO.getUser_no();
+		HttpSession session = request.getSession();
+		//   세션 객체에 id를 저장
+		session.setAttribute("id", user_id);
+		session.setAttribute("user_no", user_no);
 		
 		//4. 뷰 이동
 		toURL = toURL == null || toURL.equals("") ? "/" : toURL;

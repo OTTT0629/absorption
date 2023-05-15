@@ -18,9 +18,4 @@
 		(user_id, user_pwd, user_nm, user_nicknm, user_gen, user_email, reg_date)
 		VALUES(#{user_id}, #{user_pwd}, #{user_nm}, #{user_nicknm}, #{user_gen}, #{user_email}, now())
   	</insert>
-  	
-  	
-	<select id="selectNo" parameterType="int" resultType="UserDTO">
-		select * from tb_user where user_no = #{user_no}
-	</select>
   </mapper>

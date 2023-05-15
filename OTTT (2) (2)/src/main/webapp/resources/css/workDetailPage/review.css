@@ -118,16 +118,7 @@ header{
 
 
 .h-icon > ul > li:first-child > a{
-    background:url("../images/icon/search02.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 32px;
-    width: 32px;
-    height: 32px;
-}
-
-.h-icon > ul > li:last-child > a{
-    background:url("../images/icon/profile.png");
+    background:url("../../images/icon/search02.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 32px;
@@ -136,7 +127,7 @@ header{
 }
 
 .h-icon > ul > li:first-child > a:hover{
-    background: url("../images/icon/search-h.png");
+    background: url("../../images/icon/search-h.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 32px;
@@ -144,14 +135,34 @@ header{
     height: 32px;
 }
 
-/* .h-icon > ul > li:last-child > a:hover{
-    background: url("../images/icon/user-h.png");
+.h-icon > ul > li > .logout{
+    background:url("../../images/icon/user01.png");
+    background-repeat:no-repeat;
+    background-position: center;
+    background-size: 32px;
+    width: 32px;
+    height: 32px;
+}
+
+
+
+.h-icon > ul > li> .logout:hover{
+    background: url("../../images/icon/user-h.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 32px;
     width: 32px;
     height: 32px;
-} */
+}
+
+.h-icon > ul > li > .login{
+    background:url("../../images/img/profile.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 32px;
+    width: 32px;
+    height: 32px;
+}
 
 /* main */
 
@@ -582,6 +593,7 @@ form label{
     background-color: #3F3B3B; 
     border: 2px solid rgba(255, 255, 255, 0.493);
     border-radius: 10px;
+    margin-top: 10px;
     margin-left: 330px;
     position: relative;
 }
@@ -730,8 +742,8 @@ form label{
 
 .heart{   
     position: absolute;
-    right: 30px;
-    top: 25px;
+    right: 13px;
+    top: 10px;
 }
 
 .heart_img {
@@ -755,9 +767,11 @@ form label{
       background-position: 0 0;
     }
     100% {
+      
       background-position: -2800px 0;
     }
   }
+
 
 .comment > a > img {
     width: 32px;
@@ -771,12 +785,19 @@ form label{
     background-color:#3F3B3B;
     border-top: 1px solid rgba(255, 255, 255, 0.493);
     height: 100px;
+    padding: 10px;
 }
 
 .review-box-text {
-    font-size: 150%;
-    color: rgba(255, 255, 255, 0.493) ;
+    font-size: 15px;
+    color: white;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* 세 줄 이후 생략 부호 표시 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+
 
 .review-box-footer {
     border-top: 1px solid rgba(255, 255, 255, 0.493);
@@ -835,4 +856,19 @@ form label{
     right: 15px;
 }
 
+.rating {
+	position: absolute;
+	right: 60px;
+	top: 6px;
+	border: 1px solid gray;
+	border-radius: 5px;
+	background-color: gray;
+	color: white;
+	padding: 3px;
+}
+
+.rating > img {
+	width: 32px;
+	
+}
 

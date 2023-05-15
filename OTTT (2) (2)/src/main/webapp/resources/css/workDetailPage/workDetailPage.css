@@ -764,7 +764,7 @@ form label{
 .right-box{
     width: 800px;
     height: 700px;
-
+	overflow: hidden;
     position: relative;
     font-size: 15px;
     line-height: 30px;
@@ -786,9 +786,7 @@ form label{
     font-style: oblique;
 }
 
-.right-box p{
-    display: inline;
-}
+
 
 .more-see{
     display: inline;
@@ -826,7 +824,7 @@ form label{
     border-radius: 10px; 
     height: 50px;
     display: flex;
-    position:relative;
+    
 }
 
 .user-icon{   
@@ -873,8 +871,8 @@ form label{
 
 .heart{   
     position: absolute;
-    right: 30px;
-    top: 25px;
+    right: 13px;
+    top: 10px;
 }
 
 .heart_img {
@@ -920,8 +918,13 @@ form label{
 }
 
 .review-box-text {
-    font-size: 26px;
-    color: rgba(255, 255, 255, 0.493) ;
+    font-size: 15px;
+    color: white;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* 세 줄 이후 생략 부호 표시 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .review-box-footer {
@@ -1204,3 +1207,20 @@ form label{
     height: 1px;
     overflow:hidden;
 } 
+
+.rating {
+	position: absolute;
+	right: 60px;
+	top: 6px;
+	border: 1px solid gray;
+	border-radius: 5px;
+	background-color: gray;
+	color: white;
+	padding: 3px;
+}
+
+.rating > img {
+	width: 32px;
+	
+}
+

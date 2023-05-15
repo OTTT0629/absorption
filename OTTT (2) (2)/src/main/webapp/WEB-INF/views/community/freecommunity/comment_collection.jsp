@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
-<c:set var="loginout" value="${sessionScope.id == null ? 'logout' : 'login'}" />
-<c:set var="loginoutlink" value="${sessionScope.id==null ? '/login' : '/mypage'}" />
-
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <!doctype html>
 <html lang="ko">
@@ -14,13 +8,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>comment_collection</title>
-    
-    <style type="text/css">
-    	.notcollection{
-    		font-size: 27px;
-    		text-align: center;
-    	}
-    </style>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     <link rel="stylesheet" href="${path}/resources/css/community/freecommunity/community_main.css" >
@@ -69,10 +56,11 @@
           </ul>
         </div>
       </header>
+
       <!--meun bar Start-->  
         <div id="line-1" >
           <nav class="nav">
-          <a class="nav-link1" href="<c:url value='/community' />">자유게시판</a>
+          <a class="nav-link1" href="<c:url value='/community' />" style="color: #33ff33;">자유게시판</a>
           <a class="nav-link1" href="<c:url value='/community/endmovie/tving' />">종료예정작</a>
           <a class="nav-link1" href="<c:url value='/community/priceInfoTving' />">가격정보</a>
           <a class="nav-link1" href="<c:url value='/community/QnA' />">Q&A</a>
@@ -83,7 +71,7 @@
           <div class="Lcontent">
             <form name="post_search" action="" method="get">
               <input class="search" type="search" placeholder=" &nbsp;Search">
-              <input class="searchicon" type="image" src="${path}/resources/images/icon/search02.png" alt="돋보기">
+              <input class="searchicon" type="image" src="${path}/resources/images/icon/search.png" alt="돋보기">
             </form>
             <ul class="movepage">
               <li style="display: flex;">
@@ -113,55 +101,108 @@
                     </div>
               </li>
           </div>
+
 <!--ㅡmain------------------------------------------>
-		  <div class="Rcontent" >
-  			<div>
-  			   <input type="hidden" name="user_no" value="${ArticleDTO.user_no}">
-  				<form:form modelAttribute="ArticleDTO" method="get">
-  					<c:if test="${list.size() == null || list.size() == 0 }">
-              			<div class="notcollection">게시물이 없습니다</div>  
-              		</c:if>
-              		<c:if test="${list.size() != null || list.size() == 0 }">
-		              <c:forEach var="ArticleDTO" items="${list }">
-			             <ul class="post" >
-			               <div class="post_info">
-			                 <div style="display: flex;">
-			                  	<a href="#"><img class="usur_img" src="${path}/resources/images/icon/user01.png" alt="profile"></a>
-			                  	<a href="#"><span class="nickname">${ArticleDTO.user_nicknm }</span></a>
-			                  	<span id="current_date" ><fmt:formatDate value="${ArticleDTO.article_create_dt}" pattern="yyyy-MM-dd" type="date"/> </span>
-			                 </div>            
-			                 <div>
-			                   <div>
-			                    <button type="button" class="btn_warning" data-bs-toggle="dropdown" >
-			                      신고
-			                    </button>
-			                    <ul class="dropdown-menu" >
-			                      <li><a class="dropdown-item" href="#">욕설/비방</a></li>
-			                      <li><a class="dropdown-item" href="#">광고/도배</a></li>
-			                      <li><a class="dropdown-item" href="#">악의적인 스포</a></li>
-			                      <li><a class="dropdown-item" href="#">선정성</a></li>
-			                    </ul>                   
-			                   </div>
-			                  </div>  
-			                </div>                
-			                <div style="width: 900px;">
-			                  <a href="<c:url value='/community/post?article_no=${ArticleDTO.article_no }'/>" class="main_article" >${ArticleDTO.article_content }</a>
-			                </div>
-			                <div>
-			                <div>
-			                  <input class="heart_img" type="image" src="${path}/resources/images/img/free-icon-heart-6063477 2.png" alt="heart">
-			                  <span>${articleDTO.article_like_count }</span> 
-			                  <input class="re_comment_img" type="image" src="${path}/resources/images/img/comment.png" alt="comment">
-			                  <span>10</span>                  
-			                </div>
-			                </div>
-			             </ul>
-		              </c:forEach>
-		             </c:if>
-  				</form:form>
-  			</div>
+<div class="Rcontent" >
+  <div class="post_list">
+   <ul class="post" >
+      <div class="post_info">
+       <div style="display: flex;">
+          <a href="#"><img class="usur_img" src="${path}/resources/images/icon/user01.png" alt="profile"></a>
+          <a href="#"><span class="nickname">Nickname</span></a>
+          <span id="current_date" >작성한 날짜</span>
+        </div>            
+        <div>
+         <div>
+          <button type="button" class="btn_warning" data-bs-toggle="dropdown" >
+            신고
+          </button>
+          <ul class="dropdown-menu" >
+            <li><a class="dropdown-item" href="#">욕설/비방</a></li>
+            <li><a class="dropdown-item" href="#">광고/도배</a></li>
+            <li><a class="dropdown-item" href="#">악의적인 스포</a></li>
+            <li><a class="dropdown-item" href="#">선정성</a></li>
+          </ul>                   
          </div>
-  		</div>
- 	  </div>
-	</body>
+        </div>  
+      </div>                
+      <div style="width: 900px;">
+        <a href="#" class="main_article">내가 작성한 댓글이 올라감</a>
+      </div>
+      <div>
+      <div>
+        <input class="heart_img" type="image" src="${path}/resources/images/img/free-icon-heart-6063477 2.png" alt="heart">
+        <span>5</span> 
+        <input class="re_comment_img" type="image" src="${path}/resources/images/img/comment.png" alt="comment">
+        <span>10</span>                  
+      </div>
+      </div>
+    </ul>            
+    <ul class="post" >
+      <div class="post_info">
+       <div style="display: flex;">
+          <a href="#"><img class="usur_img" src="${path}/resources/images/icon/user01.png" alt="profile"></a>
+          <a href="#"><span class="nickname">Nickname</span></a>
+          <span id="current_date" >작성한 날짜</span>
+        </div>            
+        <div>
+          <button type="button" class="btn_warning" data-bs-toggle="dropdown" >
+            신고
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">욕설/비방</a></li>
+            <li><a class="dropdown-item" href="#">광고/도배</a></li>
+            <li><a class="dropdown-item" href="#">악의적인 스포</a></li>
+            <li><a class="dropdown-item" href="#">선정성</a></li>
+          </ul>
+        </div>  
+      </div>                
+      <div style="width: 900px;">
+        <a href="#" class="main_article">내가 작성한 댓글이 올라감</a>
+      </div>
+      <div>
+      <div>
+        <input class="heart_img" type="image" src="${path}/resources/images/img/free-icon-heart-6063477 2.png" alt="heart">
+        <span>5</span> 
+        <input class="re_comment_img" type="image" src="${path}/resources/images/img/comment.png" alt="comment">
+        <span>10</span>                  
+      </div>
+      </div>
+    </ul>
+    <ul class="post" >
+      <div class="post_info">
+       <div style="display: flex;">
+          <a href="#"><img class="usur_img" src="${path}/resources/images/icon/user01.png" alt="profile"></a>
+          <a href="#"><span class="nickname">Nickname</span></a>
+          <span id="current_date" >작성한 날짜</span>
+        </div>            
+        <div>
+          <button type="button" class="btn_warning" data-bs-toggle="dropdown" >
+            신고
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">욕설/비방</a></li>
+            <li><a class="dropdown-item" href="#">광고/도배</a></li>
+            <li><a class="dropdown-item" href="#">악의적인 스포</a></li>
+            <li><a class="dropdown-item" href="#">선정성</a></li>
+          </ul>
+        </div>  
+      </div>                
+      <div style="width: 900px;">
+        <a href="#" class="main_article">내가 작성한 댓글이 올라감</a>
+      </div>
+      <div>
+      <div>
+        <input class="heart_img" type="image" src="${path}/resources/images/img/free-icon-heart-6063477 2.png" alt="heart">
+        <span>5</span> 
+        <input class="re_comment_img" type="image" src="${path}/resources/images/img/comment.png" alt="comment">
+        <span>10</span>                  
+      </div>
+      </div>
+    </ul>
+  </div>
+</div>
+</div>
+</div>
+</body>
 </html>

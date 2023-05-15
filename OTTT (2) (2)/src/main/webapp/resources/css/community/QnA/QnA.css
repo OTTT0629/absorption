@@ -158,6 +158,8 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
     width: 1200px;
     height: 100%;
     margin: 0 auto;
+    box-sizing: border-box;
+    display: flex;
     /* border: 1px solid red; */
 }
 
@@ -186,11 +188,6 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
     text-decoration: none;
 } */
 
-.qa-main p{
-    display: flex;
-    justify-content: flex-end;
-    font-weight: bold;
-}
 
 .btn{
     color: #fff;

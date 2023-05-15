@@ -2,6 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/> 
+<c:set var="loginId" value="${sessionScope.id }"/>
+<c:set var="loginout" value="${sessionScope.id == null ? 'logout' : 'login'}" />
+<c:set var="loginoutlink" value="${sessionScope.id==null ? '/login' : '/mypage'}" />
+
 <!doctype html>
 <html lang="ko">
   <head>
@@ -23,7 +27,7 @@
     <link rel="stylesheet" href="${path}/resources/css/workDetailPage/workDetailPage.css" >
     <script src="${path }/resources/js/workDetailPage/script/jquery-3.6.1.min.js"></script>
     <script src="${path}/resources/js/workDetailPage/script/workDetailPage.js"></script>
-    <link rel="stylesheet" href="./css/main.css" >
+   
   </head>
   <body>
     <div class="wrap">
@@ -376,14 +380,15 @@
           <button id="review-button">
             <img class="review-icon" src="${path }/resources/images/img/review.png" alt="봣어요">
           </button>
-
-
+          
+          
+		 
           <div class="review-back">1</div>
           <div id="review-popup" class="popup11">
             <form id="review-form">
               <label for="review-text" style="background-color: #202020;">리뷰를 작성해주세요</label>
-
-              <textarea id="review-text" name="review-text"></textarea>
+				<input type="hidden" name="user_no" value="${sessionScope.user_no}" >
+              <textarea id="review-text" name="review_content"></textarea>
               <div class="reveiw-star-footer">
                 <div class="review-star" >별점을 매겨주세요:
                   <div class="review-star" >별점을 매겨주세요:
@@ -399,16 +404,16 @@
                         <label for="starpoint_8" class="label_star" title="4"><span class="blind">4점</span></label>
                         <label for="starpoint_9" class="label_star" title="4.5"><span class="blind">4.5점</span></label>
                         <label for="starpoint_10" class="label_star" title="5"><span class="blind">5점</span></label>
-                        <input type="radio" name="starpoint" id="starpoint_1" class="star_radio">
-                        <input type="radio" name="starpoint" id="starpoint_2" class="star_radio">
-                        <input type="radio" name="starpoint" id="starpoint_3" class="star_radio">
-                        <input type="radio" name="starpoint" id="starpoint_4" class="star_radio">
-                        <input type="radio" name="starpoint" id="starpoint_5" class="star_radio">
-                        <input type="radio" name="starpoint" id="starpoint_6" class="star_radio">
-                        <input type="radio" name="starpoint" id="starpoint_7" class="star_radio">
-                        <input type="radio" name="starpoint" id="starpoint_8" class="star_radio">
-                        <input type="radio" name="starpoint" id="starpoint_9" class="star_radio">
-                        <input type="radio" name="starpoint" id="starpoint_10" class="star_radio">
+                        <input type="radio" name="rating" id="starpoint_1" class="star_radio" value="0.5">
+                        <input type="radio" name="rating" id="starpoint_2" class="star_radio" value="1">
+                        <input type="radio" name="rating" id="starpoint_3" class="star_radio" value="1.5">
+                        <input type="radio" name="rating" id="starpoint_4" class="star_radio" value="2">
+                        <input type="radio" name="rating" id="starpoint_5" class="star_radio" value="2.5">
+                        <input type="radio" name="rating" id="starpoint_6" class="star_radio" value="3">
+                        <input type="radio" name="rating" id="starpoint_7" class="star_radio" value="3.5">
+                        <input type="radio" name="rating" id="starpoint_8" class="star_radio" value="4">
+                        <input type="radio" name="rating" id="starpoint_9" class="star_radio" value="4.5">
+                        <input type="radio" name="rating" id="starpoint_10" class="star_radio" value="5">
                         <span class="starpoint_bg"></span>
                       </div>
                     </div>
@@ -418,7 +423,6 @@
                 <div class="review-bottom">
                   <div class="checkedblur"><input type="checkbox" id="checkbox-blur">스포일러 포함 여부</input></div>
                 <button type="submit" id="submit-review">
-              
                   리뷰 등록
                 </button>
                 </div>
@@ -443,189 +447,79 @@
     </div>
       <div class="right-box" id="reviews-container">
         <div class="review-count">
-          <p>총 70개의 리뷰가 있습니다.</p>           
+          <p>총 ${count }개의 리뷰가 있습니다.</p>           
           <div class="more-see">
             <a href="<c:url value='/detailPage/review' />">
               <p>더보기</p>
             </a>
-  
+  			
           </div>
         </div>
-        
-        <div class="review-box">
-          <div class="review-blur">
-            <span class="red">스포일러</span>
-            가 포함된 리뷰입니다. 보시려면
-            <span class="red">여기</span>
-            를 클릭해주세요
-          </div>
+        <c:forEach var="ReviewDTO" items="${list}">
+        <div class="review-box">      
           <div class="review-box-header">
             <div class="user-icon">
-              <img src="${path }/resources/images/icon/user.png" alt="유저 이미지파일">
+              <img src="${path}/resources/images/icon/user.png" alt="유저 이미지파일">
             </div>
             <div class="user-name">
               <a href="../ottt박소율/mypageshow.html">
-                유저 닉네임
+                <p class="user_nicknm"> ${ReviewDTO.user_nicknm} </p>
               </a>
             </div>
-            <img class="star1" src="${path }/resources/images/img/star.png" alt="별점">
+            <ul>
+              <li class="rating">
+              	<img src="${path}/resources/images/img/starone.PNG" alt="별점">
+                ${ReviewDTO.rating}
+              </li>
+              <li>
                 <div class="heart">        
                     <div>
-                      <div class="heart_img"></div>
+					  <button onclick="changeImage()">
+                      	<img id="myImage" src="${path}/resources/images/img/likeoff.png" width="35" height="80%">
+                      </button>					
                     </div>             
                 </div>
+              </li>
+            </ul>
           </div>
           <a href="<c:url value='/detailPage/reply' />">
-          <div class="review-box-body">
-            <p class="review-box-text">"내용 들어갈 자리"</p>
+          <div class="review-box-body">				
+            <p class="review-box-text review_content">${ReviewDTO.review_content }</p>
           </div>
         </a>
           <div class="review-box-footer">
-            <div class="f-left">
+            <div>
+              <ul>
+                <li>
                   <div class="like">
-                    <img src="${path }/resources/images/img/좋아요.png" alt="좋아요아이콘">
+                    <img src="${path}/resources/images/img/좋아요.png" alt="좋아요아이콘">
                   </div>
                   <div class="like-count">
                     <p>
                       9999개
                     </p>
                   </div>
+                </li>
+                <li>
                   <div class="footer-comment">
-                    <img src="${path }/resources/images/img/comment.png" alt="댓글아이콘">
+                    <img src="${path}/resources/images/img/댓글.png" alt="댓글아이콘">
                   </div>
                   <div class="comment-count">
                     <p>
                       9999개
                     </p>
                   </div>
+                </li>
+              </ul>
             </div>
-            <div class="f-right">
                   <div class="report">
-                  <button><img src="${path }/resources/images/img/신고하기.png" alt="신고"></button>
-                    <button>신고</button>
+                  <button><img src="${path}/resources/images/img/신고하기.png" alt="신고"></button>
+                      <button>신고</button>
                   </div>
-            </div>
           </div>
+          
         </div>
-      
-
-
-      <div class="review-box">
-        <div class="review-blur">
-          <span class="red">스포일러</span>
-          가 포함된 리뷰입니다. 보시려면
-          <span class="red">여기</span>
-          를 클릭해주세요
-        </div>
-        <div class="review-box-header">
-          <div class="user-icon">
-            <img src="${path }/resources/images/icon/user.png" alt="유저 이미지파일">
-          </div>
-          <div class="user-name">
-            <a href="../ottt박소율/mypageshow.html">
-              유저 닉네임
-            </a>
-          </div>
-          <img class="star1" src="${path }/resources/images/img/star.png" alt="별점">
-              <div class="heart">        
-                  <div>
-                    <div class="heart_img"></div>
-                  </div>             
-              </div>
-        </div>
-        <a href="<c:url value='/detailPage/reply' />">
-        <div class="review-box-body">
-          <p class="review-box-text">"내용 들어갈 자리"</p>
-        </div>
-      </a>
-        <div class="review-box-footer">
-          <div class="f-left">
-
-
-                <div class="like">
-                  <img src="${path }/resources/images/img/좋아요.png" alt="좋아요아이콘">
-                </div>
-                <div class="like-count">
-                  <p>
-                    9999개
-                  </p>
-                </div>
-                <div class="footer-comment">
-                  <img src="${path }/resources/images/img/comment.png" alt="댓글아이콘">
-                </div>
-                <div class="comment-count">
-                  <p>
-                    9999개
-                  </p>
-                </div>
-          </div>
-          <div class="f-right">
-                <div class="report">
-                  <button><img src="${path }/resources/images/img/신고하기.png" alt="신고"></button>
-                <button>신고</button>
-                </div>
-
-          </div>
-        </div>
-      </div>
-   
-
-
-    <div class="review-box">
-      <div class="review-box-header">
-        <div class="user-icon">
-          <img src="${path }/resources/images/icon/user.png" alt="유저 이미지파일">
-        </div>
-        <div class="user-name">
-          <a href="../ottt박소율/mypageshow.html">
-            유저 닉네임
-          </a>
-        </div>
-        <img class="star1" src="${path }/resources/images/img/star.png" alt="별점">
-            <div class="heart">        
-                <div>
-                  <div class="heart_img"></div>
-                </div>             
-            </div>
-
-      </div>
-      <a href="<c:url value='/detailPage/reply' />">
-      <div class="review-box-body">
-        <p class="review-box-text">"내용 들어갈 자리"</p>
-      </div>
-    </a>
-      <div class="review-box-footer">
-        <div class="f-left">
-
-
-              <div class="like">
-                <img src="${path }/resources/images/img/좋아요.png" alt="좋아요아이콘">
-              </div>
-              <div class="like-count">
-                <p>
-                  9999개
-                </p>
-              </div>
-
-
-              <div class="footer-comment">
-                <img src="${path }/resources/images/img/comment.png" alt="댓글아이콘">
-              </div>
-              <div class="comment-count">
-                <p>
-                  9999개
-                </p>
-              </div>
-        </div>
-        <div class="f-right">
-              <div class="report">
-              <button><img src="${path }/resources/images/img/신고하기.png" alt="신고"></button>
-            <button>신고</button>
-                </a>
-              </div>
-        </div>
-      </div>
-    </div>
+        </c:forEach>
   </div>
   </section>
   <section class="sec04">
@@ -672,6 +566,37 @@
     </footer>    
         
     </div>
+    
+<script type="text/javascript">
+	$(document).ready(function() {	
+		$('#submit-review').on("click", function(){
+			let form = $("#review-form")
+			form.attr("action", "<c:url value='/detailPage/review/write'/>")
+			form.attr("method", "post")
+			
+			if(formCheck()){
+				form.submit()
+			}
+			alert("리뷰등록됬다잉.")
+		})
+		
+		let formCheck = function() {
+			let form = document.getElementById("review-form")
+			if(form.user_no.value==""){
+				alert("로그인 해라 좋은 말로 할때")
+				form.content.focus()
+				return false
+			}			
+			if(form.review_content.value=="") {
+				alert("내용이 비었다 후딱 채워라잉")
+				form.content.focus()
+				return false
+			}
+			return true
+		}	
+	})
+	</script>
+    
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
