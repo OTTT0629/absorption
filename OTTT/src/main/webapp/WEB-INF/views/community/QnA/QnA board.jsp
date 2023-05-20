@@ -185,6 +185,7 @@
 					$("textarea").attr('readonly', false)
 					$("#modi").html("등록")
 					$("#del").html("취소")
+					$("#del").attr('data-bs-target', null)
 					return
 				}
 				

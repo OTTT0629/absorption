@@ -99,7 +99,6 @@ public class NoticeController {
 			m.addAttribute("msg", "MOD_ERR");		
 			return "/community/notice/noticeboard";
 		}
-		
 	}
 	
 	@PostMapping("/notice/remove")

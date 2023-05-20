@@ -14,10 +14,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     <link rel="stylesheet" href="${path}/resources/css/community/notice/noticeboard.css" >
-<<<<<<< HEAD
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-=======
->>>>>>> 4547f64bc5c74a0511909381260b9a52f855e3db
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript" src="${path}/resources/js/community/main.js"></script>
     <style type="text/css">
@@ -187,13 +184,10 @@
 				
 				if(isReadonly=='readonly'){
 					$("input[name=article_title]").attr('readonly', false)
-<<<<<<< HEAD
 					$("textarea").attr('readonly', false)
-=======
-					$("input[name=article_content]").attr('readonly', false)
->>>>>>> 4547f64bc5c74a0511909381260b9a52f855e3db
 					$("#modi").html("등록")
 					$("#del").html("취소")
+					$("#del").attr('data-bs-target', null)
 					return
 				}
 				
@@ -222,7 +216,6 @@
 				form.submit()
 			})
 			
-<<<<<<< HEAD
 			$("#listBtn").on("click", function() {
 				location.href="<c:url value='/community/notice${searchItem.queryString}' />"
 			})
@@ -234,32 +227,20 @@
 				if(formCheck()){form.submit()}
 			})
 			
-=======
->>>>>>> 4547f64bc5c74a0511909381260b9a52f855e3db
 			let formCheck = function() {
 				let form = document.getElementById("form")
 				
 				if(form.article_title.value==""){
-<<<<<<< HEAD
 					$(".body").html("제목을 입력해 주세요.")
 		   	    	$('#Modal').modal('show');
 					form.article_title.focus()
-=======
-					alert("제목을 입력해 주세요.")
-					form.title.focus()
->>>>>>> 4547f64bc5c74a0511909381260b9a52f855e3db
 					return false
 				}
 				
 				if(form.article_content.value==""){
-<<<<<<< HEAD
 					$(".body").html("내용을 입력해 주세요.")
 		   	    	$('#Modal').modal('show');
 					form.article_content.focus()
-=======
-					alert("내용을 입력해 주세요.")
-					form.content.focus()
->>>>>>> 4547f64bc5c74a0511909381260b9a52f855e3db
 					return false
 				}
 				return true
@@ -278,13 +259,10 @@
 	   	        $(".body").html("수정 실패했습니다. 다시 시도해주세요.");
 	   	     	$('#Modal').modal('show');
 	   	    }
-<<<<<<< HEAD
 	   	 	if(msg == 'WRT_ERR') {
 	   	        $(".body").html("글이 등록되지 않았습니다. 다시 시도해주세요.");
 	   	     	$('#Modal').modal('show');
 	   	    }
-=======
->>>>>>> 4547f64bc5c74a0511909381260b9a52f855e3db
 	   	});
    	</script>
        	
@@ -292,14 +270,8 @@
       <div class="qa-main">
       
       <form action="" id="form" class="frm" method="post">
-<<<<<<< HEAD
       <div class="modi-del">
 			<c:if test="${userDTO.admin.toString() == 'Y'}">
-=======
-			<c:if test="${userDTO.admin.toString() == 'Y' }">
-				<div class="modi-del">
-	
->>>>>>> 4547f64bc5c74a0511909381260b9a52f855e3db
 	          <!-- Button trigger modal -->
 	        <button type="button" class="btn btn-secondary" id="modi" data-bs-toggle="modal" data-bs-target="#exampleModal">
 	          수정
@@ -313,11 +285,7 @@
 	                <h1 class="modal-title fs-5" id="exampleModalLabel">알림</h1>
 	                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	              </div>
-<<<<<<< HEAD
 	              <div class="modal-body" id="modal-bady1">
-=======
-	              <div class="modal-body">
->>>>>>> 4547f64bc5c74a0511909381260b9a52f855e3db
 	                수정하시겠습니까?
 	              </div>
 	              <div class="modal-footer">
@@ -350,7 +318,6 @@
 	              </div>
 	            </div>
 	          </div>
-<<<<<<< HEAD
 	        </div> 
        	</c:if>
        <c:if test="${mode == 'new'}">
@@ -383,19 +350,10 @@
 	       <button type="button" class="btn btn-outline-success" id="listBtn"><i class="fa-solid fa-list" style="background-color: #202020; margin: 3px;"></i>목록</button> 
 	    </div>
 	    </div>
-=======
-	        </div>
-	
-	
-	      </div>
-       	</c:if>
-      
->>>>>>> 4547f64bc5c74a0511909381260b9a52f855e3db
         <!-- 글목록 배너-->
         <div class="title-region">
           <div class="title-mainline">
             <input type="hidden" name="article_no" value="${articleDTO.article_no}"/>
-<<<<<<< HEAD
             <div style="display: flex; justify-content: space-between;">
             	<div><input type="text" name="article_title" value="${articleDTO.article_title}" ${mode=="new" ? "" : "readonly='readonly'" } /></div>
             	<div style="font-size: 20px;"><fmt:formatDate value="${articleDTO.article_create_dt}" pattern="yyyy-MM-dd" type="date"/></div>
@@ -405,28 +363,12 @@
 		 
           <div class="title-line">
             <textarea name="article_content" ${mode=="new" ? "" : "readonly='readonly'" } style="background-color: #202020; width: 100%; height: 100%; color: #fff; border: none; outline: none;">${articleDTO.article_content}</textarea>
-=======
-            <input type="text" name="article_title" value="${articleDTO.article_title}" ${mode=="new" ? "" : "readonly='readonly'" } />
-          </div>
-
-          <div class="title-line">
-            <input type="text" name="article_content" value="${articleDTO.article_content}" ${mode=="new" ? "" : "readonly='readonly'" } />
->>>>>>> 4547f64bc5c74a0511909381260b9a52f855e3db
           </div>
           
         </div>
         </form>
-<<<<<<< HEAD
         
       </div>
-=======
-      </div>
-
-
-
-
-      
->>>>>>> 4547f64bc5c74a0511909381260b9a52f855e3db
     </div>
     
     

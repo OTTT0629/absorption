@@ -1,10 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
 Built-By: asiri
 Build-Jdk: 11.0.18
-=======
-Built-By: ezen
-Build-Jdk: 11.0.17
->>>>>>> 4547f64bc5c74a0511909381260b9a52f855e3db
 Created-By: Maven Integration for Eclipse
 
