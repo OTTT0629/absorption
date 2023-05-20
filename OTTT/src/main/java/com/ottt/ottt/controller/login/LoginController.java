@@ -13,15 +13,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.ottt.ottt.dao.login.LoginUserDao;
 import com.ottt.ottt.dto.UserDTO;
-import com.ottt.ottt.service.user.UserService;
 
 
 @Controller
 public class LoginController {
 	
 	@Autowired
-	UserService us;
+	LoginUserDao userDao;
 
 	//로그인 페이지
 	@GetMapping(value = "/login")
@@ -48,21 +48,6 @@ public class LoginController {
 		cookie.setMaxAge(0);
 		response.addCookie(cookie);
 		}
-		
-		//3. 세션
-		//   객체 얻어오기
-		HttpSession session = request.getSession();
-		try {
-			Integer user_no = us.getUserNo(user_id);
-		//   세션 객체에 id를 저장
-			session.setAttribute("id", user_id);
-			session.setAttribute("user_no", user_no);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		//4. 뷰 이동
 
 		UserDTO userDTO = userDao.select(user_id);		
 		HttpSession session = request.getSession();
@@ -75,17 +60,6 @@ public class LoginController {
 		return "redirect:" +toURL;
 	}
 	
-	//DB꺼 가져와서 CHECK해야함
-	private boolean loginCheck(String user_id, String user_pwd) {
-		UserDTO user;
-		try {
-			user = us.getUser(user_id);
-			if(user == null) return false;
-			return user.getUser_pwd().equals(user_pwd);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
 	private boolean loginCheck(String id, String pwd) {
 		UserDTO user = userDao.select(id);
 		if(user == null) return false;
