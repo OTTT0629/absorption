@@ -59,6 +59,9 @@ public class ArticleDTO {
 		this.article_index_no = article_index_no;
 	}
 
+
+
+
 	public String getArticle_content() {
 		return article_content;
 	}

@@ -1,5 +1,6 @@
 package com.ottt.ottt.controller.mypage;
 
+<<<<<<< HEAD
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -46,4 +47,18 @@ public class MypageController {
 		return session != null && session.getAttribute("id")!=null;
 	}
 
+=======
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class MypageController {
+
+	//마이페이지 메인
+	@GetMapping(value = "/mypage")
+	public String mypage() {
+	return "/mypage/myprofile/mypage";		
+	}
+		
+>>>>>>> 4547f64bc5c74a0511909381260b9a52f855e3db
 }

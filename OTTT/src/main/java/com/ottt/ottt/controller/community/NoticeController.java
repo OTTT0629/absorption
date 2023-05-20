@@ -18,7 +18,6 @@ import com.ottt.ottt.domain.SearchItem;
 import com.ottt.ottt.dto.ArticleDTO;
 import com.ottt.ottt.dto.UserDTO;
 import com.ottt.ottt.service.community.notice.ArticleService;
-import com.ottt.ottt.service.community.notice.ArticleServiceImpl;
 
 
 @Controller
@@ -26,7 +25,7 @@ import com.ottt.ottt.service.community.notice.ArticleServiceImpl;
 public class NoticeController {
 	
 	@Autowired
-	ArticleServiceImpl articleService;
+	ArticleService articleService;
 	@Autowired
 	LoginUserDao loginUserDao;
 	
@@ -100,6 +99,7 @@ public class NoticeController {
 			m.addAttribute("msg", "MOD_ERR");		
 			return "/community/notice/noticeboard";
 		}
+		
 	}
 	
 	@PostMapping("/notice/remove")
