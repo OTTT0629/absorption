@@ -6,8 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import com.ottt.ottt.dto.UserDTO;
 
-import jakarta.validation.Valid;
-
 @Repository
 public class LoginUserDaoImpl implements LoginUserDao {
 
@@ -30,12 +28,6 @@ public class LoginUserDaoImpl implements LoginUserDao {
 	public UserDTO selectNickname(String user_nicknm) {
 		// TODO Auto-generated method stub
 		return session.selectOne(namespace+"selectNickname", user_nicknm);
-	}
-
-	@Override
-	public UserDTO selectNo(Integer user_no) {
-		// TODO Auto-generated method stub
-		return session.selectOne(namespace + "selectNo", user_no);
 	}
 
 }

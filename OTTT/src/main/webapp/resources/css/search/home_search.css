@@ -194,17 +194,6 @@ header{
 
 .h-icon > ul > li > .logout{
     background:url("../../images/icon/user01.png");
-    background-repeat:no-repeat;
-    background-position: center;
-    background-size: 32px;
-    width: 32px;
-    height: 32px;
-}
-
-
-
-.h-icon > ul > li> .logout:hover{
-    background: url("../../images/icon/user-h.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 32px;
@@ -212,6 +201,16 @@ header{
     height: 32px;
 }
 
+
+
+.h-icon > ul > li > .logout:hover{
+    background: url("../../images/icon/user-h.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 32px;
+    width: 32px;
+    height: 32px;
+}
 
 .h-icon > ul > li > .login{
     background:url("../../images/img/profile.png");
@@ -223,14 +222,15 @@ header{
 }
 
 
- .h-icon > ul > li:last-child > a:hover{
+
+/* .h-icon > ul > li:last-child > a:hover{
     background: url("./image/icon/user-h.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 32px;
     width: 32px;
     height: 32px;
-} 
+} */
 
 .sec_2{
     width: 1200px;

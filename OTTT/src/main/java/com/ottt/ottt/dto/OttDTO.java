@@ -5,11 +5,14 @@ import java.util.Objects;
 /*
  * ott_no		smallint	primary key
 	,ott_nm		varchar(50)	not null
+	,ott_img	text		default null
  */
 public class OttDTO {
 
 	private Integer ott_no;
 	private String ott_nm;
+	private String ott_img;
+	
 	
 	public OttDTO() {}
 
@@ -27,6 +30,14 @@ public class OttDTO {
 
 	public void setOtt_nm(String ott_nm) {
 		this.ott_nm = ott_nm;
+	}
+
+	public String getOtt_img() {
+		return ott_img;
+	}
+
+	public void setOtt_img(String ott_img) {
+		this.ott_img = ott_img;
 	}
 
 	@Override

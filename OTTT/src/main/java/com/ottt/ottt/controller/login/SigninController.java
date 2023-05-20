@@ -2,7 +2,6 @@ package com.ottt.ottt.controller.login;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,7 +9,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
@@ -20,13 +18,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ottt.ottt.dao.login.LoginUserDao;
 import com.ottt.ottt.dto.UserDTO;
 import com.ottt.ottt.dto.UserOTTDTO;
-
+import com.ottt.ottt.service.login.LoginUserOTTService;
 
 import jakarta.validation.Valid;
 
@@ -36,8 +33,8 @@ public class SigninController {
 	
 	@Autowired
 	LoginUserDao userDao;
-//	@Autowired
-//	LoginUserOTTService loginUserOTTService;
+	@Autowired
+	LoginUserOTTService loginUserOTTService;
 
 	//약간동의 페이지 
 	@GetMapping(value = "/term")
@@ -86,13 +83,13 @@ public class SigninController {
 	@PostMapping(value = "/addInfo", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	@ResponseBody
 	public String addInfoPost(@Valid @RequestBody MultiValueMap<String, String> formData, HttpServletRequest request) {
-//	    Integer ott_no = Integer.parseInt(formData.getFirst("ott_no"));
-//	  HttpSession session = request.getSession();
-//	  UserDTO userDTO = userDao.select((String) session.getAttribute("id"));
-//	  UserOTTDTO userOTTDTO = new UserOTTDTO();
-//	  userOTTDTO.setUser_no(userDTO.getUser_no());
-//	  userOTTDTO.setOtt_no(ott_no);
-//	  loginUserOTTService.addOTT(userOTTDTO);
+	    Integer ott_no = Integer.parseInt(formData.getFirst("ott_no"));
+	  HttpSession session = request.getSession();
+	  UserDTO userDTO = userDao.select((String) session.getAttribute("id"));
+	  UserOTTDTO userOTTDTO = new UserOTTDTO();
+	  userOTTDTO.setUser_no(userDTO.getUser_no());
+	  userOTTDTO.setOtt_no(ott_no);
+	  loginUserOTTService.addOTT(userOTTDTO);
 	  return "/";
 	}
 

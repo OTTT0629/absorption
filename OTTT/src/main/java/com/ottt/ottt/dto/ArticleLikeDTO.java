@@ -10,15 +10,10 @@ import java.util.Objects;
 public class ArticleLikeDTO {
 	
 	private Integer	article_like_no;
-	private Integer	article_no;
-	private Integer user_no;
+	private int		article_no;
 	
 	
-
-
 	public ArticleLikeDTO() {}
-
-
 
 
 	public Integer getArticle_like_no() {
@@ -26,49 +21,25 @@ public class ArticleLikeDTO {
 	}
 
 
-
-
 	public void setArticle_like_no(Integer article_like_no) {
 		this.article_like_no = article_like_no;
 	}
 
 
-
-
-	public Integer getArticle_no() {
+	public int getArticle_no() {
 		return article_no;
 	}
 
 
-
-
-	public void setArticle_no(Integer article_no) {
+	public void setArticle_no(int article_no) {
 		this.article_no = article_no;
 	}
 
 
-
-
-	public Integer getUser_no() {
-		return user_no;
-	}
-
-
-
-
-	public void setUser_no(Integer user_no) {
-		this.user_no = user_no;
-	}
-
-
-
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(article_like_no, article_no, user_no);
+		return Objects.hash(article_like_no, article_no);
 	}
-
-
 
 
 	@Override
@@ -80,20 +51,14 @@ public class ArticleLikeDTO {
 		if (getClass() != obj.getClass())
 			return false;
 		ArticleLikeDTO other = (ArticleLikeDTO) obj;
-		return Objects.equals(article_like_no, other.article_like_no) && Objects.equals(article_no, other.article_no)
-				&& Objects.equals(user_no, other.user_no);
+		return Objects.equals(article_like_no, other.article_like_no) && article_no == other.article_no;
 	}
-
-
 
 
 	@Override
 	public String toString() {
-		return "ArticleLikeDTO [article_like_no=" + article_like_no + ", article_no=" + article_no + ", user_no="
-				+ user_no + "]";
+		return "ArticleLikeDTO [article_like_no=" + article_like_no + ", article_no=" + article_no + "]";
 	}
 
-
-	
 
 }

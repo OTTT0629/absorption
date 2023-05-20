@@ -74,23 +74,23 @@ public class CommentDTO {
 	}
 
 
-	public String getCmm_content() {
+	public String getCmt_content() {
 		return cmt_content;
 	}
 
 
-	public void setCmm_content(String cmm_content) {
-		this.cmt_content = cmm_content;
+	public void setCmt_content(String cmt_content) {
+		this.cmt_content = cmt_content;
 	}
 
 
-	public String getCmm_writer() {
+	public String getCmt_writer() {
 		return cmt_writer;
 	}
 
 
-	public void setCmm_writer(String cmm_writer) {
-		this.cmt_writer = cmm_writer;
+	public void setCmt_writer(String cmt_writer) {
+		this.cmt_writer = cmt_writer;
 	}
 
 
