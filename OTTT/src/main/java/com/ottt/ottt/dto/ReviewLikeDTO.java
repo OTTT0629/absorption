@@ -12,6 +12,7 @@ import java.util.Objects;
  */
 public class ReviewLikeDTO {
 
+<<<<<<< HEAD
 	private Integer review_like_no;
 	private int review_no;
 	private int user_no;
@@ -25,11 +26,24 @@ public class ReviewLikeDTO {
 	public void setReview_like_no(Integer review_like_no) {
 		this.review_like_no = review_like_no;
 	}
+=======
+	
+	private Integer review_no;
+	private Integer user_no;
+
+	
+
+
+	public ReviewLikeDTO() {}
+
+
+>>>>>>> 7c5f8d98bb08e6ee1d7eaeaf01c0c8ee7140c260
 
 	public int getReview_no() {
 		return review_no;
 	}
 
+<<<<<<< HEAD
 	public void setReview_no(int review_no) {
 		this.review_no = review_no;
 	}
@@ -47,6 +61,26 @@ public class ReviewLikeDTO {
 		return Objects.hash(review_like_no, review_no, user_no);
 	}
 
+=======
+	public void setReview_no(Integer review_no) {
+		this.review_no = review_no;
+	}
+
+	@Override
+	public String toString() {
+		return "ReviewLikeDTO [review_no=" + review_no + ", user_no=" + user_no + "]";
+	}
+
+
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(review_no, user_no);
+	}
+
+
+
+>>>>>>> 7c5f8d98bb08e6ee1d7eaeaf01c0c8ee7140c260
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -56,6 +90,7 @@ public class ReviewLikeDTO {
 		if (getClass() != obj.getClass())
 			return false;
 		ReviewLikeDTO other = (ReviewLikeDTO) obj;
+<<<<<<< HEAD
 		return Objects.equals(review_like_no, other.review_like_no) && review_no == other.review_no
 				&& user_no == other.user_no;
 	}
@@ -65,6 +100,23 @@ public class ReviewLikeDTO {
 		return "ReviewLikeDTO [review_like_no=" + review_like_no + ", review_no=" + review_no + ", user_no=" + user_no
 				+ "]";
 	}
+=======
+		return review_no == other.review_no && user_no == other.user_no;
+	}
+
+
+
+	public int getUser_no() {
+		return user_no;
+	}
+
+	public void setUser_no(Integer user_no) {
+		this.user_no = user_no;
+	}
+
+	
+
+>>>>>>> 7c5f8d98bb08e6ee1d7eaeaf01c0c8ee7140c260
 	
 	
 }

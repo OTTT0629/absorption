@@ -5,7 +5,11 @@
 <c:set var="loginId" value="${sessionScope.id }"/>
 <c:set var="loginout" value="${sessionScope.id == null ? 'logout' : 'login'}" />
 <c:set var="loginoutlink" value="${sessionScope.id==null ? '/login' : '/mypage'}" />
+<<<<<<< HEAD
 
+=======
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+>>>>>>> 7c5f8d98bb08e6ee1d7eaeaf01c0c8ee7140c260
 <!doctype html>
 <html lang="ko">
   <head>
@@ -341,6 +345,7 @@
               </div>
             
         </div>
+<<<<<<< HEAD
       </div>
       <div class="bottom-right">
         
@@ -367,6 +372,11 @@
       <section class="sec03">
         <div class="left-score">
           <h2>이 영화의 평균 별점</h2>
+=======
+                <div class="left-score">
+          <h2>이 영화의 평균 별점</h2>
+          
+>>>>>>> 7c5f8d98bb08e6ee1d7eaeaf01c0c8ee7140c260
       <div class="left-box">
         <img class="star" src="${path }/resources/images/img/star.png" alt="별점">
         <h3>4.9/5</h3>
@@ -388,6 +398,10 @@
             <form id="review-form">
               <label for="review-text" style="background-color: #202020;">리뷰를 작성해주세요</label>
 				<input type="hidden" name="user_no" value="${sessionScope.user_no}" >
+<<<<<<< HEAD
+=======
+				<input type="hidden" name="review_no" value="${reviewDTO.review_no }"  />
+>>>>>>> 7c5f8d98bb08e6ee1d7eaeaf01c0c8ee7140c260
               <textarea id="review-text" name="review_content"></textarea>
               <div class="reveiw-star-footer">
                 <div class="review-star" >별점을 매겨주세요:
@@ -443,9 +457,137 @@
           
         </div>
       </div>
+<<<<<<< HEAD
       
     </div>
       <div class="right-box" id="reviews-container">
+=======
+
+    </div>
+      </div>
+      <div class="bottom-right">
+        
+        <div class="right-text">
+          <span>Im Westen nichts Neues</span>
+        </br>
+            <span>2023 ·</span>
+            <span>미국 ·</span>
+            <span class="a1"><a href="#">전쟁</a></span>
+            <span>· 148분 ·</span>
+            <span>청불</span>
+              <br/>
+            <span>감독 : 에드워드 버거</span>
+              <br/>
+            <span>주연 : 펠릭스 카머러, 알브레히트 슈흐, 아론 힐머, 에딘 하사노비치</span>
+              <br/>
+            <span>조연 : 데비트 슈트리조, 아드리안 그뤼네발트, 안드레아스 돌러</span>
+        	<section class="myReview" style="font-size: 15px;">
+        	<div class="asdasd" style="border-top: 3px solid #33ff33;">
+        <p class="mytextReview" style="font-style: oblique; font-size: 20px;">내가 작성한 리뷰</p>
+        </div>
+        <div class="tesat">
+        <form action=""  class="frm" method="post">
+        	<input type="hidden" name="user_no" value="${ReviewDTO.user_no }">
+    		<input type="hidden" name="review_no" value="${ReviewDTO.review_no }"  />
+        <div class="review-box">      
+          <div class="review-box-header">
+            <div class="user-icon">
+              <img class="aaa" src="${path}/resources/images/icon/user.png" alt="유저 이미지파일">
+            </div>
+            <div class="user-name">
+              <a href="../ottt박소율/mypageshow.html">
+                <p class="user_nicknm"> ${ReviewDTO.user_nicknm} </p></a>
+                <p class="date-insert" name="review_create_dt"><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${ReviewDTO.review_create_dt}"/></p>
+              
+            </div>
+            <ul>
+              <li class="rating1">
+              <div class="bbb">
+              	<img src="${path}/resources/images/img/starone.PNG" alt="별점">
+                ${ReviewDTO.rating}0.5
+                </div>
+              </li>
+              <li>
+                <div class="heart1">        
+                    <div>
+					   <button class="LikeBtn">
+                      	 <img id="myImage-${ReviewDTO.review_no}" src="${path}/resources/images/img/likeoff.png" width="35" height="80%">
+                      </button>					
+                    </div>             
+                </div>
+              </li>
+            </ul>
+          </div>
+          <a href="<c:url value='/detailPage/reply' />">
+          <div class="review-box-body">				
+            <p class="review-box-text review_content">${ReviewDTO.review_content }</p>
+          </div>
+        </a>
+          <div class="review-box-footer">
+            <div>
+              <ul>
+                <li>
+                  <div class="like">
+                    <img src="${path}/resources/images/img/좋아요.png" alt="좋아요아이콘">
+                  </div>
+                  <div class="like-count">
+                    <p>
+                      9999개
+                    </p>
+                  </div>
+                </li>
+                <li>
+                  <div class="footer-comment">
+                    <img src="${path}/resources/images/img/댓글.png" alt="댓글아이콘">
+                  </div>
+                  <div class="comment-count">
+                    <p>
+                      9999개
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+                         <c:if test="${loginId != null && sessionScope.user_no eq ReviewDTO.user_no}">
+   			 <button  class="removeBtn">삭제</button>
+ 		    </c:if>
+                  <div class="report">
+                  <button><img src="${path}/resources/images/img/신고하기.png" alt="신고"></button>
+                      <button class="report-text" >신고</button>
+                  </div>
+          </div>
+          
+        </div>
+    		
+    		</form>
+        </div>
+    		
+    		
+    </section>
+        </div>
+        
+    
+    
+    
+        </div>
+          
+        <div>
+          </div>
+      </section>
+      <section class="sec03">
+      
+
+ 
+ 
+ 
+    
+
+  </section>
+  <section class="sec04">
+  
+    <div class="bottom-bot">
+          <div class="right-box" id="reviews-container">
+>>>>>>> 7c5f8d98bb08e6ee1d7eaeaf01c0c8ee7140c260
         <div class="review-count">
           <p>총 ${count }개의 리뷰가 있습니다.</p>           
           <div class="more-see">
@@ -456,6 +598,11 @@
           </div>
         </div>
         <c:forEach var="ReviewDTO" items="${list}">
+<<<<<<< HEAD
+=======
+        
+        <input type="hidden" name="review_no" value="${ReviewDTO.review_no }"  />
+>>>>>>> 7c5f8d98bb08e6ee1d7eaeaf01c0c8ee7140c260
         <div class="review-box">      
           <div class="review-box-header">
             <div class="user-icon">
@@ -463,8 +610,14 @@
             </div>
             <div class="user-name">
               <a href="../ottt박소율/mypageshow.html">
+<<<<<<< HEAD
                 <p class="user_nicknm"> ${ReviewDTO.user_nicknm} </p>
               </a>
+=======
+                <p class="user_nicknm"> ${ReviewDTO.user_nicknm} </p></a>
+                <p class="date-insert" name="review_create_dt"><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${ReviewDTO.review_create_dt}"/></p>
+              
+>>>>>>> 7c5f8d98bb08e6ee1d7eaeaf01c0c8ee7140c260
             </div>
             <ul>
               <li class="rating">
@@ -474,7 +627,11 @@
               <li>
                 <div class="heart">        
                     <div>
+<<<<<<< HEAD
 					  <button onclick="changeImage()">
+=======
+					  <button  class="LikeBtn">
+>>>>>>> 7c5f8d98bb08e6ee1d7eaeaf01c0c8ee7140c260
                       	<img id="myImage" src="${path}/resources/images/img/likeoff.png" width="35" height="80%">
                       </button>					
                     </div>             
@@ -512,18 +669,33 @@
                 </li>
               </ul>
             </div>
+<<<<<<< HEAD
                   <div class="report">
                   <button><img src="${path}/resources/images/img/신고하기.png" alt="신고"></button>
                       <button>신고</button>
+=======
+                         <c:if test="${loginId != null && sessionScope.user_no eq ReviewDTO.user_no}">
+   			 <button  class="removeBtn">삭제</button>
+ 		    </c:if>
+                  <div class="report">
+                  <button><img src="${path}/resources/images/img/신고하기.png" alt="신고"></button>
+                      <button class="report-text" >신고</button>
+>>>>>>> 7c5f8d98bb08e6ee1d7eaeaf01c0c8ee7140c260
                   </div>
           </div>
           
         </div>
+<<<<<<< HEAD
         </c:forEach>
   </div>
   </section>
   <section class="sec04">
     <div class="bottom-bot">
+=======
+      
+        </c:forEach>
+  </div>
+>>>>>>> 7c5f8d98bb08e6ee1d7eaeaf01c0c8ee7140c260
             <div class="b-text">
               <div>동일한 장르의 작품</div>
               <div><a href="#">더보기</a></div>
@@ -568,6 +740,18 @@
     </div>
     
 <script type="text/javascript">
+<<<<<<< HEAD
+=======
+	
+	let msg = "${msg}"
+		if(msg=="DEL_OK") alert("성공적으로 삭제 되었습니다.")
+		if(msg=="DEL_ERR") alert("이미 삭제 되었거나 리뷰가 존재하지 않습니다.")
+
+		let review_no = $("input[name=review_no]").val()
+
+	
+
+>>>>>>> 7c5f8d98bb08e6ee1d7eaeaf01c0c8ee7140c260
 	$(document).ready(function() {	
 		$('#submit-review').on("click", function(){
 			let form = $("#review-form")
@@ -593,9 +777,80 @@
 				return false
 			}
 			return true
+<<<<<<< HEAD
 		}	
 	})
 	</script>
+=======
+		}
+		
+		
+		
+		$(".removeBtn").on("click", function() {
+            if (!confirm("리뷰를 삭제하시겠습니까?"))
+            	return;
+            
+            let form = $("form")
+            form.attr("action", "<c:url value='/remove' />")
+            form.attr("method", "post")
+            form.submit()   
+         })
+	})
+	
+	
+	
+	
+	</script>
+	
+
+
+	<script type="text/javascript">
+	var likeval = ${like};
+	
+	let review_no = ${Detail.review_no};
+	let user_no = '${login.user_id}';
+	if(likeval > 0){
+		console.log(likeval + "좋아요 누름");
+		$('.LikeBtn img').attr('src', '${path}/resources/images/img/likeon.png');
+		$('.LikeBtn').click(function() {
+			$.ajax({
+				type :'post',
+				url : '<c:url value ="/detailPage/likeDown"/>',
+				contentType: 'application/json',
+				data : JSON.stringify(
+						{
+							"review_no" : review_no,
+							"user_no" : user_no
+						}		
+					),
+				success : function(data) {
+					alert('취소 성공');
+				}
+			})
+		})
+
+	}else{
+		console.log(likeval + "좋아요 안누름")
+		console.log(user_no);
+		$('.LikeBtn').click(function() {
+			$.ajax({
+				type :'post',
+				url : '<c:url value ="/detailPage/likeUp"/>',
+				contentType: 'application/json',
+				data : JSON.stringify(
+						{
+							"review_no" : review_no,
+							"user_no" : user_no
+						}		
+					),
+				success : function(data) {
+					alert('성공염');
+				}
+			})
+		})
+	</script>
+	
+>>>>>>> 7c5f8d98bb08e6ee1d7eaeaf01c0c8ee7140c260
     
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"

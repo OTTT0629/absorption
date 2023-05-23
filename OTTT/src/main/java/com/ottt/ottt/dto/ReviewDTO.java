@@ -2,7 +2,10 @@ package com.ottt.ottt.dto;
 
 import java.util.Date;
 import java.util.Objects;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7c5f8d98bb08e6ee1d7eaeaf01c0c8ee7140c260
 /*
  * --리뷰번호
 	review_no			bigint 			generated always as identity primary key
@@ -11,7 +14,11 @@ import java.util.Objects;
 	--작성자(프로필번호) FK
 	,user_no			BIGINT			not null
 	--별점
+<<<<<<< HEAD
 	,rating			 	float				not null
+=======
+	,rating			 	float			not null
+>>>>>>> 7c5f8d98bb08e6ee1d7eaeaf01c0c8ee7140c260
 	--내용
 	,review_content		varchar(65535)	not null
 	--등록날짜
@@ -27,6 +34,12 @@ public class ReviewDTO {
 	private Date review_create_dt;
 	
 	private String user_nicknm;
+<<<<<<< HEAD
+=======
+	
+	
+	
+>>>>>>> 7c5f8d98bb08e6ee1d7eaeaf01c0c8ee7140c260
 	private UserDTO userDTO;
 	public Integer getReview_no() {
 		return review_no;

@@ -43,6 +43,16 @@ public class ReviewDaoImpl implements ReviewDao {
 		
 		return session.selectList(namespace+"selectAll");
 	}
+<<<<<<< HEAD
+=======
+	@Override
+	public ReviewDTO selectReview(Integer content_no, Integer user_no) throws Exception {
+		Map map = new HashMap();
+		map.put("user_no", user_no);
+		map.put("content_no", content_no );
+		return session.selectOne(namespace + "selectReview", map);
+	}
+>>>>>>> 7c5f8d98bb08e6ee1d7eaeaf01c0c8ee7140c260
 	
 	
 	

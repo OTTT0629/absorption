@@ -20,6 +20,7 @@
 	  		insert into tb_review (user_no, rating , review_content)
 			values (#{user_no}, #{rating}, #{review_content})
 	 </insert>
+<<<<<<< HEAD
 	  	
 	<select id="count" resultType="int">
 		select count(*) from tb_review
@@ -27,9 +28,34 @@
 
 	<select id="selectAll" resultType="ReviewDTO">
 		select user_nicknm, rating, review_content, review_no, tb_review.user_no, review_no
+=======
+	 
+	<select id="selectAll" resultType="ReviewDTO">
+		select user_nicknm, rating, review_content, review_no, tb_review.user_no, review_no, review_create_dt
+>>>>>>> 7c5f8d98bb08e6ee1d7eaeaf01c0c8ee7140c260
 		from tb_review, tb_user
 		where tb_review.user_no = tb_user.user_no
 		order by review_no DESC
 	</select>          
+<<<<<<< HEAD
+=======
+	  	
+	<select id="count" resultType="int">
+		select count(*) from tb_review
+	</select>
+	
+	
+	<select id="selectReview" resultType="map">
+		SELECT review_no, content_no, a.rating, review_content, review_create_dt, b.user_nicknm, b.user_no  
+		FROM tb_review a, tb_user b
+		where a.user_no = b.user_no and a.content_no = #{content_no} and b.user_no = #{user_no}
+	</select>       
+  	
+	
+	<select id="myReview"></select>
+	
+	
+
+>>>>>>> 7c5f8d98bb08e6ee1d7eaeaf01c0c8ee7140c260
   	
 </mapper>

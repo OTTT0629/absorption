@@ -14,7 +14,11 @@ public class ReviewServiceImpl implements ReviewService {
     ReviewDao reviewDao;
 
 	@Override
+<<<<<<< HEAD
 	public int removeReview(Integer review_no, int user_no) throws Exception {
+=======
+	public int removeReview(Integer review_no, Integer user_no) throws Exception {
+>>>>>>> 7c5f8d98bb08e6ee1d7eaeaf01c0c8ee7140c260
 		
 		return reviewDao.delete(review_no, user_no);
 	}
@@ -43,6 +47,15 @@ public class ReviewServiceImpl implements ReviewService {
 		return reviewDao.selectAll();
 	}
 
+<<<<<<< HEAD
+=======
+	@Override
+	public ReviewDTO getReviewNo(Integer content_no, Integer user_no) throws Exception {
+		// TODO Auto-generated method stub
+		return reviewDao.selectReview(content_no, user_no);
+	}
+
+>>>>>>> 7c5f8d98bb08e6ee1d7eaeaf01c0c8ee7140c260
 	
 
 	
