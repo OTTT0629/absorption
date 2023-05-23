@@ -22,8 +22,8 @@ public class CommentDTO {
 	private int		user_no;
 	private int		article_no;
 	private int 	review_no;
-	private String	cmt_content;
-	private String	cmt_writer;
+	private String	cmm_content;
+	private String	cmm_writer;
 	private Date	cmt_dt;
 	private Date	cmt_mod_dt;
 	private int		cmt_like_count;
@@ -75,22 +75,22 @@ public class CommentDTO {
 
 
 	public String getCmm_content() {
-		return cmt_content;
+		return cmm_content;
 	}
 
 
 	public void setCmm_content(String cmm_content) {
-		this.cmt_content = cmm_content;
+		this.cmm_content = cmm_content;
 	}
 
 
 	public String getCmm_writer() {
-		return cmt_writer;
+		return cmm_writer;
 	}
 
 
 	public void setCmm_writer(String cmm_writer) {
-		this.cmt_writer = cmm_writer;
+		this.cmm_writer = cmm_writer;
 	}
 
 
@@ -136,7 +136,7 @@ public class CommentDTO {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(article_no, cmt_content, cmt_writer, cmt_no, user_no);
+		return Objects.hash(article_no, cmm_content, cmm_writer, cmt_no, user_no);
 	}
 
 
@@ -149,8 +149,8 @@ public class CommentDTO {
 		if (getClass() != obj.getClass())
 			return false;
 		CommentDTO other = (CommentDTO) obj;
-		return article_no == other.article_no && Objects.equals(cmt_content, other.cmt_content)
-				&& Objects.equals(cmt_writer, other.cmt_writer) && Objects.equals(cmt_no, other.cmt_no)
+		return article_no == other.article_no && Objects.equals(cmm_content, other.cmm_content)
+				&& Objects.equals(cmm_writer, other.cmm_writer) && Objects.equals(cmt_no, other.cmt_no)
 				&& user_no == other.user_no;
 	}
 
@@ -158,7 +158,7 @@ public class CommentDTO {
 	@Override
 	public String toString() {
 		return "CommentDTO [cmt_no=" + cmt_no + ", user_no=" + user_no + ", article_no=" + article_no
-				+ ", cmm_content=" + cmt_content + ", cmm_writer=" + cmt_writer + ", cmt_dt=" + cmt_dt + ", cmt_mod_dt="
+				+ ", cmm_content=" + cmm_content + ", cmm_writer=" + cmm_writer + ", cmt_dt=" + cmt_dt + ", cmt_mod_dt="
 				+ cmt_mod_dt + ", cmt_like_count=" + cmt_like_count + ", report_cnt=" + report_cnt + "]";
 	}
 	

@@ -85,7 +85,7 @@
       						<img class="mimg" src="${path}/resources/images/img/free-icon-diary-6393039.png" alt="다이어리">
       						<a href="<c:url value="/mypage/mydiary" />">나만의 다이어리</a>
    						</li>
-   						<li id="Lrivew">
+   						<li id="Lreview">
 		                	<img class="mimg" src="${path}/resources/images/img/free-icon-review-3501894.png" alt="리뷰">
 		                	<a href="<c:url value="/mypage/myreview" />">나의 리뷰</a>
 		              	</li>

@@ -29,11 +29,6 @@
     <div class="wrap"> 
         <div style="background-color: black; text-align: center; height: 850px;">
 
-        	<div class="user">
-                <a href="<c:url value='${loginoutlink}' /> " class="${loginout}">
-                    <img src="${path}/resources/images/img/profile.png" class="user-img">
-                </a>
-            </div>
             <img src="${path}/resources/images/logo/메인이미지.png" style="width: 1200px; background-position: center; margin-top: 150px;"/>
             
             <div>
@@ -80,7 +75,7 @@
               <a href="<c:url value="/genre/animation" />">애니</a>
             </li>
             <li>
-              <a href="<c:url value="/community/freecommunity" />">게시판</a>
+              <a href="<c:url value="/community" />">게시판</a>
             </li>
           </ul>
         </nav>
@@ -92,13 +87,18 @@
               </a>
             </li>
             <li>
-              <a href="<c:url value='${loginoutlink}' /> " class="${loginout}">
-                <!-- <img src="./images/icon/user01.png" alt="내 정보"> -->
+              <a href="<c:url value='/mypage' /> " class="${loginout}">
+                <%-- <img src="${profilimg}" alt="내 정보"> --%>
               </a>
             </li>
           </ul>
             </div>
         </header>
+        
+        <script type="text/javascript">
+			let msg = "${msg}"
+			if(msg == "byebye") alert("또 봐ㅜㅜ")
+    	</script>
 
         <section class="sec_2">
             <div style="font-size: 23px; margin-left: 20px; margin-top: 20px;">별점 높은 작품들</div>

@@ -58,12 +58,12 @@
       	<section class="sec01">      
         	<div class="mypage-info">
 	          	<div class="porfile">
-	            	<img  src="${path}/resources/images/img/profile.png" alt="프로필이미지">
+	            	<img  src=${userDTO.image } alt="프로필이미지">
 	          	</div>
 	          	<div class="user">
 	          		<ul>
 	          			<li class="user-name">
-	          				<span>뚜 벅</span>
+	          				<span>${userDTO.user_nicknm }</span>
           				</li>
 		              	<li class="user-follow">
 		                	<span class="user-follow-l"><a href="<c:url value="/mypage/follower" />">팔로워</a></span>
@@ -76,7 +76,7 @@
               	<div class="set">
               		<ul>
               			<li>
-              				<a href="./mysetting.html">
+              				<a href="<c:url value="/mypage/setting" />">
               				<img class="set-img" src="${path}/resources/images/img/톱니.png" alt="설정이미지">
             				</a>
            				</li>

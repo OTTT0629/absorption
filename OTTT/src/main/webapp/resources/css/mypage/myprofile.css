@@ -163,6 +163,16 @@ form > div {
     align-items: center;
 }
 
+.cancle {
+	width: 360px;
+    height: 60px;
+    background-color: #3F3B3B;
+    position: absolute;
+    bottom: 10%;
+    text-align: center;
+    line-height: 60px;
+}
+
 .profile-b {
     margin-right: auto;
     position: relative;
@@ -211,11 +221,16 @@ form > div {
 }
 
 .input-file-button {
-    width: 360px;
+    width: 100%;
     height: 60px;
     background-color: #3F3B3B;
-    position: absolute;
-    bottom: 10%;
     text-align: center;
     line-height: 50px;
+}
+
+.cancleBtn {
+	width: 100%;
+	border: 0;
+	background-color: transparent;
+	color: #fff;
 }

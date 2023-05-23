@@ -48,7 +48,5 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	
-	<view-controller path="/" view-name="home"/>
 
 </web-app>

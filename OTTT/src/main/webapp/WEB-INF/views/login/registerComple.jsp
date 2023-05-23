@@ -11,15 +11,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     <link rel="stylesheet" href="${path}/resources/css/login/registercomple.css" >
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
     <style>
     	.ott-logo-img:hover,
 		.ott-logo-img.active {
 			outline: 3px solid #33ff33;
-		}
-		
-		#msg{
-			text-align: center;
 		}
     </style>
     <title>회원가입 완료</title>
@@ -69,50 +64,15 @@
       
         <div class = "Login">
         	<img src = "${path}/resources/images/logo/OTTT.png" width="420" height="120">
-        	<div style="font-size: 30px; font-weight: bold; text-align: center; margin: 10px 0;">환영합니다!</div>
+        	<h1 style="font-size: 30px; display: inline-block;">환영합니다!</h1>
         	
-        	
-        	
-        	<form method="post" action="<c:url value='/signin/complete' />" onsubmit="return frmCheck(this)">
-        			<div id="msg">		        		
-						<c:if test= "${not empty param.msg}" >
-						<i class="fa fa-exclamation-circle">${URLDecoder.decode(param.msg)}</i>
-						</c:if>
-					</div>
-						<input type="text" style="border:0 solid black" name="user_id" placeholder="아이디">
-		            	<input type="password" style="border:0 solid black" name="user_pwd" style="border:0 solid black" placeholder="비밀번호">
-		            	<input type="submit" value="로그인">
+        	<form method="post" action="<c:url value='/' />" id="login-form">
+        		<input type="text" style="border:0 solid black" name="id" placeholder="아이디">
+            	<input type="password" style="border:0 solid black" name="pwd" style="border:0 solid black" placeholder="비밀번호">
+            	<input type="submit" value="로그인">
            	</form>
        	</div>
    	</div>
-   	
-   	<script type="text/javascript">
-			function frmCheck(frm) {
-				let msg = ''
-				
-				if (frm.user_id.value.length == 0){
-					setMessage("id를 입력해주세요", frm.user_id)
-					return false;
-				}
-				
-				if (frm.user_pwd.value.length == 0){
-					setMessage("비밀번호를 입력해주세요", frm.user_pwd)
-					return false;
-				}
-				
-				return true;
-				
-			}
-			
-			function setMessage(msg, element) {
-				document.getElementById("msg").innerHTML
-						= `<i class="fa fa-exclamation-circle">${'${msg}'}</i>`
-				if(element) {
-					element.select()	//값이 잘못 입력되었을 때 다시 입력 
-				}
-			}
-	
-	</script>
          
 </body>
 </html>

@@ -142,8 +142,7 @@ header{
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: 30px;
-   
+    font-size: 30px;   
 }
 
 .info-main > div {
@@ -153,4 +152,12 @@ header{
     text-align: center;
     line-height: 50px;
     margin: 20px;
+}
+
+.byebye {
+	width: 500px;
+    height: 60px;
+	border: 0;
+	background-color: transparent;
+	color: 	#fff;
 }

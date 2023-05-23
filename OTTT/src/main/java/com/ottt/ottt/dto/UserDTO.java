@@ -4,34 +4,34 @@ import java.util.Date;
 import java.util.Objects;
 
 /*
- * --회원번호
-	user_no			bigint			generated always as identity primary key
+	--회원번호
+	user_no			bigint			generated always as identity primary key	
 	--등급
-	,gr_no 			char(1)			not null
+	,gr_no 			char(1)			default '0'	
 	--아이디
-	,user_id		varchar(20)		not null
+	,user_id		varchar(20)		not null	
 	--비밀번호
-	,user_pwd		varchar(30)		not null
+	,user_pwd		varchar(30)		not null	
 	--이름
-	,user_nm		varchar(15)		not null
+	,user_nm		varchar(15)		not null	
 	--닉네임
-	,user_nicknm	varchar(20)		not null
+	,user_nicknm	varchar(20)		not null	
 	--성별
-	,user_gen		int				not null
+	,user_gen		int				not null	
 	--이메일
-	,user_email		varchar(150)	not null
+	,user_email		varchar(150)	not null	
 	--가입일
-	,reg_date		timestamptz		not null
+	,reg_date		timestamptz		default now()
 	--관리자 여부
-	,admin			char(1)			not null
+	,admin			char(1)			default 'N'	
 	--프로필 이미지
-	,image 			text
+	,image 			text			default null	
 	--팔로잉
-	,following		bigint
+	,following		bigint			default 0	
 	--팔로워
-	,followers 		bigint
+	,followers 		bigint			default 0	
 	--신고개수
-	,report_cnt		int
+	,report_cnt		int				default 0
  */
 public class UserDTO {
 
@@ -51,6 +51,21 @@ public class UserDTO {
 	private int report_cnt;
 	
 	public UserDTO() {}
+	
+	
+
+	public UserDTO(String user_id, String user_pwd, String user_nm, String user_nicknm, int user_gen,
+			String user_email) {
+		super();
+		this.user_id = user_id;
+		this.user_pwd = user_pwd;
+		this.user_nm = user_nm;
+		this.user_nicknm = user_nicknm;
+		this.user_gen = user_gen;
+		this.user_email = user_email;
+	}
+
+
 
 	public Integer getUser_no() {
 		return user_no;
