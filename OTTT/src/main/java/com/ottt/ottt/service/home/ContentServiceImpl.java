@@ -19,5 +19,11 @@ public class ContentServiceImpl implements ContentService {
 		return contentDao.ratingSelect();
 	}
 
+	@Override
+	public List<ContentDTO> getGenreName(Integer content_no) throws Exception {
+		// TODO Auto-generated method stub
+		return contentDao.genreNameSelect(content_no);
+	}
+
 	
 }

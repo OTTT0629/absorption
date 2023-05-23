@@ -35,7 +35,6 @@ public class HomeController {
 			List<ContentDTO> list = contentServiceImpl.getRating();
 			m.addAttribute("list", list);
 			
-			ContentCategoryDTO contentCategoryDTO = 
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

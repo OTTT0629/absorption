@@ -7,4 +7,5 @@ import com.ottt.ottt.dto.ContentDTO;
 public interface ContentDao {
 
 	List<ContentDTO> ratingSelect() throws Exception;
+	List<ContentDTO> genreNameSelect(Integer content_no) throws Exception;
 }

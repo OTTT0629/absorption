@@ -22,6 +22,25 @@ public class ContentDTO {
 	private String thumbnail;
 	private Integer age;
 	private String country;
+	
+	private Integer genre_no;
+	private String genre_nm;
+
+	public Integer getGenre_no() {
+		return genre_no;
+	}
+
+	public void setGenre_no(Integer genre_no) {
+		this.genre_no = genre_no;
+	}
+
+	public String getGenre_nm() {
+		return genre_nm;
+	}
+
+	public void setGenre_nm(String genre_nm) {
+		this.genre_nm = genre_nm;
+	}
 
 	public ContentDTO() {}
 

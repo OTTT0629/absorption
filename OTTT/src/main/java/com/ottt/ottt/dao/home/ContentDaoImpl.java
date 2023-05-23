@@ -20,5 +20,11 @@ public class ContentDaoImpl implements ContentDao {
 		return session.selectList(namespace+"ratingSelect");
 	}
 
+	@Override
+	public List<ContentDTO> genreNameSelect(Integer content_no) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace+"contentGenreName", content_no);
+	}
+
 	
 }

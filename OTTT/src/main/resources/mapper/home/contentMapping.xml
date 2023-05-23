@@ -12,4 +12,12 @@
 	limit 14
   </select>
   
+  <select id="contentGenreName" parameterType="int" resultType="ContentDTO">
+	SELECT tg.genre_nm
+	FROM tb_content_genre tcg, tb_content c, tb_genre tg 
+	where c.content_no = tcg.content_no  and tg.genre_no = tcg.genre_no 
+	and c.content_no = #{content_no}
+	group by tg.genre_nm
+  </select>
+  
   </mapper>

@@ -117,15 +117,15 @@
                                     
                                     <div class="work-cat">
                                         <div>영화</div>    
-                                        <div>전쟁</div>
+                                        <!-- <div>전쟁</div> -->
                                         <div>${contentDTO.country.toString()}</div>
                                     </div>
                                     <div>
                                         <img src="${path}/resources/images/img/3star.png" class="star-img"/>
                                     </div>                           
                                     <div class="work-my">
-                                        <div><a href="#">찜</a></div>
-                                        <div><a href="../OTTT_review_page유찬희/review.html">리뷰쓰기</a></div>
+                                    	<div><a href="../OTTT_review_page유찬희/review.html">리뷰쓰기</a></div>
+                                        <div><a href="#"><img alt="찜" src="${path}/resources/images/img/nojjim.png" style="width: 15px; margin: 5px;"></a></div>                                      
                                     </div>
                                 </div>
                             </a>

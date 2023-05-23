@@ -7,5 +7,6 @@ import com.ottt.ottt.dto.ContentDTO;
 public interface ContentService {
 	
 	List<ContentDTO> getRating() throws Exception;
+	List<ContentDTO> getGenreName(Integer content_no) throws Exception;
 
 }
