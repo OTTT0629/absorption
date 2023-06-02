@@ -92,7 +92,27 @@
 										<input type="text" id="userfile" name="userfile">
 		                      			<label for="fileInput" for="btn_file" ><img src="${path}/resources/images/img/writeImg.png" class="img_file"></label>
 									</div>
+<<<<<<< HEAD
+		                      		<img src="${path}/resources/images/img/commit.png" alt="commit" class="btn_commit"	 data-bs-toggle="modal" data-bs-target="#commitBtn">      
+		                    		<!-- Modal -->
+			                    	<div class="modal fade" id="commitBtn" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			                      		<div class="modal-dialog modal-dialog-centered">
+			                        		<div class="modal-content">
+			                          			<div class="modal-header">
+			                            			<h1 class="modal-title fs-5" id="exampleModalLabe2">알림</h1>
+			                            			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			                          			</div>
+			                          			<div class="modal-body">등록하시겠습니까?</div>
+			                          			<div class="modal-footer">
+			                          				<button type="button" id="saveBtn"class="btn btn-primary">Yes</button>
+			                            			<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+			                          			</div>
+			                       			</div>
+			                     		 </div>
+			              			</div>         
+=======
 		                      		<img src="${path}/resources/images/img/commit.png" alt="commit" class="btn_commit"	id="commitBtn">             
+>>>>>>> 14c62d30ec89ae4aa8f36f85d6d1f7662e2aacea
 		                  		</li>
 
 	          				</ul>
@@ -110,10 +130,18 @@
 			/********************************************************************************/
 			let PATH = "<c:out value='${path}'/>"; 	//이미지 root 경로
 			let URL = 	"<c:url value='/community/post?article_no='/>";	//상세페이지 이동 URL 설정
+<<<<<<< HEAD
+			let LOGIN_YN = "${sessionScope.user_no}";	//로그인여부
+			let OFFSET = 0;
+			let TOTAL_COUNT = 0;
+			let CATEGORY =  "${category}" != "" ? "${category}" : "all";
+			let schText = "${schText}";
+=======
 			let LOGIN_YN = '${sessionScope.user_no}';	//로그인여부
 			let OFFSET = 0;
 			let TOTAL_COUNT = 0;
 			let CATEGORY =  "${category}" != "" ? "${category}" : "all";
+>>>>>>> 14c62d30ec89ae4aa8f36f85d6d1f7662e2aacea
 			console.log("path :"+PATH);
 			console.log("url  :"+URL);
 			
@@ -121,7 +149,16 @@
 			/* DOM Ready 영역																	*/
 			/* 작성자 gahhyun																	*/
 			/********************************************************************************/
+<<<<<<< HEAD
+			$(document).ready(function(){
+				
+				if($.trim(schText) != ""){
+					$("#schText").val(schText);
+				 	$("#schBtn").trigger("click");
+				}
+=======
 			$(document).ready(function(){				
+>>>>>>> 14c62d30ec89ae4aa8f36f85d6d1f7662e2aacea
 				
 				/********************************************************************************/
 				/*	이미지 미리보기 											*/
@@ -159,14 +196,22 @@
 				/********************************************************************************/
 				/*	DOM ajaxStart 영역 ajax 호출시 로딩효과											*/
 				/********************************************************************************/
+<<<<<<< HEAD
+/* 	      		$(document).ajaxStart(function() {
+=======
 	      		$(document).ajaxStart(function() {
+>>>>>>> 14c62d30ec89ae4aa8f36f85d6d1f7662e2aacea
 	          		$('#loading').show();
 	        	}).ajaxStop(function() {
 	          		setTimeout(function() {
 		            	$('#loading').hide();
 		          	}, 1000); // 1초의 지연 효과를 줍니다.
 	        	});
+<<<<<<< HEAD
+	 */
+=======
 	
+>>>>>>> 14c62d30ec89ae4aa8f36f85d6d1f7662e2aacea
 				
 				/********************************************************************************/
 				/*	스크롤 Event정의 영역															*/
@@ -211,7 +256,11 @@
 				/*	요소 Event정의 영역																*/
 				/********************************************************************************/
 				//저장버튼 Click Event
+<<<<<<< HEAD
+				$("#saveBtn").click(function(){		//commitBtn에서 모달 Yes의 버튼으로 교체
+=======
 				$("#commitBtn").click(function(){
+>>>>>>> 14c62d30ec89ae4aa8f36f85d6d1f7662e2aacea
 					if(LOGIN_YN == null || LOGIN_YN == ""){
 						swal("로그인 후 이용가능합니다.","로그인을 해주세요.", "warning")
 						.then(function(){
@@ -230,6 +279,24 @@
 				
 				
 				//검색어버튼 Click Event
+<<<<<<< HEAD
+				$("#schText").keydown(function(event) {
+				  // Enter 키의 keyCode는 13입니다.
+				  if (event.keyCode === 13) {
+				    // 목록 영역 클리어
+				    $("#post_list").html("");
+				    // 아티클 목록을 불러오는 ajax 함수 호출
+				    fnCallAjaxSelectArticleList({
+				      "offset": OFFSET,
+				      "category": "all",
+				      "schText": $("#schText").val()
+				    });
+				  }
+				});
+				
+				//검색어버튼 Click Event
+=======
+>>>>>>> 14c62d30ec89ae4aa8f36f85d6d1f7662e2aacea
 				$("#schBtn").click(function(){
 					//목록 영역 클리어
 					$("#post_list").html("");
@@ -242,7 +309,10 @@
 
 				});
 				
+<<<<<<< HEAD
+=======
 				
+>>>>>>> 14c62d30ec89ae4aa8f36f85d6d1f7662e2aacea
 				//화면 로딩시 아티클 목록을 불러오는 ajax 함수 호출
 				fnCallAjaxSelectArticleList({
 					"offset": OFFSET
@@ -288,7 +358,11 @@
 					checkListSize = list.length;
 					
 					//화살표 함수형 foreach 반복문
+<<<<<<< HEAD
+					list.forEach( function(v,i) {
+=======
 					list.forEach( function(v) {
+>>>>>>> 14c62d30ec89ae4aa8f36f85d6d1f7662e2aacea
 
 						//등록일 날짜형식 변경 timestamp to yyyy_MM-dd
 						let date = new Date(v.article_create_dt);
@@ -322,8 +396,17 @@
 						createHtml +=		'</div>';
 						createHtml +=		'<div>';
 						createHtml +=			'<div>';
+<<<<<<< HEAD
+						
+						//로그인 여부 및 내가 누른하트표시 on off
+						let heartOnOffImg = (v.check_like_count == 1 ? "on" : "off");
+						
+						createHtml +=				'<input onclick="javascript:fnPushHeart('+ v.article_no +','+i+');" class="heart_img" type="image" id="pushHeart_'+i+'" src="'+ PATH +'/resources/images/img/heart_'+heartOnOffImg+'.png" alt="heart">';
+						createHtml +=				'<span id="likeCount_'+i+'"	>'+ v.like_count +'</span>'; 
+=======
 						createHtml +=				'<input class="heart_img" type="image" src="'+ PATH +'/resources/images/img/heart_on.png" alt="heart">';
 						createHtml +=				'<span>'+ v.like_count +'</span>'; 
+>>>>>>> 14c62d30ec89ae4aa8f36f85d6d1f7662e2aacea
 						createHtml +=				'<input class="re_comment_img" type="image" src="'+ PATH +'/resources/images/img/comment.png" alt="comment">';
 						createHtml +=				'<span>'+ v.comment_count +'</span>';                  
 						createHtml +=			'</div>';
@@ -409,6 +492,74 @@
 			       	reader.readAsDataURL(input.files[0]);
 		   		}
        		}
+<<<<<<< HEAD
+
+			//좋아요 누르기 클릭 이벤트
+			function fnPushHeart(article_no, index){
+				
+				if(LOGIN_YN == null || LOGIN_YN == ""){
+					swal("로그인 후 이용가능합니다.","로그인을 해주세요.", "warning")
+					.then(function(){
+						location.href="/ottt/login";                   
+					});
+					return;					
+				}
+				
+				// $.post  > post 방식의 ajax 
+				$.post(
+					"/ottt/community/ajax/selectLikeCount"
+				    , {"user_no": "${sessionScope.user_no}" , "article_no" : article_no }
+				    , function(data){
+				    	
+				    	//통신 성공후 결과값이 출력된다.
+				    	console.log(data);
+				    	//data = {result: 0, message: 'success'} 오브젝트형태의 데이터임
+				    	let result = data.result // 1이나 0이 담겨있어요
+				    	
+				    	if(result == 0){
+	
+				    		//저장하는 post ajax
+				    		//1. 비동기 post ajax로 저장하는 컨트롤러 호출 , 필수값 보내야함
+				    		//2. 필수값 : 아티클번호, 회원번호
+				    		//3. 주소는 이거  /ottt/community/ajax/selectLikeCount
+				    		//4. 제이쿼리의 attr을 사용하여 이미지를 on으로 변경하기
+								$.post(
+								"/ottt/community/ajax/insertLike"
+				    			, {"user_no": "${sessionScope.user_no}" , "article_no" : article_no }
+							    , function(data){
+
+							    	$("#pushHeart_"+index).attr("src", PATH+"/resources/images/img/heart_on.png");
+									$("#likeCount_"+index).text(Number($("#likeCount_"+index).text())+1);
+
+							    }
+						    );
+	
+				    	}else {
+	
+				    		//삭제하는 post ajax
+				    		//1. 비동기 post ajax로 저장하는 컨트롤러 호출 , 필수값 보내야함
+				    		//2. 필수값 : 아티클번호, 회원번호
+				    		//3. 주소는 이거  /ottt/community//ajax/deleteLike
+				    		//4. 제이쿼리의 attr을 사용하여 이미지를 off으로 변경하기
+								$.post(
+								"/ottt/community/ajax/deleteLike"
+				    			, {"user_no": "${sessionScope.user_no}" , "article_no" : article_no }
+							    , function(data){
+
+							    	$("#pushHeart_"+index).attr("src", PATH+"/resources/images/img/heart_off.png");
+									$("#likeCount_"+index).text(Number($("#likeCount_"+index).text())-1);
+
+							    }
+						    );
+				    		
+				    	}
+				    	
+				    }
+				)	
+			}
+			
+=======
+>>>>>>> 14c62d30ec89ae4aa8f36f85d6d1f7662e2aacea
 		</script>
 	</body>
 </html>

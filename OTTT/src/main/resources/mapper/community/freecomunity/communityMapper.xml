@@ -41,13 +41,14 @@
 			, tal.article_no as like_article_no 			-- 좋아요 누른 게시물번호
          	, (SELECT COUNT(*) FROM tb_comment tc2 WHERE tc2.article_no = ta.article_no) as comment_count	-- 코멘트 개수
          	, (SELECT COUNT(*) FROM tb_article_like tal2 WHERE tal2.article_no = ta.article_no) AS like_count -- 좋아요 개수
+         	, (SELECT COUNT(*) FROM tb_article_like tal3 WHERE tal3.article_no = ta.article_no AND tal3.user_no = #{user_no} ) AS check_like_count -- 내가 눌렀는지 확인
 			, tu.user_no							-- 유저번호
 			, ta.article_index_no					-- 게시판구분
 			, ta.article_content					-- 게시판 내용
 			, ta.article_image						-- 사진 경로
 			, ta.article_title						-- 게시판 제목
-			, ta.article_create_dt	-- 등록일
-			, ta.article_mod_dt		-- 수정일
+			, ta.article_create_dt					-- 등록일
+			, ta.article_mod_dt						-- 수정일
 			-- , to_char(ta.article_create_dt,'YYYY-MM-DD') AS article_create_dt	-- 등록일
 			-- , to_char(ta.article_mod_dt,'YYYY-MM-DD') AS article_create_dt	-- 수정일
 			, ta.report_cnt

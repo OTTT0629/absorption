@@ -40,7 +40,8 @@ public class CommunityController {
 	
 	//freecommunity 메인호출
 	@GetMapping("/freecommunity")
-	public String freecommunity(@RequestParam(value = "category", required = false) String category, Model m, HttpServletRequest request, HttpSession session, String toURL) throws Exception {
+	public String freecommunity(@RequestParam(value = "schText", required = false) String schText,@RequestParam(value = "category", required = false) String category,
+									Model m, HttpServletRequest request, HttpSession session, String toURL) throws Exception {
 		
 		logger.info(">>>>>>>>>>>>>>>>>>>>> @GetMapping /freecommunity freecommunity 진입 ");
 		logger.info(">>>>>>>>>>>>>>>>>>>>> category 선택한 카테고리 : "+category);
@@ -57,15 +58,10 @@ public class CommunityController {
 			logger.info(">>>>>>>>>>>>>>> 로그인상태가 아닙니다. ");
 		}
 
-		/*
-		if(!loginCheck(request)) {
-			return "redirect:/login/login?toURL="+request.getRequestURL();		
-		}
-		*/
-		//UserDTO userDTO = loginUserDao.select((String)session.getAttribute("id"));
-
+		logger.info(">>>>>>>>>>>>>>>>>>>>> schText 검색어 : "+schText);
+		
 		m.addAttribute("category",category);
-		m.addAttribute(userDTO);
+		m.addAttribute("schText",schText);;
 		
 		return "/community/freecommunity/communityMain";		
 
@@ -82,7 +78,7 @@ public class CommunityController {
 			HttpSession session = request.getSession();
 
 			UserDTO userDTO = loginUserDao.select((String)session.getAttribute("id"));
-			m.addAttribute(userDTO);
+			
         	if (userDTO == null) {	   
         		logger.info("!!!! 로그인이 필요합니다. !!!!");
         		return "redirect:/login";
@@ -123,7 +119,6 @@ public class CommunityController {
 			HttpSession session = request.getSession();
 			
 			UserDTO userDTO = loginUserDao.select((String)session.getAttribute("id"));
-			m.addAttribute(userDTO);
 
 			if(userDTO != null) {
 				dto.setUser_no(userDTO.getUser_no());
@@ -243,17 +238,12 @@ public class CommunityController {
 
 		Map<String, Object> result = new HashMap<String,Object>();
 		
+		UserDTO userDTO = loginUserDao.select((String)session.getAttribute("id"));
+		
 		//왼쪽 카테고리가 "내가쓴글","내가 좋아요한 글", "내가 댓글단 글" 일때 회원번호를 ArticleSearchDTO에 담는다.
 		if( "myPost".equals(dto.getCategory()) 
 				|| "myLike".equals(dto.getCategory()) 
 					|| "myComment".equals(dto.getCategory())) {
-
-			UserDTO userDTO = loginUserDao.select((String)session.getAttribute("id"));
-			
-        	if (userDTO == null) {	   
-        		result.put("message", "로그인이 필요합니다.");
-        		return result;
-	        }
 			
 			dto.setUser_no(userDTO.getUser_no());
 

@@ -24,8 +24,16 @@ public class CommunityServiceImpl implements CommunityService{
 
 	@Override
 	public int delete(Integer article_no) throws Exception {
-		communityDao.delete(article_no);
-		return communityDao.delete(article_no);
+		int result = communityDao.delete(article_no);
+		
+		if(result>0) {
+	        ArticleLikeDTO likeDTO = new ArticleLikeDTO();
+	        likeDTO.setArticle_no(article_no);
+	        communityDao.deleteLike(likeDTO);
+//			communityDao.deleteComment(article_no);
+		}
+		
+		return result;
 	}
 
 	@Override

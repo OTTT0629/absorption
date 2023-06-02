@@ -38,10 +38,17 @@
    			</div>
        		<div id="line-2">
    				<div class="Lcontent">
+<<<<<<< HEAD
+      				<form name="schForm" action="<c:url value='/community/freecommunity' />" method="get">
+           				<input class="search" type="search" placeholder=" &nbsp;Search" id="schText" name="schText">
+              			<input class="searchicon" type="image" id="schBtn"	src="${path}/resources/images/icon/search02.png" id="schBtn" alt="돋보기">
+	            	</form>
+=======
       				<form name="post_search" action="" method="get">
            				<input class="search" type="search" placeholder=" &nbsp;Search">
            				<input class="searchicon" type="image" src="${path}/resources/images/icon/search02.png" alt="돋보기">
            			</form>
+>>>>>>> 14c62d30ec89ae4aa8f36f85d6d1f7662e2aacea
            			<ul class="movepage">
            				<li style="display: flex;">
              				<div class="list-group">
@@ -105,11 +112,26 @@
 									<c:when test="${mode == 'view' }">		
 										<c:if test="${articleDTO.article_image != null}">
 											<div class="container">
+<<<<<<< HEAD
+			                					<img class="poster" src="data:image/png;base64,${articleDTO.article_image}" alt="poster" style="border-radius: 10px;">		
+=======
 			                					<img class="poster" src="data:image/png;base64,${articleDTO.article_image}" alt="poster">		
+>>>>>>> 14c62d30ec89ae4aa8f36f85d6d1f7662e2aacea
 			                				</div>
 										</c:if>
 									</c:when>
 									<c:otherwise>
+<<<<<<< HEAD
+										<c:if test="${articleDTO.article_image != null}">
+											<div  class="container" style="margin-left: 70px">
+					                  			<img src="data:image/png;base64,${articleDTO.article_image}" id="preview" style="border-radius: 5px;"/>
+					                  		</div>
+				                  		</c:if>
+										<div>
+											<div class="inImg">
+												<input id="fileInput" name="upFile"	 accept="image/*" type="file" tabindex="-1" style="position: absolute; clip: rect(0px 0px 0px 0px);">
+												<input type="text" id="userfile" name="userfile" value="${articleDTO.article_image_name}">
+=======
 										<div style="margin-left: 70px">
 				                  			<img src="" id="preview" style="border-radius: 5px;"/>
 				                  		</div>
@@ -118,6 +140,7 @@
 												<input id="fileInput" name="upFile"	 accept="image/*" type="file" tabindex="-1" style="position: absolute; clip: rect(0px 0px 0px 0px);">
 												<input type="text" id="userfile" name="userfile" value="${articleDTO.article_image_name}">
 				                      			<!-- <label for="imgReset" for="imgReset"><button type="button" id="imgReset">이미지삭제</button></label> -->
+>>>>>>> 14c62d30ec89ae4aa8f36f85d6d1f7662e2aacea
 				                      			<label for="fileInput" for="btn_file" ><img src="${path}/resources/images/img/writeImg.png" class="img_file"></label>
 											</div>
 										</div>
@@ -302,7 +325,11 @@
 
 				}); 
 				
+<<<<<<< HEAD
+				//좋아요 누르기 클릭 이벤트
+=======
 				
+>>>>>>> 14c62d30ec89ae4aa8f36f85d6d1f7662e2aacea
 				$("#pushHeart").click(function(){
 
 					if(LOGIN_YN == null || LOGIN_YN == ""){
@@ -362,6 +389,24 @@
 					)	
 					
 				});
+<<<<<<< HEAD
+
+				
+				//검색어버튼 Click Event
+				$("#schText").keydown(function(event) {
+			  		// Enter 키의 keyCode는 13입니다.
+				  	if (event.keyCode === 13) {
+						$("#schForm").submit();			
+				  	};
+
+				});
+				
+				//검색어버튼 Click Event
+				$("#schBtn").click(function(){
+					$("#schForm").submit();					
+				});
+=======
+>>>>>>> 14c62d30ec89ae4aa8f36f85d6d1f7662e2aacea
 				
 				
 	   		});
@@ -373,6 +418,20 @@
 				info 
 				question
 	     	*/
+<<<<<<< HEAD
+			//목록 호출 함수
+			function fnCallAjaxSelectArticleList(param){
+				//ajax-post방식 축약버전 호출방식
+				$.post(
+					"/ottt/community/ajax/getArticleList"
+				    ,param
+				    ,fnCreatArticleList
+				)				
+			}
+	     	
+	     	
+=======
+>>>>>>> 14c62d30ec89ae4aa8f36f85d6d1f7662e2aacea
 	     	function post_delete(){
 	   			//폼서브밋 방식으로 삭제요청
 				if(LOGIN_YN == null || LOGIN_YN == ""){
@@ -433,6 +492,12 @@
 		   		}
        		}
 	
+<<<<<<< HEAD
+    	</script>
+	</body>
+</html>
+
+=======
 	     	/*
 	      	function post_delete(article_no) {
 	      		$.ajax({
@@ -457,3 +522,4 @@
     	</script>
 	</body>
 </html>
+>>>>>>> 14c62d30ec89ae4aa8f36f85d6d1f7662e2aacea

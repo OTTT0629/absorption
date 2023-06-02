@@ -39,7 +39,7 @@
               <a href="<c:url value="/genre/animation" />">애니</a>
             </li>
             <li>
-              <a href="<c:url value="/community" />" style="color: #33ff33;">게시판</a>
+              <a href="<c:url value="/community/freecommunity" />" style="color: #33ff33;">게시판</a>
             </li>
           </ul>
         </nav>
@@ -60,7 +60,7 @@
       </header>
       <div id="line-1" >
         <nav class="nav">
-          <a class="nav-link1" href="<c:url value='/community' />">자유게시판</a>
+          <a class="nav-link1" href="<c:url value='/community/freecommunity' />">자유게시판</a>
           <a class="nav-link1" href="<c:url value='/community/endmovie' />" style="color: #33ff33;">종료예정작</a>
           <a class="nav-link1" href="<c:url value='/community/priceInfoTving' />">가격정보</a>
           <a class="nav-link1" href="<c:url value='/community/QnA' />">Q&A</a>
