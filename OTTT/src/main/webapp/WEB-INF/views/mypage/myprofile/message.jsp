@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <!doctype html>
 <html lang="ko">
@@ -8,50 +9,36 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>쪽지알림</title>
+    <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+    <script src="${path}/resources/js/mypage/message.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
-    <link rel="stylesheet" href="${path}/resources/css/mypage/message.css" >
-    <script type="text/javascript" src="js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="${path}/resources/css/mypage/message.css" >
+    
   </head>
 
-  <body style="background-color: #202020;">
+  <body>
      
-    <div class="wrap">
-      <header >
+    <div class="warp">
+        <header >
         <div class="logo">
 			<a href="<c:url value="/" />">
 				  <img src="${path}/resources/images/logo/OTTT.png" alt="로고">
 				</a>
-			</div>
-			<nav class="gnb">
-				<ul>
-            <li>
-              <a href="<c:url value="/genre/movie" />">영화</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/drama" />">드라마</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/interest" />">예능</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/animation" />">애니</a>
-            </li>
-            <li>
-              <a href="<c:url value="/community" />">게시판</a>
-            </li>
+		</div>
+		<nav class="gnb">
+			<ul>
+                <li><a href="<c:url value="/genre/movie" />">영화</a></li>
+                <li><a href="<c:url value="/genre/drama" />">드라마</a></li>
+                <li><a href="<c:url value="/genre/interest" />">예능</a></li>
+                <li><a href="<c:url value="/genre/animation" />">애니</a></li>
+                <li><a href="<c:url value="/community/freecommunity" />">게시판</a></li>
           </ul>
         </nav>
         <div class="h-icon">
           <ul>
-            <li>
-              <a href="<c:url value='/search' />">
-              </a>
-            </li>
-            <li>
-              <a href="<c:url value='/mypage' />">
-              </a>
-            </li>
+            <li><a href="<c:url value='/search' />"></a></li>
+            <li><a href="<c:url value='/mypage' />"></a></li>
           </ul>
         </div>
       </header>
@@ -65,304 +52,56 @@
           <li><a href="<c:url value="/mypage/message" />" style="color: #33ff33">쪽지함</a></li>
         </ul>
       </nav>
-
-      <section class="sec01">      
-        <div class="mypage-info">
-          <div class="set">
-            <a href="<c:url value="/mypage/messagesetting" />"><img class="set-img" src="${path}/resources/images/img/톱니.png" alt="img-set"></a>
-          </div>
-        </div>
-      </section>
-
-      <section class="sec02">
-        <span class="alarm-1-1"><img class="profile" src="${path}/resources/images/img/이브이.png" alt="profile" /></span>
-        <div class="push-alarm">
-
-        <div class="modi-del">
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#content01">
-            이브이 님이 메세지를 보냈습니다.
-          </button>
-          <div class="modal fade" id="content01" tabindex="-1" aria-labelledby="content01Label" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="content01Label"><img src="${path}/resources/images/img/이브이.png">이브이</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  안녕하세요? 저는 이브이 입니다.<br /> 
-                  쪽지 드려봐요.<br />
-                  앞으로 잘 부탁드려요.<br />
-                  안녕하세요? 저는 파이리또가스 입니다. 쪽지 드려봐요. 앞으로 잘 부탁드려요.
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-primary">삭제</button>
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">답장</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        </div>
-        <div class="send-msg">
-          <!-- 보내기 버튼 모달 -->
-          <button type="button" class="btn btn-primary1" data-bs-toggle="modal" data-bs-target="#msg00">
-            <img src="${path}/resources/images/img/send.png" alt="send">
-          </button>
-    
-          <!-- 내용 -->
-          <div class="modal fade" id="msg00" tabindex="-1" aria-labelledby="msg00Label" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="msg00Label"><img src="${path}/resources/images/img/이브이.png">이브이 님에게</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <textarea placeholder="내용을 입력하세요" class="form-control" style="background-color:#0c0808; color:white;"></textarea>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                  <button type="button" class="btn btn-primary">답장</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <button type="button" class="btn-delete"><img src="${path}/resources/images/img/delete-normal.png" alt="delete"></button>
-      </section>
-
-      <section class="sec02">
-        <span class="alarm-1-1"><img class="profile" src="${path}/resources/images/img/이브이.png" alt="profile" /></span>
-        <div class="push-alarm">
-
-        <div class="modi-del">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#content02">
-          이브이 님이 메세지를 보냈습니다.
-        </button>
-
-        <div class="modal fade" id="content02" tabindex="-1" aria-labelledby="content02Label" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="content01Label"><img src="${path}/resources/images/img/이브이.png"> 이브이</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-              안녕하세요 안녕하세요
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-primary">삭제</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">답장</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        </div>
-        </div>
-        <div class="send-msg">
-          <!-- 보내기 버튼 모달 -->
-          <button type="button" class="btn btn-primary1" data-bs-toggle="modal" data-bs-target="#msg01">
-            <img src="{path}/resources/images/img/send.png" alt="send">
-          </button>
-    
-          <!-- 내용 -->
-          <div class="modal fade" id="msg01" tabindex="-1" aria-labelledby="msg01Label" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="msg00Label"><img src="${path}/resources/images/img/이브이.png">이브이 님에게</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <textarea placeholder="내용을 입력하세요" class="form-control" style="background-color:#0c0808; color:white;"></textarea>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                  <button type="button" class="btn btn-primary">답장</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <button type="button" class="btn-delete"><img src="${path}/resources/images/img/delete-normal.png" alt="delete"></button>
-      </section>
-
-      <section class="sec02">
-        <span class="alarm-1-1"><img class="profile" src="${path}/resources/images/img/이브이.png" alt="profile" /></span>
-        <div class="push-alarm">
-
-      <div class="modi-del">
-
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#content03">
-          피카츄 님이 메세지를 보냈습니다.
-        </button>
-
-        <div class="modal fade" id="content03" tabindex="-1" aria-labelledby="content03Label" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="content03Label"><img src="${path}/resources/images/img/이브이.png">피카츄</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                안녕하세요? 저는 파이리또가스 입니다.<br /> 
-                <br />
-                앞으로 잘 부탁드려요.<br />
-                안녕하세요? 저는 파이리또가스 입니다. 쪽지 드려봐요. 앞으로 잘 부탁드려요.
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-primary">삭제</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">답장</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      </div>
-      <div class="send-msg">
-        <!-- 보내기 버튼 모달 -->
-        <button type="button" class="btn btn-primary1" data-bs-toggle="modal" data-bs-target="#msg02">
-          <img src="{path}/resources/images/img/send.png" alt="send">
-        </button>
-  
-        <!-- 내용 -->
-        <div class="modal fade" id="msg02" tabindex="-1" aria-labelledby="msg02Label" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="msg02Label"><img src="${path}/resources/images/img/이브이.png">피카츄 님에게</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <textarea placeholder="내용을 입력하세요" class="form-control" style="background-color:#0c0808; color:white;"></textarea>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                <button type="button" class="btn btn-primary">답장</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        </div>
-        <button type="button" class="btn-delete"><img src="${path}/resources/images/img/delete-normal.png" alt="delete"></button>
-      </section>
-
-      <section class="sec02">
-        <span class="alarm-1-1"><img class="profile" src="${path}/resources/images/img/이브이.png" alt="profile" /></span>
         
-        <div class="push-alarm">
-        <div class="modi-del">
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#content04">
-            뚜벅초 님이 메세지를 보냈습니다.
-          </button>
-          <div class="modal fade" id="content04" tabindex="-1" aria-labelledby="content04Label" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="content04Label"><img src="${path}/resources/images/img/이브이.png"> 푸린?뚜벅초?</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  안녕하세요
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-primary">삭제</button>
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">답장</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        </div>
-        <div class="send-msg">
-          <!-- 보내기 버튼 모달 -->
-          <button type="button" class="btn btn-primary1" data-bs-toggle="modal" data-bs-target="#msg03">
-            <img src="{path}/resources/images/img/send.png" alt="send">
-          </button>
-    
-          <!-- 내용 -->
-          <div class="modal fade" id="msg03" tabindex="-1" aria-labelledby="msg03Label" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="msg03Label"><img src="${path}/resources/images/img/이브이.png">푸린 님에게</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <textarea placeholder="내용을 입력하세요" class="form-control" style="background-color:#0c0808; color:white;"></textarea>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                  <button type="button" class="btn btn-primary">답장</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <button type="button" class="btn-delete"><img src="${path}/resources/images/img/delete-normal.png" alt="delete"></button>
-      </section>
+      <div class="sec00">
 
-      <section class="sec03">
-        <span class="alarm-1-1"><img class="profile" src="${path}/resources/images/img/이브이.png" alt="profile" /></span>
-        <div class="push-alarm">
-
-      <div class="modi-del">
-
-
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#content05">
-        피카츄라이츄파이리꼬부기피카츄라이츄파이리꼬부기 님이 메세지를 보냈습니다.
-        </button>
-
-
-        <div class="modal fade" id="content05" tabindex="-1" aria-labelledby="content05Label" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="content05Label"><img src="${path}/resources/images/img/이브이.png"> 푸린?뚜벅초?</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                쪽지 드려봐요.<br />
-                앞으로 잘 부탁드려요.<br />
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-primary">삭제</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">답장</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      </div>
-      <div class="send-msg">
-      <!-- 보내기 버튼 모달 -->
-      <button type="button" class="btn btn-primary1" data-bs-toggle="modal" data-bs-target="#msg04">
-        <img src="{path}/resources/images/img/send.png" alt="send">
-      </button>
-
-      <!-- 내용 -->
-      <div class="modal fade" id="msg04" tabindex="-1" aria-labelledby="msg04Label" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="msg04Label"><img src="${path}/resources/images/img/이브이.png">푸린 님에게</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <textarea placeholder="내용을 입력하세요" class="form-control" style="background-color:#0c0808; color:white;"></textarea>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-              <button type="button" class="btn btn-primary">답장</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      </div>
-      <button type="button" class="btn-delete"><img src="${path}/resources/images/img/delete-normal.png" alt="delete"></button>
-      </section>
+        <button type="button" id="btn-recv">받은 쪽지</button>
+        <button type="button" id="btn-send">보낸 쪽지</button>
 
       </div>
+
+      <div class="sec01">
+        
+        <div class="sec-left">
+            <table>
+                <tr>
+                    <th class="msg-img">프로필</th>
+                    <th class="msg-name">이름</th>
+                    <th class="msg-time">시간</th>
+                    <th class="msg-del">삭제</th>
+                </tr>
+                
+<%-- 	            <c:forEach var="messageDTO"> --%>
+<!-- 	              <tr> -->
+<!-- 	                <td class="msg-img">픞</td> -->
+<!-- 	                <td class="msg-name">이름</td> -->
+<%-- 	                <td class="msg-time"><fmt:formatDate value="${messageDTO.send_date}" pattern="yyyy-MM-dd HH24:MI" type="date" /></td> --%>
+<!-- 	                <td class="msg-del">X</td> -->
+<!-- 	              </tr> -->
+<%-- 	            </c:forEach> --%>
+            
+            </table>
+        </div>
+
+        <div class="sec-right">
+            <div class="msg-nick">닉네임</div>
+	        <div class="msg-view-content">
+	        	의사가 환자를 직접 만나지 않고 전화나 화상을 통해 상담하고 약을 처방하는 비대면진료는 코로나19 확산이 시작된 지난 2020년부터 의료기관 내 감염 방지를 위해 한시 허용됐다. 4월 말까지 3년여 간 1천419만 명 대상으로 3천786건의 비대면진료가 이뤄졌다.<br /><br />
+
+				6월 1일부터 코로나19 위기단계가 '심각'에서 '경계'로 하향되면 비대면진료 한시 허용도 종료되기 때문에 정부는 제도화까지의 입법 공백을 메우기 위해 시범사업을 진행하기로 했다.<br /><br />
+				
+				내달부터 시행되는 비대면진료 시범사업은 지난 3년여 간의 한시 허용 비대면진료와 달리 대상 환자가 제한적이다.<br /><br />
+				
+				지금까진 초진·재진 구분 없이 비대면진료를 이용할 수 있었으나 다음달부터는 해당 의료기관에서 해당 질환에 대해 1회 이상 대면 진료한 경험이 있는 경우로 한정된다.<br /><br />
+				
+				고혈압, 당뇨병 등 만성질환자의 경우 1년 이내, 기타 질환자는 30일 이내에 진료를 받은 경험이 있어야 한다.
+	        
+	        </div>
+	        <button type="button" id="msg-write" class="msg-write-btn" >답장</button>
+        </div>
+
+      </div>
+	  
+    </div>
   </body>
 </html>
