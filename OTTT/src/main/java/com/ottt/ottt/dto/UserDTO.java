@@ -36,19 +36,19 @@ import java.util.Objects;
 public class UserDTO {
 
 	private Integer user_no;
-	private char 	gr_no;
+	private char gr_no;
 	private String user_id;
 	private String user_pwd;
 	private String user_nm;
 	private String user_nicknm;
-	private Integer user_gen;
+	private int user_gen;
 	private String user_email;
-	private Date 	reg_date;
-	private char 	admin;
-	private String 	image;
-	private Integer following;
-	private Integer followers;
-	private Integer report_cnt;
+	private Date reg_date;
+	private char admin;
+	private String image;
+	private int following;
+	private int followers;
+	private int report_cnt;
 	
 	public UserDTO() {}
 	

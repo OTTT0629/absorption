@@ -63,6 +63,45 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
 
 
 
+.h-icon > ul > li:first-child > a{
+    background:url("../../../images/icon/search02.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 32px;
+    width: 32px;
+    height: 32px;
+}
+
+.h-icon > ul > li:first-child > a:hover{
+    background: url("../../../images/icon/search-h.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 32px;
+    width: 32px;
+    height: 32px;
+}
+
+.h-icon > ul > li:last-child > a{
+    background:url("../../../images/img/profile.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 32px;
+    width: 32px;
+    height: 32px;
+}
+
+
+/* .h-icon > ul > li:last-child > a:hover{
+    background: url("../images/user-h.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 32px;
+    width: 32px;
+    height: 32px;
+} */
+
+/* header End */
+
 /* meun bar Start */
 #line-1 {
     width: 1200px;
@@ -77,7 +116,7 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
     margin: 0 auto;
     position: relative;
     display: flex;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     
 }
 
@@ -119,8 +158,6 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
     width: 1200px;
     height: 100%;
     margin: 0 auto;
-    box-sizing: border-box;
-    
     /* border: 1px solid red; */
 }
 
@@ -149,10 +186,16 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
     text-decoration: none;
 } */
 
+.qa-main p{
+    display: flex;
+    justify-content: flex-end;
+    font-weight: bold;
+}
 
 .btn{
     color: #fff;
     background-color: transparent;
+    border-style: none;
     border-color: #fff; 
     font-size: 23px; 
     text-decoration: none;
@@ -174,7 +217,7 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
 
 .title-mainline{
     width: 1100px;
-    height: 40px;
+    height: 50px;
     border-bottom: 2.5px solid #fff;
     margin: 0 auto;
 }
@@ -192,14 +235,4 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
     border-bottom: 1.5px solid #fff;
     margin: 0 auto;
 }
-.page-link {
-    color: #ffffff; 
-    background-color: #202020;
-    border-color: #ffffff;
-  }
-    
-  .page-link:focus, .page-link:hover {
-    color: #33ff33;
-    background-color: #202020; 
-    border-color: #33ff33;
-  }
+

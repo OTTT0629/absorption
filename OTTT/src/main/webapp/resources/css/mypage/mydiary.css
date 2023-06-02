@@ -102,7 +102,8 @@ header{
     height: 32px;
 }
 
-.h-icon > ul > li:last-child > a > img{
+.h-icon > ul > li:last-child > a{
+    background:url("../../images/img/profile.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 32px;

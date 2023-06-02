@@ -36,7 +36,7 @@
               <a href="<c:url value="/genre/animation" />">애니</a>
             </li>
             <li>
-              <a href="<c:url value="/community/freecommunity" />">게시판</a>
+              <a href="<c:url value="/community" />">게시판</a>
             </li>
           </ul>
         </nav>

@@ -39,7 +39,7 @@
               <a href="../0413장르 폼테크추가(수형)/4. index animation.html">애니</a>
             </li>
             <li>
-              <a href="<c:url value="/community/freecommunity" />">게시판</a>
+              <a href="../자유게시판/자유게시판 main.html">게시판</a>
             </li>
           </ul>
         </nav>

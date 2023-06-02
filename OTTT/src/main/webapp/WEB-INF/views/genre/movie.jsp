@@ -7,11 +7,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>movie</title>
+    <title>1movie</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     <link rel="stylesheet" href="${path}/resources/css/genre/main.css" >
     <script type="text/javascript" src="${path}/resources/js/genre/main.js"></script>
-    <script src="${path}/resources/js/home/jquery-3.6.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
   </head>
  
@@ -179,180 +178,670 @@
         </ul>
       </div>
     </section>
-    
-    
-    <script type="text/javascript">
-        $(document).ready(function() {
-        	  $(document).on("click", "#tonojjim", function(event) {
-        	    event.preventDefault();
-        	    // 버튼을 클릭했을 때 실행되는 코드
-        	    let content_no = $(this).closest(".work-info").find("#noInput").val()
-    			let user_no = '${sessionScope.no}'
-        	    $.ajax({
-        	      type: 'DELETE',
-        	      url: '/ottt/genre/genrejjim?content_no=' + content_no + '&user_no=' + user_no,
-        	      headers: {"content-type":"application/json"},
-        	      data: JSON.stringify({content_no:content_no, user_no:user_no}),
-        	      success: function(result){
-        	    	  document.location.reload(true)
-        	        $(".body").html("찜 해제 되었습니다.")
-        	        $('#Modal').modal('show')
-        	        /* $('#checkBtn').on('click', function() {
-        	        	document.location.reload(true)
-					})*/ 	        
-        	      },
-        	      error: function() {
-        	        $(".body").html("찜해제에 실패했습니다. 다시 시도해주세요.")
-        	        $('#Modal').modal('show')
-        	      }					
-        	    })
-        	  })
-        	  
-        	  $(document).on("click", "#tojjim", function(event) {
-        	    event.preventDefault();
-        	    // 버튼을 클릭했을 때 실행되는 코드
-        	    let content_no = $(this).closest(".work-info").find("#noInput").val()
-    			let user_no = '${sessionScope.no}'
-        	    $.ajax({
-        	      type: 'PATCH',
-        	      url: '/ottt/genre/genrejjim?content_no=' + content_no + '&user_no=' + user_no,
-        	      headers: {"content-type":"application/json"},
-        	      data: JSON.stringify({content_no:content_no, user_no:user_no}),
-        	      success: function(result){
-        	    	  document.location.reload(true)
-        	        $(".body").html("찜 등록 되었습니다.")
-        	        $('#Modal').modal('show') 
-        	        /* $('#checkBtn').on('click', function() {
-        	        	document.location.reload(true)
-					}) */ 
-        	      },
-        	      error: function() {
-        	        $(".body").html("찜등록에 실패했습니다. 다시 시도해주세요.")
-        	        $('#Modal').modal('show')
-        	      }					
-        	    });
-        	  });
-
-        	  $(document).on("click", "#nojjim", function(event) {
-        		event.preventDefault()
-        	    $(".body2").html("로그인이 필요합니다.")
-        	    $('#Modal2').modal('show')
-        	  })
-        })       
-        </script>
-    
-    
       <section class="sec01">
-      <c:forEach var="contentDTO" items="${movieList}">
-	      <div class="work-info">
-	          <a href="<c:url value="/detailPage${pr.sc.queryString}?content_no=${contentDTO.content_no }" />">
-	          	  <input id="noInput" type="hidden" value="${contentDTO.content_no }" />
-	              <img src="${contentDTO.thumbnail.toString() }" class="poster"/>
-	              <div class="work-review">
-                     <div class="ott-img"  style="cursor: default;">
-                        <c:forEach var="contentOttDTO" items="${ottList[contentDTO.content_no]}">
-						    <c:if test="${contentOttDTO.content_no == contentDTO.content_no}">									    	
-						        <span><img src="${contentOttDTO.ott_img.toString()}"></span>
-						    </c:if>
-						</c:forEach> 
-                     </div>
-                     <div class="work-cat">
-                         <div class="star-img">
-                              <div><img src="${path}/resources/images/img/onestar.png" style="cursor: default;"></div>
-                                   <div class="score" style="cursor: default;">${contentDTO.rating}</div>
-                              </div>
-                              <div id="jjim">
-							    <c:choose>
-							        <c:when test="${sessionScope.id != null}">
-						            <c:set var="isInWishlist" value="false" />
-							            <c:forEach var="wishlistDTO" items="${wishList}">
-							                <c:if test="${wishlistDTO.content_no == Integer.parseInt(contentDTO.content_no) && sessionScope.no == wishlistDTO.user_no}">
-							                    <c:set var="isInWishlist" value="true" />
-							                </c:if>
-							            </c:forEach>
-							            <c:choose>
-							                <c:when test="${isInWishlist}">
-					                    <button type="button" id="tonojjim" style="width: 25px; height: 30px; background-color:transparent; border: 0;"><img alt="찜" src="${path}/resources/images/img/jjim.png" style="width: 17px; cursor: pointer;"></button>
-					                </c:when>
-					                <c:otherwise>
-					                    <button type="button" id="tojjim" style="width: 25px; height: 30px; background-color:transparent; border: 0;"><img alt="찜" src="${path}/resources/images/img/nojjim.png" style="width: 17px; cursor: pointer;"></button>
-					                </c:otherwise>
-					            </c:choose>
-						        </c:when>
-						        <c:otherwise>
-						            <button type="button" id="nojjim" style="width: 25px; height: 30px; background-color:transparent; border: 0;"><img alt="찜" src="${path}/resources/images/img/nojjim.png" style="width: 17px; cursor: pointer;"></button>
-						        </c:otherwise>
-						    </c:choose>
-						</div>                                        
-                     </div>                                    
-                 </div>
-	          </a>
-	        </div>
-      </c:forEach>				
+        <div class="work-info">
+          <a href="#">
+              <img src="./images/popular/theglory.jpg" class="poster"/>
+              <div class="work-review">
+                  <div class="ott-img">
+                      <span><img src="./images/ottlogo/Netflix.png"></span>
+                  </div>
+                  <div class="work-cat">
+                      <div>드라마</div>    
+                      <div>범죄</div>
+                      <div>한국</div>
+                  </div>
+                  <div>
+                      <img src="./images/main/starpan.png" class="star-img"/>
+                  </div>
+                  <div class="work-my">
+                      <div><a href="#">찜</a></div>
+                      <div><a href="#">리뷰쓰기</a></div>
+                  </div>
+              </div>
+          </a>
+        </div>
+        <div class="work-info">
+            <a href="#">
+                <img src="./images/popular/smartphonedropdown.jpg" class="poster"/>
+                <div class="work-review">
+                    <div class="ott-img">
+                        <span><img src="./images/ottlogo/Netflix.png"></span>
+                    </div>
+                    <div class="work-cat">
+                        <div>드라마</div>    
+                        <div>범죄</div>
+                        <div>한국</div>
+                    </div>
+                    <div>
+                        <img src="./images/main/starpan.png" class="star-img"/>
+                    </div>
+                    <div class="work-my">
+                        <div><a href="#">찜</a></div>
+                        <div><a href="#">리뷰쓰기</a></div>
+                    </div>
+                </div>
+            </a>
+          </div>
+          <div class="work-info">
+            <a href="#">
+                <img src="./images/popular/search.jpg" class="poster"/>
+                <div class="work-review">
+                    <div class="ott-img">
+                        <span><img src="./images/popular/1tascandle.jpg"></span>
+                    </div>
+                    <div class="work-cat">
+                        <div>드라마</div>    
+                        <div>범죄</div>
+                        <div>한국</div>
+                    </div>
+                    <div>
+                        <img src="./images/main/starpan.png" class="star-img"/>
+                    </div>
+                    <div class="work-my">
+                        <div><a href="#">찜</a></div>
+                        <div><a href="#">리뷰쓰기</a></div>
+                    </div>
+                </div>
+            </a>
+          </div>
+          <div class="work-info">
+            <a href="#">
+                <img src="./images/popular/doweibi.jpg" class="poster"/>
+                <div class="work-review">
+                    <div class="ott-img">
+                        <span><img src="./images/ottlogo/Netflix.png"></span>
+                    </div>
+                    <div class="work-cat">
+                        <div>드라마</div>    
+                        <div>범죄</div>
+                        <div>한국</div>
+                    </div>
+                    <div>
+                        <img src="./images/main/starpan.png" class="star-img"/>
+                    </div>
+                    <div class="work-my">
+                        <div><a href="#">찜</a></div>
+                        <div><a href="#">리뷰쓰기</a></div>
+                    </div>
+                </div>
+            </a>
+          </div>
+          <div class="work-info">
+            <a href="#">
+                <img src="./images/popular/dehangsa.jpg" class="poster"/>
+                <div class="work-review">
+                    <div class="ott-img">
+                        <span><img src="./images/ottlogo/Netflix.png"></span>
+                    </div>
+                    <div class="work-cat">
+                        <div>드라마</div>    
+                        <div>범죄</div>
+                        <div>한국</div>
+                    </div>
+                    <div>
+                        <img src="./images/main/starpan.png" class="star-img"/>
+                    </div>
+                    <div class="work-my">
+                        <div><a href="#">찜</a></div>
+                        <div><a href="#">리뷰쓰기</a></div>
+                    </div>
+                </div>
+            </a>
+          </div>
+          <div class="work-info">
+            <a href="#">
+                <img src="./images/popular/doweibi.jpg" class="poster"/>
+                <div class="work-review">
+                    <div class="ott-img">
+                        <span><img src="./images/ottlogo/Netflix.png"></span>
+                    </div>
+                    <div class="work-cat">
+                        <div>드라마</div>    
+                        <div>범죄</div>
+                        <div>한국</div>
+                    </div>
+                    <div>
+                        <img src="./images/main/starpan.png" class="star-img"/>
+                    </div>
+                    <div class="work-my">
+                        <div><a href="#">찜</a></div>
+                        <div><a href="#">리뷰쓰기</a></div>
+                    </div>
+                </div>
+            </a>
+          </div>
+          <div class="work-info">
+            <a href="#">
+                <img src="./images/popular/dehangsa.jpg" class="poster"/>
+                <div class="work-review">
+                    <div class="ott-img">
+                        <span><img src="./images/ottlogo/Netflix.png"></span>
+                    </div>
+                    <div class="work-cat">
+                        <div>드라마</div>    
+                        <div>범죄</div>
+                        <div>한국</div>
+                    </div>
+                    <div>
+                        <img src="./images/main/starpan.png" class="star-img"/>
+                    </div>
+                    <div class="work-my">
+                        <div><a href="#">찜</a></div>
+                        <div><a href="#">리뷰쓰기</a></div>
+                    </div>
+                </div>
+            </a>
+          </div>
+          <div class="work-info">
+            <a href="#">
+                <img src="./images/popular/doweibi.jpg" class="poster"/>
+                <div class="work-review">
+                    <div class="ott-img">
+                        <span><img src="./images/ottlogo/Netflix.png"></span>
+                    </div>
+                    <div class="work-cat">
+                        <div>드라마</div>    
+                        <div>범죄</div>
+                        <div>한국</div>
+                    </div>
+                    <div>
+                        <img src="./images/main/starpan.png" class="star-img"/>
+                    </div>
+                    <div class="work-my">
+                        <div><a href="#">찜</a></div>
+                        <div><a href="#">리뷰쓰기</a></div>
+                    </div>
+                </div>
+            </a>
+          </div>
+          <div class="work-info">
+            <a href="#">
+                <img src="./images/popular/theglory.jpg" class="poster"/>
+                <div class="work-review">
+                    <div class="ott-img">
+                        <span><img src="./images/ottlogo/Netflix.png"></span>
+                    </div>
+                    <div class="work-cat">
+                        <div>드라마</div>    
+                        <div>범죄</div>
+                        <div>한국</div>
+                    </div>
+                    <div>
+                        <img src="./images/main/starpan.png" class="star-img"/>
+                    </div>
+                    <div class="work-my">
+                        <div><a href="#">찜</a></div>
+                        <div><a href="#">리뷰쓰기</a></div>
+                    </div>
+                </div>
+            </a>
+          </div>
+          <div class="work-info">
+              <a href="#">
+                  <img src="./images/popular/smartphonedropdown.jpg" class="poster"/>
+                  <div class="work-review">
+                      <div class="ott-img">
+                          <span><img src="./images/ottlogo/Netflix.png"></span>
+                      </div>
+                      <div class="work-cat">
+                          <div>드라마</div>    
+                          <div>범죄</div>
+                          <div>한국</div>
+                      </div>
+                      <div>
+                          <img src="./images/main/starpan.png" class="star-img"/>
+                      </div>
+                      <div class="work-my">
+                          <div><a href="#">찜</a></div>
+                          <div><a href="#">리뷰쓰기</a></div>
+                      </div>
+                  </div>
+              </a>
+            </div>
+            <div class="work-info">
+              <a href="#">
+                  <img src="./images/popular/search.jpg" class="poster"/>
+                  <div class="work-review">
+                      <div class="ott-img">
+                          <span><img src="./images/popular/1tascandle.jpg"></span>
+                      </div>
+                      <div class="work-cat">
+                          <div>드라마</div>    
+                          <div>범죄</div>
+                          <div>한국</div>
+                      </div>
+                      <div>
+                          <img src="./images/main/starpan.png" class="star-img"/>
+                      </div>
+                      <div class="work-my">
+                          <div><a href="#">찜</a></div>
+                          <div><a href="#">리뷰쓰기</a></div>
+                      </div>
+                  </div>
+              </a>
+            </div>
+            <div class="work-info">
+              <a href="#">
+                  <img src="./images/popular/doweibi.jpg" class="poster"/>
+                  <div class="work-review">
+                      <div class="ott-img">
+                          <span><img src="./images/ottlogo/Netflix.png"></span>
+                      </div>
+                      <div class="work-cat">
+                          <div>드라마</div>    
+                          <div>범죄</div>
+                          <div>한국</div>
+                      </div>
+                      <div>
+                          <img src="./images/main/starpan.png" class="star-img"/>
+                      </div>
+                      <div class="work-my">
+                          <div><a href="#">찜</a></div>
+                          <div><a href="#">리뷰쓰기</a></div>
+                      </div>
+                  </div>
+              </a>
+            </div>
+            <div class="work-info">
+              <a href="#">
+                  <img src="./images/popular/dehangsa.jpg" class="poster"/>
+                  <div class="work-review">
+                      <div class="ott-img">
+                          <span><img src="./images/ottlogo/Netflix.png"></span>
+                      </div>
+                      <div class="work-cat">
+                          <div>드라마</div>    
+                          <div>범죄</div>
+                          <div>한국</div>
+                      </div>
+                      <div>
+                          <img src="./images/main/starpan.png" class="star-img"/>
+                      </div>
+                      <div class="work-my">
+                          <div><a href="#">찜</a></div>
+                          <div><a href="#">리뷰쓰기</a></div>
+                      </div>
+                  </div>
+              </a>
+            </div>
+            <div class="work-info">
+                <a href="#">
+                    <img src="./images/popular/theglory.jpg" class="poster"/>
+                    <div class="work-review">
+                        <div class="ott-img">
+                            <span><img src="./images/ottlogo/Netflix.png"></span>
+                        </div>
+                        <div class="work-cat">
+                            <div>드라마</div>    
+                            <div>범죄</div>
+                            <div>한국</div>
+                        </div>
+                        <div>
+                            <img src="./images/main/starpan.png" class="star-img"/>
+                        </div>
+                        <div class="work-my">
+                            <div><a href="#">찜</a></div>
+                            <div><a href="#">리뷰쓰기</a></div>
+                        </div>
+                    </div>
+                </a>
+              </div>
+              <div class="work-info">
+                  <a href="#">
+                      <img src="./images/popular/smartphonedropdown.jpg" class="poster"/>
+                      <div class="work-review">
+                          <div class="ott-img">
+                              <span><img src="./images/ottlogo/Netflix.png"></span>
+                          </div>
+                          <div class="work-cat">
+                              <div>드라마</div>    
+                              <div>범죄</div>
+                              <div>한국</div>
+                          </div>
+                          <div>
+                              <img src="./images/main/starpan.png" class="star-img"/>
+                          </div>
+                          <div class="work-my">
+                              <div><a href="#">찜</a></div>
+                              <div><a href="#">리뷰쓰기</a></div>
+                          </div>
+                      </div>
+                  </a>
+                </div>
+                <div class="work-info">
+                  <a href="#">
+                      <img src="./images/popular/search.jpg" class="poster"/>
+                      <div class="work-review">
+                          <div class="ott-img">
+                              <span><img src="./images/popular/1tascandle.jpg"></span>
+                          </div>
+                          <div class="work-cat">
+                              <div>드라마</div>    
+                              <div>범죄</div>
+                              <div>한국</div>
+                          </div>
+                          <div>
+                              <img src="./images/main/starpan.png" class="star-img"/>
+                          </div>
+                          <div class="work-my">
+                              <div><a href="#">찜</a></div>
+                              <div><a href="#">리뷰쓰기</a></div>
+                          </div>
+                    </div>
+                </a>
+            </div>
+            <div class="work-info">
+                <a href="#">
+                    <img src="./images/popular/doweibi.jpg" class="poster"/>
+                    <div class="work-review">
+                        <div class="ott-img">
+                            <span><img src="./images/ottlogo/Netflix.png"></span>
+                        </div>
+                        <div class="work-cat">
+                            <div>드라마</div>    
+                            <div>범죄</div>
+                            <div>한국</div>
+                        </div>
+                        <div>
+                            <img src="./images/main/starpan.png" class="star-img"/>
+                        </div>
+                        <div class="work-my">
+                            <div><a href="#">찜</a></div>
+                            <div><a href="#">리뷰쓰기</a></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="work-info">
+                <a href="#">
+                    <img src="./images/popular/dehangsa.jpg" class="poster"/>
+                    <div class="work-review">
+                        <div class="ott-img">
+                            <span><img src="./images/ottlogo/Netflix.png"></span>
+                        </div>
+                        <div class="work-cat">
+                            <div>드라마</div>    
+                            <div>범죄</div>
+                            <div>한국</div>
+                        </div>
+                        <div>
+                            <img src="./images/main/starpan.png" class="star-img"/>
+                        </div>
+                        <div class="work-my">
+                            <div><a href="#">찜</a></div>
+                            <div><a href="#">리뷰쓰기</a></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="work-info">
+                <a href="#">
+                    <img src="./images/popular/doweibi.jpg" class="poster"/>
+                    <div class="work-review">
+                        <div class="ott-img">
+                            <span><img src="./images/ottlogo/Netflix.png"></span>
+                        </div>
+                        <div class="work-cat">
+                            <div>드라마</div>    
+                            <div>범죄</div>
+                            <div>한국</div>
+                        </div>
+                        <div>
+                            <img src="./images/main/starpan.png" class="star-img"/>
+                        </div>
+                        <div class="work-my">
+                            <div><a href="#">찜</a></div>
+                            <div><a href="#">리뷰쓰기</a></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="work-info">
+                <a href="#">
+                    <img src="./images/popular/dehangsa.jpg" class="poster"/>
+                    <div class="work-review">
+                        <div class="ott-img">
+                            <span><img src="./images/ottlogo/Netflix.png"></span>
+                        </div>
+                        <div class="work-cat">
+                            <div>드라마</div>    
+                            <div>범죄</div>
+                            <div>한국</div>
+                        </div>
+                        <div>
+                            <img src="./images/main/starpan.png" class="star-img"/>
+                        </div>
+                        <div class="work-my">
+                            <div><a href="#">찜</a></div>
+                            <div><a href="#">리뷰쓰기</a></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="work-info">
+                <a href="#">
+                    <img src="./images/popular/doweibi.jpg" class="poster"/>
+                    <div class="work-review">
+                        <div class="ott-img">
+                            <span><img src="./images/ottlogo/Netflix.png"></span>
+                        </div>
+                        <div class="work-cat">
+                            <div>드라마</div>    
+                            <div>범죄</div>
+                            <div>한국</div>
+                        </div>
+                        <div>
+                            <img src="./images/main/starpan.png" class="star-img"/>
+                        </div>
+                        <div class="work-my">
+                            <div><a href="#">찜</a></div>
+                            <div><a href="#">리뷰쓰기</a></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="work-info">
+                <a href="#">
+                    <img src="./images/popular/theglory.jpg" class="poster"/>
+                    <div class="work-review">
+                        <div class="ott-img">
+                            <span><img src="./images/ottlogo/Netflix.png"></span>
+                        </div>
+                        <div class="work-cat">
+                            <div>드라마</div>    
+                            <div>범죄</div>
+                            <div>한국</div>
+                        </div>
+                        <div>
+                            <img src="./images/main/starpan.png" class="star-img"/>
+                        </div>
+                        <div class="work-my">
+                            <div><a href="#">찜</a></div>
+                            <div><a href="#">리뷰쓰기</a></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="work-info">
+                <a href="#">
+                    <img src="./images/popular/smartphonedropdown.jpg" class="poster"/>
+                    <div class="work-review">
+                        <div class="ott-img">
+                            <span><img src="./images/ottlogo/Netflix.png"></span>
+                        </div>
+                        <div class="work-cat">
+                            <div>드라마</div>    
+                            <div>범죄</div>
+                            <div>한국</div>
+                        </div>
+                        <div>
+                            <img src="./images/main/starpan.png" class="star-img"/>
+                        </div>
+                        <div class="work-my">
+                            <div><a href="#">찜</a></div>
+                            <div><a href="#">리뷰쓰기</a></div>
+                        </div>
+                    </div>
+                </a>
+                </div>
+                <div class="work-info">
+                <a href="#">
+                    <img src="./images/popular/search.jpg" class="poster"/>
+                    <div class="work-review">
+                        <div class="ott-img">
+                            <span><img src="./images/popular/1tascandle.jpg"></span>
+                        </div>
+                        <div class="work-cat">
+                            <div>드라마</div>    
+                            <div>범죄</div>
+                            <div>한국</div>
+                        </div>
+                        <div>
+                            <img src="./images/main/starpan.png" class="star-img"/>
+                        </div>
+                        <div class="work-my">
+                            <div><a href="#">찜</a></div>
+                            <div><a href="#">리뷰쓰기</a></div>
+                        </div>
+                    </div>
+                </a>
+                </div>
+                <div class="work-info">
+                <a href="#">
+                    <img src="./images/popular/doweibi.jpg" class="poster"/>
+                    <div class="work-review">
+                        <div class="ott-img">
+                            <span><img src="./images/ottlogo/Netflix.png"></span>
+                        </div>
+                        <div class="work-cat">
+                            <div>드라마</div>    
+                            <div>범죄</div>
+                            <div>한국</div>
+                        </div>
+                        <div>
+                            <img src="./images/main/starpan.png" class="star-img"/>
+                        </div>
+                        <div class="work-my">
+                            <div><a href="#">찜</a></div>
+                            <div><a href="#">리뷰쓰기</a></div>
+                        </div>
+                    </div>
+                </a>
+                </div>
+                <div class="work-info">
+                <a href="#">
+                    <img src="./images/popular/dehangsa.jpg" class="poster"/>
+                    <div class="work-review">
+                        <div class="ott-img">
+                            <span><img src="./images/ottlogo/Netflix.png"></span>
+                        </div>
+                        <div class="work-cat">
+                            <div>드라마</div>    
+                            <div>범죄</div>
+                            <div>한국</div>
+                        </div>
+                        <div>
+                            <img src="./images/main/starpan.png" class="star-img"/>
+                        </div>
+                        <div class="work-my">
+                            <div><a href="#">찜</a></div>
+                            <div><a href="#">리뷰쓰기</a></div>
+                        </div>
+                    </div>
+                </a>
+                </div>
+                <div class="work-info">
+                <a href="#">
+                    <img src="./images/popular/theglory.jpg" class="poster"/>
+                    <div class="work-review">
+                        <div class="ott-img">
+                            <span><img src="./images/ottlogo/Netflix.png"></span>
+                        </div>
+                        <div class="work-cat">
+                            <div>드라마</div>    
+                            <div>범죄</div>
+                            <div>한국</div>
+                        </div>
+                        <div>
+                            <img src="./images/main/starpan.png" class="star-img"/>
+                        </div>
+                        <div class="work-my">
+                            <div><a href="#">찜</a></div>
+                            <div><a href="#">리뷰쓰기</a></div>
+                        </div>
+                    </div>
+                </a>
+                </div>
+                <div class="work-info">
+                    <a href="#">
+                        <img src="./images/popular/smartphonedropdown.jpg" class="poster"/>
+                        <div class="work-review">
+                            <div class="ott-img">
+                                <span><img src="./images/ottlogo/Netflix.png"></span>
+                            </div>
+                            <div class="work-cat">
+                                <div>드라마</div>    
+                                <div>범죄</div>
+                                <div>한국</div>
+                            </div>
+                            <div>
+                                <img src="./images/main/starpan.png" class="star-img"/>
+                            </div>
+                            <div class="work-my">
+                                <div><a href="#">찜</a></div>
+                                <div><a href="#">리뷰쓰기</a></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="work-info">
+                    <a href="#">
+                        <img src="./images/popular/search.jpg" class="poster"/>
+                        <div class="work-review">
+                            <div class="ott-img">
+                                <span><img src="./images/popular/1tascandle.jpg"></span>
+                            </div>
+                            <div class="work-cat">
+                                <div>드라마</div>    
+                                <div>범죄</div>
+                                <div>한국</div>
+                            </div>
+                            <div>
+                                <img src="./images/main/starpan.png" class="star-img"/>
+                            </div>
+                            <div class="work-my">
+                                <div><a href="#">찜</a></div>
+                                <div><a href="#">리뷰쓰기</a></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="work-info">
+                    <a href="#">
+                        <img src="./images/popular/doweibi.jpg" class="poster"/>
+                        <div class="work-review">
+                            <div class="ott-img">
+                                <span><img src="./images/ottlogo/Netflix.png"></span>
+                            </div>
+                            <div class="work-cat">
+                                <div>드라마</div>    
+                                <div>범죄</div>
+                                <div>한국</div>
+                            </div>
+                            <div>
+                                <img src="./images/main/starpan.png" class="star-img"/>
+                            </div>
+                            <div class="work-my">
+                                <div><a href="#">찜</a></div>
+                                <div><a href="#">리뷰쓰기</a></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
     </section>
-    
-    <!-- 페이지 번호 배너-->
-		        <div class="page-num" style="margin-top: 20px;">
-		          <nav aria-label="Page navigation example" class="d-flex flex-row justify-content-center">
-		            <ul class="pagination">
-		            <c:if test="${pr.showPrev}">
-			            <li class="page-item">
-			                <a class="page-link" href='<c:url value="/genre/movie${pr.sc.getQueryString(pr.beginPage-1)}" />' aria-label="Previous">
-			                  <span aria-hidden="true">&laquo;</span>
-			                </a>
-			              </li>
-		            </c:if>
-		            <c:forEach var="i" begin="${pr.beginPage }" end="${pr.endPage }">
-		            	<li class="page-item"><a class="page-link" href='<c:url value="/genre/movie${pr.sc.getQueryString(i)}" />'>${i}</a></li>
-		            </c:forEach>
-		              <c:if test="${pr.showNext}">
-			              <li class="page-item">
-			                <a class="page-link" href='<c:url value="/genre/movie${pr.sc.getQueryString(pr.endPage-1)}" />' aria-label="Next">
-			                  <span aria-hidden="true">&raquo;</span>
-			                </a>
-			              </li>
-		              </c:if>
-		              
-		            </ul>
-		          </nav>
-		        </div>
       <footer></footer>
     </div>
-    
-          <!-- Modal -->
-	        <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	          <div class="modal-dialog modal-dialog-centered">
-	            <div class="modal-content">
-	              <div class="modal-header">
-	                <h1 class="modal-title fs-5" id="exampleModalLabel">알림</h1>
-	                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	              </div>
-	              <div class="modal-body body">
-	              </div>
-	              <div class="modal-footer" id="modal-footer" style="height: 60px;">
-	                <!-- <button type="button" id="checkBtn" class="btn btn-secondary" data-bs-dismiss="modal">확인</button> -->
-	              </div>
-	            </div>
-	          </div>
-	        </div>
-	        
-	        <!-- Modal -->
-	        <div class="modal fade" id="Modal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	          <div class="modal-dialog modal-dialog-centered">
-	            <div class="modal-content">
-	              <div class="modal-header">
-	                <h1 class="modal-title fs-5" id="exampleModalLabel">알림</h1>
-	                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	              </div>
-	              <div class="modal-body body2">
-	              </div>
-	              <div class="modal-footer" id="modal-footer2">
-	                <button type="button" id="checkBtn" class="btn btn-secondary" data-bs-dismiss="modal">확인</button>
-	              </div>
-	            </div>
-	          </div>
-	        </div>
-	        
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
@@ -373,70 +862,6 @@
         outline: 3px solid #33ff33;
         border-radius: 10px;
       }
-      
-      /* 모달 */
-.modal-content{
-    background-color: #202020;
-}
-
-.modal-body{
-    font-size: 26px;
-    text-align: center;
-    border: 1px solid #fff;
-}
-
-.modal-header{
-    border: 1px solid #fff;
-}
-
-.modal-footer{
-    border: 1px solid #fff;
-    display: flex;
-    justify-content: flex-end;
-}
- 
-.modi-del{
-	display: flex;
-    justify-content: flex-end;
-}
-
-
-.qa-main p{
-    display: flex;
-    justify-content: flex-end;
-    font-weight: bold;
-}
-
-.btn{
-    color: #fff;
-    background-color: transparent;
-    border-style: none;
-    border-color: #fff; 
-    font-size: 23px; 
-    text-decoration: none;
-}
-
-
-.btn:hover{
-    border-color: #33FF33;
-    background-color: transparent;
-    border-style: solid;
-    color: #33FF33; 
-}    
-
-.page-link {
-    color: #ffffff; 
-    background-color: #202020;
-    border-color: #ffffff;
-  }
-    
-  .page-link:focus, .page-link:hover {
-    color: #33ff33;
-    background-color: #202020; 
-    border-color: #33ff33;
-  }
     </style>
-    
-
   </body>
 </html>
