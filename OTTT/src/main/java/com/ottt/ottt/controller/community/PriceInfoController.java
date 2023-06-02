@@ -10,32 +10,32 @@ public class PriceInfoController {
 	//price_info
 		@GetMapping(value = "/priceInfoTving")
 		public String priceInfoTving() {
-				return "/community/price_info/price_tving";		
+				return "/community/priceInfo/priceTving";		
 		}
 		
 		@GetMapping(value = "/priceInfoCoupang")
 		public String priceInfoCoupang() {
-				return "/community/price_info/price_coupang";		
+				return "/community/priceInfo/priceCoupang";		
 		}
 		
 		@GetMapping(value = "/priceInfoDisney")
 		public String priceInfoDisney() {
-				return "/community/price_info/price_disneyplus";		
+				return "/community/priceInfo/priceDisneyplus";		
 		}
 		
 		@GetMapping(value = "/priceInfoNetflix")
 		public String priceInfoNetflix() {
-				return "/community/price_info/price_netflix";		
+				return "/community/priceInfo/priceNetflix";		
 		}
 		
 		@GetMapping(value = "/priceInfoWatcha")
 		public String priceInfoWatcha() {
-				return "/community/price_info/price_watcha";		
+				return "/community/priceInfo/priceWatcha";		
 		}
 		
 		@GetMapping(value = "/priceInfoWavve")
 		public String priceInfoWavve() {
-				return "/community/price_info/price_wavve";		
+				return "/community/priceInfo/priceWavve";		
 		}
 		
 }

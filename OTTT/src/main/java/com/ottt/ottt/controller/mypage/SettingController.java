@@ -94,6 +94,8 @@ public class SettingController {
 				
 				userDTO.setImage(bucketUrl+upload);
 				
+				session.setAttribute("user_img", userDTO.getImage());
+				
 				if(us.mod_img(userDTO) != 1)
 					throw new Exception("mod_img failed");					        
 	        }

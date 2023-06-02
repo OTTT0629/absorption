@@ -118,7 +118,7 @@ public class SigninController {
 		HttpSession session = request.getSession();
 		//	세션 객체에 id를 저장
 		session.setAttribute("id", id);
-		return "home";		
+		return "redirect:/";		
 	}
 	
 	//DB꺼 가져와서 CHECK해야함
