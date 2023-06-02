@@ -69,24 +69,60 @@
 		
 			<div class="main">
 				<div class="blank"></div>
+				<div class="post">
+				  	<a href="#" class="review">
+				    <div class="Lside">
+				      	<img class="poster" src="${path}/resources/images/poster/whiplash.jpg" alt="위플래쉬">
+				    </div>
+				    <div class="Rside">
+				    	<div class="rv-head">
+				    		<span class="title">위플래쉬</span>
+				        	<img class="star" src="./images/icon/point.png" alt="별점">
+				      	</div>
 				
-				<a href="#" class="review">
-					<div class="post">				  	
-					    <div class="Lside">
-					      	<img class="poster" src="${path}/resources/images/poster/whiplash.jpg" alt="위플래쉬">
-					    </div>
-					    <div class="Rside">
-					    	<div class="rv-head">
-					    		<span class="title">위플래쉬</span>
-					        	<img class="star" src="./images/icon/point.png" alt="별점">
-					      	</div>
-					
-							<div class="rv-main">
-							  <span>내용</span>
-							</div>
-					    </div>				  
+						<div class="rv-main">
+						  <span>내용</span>
+						</div>
+				    </div>
+				  	</a>
+				</div>
+			
+				<div class="post">
+				  	<a href="<c:url value="/detailPage" />" class="review">
+				    <div class="Lside">
+				    	<img class="poster" src="./images/poster/subu.jpg" alt="서부전선">
+				    </div>
+				    
+				    <div class="Rside">
+				    	<div class="rv-head">
+				        	<span class="title">서부전선</span>
+				        	<img class="star" src="./images/icon/point.png" alt="별점">
+		        		</div>
+		        		
+		        		<div class="rv-main">
+		        			<span>내용</span>
+	        			</div>
+        			</div>
+				  	</a>
+			  	</div>
+			
+				<div class="post">
+					<a href="#" class="review">
+					<div class="Lside">
+						<img class="poster" src="./images/poster/no.jfif" alt="노인을 위한 나라는 없다">
 					</div>
-				</a>
+					<div class="Rside">
+						<div class="rv-head">
+							<span class="title">노인을 위한 나라는 없다</span>
+					      	<img class="star" src="./images/icon/point.png" alt="별점">
+					    </div>
+					
+					    <div class="rv-main">
+					    	<span>내용</span>
+					    </div>
+				    </div>
+					</a>
+				</div>
 			</div>
 		</section>
 	</div>

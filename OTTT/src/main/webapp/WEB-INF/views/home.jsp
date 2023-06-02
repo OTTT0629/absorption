@@ -4,8 +4,6 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>  
 <c:set var="loginout" value="${sessionScope.id == null ? 'logout' : 'login'}" />
 <c:set var="loginoutlink" value="${sessionScope.id==null ? '/login' : '/mypage'}" />
-<c:set var="user_img" value="${sessionScope.user_img}" />
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -148,15 +146,7 @@
             <li>
                 <a href="<c:url value='/mypage' /> " class="${loginout}" >
                     <c:if test="${sessionScope.id != null}">
-<<<<<<< HEAD
-<<<<<<< HEAD
                         <img src="${user_img }" id="profile" class="${loginout}">              	
-=======
-                        <img src="" id="profile" class="${loginout}">              	
->>>>>>> e87c70c181cf71d66e2101e699d0150424b6cdfd
-=======
-                        <img src="${user_img }" id="profile" class="${loginout}">              	
->>>>>>> rgh
                     </c:if>              	
                 </a>
               </li>
@@ -165,9 +155,6 @@
           </header>
                   
         <script type="text/javascript">
-<<<<<<< HEAD
-        $(document).ready(function() {        	
-=======
         $(document).ready(function() {
         	
         	let img = function() {
@@ -178,7 +165,6 @@
             }
             
             img()
->>>>>>> e87c70c181cf71d66e2101e699d0150424b6cdfd
             
         	  $(document).on("click", "#tonojjim", function(event) {
         	    event.preventDefault();

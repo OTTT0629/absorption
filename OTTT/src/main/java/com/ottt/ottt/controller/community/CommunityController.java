@@ -33,7 +33,6 @@ public class CommunityController {
 	
 	@Autowired
 	CommunityService communityService;
-
 	@Autowired
 	LoginUserDao loginUserDao;
 
@@ -41,12 +40,8 @@ public class CommunityController {
 	
 	//freecommunity 메인호출
 	@GetMapping("/freecommunity")
-<<<<<<< HEAD
-	public String freecommunity(@RequestParam(value = "category", required = false) String category, Model m, HttpServletRequest request, HttpSession session, String toURL) throws Exception {
-=======
 	public String freecommunity(@RequestParam(value = "schText", required = false) String schText,@RequestParam(value = "category", required = false) String category,
 									Model m, HttpServletRequest request, HttpSession session, String toURL) throws Exception {
->>>>>>> e87c70c181cf71d66e2101e699d0150424b6cdfd
 		
 		logger.info(">>>>>>>>>>>>>>>>>>>>> @GetMapping /freecommunity freecommunity 진입 ");
 		logger.info(">>>>>>>>>>>>>>>>>>>>> category 선택한 카테고리 : "+category);
@@ -59,21 +54,10 @@ public class CommunityController {
 			logger.info(">>>>>>>>>>>>>>> 로그인상태가 아닙니다. ");
 		}
 
-<<<<<<< HEAD
-		/*
-		if(!loginCheck(request)) {
-			return "redirect:/login/login?toURL="+request.getRequestURL();		
-		}
-		*/
-		//UserDTO userDTO = loginUserDao.select((String)session.getAttribute("id"));
-
-		m.addAttribute("category",category);
-=======
 		logger.info(">>>>>>>>>>>>>>>>>>>>> schText 검색어 : "+schText);
 		
 		m.addAttribute("category",category);
 		m.addAttribute("schText",schText);;
->>>>>>> e87c70c181cf71d66e2101e699d0150424b6cdfd
 		
 		return "/community/freecommunity/communityMain";		
 
@@ -250,25 +234,12 @@ public class CommunityController {
 
 		Map<String, Object> result = new HashMap<String,Object>();
 		
-<<<<<<< HEAD
-=======
 		UserDTO userDTO = loginUserDao.select((String)session.getAttribute("id"));
 		
->>>>>>> e87c70c181cf71d66e2101e699d0150424b6cdfd
 		//왼쪽 카테고리가 "내가쓴글","내가 좋아요한 글", "내가 댓글단 글" 일때 회원번호를 ArticleSearchDTO에 담는다.
 		if( "myPost".equals(dto.getCategory()) 
 				|| "myLike".equals(dto.getCategory()) 
 					|| "myComment".equals(dto.getCategory())) {
-<<<<<<< HEAD
-
-			UserDTO userDTO = loginUserDao.select((String)session.getAttribute("id"));
-			
-        	if (userDTO == null) {	   
-        		result.put("message", "로그인이 필요합니다.");
-        		return result;
-	        }
-=======
->>>>>>> e87c70c181cf71d66e2101e699d0150424b6cdfd
 			
 			dto.setUser_no(userDTO.getUser_no());
 

@@ -64,6 +64,34 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
 } */
 
 
+
+.h-icon > ul > li:first-child > a{
+    background:url("../images/icon/search02.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 32px;
+    width: 32px;
+    height: 32px;
+}
+
+.h-icon > ul > li:last-child > a{
+    background:url("../images/icon/profile.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 32px;
+    width: 32px;
+    height: 32px;
+}
+
+.h-icon > ul > li:first-child > a:hover{
+    background: url("../images/icon/searchh.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 32px;
+    width: 32px;
+    height: 32px;
+}
+
 .ott-logo-box {
   display: flex;
   justify-content: space-evenly;

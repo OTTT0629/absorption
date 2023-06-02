@@ -33,19 +33,7 @@ public class DetailController {
 	public String workDetailPage(Model m, HttpServletRequest request, HttpSession session) {         //, Integer content_no) 
 
 		Integer user_no = (Integer) session.getAttribute("user_no");
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-		
-		if(session.getAttribute("id") != null) {
-			UserDTO userDTO = loginUserDao.select((String) session.getAttribute("id"));
-			m.addAttribute(userDTO);
-		}
->>>>>>> e87c70c181cf71d66e2101e699d0150424b6cdfd
-			
-=======
 					
->>>>>>> rgh
 		try {
 			
 			List<ReviewDTO> list = reviewService.getReview();

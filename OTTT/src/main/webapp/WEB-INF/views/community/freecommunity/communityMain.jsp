@@ -76,22 +76,6 @@
             			<!-- 입력 폼 -->
 	       				<form id="insertForm" class="frm" method="post" enctype="multipart/form-data" action="<c:url value='/community/freecommunity'/>">  
 	           				<ul class="post_write">
-<<<<<<< HEAD
-		                  		<li>
-<<<<<<< HEAD
-	                    			<img src="${path}/resources/images/icon/user01.png" alt="프로필사진">
-=======
-	                    			<img src="${user_img }" alt="프로필사진">
->>>>>>> e87c70c181cf71d66e2101e699d0150424b6cdfd
-		                  		</li>
-		                  		<li>
-	                      			<textarea class="writeHere" placeholder="Write Here" onkeydown="resize(this)" onkeyup="resize(this)" id="article_content" name="article_content" ></textarea>
-		                  		</li>
-								<li style="margin-left: 70px">
-		                  			<img src="" id="preview" style="border-radius: 5px;"/>
-		                  		</li>
-
-=======
 		                  		<c:choose>
 	                  				<c:when test="${user_no == null || user_no == ''}">
 	                  					<li>
@@ -110,16 +94,12 @@
 				                  		</li>
 	                  				</c:otherwise>
 	                  			</c:choose>
->>>>>>> rgh
 		                  		<li class="btn_s">
 									<div class="form-group">
 										<input id="fileInput" name="upFile"   accept="image/*" type="file" tabindex="-1" style="position: absolute; clip: rect(0px 0px 0px 0px);" onchange="readURL(this)">
 										<input type="text" id="userfile" name="userfile">
 		                      			<label for="fileInput" for="btn_file" ><img src="${path}/resources/images/img/writeImg.png" class="img_file"></label>
 									</div>
-<<<<<<< HEAD
-		                      		<img src="${path}/resources/images/img/commit.png" alt="commit" class="btn_commit"	id="commitBtn">             
-=======
 		                      		<img src="${path}/resources/images/img/commit.png" alt="commit" class="btn_commit"	 data-bs-toggle="modal" data-bs-target="#commitBtn">      
 		                    		<!-- Modal -->
 			                    	<div class="modal fade" id="commitBtn" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -137,7 +117,6 @@
 			                       			</div>
 			                     		 </div>
 			              			</div>         
->>>>>>> e87c70c181cf71d66e2101e699d0150424b6cdfd
 		                  		</li>
 
 	          				</ul>
@@ -155,18 +134,11 @@
 			/********************************************************************************/
 			let PATH = "<c:out value='${path}'/>"; 	//이미지 root 경로
 			let URL = 	"<c:url value='/community/post?article_no='/>";	//상세페이지 이동 URL 설정
-<<<<<<< HEAD
-			let LOGIN_YN = '${sessionScope.user_no}';	//로그인여부
-			let OFFSET = 0;
-			let TOTAL_COUNT = 0;
-			let CATEGORY =  "${category}" != "" ? "${category}" : "all";
-=======
 			let LOGIN_YN = "${sessionScope.user_no}";	//로그인여부
 			let OFFSET = 0;
 			let TOTAL_COUNT = 0;
 			let CATEGORY =  "${category}" != "" ? "${category}" : "all";
 			let schText = "${schText}";
->>>>>>> e87c70c181cf71d66e2101e699d0150424b6cdfd
 			console.log("path :"+PATH);
 			console.log("url  :"+URL);
 			
@@ -174,16 +146,12 @@
 			/* DOM Ready 영역																	*/
 			/* 작성자 gahhyun																	*/
 			/********************************************************************************/
-<<<<<<< HEAD
-			$(document).ready(function(){				
-=======
 			$(document).ready(function(){
 				
 				if($.trim(schText) != ""){
 					$("#schText").val(schText);
 				 	$("#schBtn").trigger("click");
 				}
->>>>>>> e87c70c181cf71d66e2101e699d0150424b6cdfd
 				
 				/********************************************************************************/
 				/*	이미지 미리보기 											*/
@@ -221,22 +189,14 @@
 				/********************************************************************************/
 				/*	DOM ajaxStart 영역 ajax 호출시 로딩효과											*/
 				/********************************************************************************/
-<<<<<<< HEAD
-	      		$(document).ajaxStart(function() {
-=======
  	      		$(document).ajaxStart(function() {
->>>>>>> e87c70c181cf71d66e2101e699d0150424b6cdfd
 	          		$('#loading').show();
 	        	}).ajaxStop(function() {
 	          		setTimeout(function() {
 		            	$('#loading').hide();
 		          	}, 1000); // 1초의 지연 효과를 줍니다.
 	        	});
-<<<<<<< HEAD
-	
-=======
 	 
->>>>>>> e87c70c181cf71d66e2101e699d0150424b6cdfd
 				
 				/********************************************************************************/
 				/*	스크롤 Event정의 영역															*/
@@ -281,11 +241,7 @@
 				/*	요소 Event정의 영역																*/
 				/********************************************************************************/
 				//저장버튼 Click Event
-<<<<<<< HEAD
-				$("#commitBtn").click(function(){
-=======
 				$("#saveBtn").click(function(){		//commitBtn에서 모달 Yes의 버튼으로 교체
->>>>>>> e87c70c181cf71d66e2101e699d0150424b6cdfd
 					if(LOGIN_YN == null || LOGIN_YN == ""){
 						swal("로그인 후 이용가능합니다.","로그인을 해주세요.", "warning")
 						.then(function(){
@@ -304,8 +260,6 @@
 				
 				
 				//검색어버튼 Click Event
-<<<<<<< HEAD
-=======
 				$("#schText").keydown(function(event) {
 				  // Enter 키의 keyCode는 13입니다.
 				  if (event.keyCode === 13) {
@@ -321,7 +275,6 @@
 				});
 				
 				//검색어버튼 Click Event
->>>>>>> e87c70c181cf71d66e2101e699d0150424b6cdfd
 				$("#schBtn").click(function(){
 					//목록 영역 클리어
 					$("#post_list").html("");
@@ -334,10 +287,6 @@
 
 				});
 				
-<<<<<<< HEAD
-				
-=======
->>>>>>> e87c70c181cf71d66e2101e699d0150424b6cdfd
 				//화면 로딩시 아티클 목록을 불러오는 ajax 함수 호출
 				fnCallAjaxSelectArticleList({
 					"offset": OFFSET
@@ -383,11 +332,7 @@
 					checkListSize = list.length;
 					
 					//화살표 함수형 foreach 반복문
-<<<<<<< HEAD
-					list.forEach( function(v) {
-=======
 					list.forEach( function(v,i) {
->>>>>>> e87c70c181cf71d66e2101e699d0150424b6cdfd
 
 						//등록일 날짜형식 변경 timestamp to yyyy_MM-dd
 						let date = new Date(v.article_create_dt);
@@ -396,11 +341,7 @@
 						createHtml += 	'<ul class="post" >';
 						createHtml += 		'<div class="post_info">';
 						createHtml +=			'<div style="display: flex;">';
-<<<<<<< HEAD
-						createHtml +=				'<a href="#"><img class="usur_img" src="'+ PATH +'/resources/images/icon/user01.png" alt="profile"></a>';
-=======
 						createHtml +=				'<a href="#"><img class="usur_img" src="'+ v.image +'" alt="profile"></a>';
->>>>>>> e87c70c181cf71d66e2101e699d0150424b6cdfd
 						createHtml +=				'<a href="#"><span class="nickname">'+ v.user_nicknm +'</span></a>';
 						createHtml +=				'<span id="current_date" >'+ formattedDate +'</span>';
 						createHtml +=			'</div>';
@@ -425,17 +366,12 @@
 						createHtml +=		'</div>';
 						createHtml +=		'<div>';
 						createHtml +=			'<div>';
-<<<<<<< HEAD
-						createHtml +=				'<input class="heart_img" type="image" src="'+ PATH +'/resources/images/img/heart_on.png" alt="heart">';
-						createHtml +=				'<span>'+ v.like_count +'</span>'; 
-=======
 						
 						//로그인 여부 및 내가 누른하트표시 on off
 						let heartOnOffImg = (v.check_like_count == 1 ? "on" : "off");
 						
 						createHtml +=				'<input onclick="javascript:fnPushHeart('+ v.article_no +','+i+');" class="heart_img" type="image" id="pushHeart_'+i+'" src="'+ PATH +'/resources/images/img/heart_'+heartOnOffImg+'.png" alt="heart">';
 						createHtml +=				'<span id="likeCount_'+i+'"	>'+ v.like_count +'</span>'; 
->>>>>>> e87c70c181cf71d66e2101e699d0150424b6cdfd
 						createHtml +=				'<input class="re_comment_img" type="image" src="'+ PATH +'/resources/images/img/comment.png" alt="comment">';
 						createHtml +=				'<span>'+ v.comment_count +'</span>';                  
 						createHtml +=			'</div>';
@@ -521,8 +457,6 @@
 			       	reader.readAsDataURL(input.files[0]);
 		   		}
        		}
-<<<<<<< HEAD
-=======
 
 			//좋아요 누르기 클릭 이벤트
 			function fnPushHeart(article_no, index){
@@ -588,7 +522,6 @@
 				)	
 			}
 			
->>>>>>> e87c70c181cf71d66e2101e699d0150424b6cdfd
 		</script>
 	</body>
 </html>

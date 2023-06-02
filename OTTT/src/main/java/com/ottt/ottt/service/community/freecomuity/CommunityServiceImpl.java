@@ -24,10 +24,6 @@ public class CommunityServiceImpl implements CommunityService{
 
 	@Override
 	public int delete(Integer article_no) throws Exception {
-<<<<<<< HEAD
-		communityDao.delete(article_no);
-		return communityDao.delete(article_no);
-=======
 		int result = communityDao.delete(article_no);
 		
 		if(result>0) {
@@ -38,7 +34,6 @@ public class CommunityServiceImpl implements CommunityService{
 		}
 		
 		return result;
->>>>>>> e87c70c181cf71d66e2101e699d0150424b6cdfd
 	}
 
 	@Override
