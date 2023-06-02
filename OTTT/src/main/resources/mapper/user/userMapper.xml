@@ -53,6 +53,12 @@
 		where user_no = #{user_no} and user_id = #{user_id}  	
   	</update>
   	
+  	<update id="up_profile" parameterType="UserDTO">
+  		UPDATE tb_user
+		SET image = #{image}
+		where user_no = #{user_no} and user_id = #{user_id}
+  	</update>
+  	
   	<delete id="delete" parameterType="map">
   		delete from tb_user
 		where user_no = #{user_no} and user_id = #{user_id}  	

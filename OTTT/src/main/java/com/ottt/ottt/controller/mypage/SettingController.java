@@ -4,26 +4,49 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.ottt.ottt.controller.s3.S3Uploader;
 import com.ottt.ottt.dto.UserDTO;
 import com.ottt.ottt.service.user.UserService;
 
+import lombok.RequiredArgsConstructor;
+
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/mypage")
 public class SettingController {
+	
+    @Autowired
+    private S3Uploader s3Uploader;
+        
+    @Value("${cloud.aws.s3.bucket.url}")
+    private String bucketUrl;
+    
+    @Value("${default.porfile.img}")
+    private String defaultImg;
 		
 	@Autowired
 	UserService us;
 		
 	//마이페이지 프로필 셋팅
 	@GetMapping(value = "/setting")
-	public String mysetting() {
+	public String mysetting(Model m, HttpSession session) {
+		String user_id = (String) session.getAttribute("id");
+		
+		UserDTO userDTO;
+		try {
+			userDTO = us.getUser(user_id);
+			m.addAttribute(userDTO);
+		} catch (Exception e) { e.printStackTrace(); }
+		
 				
 	return "/mypage/myprofile/setting";		
 	}
@@ -45,24 +68,51 @@ public class SettingController {
 	return "/mypage/myprofile/myprofile";
 	}
 	
-	//닉네임 변경
+	//프로필 변경
 	@PostMapping("/setting/myprofile")
-	public String myprofile(UserDTO userDTO, String user_nicknm, RedirectAttributes rattr
-							, Model m, HttpSession session) {
+	public String myprofile(UserDTO userDTO, String new_nicknm, RedirectAttributes rattr
+							, Model m, HttpSession session, MultipartFile newImg) {
 		
-		String user_id = (String) session.getAttribute("id");		
+		String user_id = (String) session.getAttribute("id");
 		
 		try {
 			userDTO = us.getUser(user_id);
-			if(us.selectNicknmCnt(user_nicknm) != 0)
-				throw new Exception("nicknm duplicate");
 			
-			userDTO.setUser_nicknm(user_nicknm);
-			if(us.mod_nick(userDTO) != 1)
-				throw new Exception("mod_nick failed");
+			//프로필 이미지 선택했는지 확인
+	        if(!newImg.getOriginalFilename().equals("")) {
+	        		        	        
+				String img = userDTO.getImage();
+				String index = "profile";
 				
+				//기본 이미지인지 확인
+				if(!defaultImg.equals(img)) {
+					s3Uploader.deleteFile(img);
+				}
+				
+				//이미지 업로드
+				String upload = s3Uploader.upload(newImg, index);
+				
+				userDTO.setImage(bucketUrl+upload);
+				
+				if(us.mod_img(userDTO) != 1)
+					throw new Exception("mod_img failed");					        
+	        }
+	        		
+			//닉네임 입력했는지 확인
+			if(!new_nicknm.equals("")) {
+				
+				//닉네임 중복 확인
+				if(us.selectNicknmCnt(new_nicknm) != 0)
+					throw new Exception("nicknm duplicate");
+				
+				userDTO.setUser_nicknm(new_nicknm);
+				if(us.mod_nick(userDTO) != 1)
+					throw new Exception("mod_nick failed");
+			}
+			
 			rattr.addFlashAttribute("msg","MOD_OK");
 			return "redirect:/mypage/setting/myprofile";
+			
 		} catch (Exception e) {			
 			e.printStackTrace();
 			m.addAttribute(userDTO);
