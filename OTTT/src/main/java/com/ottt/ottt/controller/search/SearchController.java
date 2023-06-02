@@ -39,8 +39,6 @@ public class SearchController {
 
 	@GetMapping("/search")
 	public String search(Model m, HttpSession session) {
-		UserDTO userDTO = loginUserDao.select((String)session.getAttribute("id"));
-		m.addAttribute(userDTO);
 		
 		return "/search/search";
 	}
@@ -50,10 +48,7 @@ public class SearchController {
 							 @RequestParam(value="ott_no", required = false) List<Integer> ott_no,
 							 @RequestParam(value="gerne_no", required = false) List<Integer> gerne_no,
 							 @RequestParam(value="category_no", required = false) List<Integer> category_no,
-							 Model m, SearchItem sc, HttpSession session) {
-		
-		UserDTO userDTO = loginUserDao.select((String)session.getAttribute("id"));
-		m.addAttribute(userDTO);		
+							 Model m, SearchItem sc, HttpSession session) {	
 		
 		sc.setPageSize(24);
 		

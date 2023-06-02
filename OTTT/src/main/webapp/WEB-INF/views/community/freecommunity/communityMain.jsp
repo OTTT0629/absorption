@@ -76,16 +76,24 @@
             			<!-- 입력 폼 -->
 	       				<form id="insertForm" class="frm" method="post" enctype="multipart/form-data" action="<c:url value='/community/freecommunity'/>">  
 	           				<ul class="post_write">
-		                  		<li>
-	                    			<img src="${user_img }" alt="프로필사진">
-		                  		</li>
-		                  		<li>
-	                      			<textarea class="writeHere" placeholder="Write Here" onkeydown="resize(this)" onkeyup="resize(this)" id="article_content" name="article_content" ></textarea>
-		                  		</li>
-								<li style="margin-left: 70px">
-		                  			<img src="" id="preview" style="border-radius: 5px;"/>
-		                  		</li>
-
+		                  		<c:choose>
+	                  				<c:when test="${user_no == null || user_no == ''}">
+	                  					<li>
+	                  						<div>로그인이 필요합니다</div>
+	                  					</li>
+	                  				</c:when>
+	                  				<c:otherwise>
+				                  		<li>
+			                    			<img src="${user_img }" alt="프로필사진">
+				                  		</li>
+				                  		<li>
+			                      			<textarea class="writeHere" placeholder="Write Here" onkeydown="resize(this)" onkeyup="resize(this)" id="article_content" name="article_content" ></textarea>
+				                  		</li>
+										<li style="margin-left: 70px">
+				                  			<img src="" id="preview" style="border-radius: 5px;"/>
+				                  		</li>
+	                  				</c:otherwise>
+	                  			</c:choose>
 		                  		<li class="btn_s">
 									<div class="form-group">
 										<input id="fileInput" name="upFile"   accept="image/*" type="file" tabindex="-1" style="position: absolute; clip: rect(0px 0px 0px 0px);" onchange="readURL(this)">

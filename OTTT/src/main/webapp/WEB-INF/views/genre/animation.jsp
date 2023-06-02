@@ -24,46 +24,8 @@
   <body>
     <form action="#" method="post">
     <div class="wrap">
-      <header >
-        <div class="logo">
-          <a href="<c:url value="/" />">
-            <img src="${path}/resources/images/logo/OTTT.png" alt="logo">
-          </a>
-        </div>
-        <nav class="gnb">
-          <ul>
-            <li>
-              <a href="<c:url value="/genre/movie" />">영화</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/drama" />">드라마</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/interest" />">예능</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/animation" />" style="color: #33ff33;">애니</a>
-            </li>
-            <li>
-              <a href="<c:url value="/community" />">게시판</a>
-            </li>
-          </ul>
-        </nav>
-        <div class="h-icon">
-          <ul>
-            <li>
-              <a href="<c:url value='/search' />">
-                <!-- <img src="./images/icon/search02.png" alt="검색"> -->
-              </a>
-            </li>
-            <li>
-              <a href="<c:url value='/mypage' />">
-                <!-- <img src="./images/icon/user01.png" alt="내 정보"> -->
-              </a>
-            </li>
-          </ul>
-        </div>
-      </header>
+		<%@ include file="../fix/header.jsp" %>
+		
       <br />
       <section class="sec00">
         <div class="ott-logo-box">
@@ -867,6 +829,10 @@
       .ott-logo-img.active {
         outline: 3px solid #33ff33;
         border-radius: 10px;
+      }
+      
+      .ani {
+      	color: #33ff33;
       }
     </style>
   </body>

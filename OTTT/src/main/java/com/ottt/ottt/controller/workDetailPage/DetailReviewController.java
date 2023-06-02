@@ -33,11 +33,6 @@ public class DetailReviewController {
       
       Integer user_no = (Integer) session.getAttribute("user_no");
       
-      if(session.getAttribute("id") != null) {
-			UserDTO userDTO = loginUserDao.select((String) session.getAttribute("id"));
-			m.addAttribute(userDTO);
-      }
-      
       try {
          List<ReviewDTO> list = reviewService.getReview();
          int count = reviewService.getCount();
