@@ -50,11 +50,7 @@
 	              	<a href="<c:url value="/genre/animation" />">애니</a>
 	            </li>
 	            <li>
-<<<<<<< HEAD
 	              	<a class="community" href="<c:url value="/community/freecommunity" />">게시판</a>
-=======
-	              	<a href="<c:url value="/community/freecommunity" />">게시판</a>
->>>>>>> 14c62d30ec89ae4aa8f36f85d6d1f7662e2aacea
 	            </li>
             </ul>
         </nav>
