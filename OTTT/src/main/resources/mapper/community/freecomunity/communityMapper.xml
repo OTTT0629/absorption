@@ -53,6 +53,7 @@
 			-- , to_char(ta.article_mod_dt,'YYYY-MM-DD') AS article_create_dt	-- 수정일
 			, ta.report_cnt
 			, tu.user_nicknm				-- 사용자 닉네임
+			, tu.image
 		FROM tb_article ta
 		INNER JOIN tb_user tu				-- 사용자 테이블
 		ON ta.user_no = tu.user_no 	

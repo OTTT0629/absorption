@@ -146,9 +146,11 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
 
 .search{
         border: solid 1px black;
+        width: 168px;
         height: 40px;
         border: 0;
         border-radius: 15px;
+         padding-left: 10px;
     }
 
 .searchicon{
@@ -208,7 +210,7 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
 .nickname_main{
     padding-left: 20px;
     font-weight: bolder;
-    width: 790px;
+    width: min-content;
 }
 
 
@@ -226,14 +228,21 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
     font-size: large;
 }
 
-.poster{
-    width: 400px;
+.container{
+	width: 300px;
+	height: 300px;
+	overflow: hidden;
+	position: relative;
+}
+
+.container > img {
+	position: absolute;
+    width: 100%;
+ 	 top: 50%;
+ 	 left: 50%;
+  	transform: translate(-50%, -50%);
     border-radius: 10px;
-<<<<<<<< HEAD:OTTT/target/ottt-1.0.0-BUILD-SNAPSHOT/resources/css/community/freecommunity/communityPost.css
     
-========
-    margin-top: 20px;
->>>>>>>> 14c62d30ec89ae4aa8f36f85d6d1f7662e2aacea:OTTT/src/main/webapp/resources/css/community/freecommunity/community_post.css
 }
 
 #current_date{
@@ -317,13 +326,12 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
 .writeHere{
     color: #fff;
     border: none;
-    background-color: #202020;
+    background-color: transparent;
     margin-top: 10px;
     width: 760px;
     max-height: max-content;
     overflow-y: hidden;
     resize: none;
-    position: relative;
     left: 58px;
     bottom: 30px;
 }
@@ -345,7 +353,7 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
 }
 
 .btn_warning2{
-    background-color: #202020;
+    background-color: #0B0C0B;
     color: #fff;
     border: none;
 }
@@ -370,7 +378,6 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
     justify-content: space-between;
 }
 
-<<<<<<<< HEAD:OTTT/target/ottt-1.0.0-BUILD-SNAPSHOT/resources/css/community/freecommunity/communityPost.css
 /*로딩바*/
 .loading {
   display: none;
@@ -408,8 +415,3 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
     --bs-btn-disabled-bg: #33ff33;
     --bs-btn-disabled-border-color: #33ff33;
 }
-========
-/* div{
-    border: plum solid 1px;
-} */
->>>>>>>> 14c62d30ec89ae4aa8f36f85d6d1f7662e2aacea:OTTT/src/main/webapp/resources/css/community/freecommunity/community_post.css

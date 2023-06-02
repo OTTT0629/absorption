@@ -80,7 +80,7 @@
           <table class="vouchar-table">
               <tr>
                 <th></th>
-                  <td style="text-align: center;">기능</td>
+                  <td style="text-align: center; font-size: 25px;">기능</td>
                 </tr>
               <tr>
                 <th>광고형 베이식<br>월 5,500원</th>

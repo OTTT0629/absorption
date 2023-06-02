@@ -77,7 +77,7 @@
 	       				<form id="insertForm" class="frm" method="post" enctype="multipart/form-data" action="<c:url value='/community/freecommunity'/>">  
 	           				<ul class="post_write">
 		                  		<li>
-	                    			<img src="${path}/resources/images/icon/user01.png" alt="프로필사진">
+	                    			<img src="${user_img }" alt="프로필사진">
 		                  		</li>
 		                  		<li>
 	                      			<textarea class="writeHere" placeholder="Write Here" onkeydown="resize(this)" onkeyup="resize(this)" id="article_content" name="article_content" ></textarea>
@@ -181,14 +181,14 @@
 				/********************************************************************************/
 				/*	DOM ajaxStart 영역 ajax 호출시 로딩효과											*/
 				/********************************************************************************/
-	  /*    		$(document).ajaxStart(function() {
+ 	      		$(document).ajaxStart(function() {
 	          		$('#loading').show();
 	        	}).ajaxStop(function() {
 	          		setTimeout(function() {
 		            	$('#loading').hide();
 		          	}, 1000); // 1초의 지연 효과를 줍니다.
 	        	});
-	 */
+	 
 				
 				/********************************************************************************/
 				/*	스크롤 Event정의 영역															*/
@@ -333,7 +333,7 @@
 						createHtml += 	'<ul class="post" >';
 						createHtml += 		'<div class="post_info">';
 						createHtml +=			'<div style="display: flex;">';
-						createHtml +=				'<a href="#"><img class="usur_img" src="'+ PATH +'/resources/images/icon/user01.png" alt="profile"></a>';
+						createHtml +=				'<a href="#"><img class="usur_img" src="'+ v.image +'" alt="profile"></a>';
 						createHtml +=				'<a href="#"><span class="nickname">'+ v.user_nicknm +'</span></a>';
 						createHtml +=				'<span id="current_date" >'+ formattedDate +'</span>';
 						createHtml +=			'</div>';

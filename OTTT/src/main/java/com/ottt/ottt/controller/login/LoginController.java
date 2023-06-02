@@ -55,6 +55,8 @@ public class LoginController {
 		session.setAttribute("id", user_id);
 		session.setAttribute("admin", userDTO.getAdmin());
 		session.setAttribute("user_no", userDTO.getUser_no());
+		session.setAttribute("user_img", userDTO.getImage());
+
 
 		toURL = toURL == null || toURL.equals("") ? "/" : toURL;
 				
