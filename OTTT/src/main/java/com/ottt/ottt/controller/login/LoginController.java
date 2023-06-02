@@ -57,6 +57,10 @@ public class LoginController {
 		session.setAttribute("user_no", userDTO.getUser_no());
 		session.setAttribute("user_img", userDTO.getImage());
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> e87c70c181cf71d66e2101e699d0150424b6cdfd
 		toURL = toURL == null || toURL.equals("") ? "/" : toURL;
 				
 		return "redirect:" +toURL;

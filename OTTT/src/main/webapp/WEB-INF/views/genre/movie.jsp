@@ -397,10 +397,13 @@
     background-color: #202020; 
     border-color: #33ff33;
   }
+<<<<<<< HEAD
   
   .movie {
   	color: #33ff33;
   }
+=======
+>>>>>>> e87c70c181cf71d66e2101e699d0150424b6cdfd
     </style>
     
 

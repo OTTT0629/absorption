@@ -148,7 +148,11 @@
             <li>
                 <a href="<c:url value='/mypage' /> " class="${loginout}" >
                     <c:if test="${sessionScope.id != null}">
+<<<<<<< HEAD
                         <img src="${user_img }" id="profile" class="${loginout}">              	
+=======
+                        <img src="" id="profile" class="${loginout}">              	
+>>>>>>> e87c70c181cf71d66e2101e699d0150424b6cdfd
                     </c:if>              	
                 </a>
               </li>
@@ -157,7 +161,20 @@
           </header>
                   
         <script type="text/javascript">
+<<<<<<< HEAD
         $(document).ready(function() {        	
+=======
+        $(document).ready(function() {
+        	
+        	let img = function() {
+                if ('${userDTO.user_id}' != '') {
+                    $('#profile').attr("src", '${userDTO.image}')
+                }     				
+                return true
+            }
+            
+            img()
+>>>>>>> e87c70c181cf71d66e2101e699d0150424b6cdfd
             
         	  $(document).on("click", "#tonojjim", function(event) {
         	    event.preventDefault();

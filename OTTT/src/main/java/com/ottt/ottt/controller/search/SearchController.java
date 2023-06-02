@@ -39,6 +39,11 @@ public class SearchController {
 
 	@GetMapping("/search")
 	public String search(Model m, HttpSession session) {
+<<<<<<< HEAD
+=======
+		UserDTO userDTO = loginUserDao.select((String)session.getAttribute("id"));
+		m.addAttribute(userDTO);
+>>>>>>> e87c70c181cf71d66e2101e699d0150424b6cdfd
 		
 		return "/search/search";
 	}
@@ -50,6 +55,12 @@ public class SearchController {
 							 @RequestParam(value="category_no", required = false) List<Integer> category_no,
 							 Model m, SearchItem sc, HttpSession session) {
 		
+<<<<<<< HEAD
+=======
+		UserDTO userDTO = loginUserDao.select((String)session.getAttribute("id"));
+		m.addAttribute(userDTO);		
+		
+>>>>>>> e87c70c181cf71d66e2101e699d0150424b6cdfd
 		sc.setPageSize(24);
 		
 		Map<String, Object> searchMap = new HashMap<String, Object>();

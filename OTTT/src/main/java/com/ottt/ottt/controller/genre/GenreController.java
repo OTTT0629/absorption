@@ -18,12 +18,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+<<<<<<< HEAD
 import com.ottt.ottt.dao.login.LoginUserDao;
+=======
+>>>>>>> e87c70c181cf71d66e2101e699d0150424b6cdfd
 import com.ottt.ottt.domain.PageResolver;
 import com.ottt.ottt.domain.SearchItem;
 import com.ottt.ottt.dto.ContentDTO;
 import com.ottt.ottt.dto.ContentOTTDTO;
+<<<<<<< HEAD
 import com.ottt.ottt.dto.UserDTO;
+=======
+>>>>>>> e87c70c181cf71d66e2101e699d0150424b6cdfd
 import com.ottt.ottt.dto.WishlistDTO;
 import com.ottt.ottt.service.content.ContentService;
 import com.ottt.ottt.service.content.WishlistService;
@@ -56,7 +62,11 @@ public class GenreController {
 	
 	@GetMapping("/movie")
 	public String movie(Model m, HttpSession session, SearchItem sc) {
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> e87c70c181cf71d66e2101e699d0150424b6cdfd
 		sc.setPageSize(24);
 
 		try {

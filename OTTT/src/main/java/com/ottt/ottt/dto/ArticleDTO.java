@@ -21,6 +21,10 @@ public class ArticleDTO {
 	private Integer	check_like_count;
 	private MultipartFile upFile;
 	private String article_image_name;
+<<<<<<< HEAD
+=======
+	private String image;
+>>>>>>> e87c70c181cf71d66e2101e699d0150424b6cdfd
 	
 	public String getUser_nicknm() {
 		return user_nicknm;
@@ -158,6 +162,17 @@ public class ArticleDTO {
 	public void setArticle_image_name(String article_image_name) {
 		this.article_image_name = article_image_name;
 	}
+<<<<<<< HEAD
+=======
+	
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+>>>>>>> e87c70c181cf71d66e2101e699d0150424b6cdfd
 
 	@Override
 	public String toString() {
@@ -166,7 +181,12 @@ public class ArticleDTO {
 				+ ", article_title=" + article_title + ", article_create_dt=" + article_create_dt + ", article_mod_dt="
 				+ article_mod_dt + ", like_count=" + like_count + ", comment_count=" + comment_count + ", report_cnt="
 				+ report_cnt + ", user_nicknm=" + user_nicknm + ", check_like_count=" + check_like_count + ", upFile="
+<<<<<<< HEAD
 				+ upFile + ", article_image_name=" + article_image_name + ", userDTO=" + userDTO + "]";
+=======
+				+ upFile + ", article_image_name=" + article_image_name + ", image=" + image + ", userDTO=" + userDTO
+				+ "]";
+>>>>>>> e87c70c181cf71d66e2101e699d0150424b6cdfd
 	}
 
 	@Override
