@@ -19,8 +19,13 @@
   <body>
     <form action="#" method="post">
     <div class="wrap">
+<<<<<<< HEAD
     	<%@ include file="../fix/header.jsp" %>
     	
+=======
+		<%@ include file="../fix/header.jsp" %>
+		
+>>>>>>> rgh
       <br />
       <section class="sec00">
         <div class="ott-logo-box">
@@ -398,12 +403,18 @@
     border-color: #33ff33;
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> rgh
   
   .movie {
   	color: #33ff33;
   }
+<<<<<<< HEAD
 =======
 >>>>>>> e87c70c181cf71d66e2101e699d0150424b6cdfd
+=======
+>>>>>>> rgh
     </style>
     
 

@@ -17,7 +17,11 @@
   <body style="background-color: #202020;">
     <form>
     <div class="wrap">
+<<<<<<< HEAD
       <%@ include file="../fix/header.jsp" %>
+=======
+		<%@ include file="../fix/header.jsp" %>
+>>>>>>> rgh
 
       <br />
       <section class="sec00">
@@ -762,8 +766,11 @@
       .inter {
       	color: #33ff33;
       }
+<<<<<<< HEAD
       
       
+=======
+>>>>>>> rgh
     </style>
   </body>
 </html>

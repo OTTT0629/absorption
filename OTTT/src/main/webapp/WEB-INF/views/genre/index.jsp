@@ -24,7 +24,11 @@
   <body>
     <form action="#" method="post">
     <div class="wrap">
+<<<<<<< HEAD
       <%@ include file="../fix/header.jsp" %>
+=======
+		<%@ include file="../fix/header.jsp" %>
+>>>>>>> rgh
       <br/>
 
     <script type="text/javascript">

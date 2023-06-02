@@ -35,7 +35,6 @@ public class DetailReplyController {
 	@GetMapping(value = "/detailPage/reply")
 	public String reviewReply(Model m, HttpServletRequest request, HttpSession session,
 			@RequestParam("content_no") int content_no, @RequestParam("review_no") int review_no) {
-		Integer user_no = (Integer) session.getAttribute("user_no");
 		UserDTO userDTO = loginUserDao.select((String)session.getAttribute("id"));
 		
 		try {

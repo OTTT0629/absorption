@@ -64,33 +64,6 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
     margin-top: 12px;
 }
 
-.h-icon > ul > li:first-child > a{
-    background:url("../../images/icon/search02.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 32px;
-    width: 32px;
-    height: 32px;
-}
-
-
-/* .h-icon  
-{
-    width: 50px;
-} */
-
-
-/* .h-icon > ul > li:last-child > a:hover{
-    background: url("../images/user-h.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 32px;
-    width: 32px;
-    height: 32px;
-} */
-
-/* header End */
-
 /* meun bar Start */
 #line-1 {
     width: 1200px;

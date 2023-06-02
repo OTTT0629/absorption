@@ -26,7 +26,6 @@ public class MypageController {
 			return "redirect:/login";
 		
 		HttpSession session = request.getSession();
-		Integer user_no = (Integer) session.getAttribute("user_no");
 		String user_id = (String) session.getAttribute("id");
 		
 		try {

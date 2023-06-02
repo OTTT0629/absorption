@@ -276,7 +276,7 @@
 					    }
 					    tmp += '</div>';
 					    tmp += '</div>';
-					    tmp += '<div class="comment comment_write_box" name="cmt_content" ><textarea name="content-area" readonly = "readonly" style="background-color: #202020; width: 100%; height: 100%; color: #fff; border: none; outline: none;">'+comment.cmt_content+'</textarea></div>';
+					    tmp += '<div class="comment comment_write_box" name="cmt_content" ><textarea name="content-area" readonly = "readonly" style="background-color: #202020; width: 100%; height: 100%; color: #fff; border: none; outline: none; resize:none;">'+comment.cmt_content+'</textarea></div>';
 					    tmp += '</div>';
 					  });
 					  return tmp + '</div>';

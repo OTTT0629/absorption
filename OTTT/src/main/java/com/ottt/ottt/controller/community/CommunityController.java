@@ -52,11 +52,7 @@ public class CommunityController {
 		logger.info(">>>>>>>>>>>>>>>>>>>>> category 선택한 카테고리 : "+category);
 		
 		UserDTO userDTO = loginUserDao.select((String)session.getAttribute("id"));
-		
-		System.out.println("=============================session.getAttribute() : " + session.getAttribute("id"));
-		System.out.println("=============================userDTO : " + userDTO);
-						
-		
+				
 		if(userDTO != null) {
 			logger.info(">>>>>>>>>>>>>>> 로그인 아이디 정보 >>>>>>>>>>>>>>>>>>>> "+userDTO.getUser_id());
 		}else {

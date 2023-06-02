@@ -149,10 +149,14 @@
                 <a href="<c:url value='/mypage' /> " class="${loginout}" >
                     <c:if test="${sessionScope.id != null}">
 <<<<<<< HEAD
+<<<<<<< HEAD
                         <img src="${user_img }" id="profile" class="${loginout}">              	
 =======
                         <img src="" id="profile" class="${loginout}">              	
 >>>>>>> e87c70c181cf71d66e2101e699d0150424b6cdfd
+=======
+                        <img src="${user_img }" id="profile" class="${loginout}">              	
+>>>>>>> rgh
                     </c:if>              	
                 </a>
               </li>

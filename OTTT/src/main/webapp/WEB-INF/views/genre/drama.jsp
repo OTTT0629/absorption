@@ -18,7 +18,12 @@
   <body>
     <form action="#" method="post">
     <div class="wrap">
+<<<<<<< HEAD
     	<%@ include file="../fix/header.jsp" %>
+=======
+		<%@ include file="../fix/header.jsp" %>
+		
+>>>>>>> rgh
       <br />
       <section class="sec00">
         <div class="ott-logo-box">
