@@ -66,43 +66,6 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
 } */
 
 
-
-.h-icon > ul > li:first-child > a{
-    background:url("../../images/icon/search02.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 32px;
-    width: 32px;
-    height: 32px;
-}
-
-.h-icon > ul > li:last-child > a{
-    background:url("../../images/icon/user01.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 32px;
-    width: 32px;
-    height: 32px;
-}
-
-.h-icon > ul > li:first-child > a:hover{
-    background: url("../../images/icon/searchh.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 32px;
-    width: 32px;
-    height: 32px;
-}
-
-.h-icon > ul > li:last-child > a:hover{
-    background:url("../../images/icon/user-h.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 32px;
-    width: 32px;
-    height: 32px;
-}
-
 .ott-logo-box {
   display: flex;
   justify-content: space-evenly;
@@ -293,8 +256,6 @@ background-color: #202020;
   box-sizing: border-box; */
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-
 }
 
 .sec01 > a {
@@ -398,99 +359,75 @@ background-color: #202020;
 /*작품 hover시 나타나는 정보*/
 
 .work-info{
-  width: 150px;
-  height: 240px;
-  margin: 7px;
+    width: 150px;
+    height: 200px;
+    margin: 30px;
 }
 
 
 .work-review{
-  position: relative;
-  top: -110px;
-  left: -5px;
-  display: none;
-  width: 160px;
-  height: 130px;
-  background-color: #202020;
-  opacity: 80%;
-  
- 
-  
+    position: absolute;
+    display: none;
+    height: 220px;
+    width: 150px;
 }
 
 .work-cat{
-  width: 150px;
-  display: flex;
-  justify-content: space-around;
-  position: absolute;
-  left: 0;
-  top: 0;
-}
-
-.work-cat div{
-  color: #fff;
-  font-size: 16px;
-  font-weight: bold;
-  padding-left: 4px;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    width: 160px;
+    top: -30px;
 }
 
 .ott-img{
-  position: absolute;
-  display: flex;
-  text-align: center;
-  left: 0;
-  top: -30px;
-  
+    position: absolute;
+    display: flex;
+   /*  top: -5x; */
+   top: -70px;
 }
 
 .ott-img img{
-  width: 30px;
-  margin-right: 5px;
-}
-
-.work-my{
-  position: absolute;
-  left: 15px;
-  top: 60px;
-  display: flex;
+    width: 30px;
+    margin-right: 5px;
 }
 
 .work-info:hover .work-review{
-  display: block;
-  z-index: 998;
+    display: block;
+    z-index: 998;
 }
-.poster{
-  width:150px;
-  height:215px;
-  block-size: 215px;
-  
-  
-}
+
 .work-info:hover .poster{
-  scale: 1.3;
-  z-index: 992;
+    scale: 1.2;
+    z-index: 992;
+    opacity: 0.4;
 }
 
 .star-img{
-  width: 100px;
-  position: absolute;
-  top: 30px;
-  left: 40px;
+    display: flex;
 }
 
-.work-review a{
-  color: #fff;
-  text-decoration: none;
-  font-size: 20px;
-  margin: 0 3px;
-  position: relative;
-  top: 35px;
 
+.score{
+    color: white;
+    margin: 5xp;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 8px;
 }
 
-.work-review a:hover{
-  color: #33FF33;
+.star-img img{
+    width: 30px;
 }
+
+.poster{
+    width: 150px;
+    height: 220px;
+    margin: 7px;
+    z-index: 990;
+    object-fit: cover;
+}
+
 
 select{
   background-color: #202020;

@@ -9,15 +9,23 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ottt.ottt.dao.login.LoginUserDao;
 import com.ottt.ottt.dto.UserDTO;
+import com.ottt.ottt.dto.UserOTTDTO;
+import com.ottt.ottt.service.login.LoginUserOTTService;
+
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/signin")
@@ -25,6 +33,8 @@ public class SigninController {
 	
 	@Autowired
 	LoginUserDao userDao;
+	@Autowired
+	LoginUserOTTService loginUserOTTService;
 
 	//약간동의 페이지 
 	@GetMapping(value = "/term")
@@ -70,9 +80,17 @@ public class SigninController {
 	return "/login/addInfo";		
 	}
 	
-	@PostMapping(value = "/addInfo")
-	public String addInfoPost() {
-	return "/login/addInfo";		
+	@PostMapping(value = "/addInfo", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	@ResponseBody
+	public String addInfoPost(@Valid @RequestBody MultiValueMap<String, String> formData, HttpServletRequest request) {
+	    Integer ott_no = Integer.parseInt(formData.getFirst("ott_no"));
+	  HttpSession session = request.getSession();
+	  UserDTO userDTO = userDao.select((String) session.getAttribute("id"));
+	  UserOTTDTO userOTTDTO = new UserOTTDTO();
+	  userOTTDTO.setUser_no(userDTO.getUser_no());
+	  userOTTDTO.setOtt_no(ott_no);
+	  loginUserOTTService.addOTT(userOTTDTO);
+	  return "/";
 	}
 	
 	//가입성공 페이지
