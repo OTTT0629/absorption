@@ -138,11 +138,9 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
 
 .search{
         border: solid 1px black;
-        width: 168px;
         height: 40px;
         border: 0;
         border-radius: 15px;
-        padding-left: 10px;
     }
 
 .searchicon{
@@ -352,7 +350,14 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
 
 
 /* 모달 */
+<<<<<<<< HEAD:OTTT/target/ottt-1.0.0-BUILD-SNAPSHOT/resources/css/community/freecommunity/communityMain.css
 
+========
+.post_info li:nth-child(4){
+    position: relative;
+    left: 500px;
+}
+>>>>>>>> 14c62d30ec89ae4aa8f36f85d6d1f7662e2aacea:OTTT/src/main/webapp/resources/css/community/freecommunity/community_main.css
 .modal-content{
     background-color: #202020;
 }
@@ -373,6 +378,7 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
  
 .modi-del{
     text-align: right;
+<<<<<<<< HEAD:OTTT/target/ottt-1.0.0-BUILD-SNAPSHOT/resources/css/community/freecommunity/communityMain.css
 }
 
 
@@ -411,6 +417,8 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
     --bs-btn-disabled-color: #fff;
     --bs-btn-disabled-bg: #33ff33;
     --bs-btn-disabled-border-color: #33ff33;
+========
+>>>>>>>> 14c62d30ec89ae4aa8f36f85d6d1f7662e2aacea:OTTT/src/main/webapp/resources/css/community/freecommunity/community_main.css
 }
 
 /*로딩바*/
@@ -426,6 +434,7 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
   background: rgba(0, 0, 0, 0.75) url('../../../images/loading2.gif') no-repeat center center;
 }
 
+<<<<<<<< HEAD:OTTT/target/ottt-1.0.0-BUILD-SNAPSHOT/resources/css/community/freecommunity/communityMain.css
 #userfile{
 	background-color: #0B0C0B;
     border: none;
@@ -439,3 +448,22 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
     bottom: 50px;
     font-size: 50px;
 }
+========
+.pro-info{
+    display: flex;
+}
+
+.pro-total{
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn.btn-secondary{
+    background-color: #0B0C0B;
+}
+/*모달 end*/
+
+/* div{
+    border: plum solid 1px;
+} */
+>>>>>>>> 14c62d30ec89ae4aa8f36f85d6d1f7662e2aacea:OTTT/src/main/webapp/resources/css/community/freecommunity/community_main.css

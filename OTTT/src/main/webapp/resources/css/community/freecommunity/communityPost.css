@@ -15,10 +15,13 @@ body{background-color: #202020;color: #fff;}
 /* header Start*/
 header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;position: relative;display: flex;}
 
+<<<<<<< HEAD
 .community{
 	color: #33ff33;
 }
 
+=======
+>>>>>>> 14c62d30ec89ae4aa8f36f85d6d1f7662e2aacea
 .logo{    width: 230px;
     height : 95px;   
     margin-top: 30px;}
