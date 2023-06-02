@@ -19,48 +19,48 @@
     <title>Document</title>
 </head>
 <body>
-	<script type="text/javascript">
+   <script type="text/javascript">
 
-    	</script>
-	<header>
-		<div class="logo">
-			<a href="<c:url value="/" />">
-				<img src="${path}/resources/images/logo/OTTT.png" alt="로고">
-			</a>
-		</div>
-		<nav class="gnb">
-			<ul>
-	            <li>
-	            	<a class="movie" href="<c:url value="/genre/movie" />">영화</a>
-	            </li>
-	            <li>
-	              	<a class="drama" href="<c:url value="/genre/drama" />">드라마</a>
-	            </li>
-	            <li>
-	              	<a class="inter" href="<c:url value="/genre/interest" />">예능</a>
-	            </li>
-	            <li>
-	              	<a class="ani" href="<c:url value="/genre/animation" />">애니</a>
-	            </li>
-	            <li>
-	              	<a class="community" href="<c:url value="/community/freecommunity" />">게시판</a>
-	            </li>
+       </script>
+   <header>
+      <div class="logo">
+         <a href="<c:url value="/" />">
+            <img src="${path}/resources/images/logo/OTTT.png" alt="로고">
+         </a>
+      </div>
+      <nav class="gnb">
+         <ul>
+               <li>
+                  <a class="movie" href="<c:url value="/genre/movie" />">영화</a>
+               </li>
+               <li>
+                    <a class="drama" href="<c:url value="/genre/drama" />">드라마</a>
+               </li>
+               <li>
+                    <a class="inter" href="<c:url value="/genre/interest" />">예능</a>
+               </li>
+               <li>
+                    <a class="ani" href="<c:url value="/genre/animation" />">애니</a>
+               </li>
+               <li>
+                    <a class="community" href="<c:url value="/community/freecommunity" />">게시판</a>
+               </li>
             </ul>
         </nav>
-        	<div class="h-icon">
-        		<ul>
-        			<li>
-        				<a href="<c:url value='/search' />" class="searchnav"></a>
-   					</li>   					
-					<li>
-						<a href="<c:url value='/mypage' /> " class="${loginout}" >
-							<c:if test="${sessionScope.id != null}">
-								<img src="${user_img }" id="profile" class="${loginout}">
-							</c:if>
-						</a>
-					</li>
-				</ul>
-			</div>
-		</header>
+           <div class="h-icon">
+              <ul>
+                 <li>
+                    <a href="<c:url value='/search' />" class="searchnav"></a>
+                  </li>                  
+               <li>
+                  <a href="<c:url value='/mypage' /> " class="${loginout}" >
+                     <c:if test="${sessionScope.id != null}">
+                        <img src="${user_img }" id="profile" class="${loginout}">
+                     </c:if>
+                  </a>
+               </li>
+            </ul>
+         </div>
+      </header>
 </body>
 </html>

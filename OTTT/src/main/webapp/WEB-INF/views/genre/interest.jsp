@@ -17,7 +17,7 @@
   <body style="background-color: #202020;">
     <form>
     <div class="wrap">
-      <%@ include file="../fix/header.jsp" %>
+		<%@ include file="../fix/header.jsp" %>
 
       <br />
       <section class="sec00">
@@ -762,8 +762,6 @@
       .inter {
       	color: #33ff33;
       }
-      
-      
     </style>
   </body>
 </html>

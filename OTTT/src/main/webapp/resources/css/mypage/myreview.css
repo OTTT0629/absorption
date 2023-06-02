@@ -92,8 +92,6 @@ header{
 } */
 
 
-<<<<<<< HEAD
-=======
 
 .h-icon > ul > li:first-child > a{
     background:url("../../images/icon/search02.png");
@@ -133,7 +131,6 @@ header{
 /* 헤더 */
 
 
->>>>>>> e87c70c181cf71d66e2101e699d0150424b6cdfd
 .sec01 {
     width: 1200px;
     height: auto;
@@ -250,6 +247,9 @@ header{
     height: 230px;
     margin: 12px 0;
     background-color: #3F3B3B;
+}
+
+.review {
     display: flex;
     flex-direction: row;
 }

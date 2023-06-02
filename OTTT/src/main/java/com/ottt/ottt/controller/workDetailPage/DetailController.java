@@ -27,23 +27,13 @@ public class DetailController {
 	private ReviewService reviewService;
 	@Autowired
 	private ReviewLikeService reviewLikeService;
-	@Autowired
-	LoginUserDao loginUserDao;
 	
 	
 	@GetMapping(value = "/detailPage")
 	public String workDetailPage(Model m, HttpServletRequest request, HttpSession session) {         //, Integer content_no) 
 
 		Integer user_no = (Integer) session.getAttribute("user_no");
-<<<<<<< HEAD
-=======
-		
-		if(session.getAttribute("id") != null) {
-			UserDTO userDTO = loginUserDao.select((String) session.getAttribute("id"));
-			m.addAttribute(userDTO);
-		}
->>>>>>> e87c70c181cf71d66e2101e699d0150424b6cdfd
-			
+					
 		try {
 			
 			List<ReviewDTO> list = reviewService.getReview();

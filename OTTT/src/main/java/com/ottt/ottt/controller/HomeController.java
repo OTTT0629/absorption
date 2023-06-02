@@ -35,24 +35,12 @@ public class HomeController {
 	ContentServiceImpl contentServiceImpl;
 	@Autowired
 	WishlistService wishlistService;
-<<<<<<< HEAD
-
-	@GetMapping(value = "/")
-	public String home(Model m, HttpSession session) {
-
-=======
 	@Autowired
 	LoginUserDao loginUserDao;
 
 	@GetMapping(value = "/")
 	public String home(Model m, HttpSession session) {
 		
-		if(session.getAttribute("id") != null) {
-			UserDTO userDTO = loginUserDao.select((String) session.getAttribute("id"));
-			m.addAttribute(userDTO);
-		}
->>>>>>> e87c70c181cf71d66e2101e699d0150424b6cdfd
-
 		try {
 			List<ContentDTO> contentList = contentServiceImpl.getRating();
 			m.addAttribute("contentList", contentList);
@@ -68,8 +56,7 @@ public class HomeController {
 				Integer user_no = (Integer) session.getAttribute("user_no");
 				List<WishlistDTO> wishList = wishlistService.getWishlist(user_no);
 				m.addAttribute("wishList", wishList);
-			}
-			
+			}			
 			
 			
 		} catch (Exception e) {
