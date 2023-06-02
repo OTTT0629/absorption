@@ -7,53 +7,15 @@
 <head>
   	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>게시판</title>
+    <title>나의 리뷰</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     <link rel="stylesheet" href="${path}/resources/css/mypage/myreview.css" >
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 </head>
 <body>
 	<div class="wrap">
-		<header>
-			<div class="logo">
-				<a href="<c:url value="/" />">
-				  <img src="${path}/resources/images/logo/OTTT.png" alt="로고">
-				</a>
-			</div>
-			<nav class="gnb">
-				<ul>
-            <li>
-              <a href="<c:url value="/genre/movie" />">영화</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/drama" />">드라마</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/interest" />">예능</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/animation" />">애니</a>
-            </li>
-            <li>
-              <a href="<c:url value="/community" />">게시판</a>
-            </li>
-          </ul>
-        </nav>
-        <div class="h-icon">
-          <ul>
-            <li>
-              <a href="<c:url value='/search' />">
-                <!-- <img src="./images/icon/search02.png" alt="검색"> -->
-              </a>
-            </li>
-            <li>
-              <a href="<c:url value='/mypage' />">
-                <!-- <img src="./images/icon/user01.png" alt="내 정보"> -->
-              </a>
-            </li>
-          </ul>
-        	</div>
-		</header>
+		<%@ include file="../../fix/header.jsp" %>
 
 		<section class="sec01">
 			<nav class="mnb">
@@ -85,7 +47,7 @@
       						<img class="mimg" src="${path}/resources/images/img/free-icon-diary-6393039.png" alt="다이어리">
       						<a href="<c:url value="/mypage/mydiary" />">나만의 다이어리</a>
    						</li>
-   						<li id="Lrivew">
+   						<li id="Lreview">
 		                	<img class="mimg" src="${path}/resources/images/img/free-icon-review-3501894.png" alt="리뷰">
 		                	<a href="<c:url value="/mypage/myreview" />">나의 리뷰</a>
 		              	</li>
