@@ -23,10 +23,9 @@ public class MypageController {
 
 		
 		if(!loginCheck(request))
-			return "redirect:/login?toURL="+request.getRequestURL();
+			return "redirect:/login";
 		
 		HttpSession session = request.getSession();
-		Integer user_no = (Integer) session.getAttribute("user_no");
 		String user_id = (String) session.getAttribute("id");
 		
 		try {

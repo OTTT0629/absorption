@@ -73,5 +73,16 @@ public class UserDaoImpl implements UserDao {
 		
 		return session.update(namespace +"up_pwd" ,userDTO);
 	}
+	
+	@Override
+	public int up_profile(UserDTO userDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return session.update(namespace +"up_profile" , userDTO);
+	}
+
+	@Override
+	public UserDTO select(Integer user_no) throws Exception {
+		return session.selectOne(namespace + "selectNo", user_no);
+	}
 
 }

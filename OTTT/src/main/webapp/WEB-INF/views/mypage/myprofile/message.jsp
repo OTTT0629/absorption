@@ -32,7 +32,7 @@
                 <li><a href="<c:url value="/genre/drama" />">드라마</a></li>
                 <li><a href="<c:url value="/genre/interest" />">예능</a></li>
                 <li><a href="<c:url value="/genre/animation" />">애니</a></li>
-                <li><a href="<c:url value="/community" />">게시판</a></li>
+                <li><a href="<c:url value="/community/freecommunity" />">게시판</a></li>
           </ul>
         </nav>
         <div class="h-icon">

@@ -1,3 +1,4 @@
+<%@page import="org.springframework.web.context.annotation.SessionScope"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -30,6 +31,8 @@
     	input[name='article_title']{
     		font-size: 26px;
     	}
+    	
+    	
 
 /* 모달 */
 .modal-content{
@@ -121,50 +124,11 @@
   <body style="background-color: #202020;">
      
     <div class="wrap">
-      <header >
-        <div class="logo">
-          <a href="<c:url value="/" />">
-            <img src="${path}/resources/images/logo/OTTT.png" alt="로고">
-          </a>
-        </div>
-        <nav class="gnb">
-          <ul>
-            <li>
-              <a href="<c:url value="/genre/movie" />">영화</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/drama" />">드라마</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/interest" />">예능</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/animation" />">애니</a>
-            </li>
-            <li>
-              <a href="<c:url value="/community" />" style="color: #33ff33;">게시판</a>
-            </li>
-          </ul>
-        </nav>
-        <div class="h-icon">
-          <ul>
-            <li>
-              <a href="<c:url value='/search' />">
-                <!-- <img src="./images/icon/search02.png" alt="검색"> -->
-              </a>
-            </li>
-            <li>
-              <a href="<c:url value='${loginoutlink}' /> " class="${loginout}">
-                <!-- <img src="./images/icon/user01.png" alt="내 정보"> -->
-              </a>
-            </li>
-          </ul>
-        </div>
-      </header>
+    	<%@ include file="../../fix/header.jsp" %>
 
         <div id="line-1" >
           <nav class="nav">
-          <a class="nav-link1" href="<c:url value='/community' />">자유게시판</a>
+          <a class="nav-link1" href="<c:url value='/community/freecommunity' />">자유게시판</a>
           <a class="nav-link1" href="<c:url value='/community/endmovie/tving' />">종료예정작</a>
           <a class="nav-link1" href="<c:url value='/community/priceInfoTving' />">가격정보</a>
           <a class="nav-link1" href="<c:url value='/community/QnA' />" style="color: #33ff33;">Q&A</a>
@@ -174,8 +138,9 @@
 
 		<script type="text/javascript">
 		$(document).ready(function() {
+			let admin = '${userDTO.admin}'
 			let article_no = $("input[name=article_no]").val()
-			
+						
 			$("#modifyBtn").on("click", function() {
 				let form = $("#form")
 				let isReadonly = $("input[name=article_title]").attr('readonly')
@@ -185,7 +150,6 @@
 					$("textarea").attr('readonly', false)
 					$("#modi").html("등록")
 					$("#del").html("취소")
-					$("#del").attr('data-bs-target', null)
 					return
 				}
 				
@@ -225,6 +189,35 @@
 				if(formCheck()){form.submit()}
 			})
 			
+			$("#sendBtn").click(function() {
+				let cmt_no = $(this).attr("data-cmt_no")
+				let cmt_content = $("textarea[name=cmt_content]").val()
+				
+				if(cmt_content.trim()==''){
+					$(".body").html("댓글을 입력해 주세요.")
+		   	    	$('#Modal').modal('show');
+					$("textarea[name=cmt_content]").focus()
+					return
+				}
+				
+				$.ajax({
+					type: 'post',
+					url: '/ottt/community/QnA/QnAcomments?article_no='+article_no,
+					headers: {"content-type":"application/json"},
+					data: JSON.stringify({article_no:article_no, cmt_content:cmt_content}),
+					success: function(result){
+						$(".body").html("댓글이 등록되었습니다.")
+			   	    	$('#Modal').modal('show');
+						$("textarea[name=cmt_content]").val('')
+						showList(article_no)
+					},
+					error: function() {
+						$(".body").html("댓글등록에 실패했습니다. 다시 시도해주세요.")
+			   	    	$('#Modal').modal('show');
+					}
+				})
+			})			
+			
 			let formCheck = function() {
 				let form = document.getElementById("form")
 				
@@ -243,8 +236,117 @@
 				}
 				return true
 			}
+			
+			let showList = function(article_no){
+				$.ajax({
+					type: 'GET',
+					url: '/ottt/community/QnA/QnAcomments?article_no='+article_no,
+					success: function(result) {
+						if(result && result.length > 0){
+							$("#commentList").html(toHtml(result))
+						}							
+						else{
+							let tmp = '<div style="margin-bottom: 100px;"><div style="margin-left: 55px; margin-bottom: 10px; font-size:20px;">댓글</div>';
+					          tmp += "<div style='margin-left: 55px; margin-bottom: 10px; font-size:16px;'>작성된 댓글이 없습니다.</div>";
+					        $("#commentList").html(tmp+'</div>');
+						}
+							
+					},
+					error: function() {alter("error")}
+				})
+			}
+			
+			let toHtml = function(comments) {
+				let tmp = '<div style="margin-bottom: 100px;"><div style="margin-left: 55px; margin-bottom: 10px; font-size:20px;">댓글</div>'
+					comments.forEach(function(comment) {
+					    tmp += "<div class='comment_show'>";
+					    tmp += '<div class="pro-dan">';
+					    tmp += '<div class="cmt" style="display: flex;" data-cmt_no=' + comment.cmt_no;
+					    tmp += ' data-article_no=' + comment.article_no + '>';
+					    tmp += '<img class="profile" src="${path}/resources/images/icon/user01.png" alt="profile" >';
+					    tmp += '<div class="nickname commenter">관리자</div>';
+					    tmp += '</div>';
+					    tmp += '<div class="btn_warning_div">';
+					    if (admin == 'Y' && admin != null) {
+					      tmp += '<button class="btn modBtn" style="text-align: center; width: 56px; height: 35px; font-size: 16px;">수정</button>';
+					      tmp += '<button class="btn delBtn" style="text-align: center; width: 56px; height: 35px; font-size: 16px;">삭제</button>';
+					    } else {
+					      tmp += '<button class="btn modBtn" style="text-align: center; width: 56px; height: 35px; font-size: 16px; display: none;">수정</button>';
+					      tmp += '<button class="btn delBtn" style="text-align: center; width: 56px; height: 35px; font-size: 16px; display: none;">삭제</button>';
+					    }
+					    tmp += '</div>';
+					    tmp += '</div>';
+					    tmp += '<div class="comment comment_write_box" name="cmt_content" ><textarea name="content-area" readonly = "readonly" style="background-color: #202020; width: 100%; height: 100%; color: #fff; border: none; outline: none; resize:none;">'+comment.cmt_content+'</textarea></div>';
+					    tmp += '</div>';
+					  });
+					  return tmp + '</div>';
+			}
+			showList(article_no)
+			
+			
+			
+			
+			$("#commentList").on("click", ".delBtn",function(){
+				//alert("삭제버튼 클릭")
+				let cmt_no = $(this).closest('.comment_show').find('.cmt').attr('data-cmt_no')
+				let article_no = $(this).closest('.comment_show').find('.cmt').attr('data-article_no')
+				
+				if($(this).closest('.comment_show').find("textarea[name=content-area]").attr('readonly') != 'readonly'){
+					showList(article_no)
+					return
+				}
+				$.ajax({
+					type: 'DELETE',							//요청메서드
+					url: '/ottt/community/QnA/QnAcomments/' + cmt_no + '?article_no=' + article_no,	//요청URI
+					success: function(result) {				//서버로부터 응답이 도착하면 호출될 함수
+						$('#Modal').modal('show')	
+						$(".body").html("삭제되었습니다.");//result는 서버가 전송한 데이터
+						showList(article_no)
+					},
+					error: function() {
+						$('#Modal').modal('show')	
+						$(".body").html("삭제되지 않았습니다. 다시 시도해주세요.") 
+						}	//에러가 발생했을 때 호출될 함수
+				})
+			})
+			
+			$("#commentList").on("click", ".modBtn", function() {
+				let cmt_no = $(this).closest('.comment_show').find('.cmt').attr('data-cmt_no')
+				let cmt_content = $(this).closest('.comment_show').find("textarea[name=content-area]").val()
+
+				if($(this).closest('.comment_show').find("textarea[name=content-area]").attr('readonly') == 'readonly'){
+					$(this).closest('.comment_show').find("textarea[name=content-area]").attr('readonly', false)
+					$(this).closest(".modBtn").html("등록")
+					$(this).closest('.comment_show').find(".delBtn").html("취소")
+					return
+				}
+				
+				if(cmt_content.trim()==''){
+					$(".body").html("내용을 입력해 주세요.")
+		   	    	$('#Modal').modal('show');
+					$("div[name=cmt_content]").focus()
+					return
+				}
+				
+				$.ajax({
+					type: 'PATCH',
+					url: '/ottt/community/QnA/QnAcomments/'+cmt_no,
+					headers: {"content-type":"application/json"},
+					data: JSON.stringify({cmt_no:cmt_no, cmt_content:cmt_content}),
+					success: function(result) {
+						$(".body").html("수정되었습니다.")
+			   	    	$('#Modal').modal('show')
+						showList(article_no)
+					},
+					error: function() {
+						$(".body").html("댓글수정에 실패했습니다. 다시 시도해주세요.")
+			   	    	$('#Modal').modal('show');
+					}
+				})
+			})
 		})
 	</script>
+	
 	
    	<script type="text/javascript">
 	   	$(document).ready(function() {
@@ -362,11 +464,34 @@
           </div>
 		 
           <div class="title-line">
-            <textarea name="article_content" ${mode=="new" ? "" : "readonly='readonly'" } style="background-color: #202020; width: 100%; height: 100%; color: #fff; border: none; outline: none;" placeholder="내용을 입력해주세요.">${articleDTO.article_content}</textarea>
+            <textarea name="article_content" ${mode=="new" ? "" : "readonly='readonly'" } onkeydown="resize(this)" onkeyup="resize(this)" style="background-color: #202020; width: 100%; height: 100%; color: #fff; border: none; outline: none;" placeholder="내용을 입력해주세요.">${articleDTO.article_content}</textarea>
           </div>
           
         </div>
         </form>  
+	    
+	    <!--댓글-->  
+		<c:if test="${sessionScope.id != null && userDTO.admin.toString() == 'Y'}">	
+	    	<div class="comment_write_box" style="margin-top: 50px;">
+	    	<div style="display: flex; justify-content: space-between; width: 1100px;">
+		    	<div>
+		    		<img class="profile" src="${path}/resources/images/icon/user01.png" alt="profile" >
+	                <div class="nickname">관리자</div>
+		    	</div>
+	            <div>
+	            	<button type="button" id="sendBtn" class="btn" style="font-size: 16px; position: relative; left: -20px;">댓글 작성</button>
+	            </div>
+	    	</div>
+               <div>
+                <textarea class="writeHere" name="cmt_content" placeholder="댓글을 입력해주세요." onkeydown="resize(this)" onkeyup="resize(this)" ></textarea>              
+               </div>
+            </div>	    	
+		</c:if>
+              	
+        <div id="commentList" style="background-color: #202020;"></div>
+        	       	
+        
+
           <!-- Modal -->
 	        <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	          <div class="modal-dialog modal-dialog-centered">

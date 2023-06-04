@@ -29,6 +29,13 @@
 		where user_id = #{user_id}
   	</select>
   	
+  	<select id="selectNo" parameterType="int" resultType="UserDTO">
+  		SELECT user_no, gr_no, user_id, user_pwd, user_nm, user_nicknm, user_gen
+		, user_email, image, following, followers, report_cnt
+		FROM tb_user
+		where user_no = #{user_no}
+  	</select>
+  	
   	<select id="selectNicknmCnt" parameterType="String" resultType="int">
   		select count(*)
 		from tb_user
@@ -51,6 +58,12 @@
   		UPDATE tb_user
 		SET user_pwd = #{user_pwd}
 		where user_no = #{user_no} and user_id = #{user_id}  	
+  	</update>
+  	
+  	<update id="up_profile" parameterType="UserDTO">
+  		UPDATE tb_user
+		SET image = #{image}
+		where user_no = #{user_no} and user_id = #{user_id}
   	</update>
   	
   	<delete id="delete" parameterType="map">

@@ -6,18 +6,28 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.ottt.ottt.dto.CommentDTO;
 import com.ottt.ottt.dao.login.LoginUserDao;
 import com.ottt.ottt.domain.PageResolver;
 import com.ottt.ottt.domain.SearchItem;
 import com.ottt.ottt.dto.ArticleDTO;
 import com.ottt.ottt.dto.UserDTO;
+import com.ottt.ottt.service.community.QnA.QnACommentService;
 import com.ottt.ottt.service.community.QnA.QnAServiceImpl;
 
 @Controller
@@ -28,6 +38,8 @@ public class QnAController {
 	QnAServiceImpl serviceImpl;
 	@Autowired
 	LoginUserDao loginUserDao;
+	@Autowired
+	QnACommentService qnACommentService;
 	
 	//QnA
 		@GetMapping(value = "/QnA")
@@ -35,6 +47,7 @@ public class QnAController {
 			
 			try {
 				UserDTO userDTO = loginUserDao.select((String) session.getAttribute("id"));
+				m.addAttribute(userDTO);
 				char admin = (char) session.getAttribute("admin");
 				if(admin=='Y') {
 					int totalCnt = serviceImpl.getAllCount(sc);
@@ -140,6 +153,77 @@ public class QnAController {
 				return "/community/QnA/QnA board";
 			}
 		}
+		
+		@GetMapping("/QnA/QnAcomments")
+		@ResponseBody
+		public ResponseEntity<List<CommentDTO>> list(Integer article_no, HttpSession session, Model m){
+			List<CommentDTO> list = null;
+			
+			try {
+				list = qnACommentService.getList(article_no);
+				String user_id = (String) session.getAttribute("id");
+				UserDTO userDTO = loginUserDao.select(user_id);
+				m.addAttribute("userDTO", userDTO);
+				return new ResponseEntity<List<CommentDTO>>(list, HttpStatus.OK);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return new ResponseEntity<List<CommentDTO>>(HttpStatus.BAD_REQUEST);
+			}
+			//return list;
+		}
+		
+		@DeleteMapping("/QnA/QnAcomments/{cmt_no}")
+		public ResponseEntity<String> remove(@PathVariable Integer cmt_no, Integer article_no){
+			System.out.println(cmt_no+ article_no);
+			
+			try {
+				int rowCnt = qnACommentService.remove(cmt_no);
+				
+				if(rowCnt != 1)
+					throw new Exception("Delete Failed");
+				
+				return new ResponseEntity<>("삭제되었습니다.", HttpStatus.OK);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return new ResponseEntity<String>("삭제되지 않았습니다. 다시 시도해주세요.", HttpStatus.BAD_REQUEST);
+			}
+		}
+		
+		@PostMapping("/QnA/QnAcomments")
+		public ResponseEntity<String> write(@RequestBody CommentDTO commentDTO, Integer article_no, HttpSession session){
+			String user_id = (String) session.getAttribute("id");
+			UserDTO userDTO = loginUserDao.select(user_id);
+			
+			commentDTO.setUser_no(userDTO.getUser_no());
+			commentDTO.setCmt_writer(userDTO.getUser_nicknm());
+			commentDTO.setArticle_no(article_no);
+			
+			try {
+				if(qnACommentService.write(commentDTO) != 1) {
+					throw new Exception("Comment_wrtie Failed");
+				}
+				return new ResponseEntity<String>("WRT_OK", HttpStatus.OK);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return new ResponseEntity<String>("WRT_ERR", HttpStatus.BAD_REQUEST);
+			}
+		}
+		
+		@PatchMapping("/QnA/QnAcomments/{cmt_no}")
+		public ResponseEntity<String> modify(@PathVariable Integer cmt_no, @RequestBody CommentDTO commentDTO, HttpSession session){
+			commentDTO.setCmt_no(cmt_no);
+			try {
+				if(qnACommentService.modify(commentDTO) != 1) {
+					throw new Exception("Update Failed");
+				}
+				return new ResponseEntity<String>("MOD_OK", HttpStatus.OK);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return new ResponseEntity<String>("MOD_ERR", HttpStatus.BAD_REQUEST);
+			}
+			
+		}
+		
 }
 
 

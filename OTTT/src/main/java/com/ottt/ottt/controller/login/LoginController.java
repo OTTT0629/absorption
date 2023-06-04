@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -53,7 +54,9 @@ public class LoginController {
 		HttpSession session = request.getSession();
 		session.setAttribute("id", user_id);
 		session.setAttribute("admin", userDTO.getAdmin());
-		session.setAttribute("no", userDTO.getUser_no());
+		session.setAttribute("user_no", userDTO.getUser_no());
+		session.setAttribute("user_img", userDTO.getImage());
+
 
 		toURL = toURL == null || toURL.equals("") ? "/" : toURL;
 				

@@ -18,6 +18,7 @@ import com.ottt.ottt.domain.SearchItem;
 import com.ottt.ottt.dto.ArticleDTO;
 import com.ottt.ottt.dto.UserDTO;
 import com.ottt.ottt.service.community.notice.ArticleService;
+import com.ottt.ottt.service.community.notice.ArticleServiceImpl;
 
 
 @Controller
@@ -25,7 +26,7 @@ import com.ottt.ottt.service.community.notice.ArticleService;
 public class NoticeController {
 	
 	@Autowired
-	ArticleService articleService;
+	ArticleServiceImpl articleService;
 	@Autowired
 	LoginUserDao loginUserDao;
 	

@@ -15,4 +15,6 @@ public interface UserDao {
 	int selectUserNo(String user_id) throws Exception;
 	int selectNicknmCnt(String user_nicknm) throws Exception;
 	int up_pwd(UserDTO userDTO) throws Exception;
+	int up_profile(UserDTO userDTO) throws Exception;
+	UserDTO select(Integer user_no) throws Exception;
 }
