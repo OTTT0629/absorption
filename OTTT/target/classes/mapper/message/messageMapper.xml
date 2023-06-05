@@ -5,31 +5,85 @@
  
  <mapper namespace="com.ottt.ottt.dao.message.MessageMapper">
  	
+ 	<sql id="selectFromMessage">
+ 		SELECT a.message_no, a.send_user_no, a.receive_user_no, a.content, a.send_date, read_yn, b.user_nicknm
+		FROM tb_message a
+		join tb_user b on a.send_user_no = b.user_no 
+ 	</sql>
+ 	
+ 	<!-- 메시지 개수 세기 -->
+ 	<select id="count" resultType="int">
+	 	SELECT count(*)
+		FROM tb_message
+ 	</select>
+ 	
+ 	<!-- 받은 메시지 개수 세기 -->
+ 	<select id="recvCount" parameterType="MessageSearchItem" resultType="int">
+	 	SELECT count(*)
+		FROM tb_message
+		WHERE receive_user_no = #{user_no}
+ 	</select> 	
+ 	
+ 	<!-- 보낸 메시지 개수 세기 -->
+ 	<select id="sendCount" parameterType="MessageSearchItem" resultType="int">
+	 	SELECT count(*)
+		FROM tb_message
+		WHERE send_user_no = #{user_no}
+ 	</select>
+ 	
+
+ 	<!-- 페이지 개수 제한해서 출력하기 -->
+ 	<select id="selectPage" parameterType="map" resultType="MessageDTO">
+ 		<include refid="selectFromMessage" />
+		ORDER BY send_date DESC, message_no DESC
+		LIMIT #{pageSize} OFFSET #{offset}
+ 	</select>
+ 	
+ 	<!-- 네비바 사용을 위한 검색에 해당되는 개수 세기 -->
+ 	<!-- 보낸 메시지 -->
+ 	<select id="recvResultCnt" parameterType="MessageSearchItem" resultType="int">
+ 		SELECT count(*) FROM tb_message
+ 		WHERE receive_user_no = #{user_no}
+ 	</select>
+ 	<!-- 받은 메시지 -->
+  	<select id="sendResultCnt" parameterType="MessageSearchItem" resultType="int">
+ 		SELECT count(*) FROM tb_message
+ 		WHERE send_user_no = #{user_no}
+ 	</select>
+ 
+ 	<!-- 검색어가 있을 때는 이쪽 사용 -->
+ 	<select id="searchSelectPage" parameterType="MessageSearchItem" resultType="MessageDTO">
+ 		<include refid="selectFromMessage" />
+		WHERE true
+		ORDER BY send_date DESC, message_no DESC
+		LIMIT #{pageSize} OFFSET #{offset}
+ 	</select>
+
  	<!-- 메시지 내용 불러오기 -->
  	<select id="selectMsg" parameterType="Integer" resultType="MessageDTO">
-		SELECT message_no, send_user_no, receive_user_no, content, send_date, read_yn
-		FROM tb_message
+		<include refid="selectFromMessage" />
 		WHERE message_no = #{message_no}
  	</select>
  	
  	<!-- 받은 메시지 리스트 불러오기 -->
- 	<select id="selectRecv" parameterType="Integer" resultType="MessageDTO">
-		SELECT message_no, send_user_no, receive_user_no, content, send_date, read_yn
-		FROM tb_message
-		WHERE receive_user_no = #{receive_user_no}
-		ORDER BY message_no DESC
+ 	<select id="selectRecv" parameterType="map" resultType="MessageDTO">
+		<include refid="selectFromMessage" />
+		WHERE receive_user_no = #{user_no}
+		ORDER BY send_date DESC, message_no DESC
+		LIMIT #{pageSize} OFFSET #{offset}
  	</select>
  	
  	<!-- 보낸 메시지 리스트 불러오기 -->
- 	<select id="selectSend" parameterType="Integer" resultType="MessageDTO">
-		SELECT message_no, send_user_no, receive_user_no, content, send_date, read_yn
-		FROM tb_message a
-		WHERE send_user_no = #{send_user_no}
-		ORDER BY message_no DESC
+ 	<select id="selectSend" parameterType="map" resultType="MessageDTO">
+		<include refid="selectFromMessage" />
+		WHERE send_user_no = #{user_no}
+		ORDER BY send_date DESC, message_no DESC
+		LIMIT #{pageSize} OFFSET #{offset}
  	</select>
  	
  	<!-- 메시지 보내기 -->
  	<insert id="insertMsg" parameterType="MessageDTO">
+ 		
  		INSERT INTO tb_message
 		(send_user_no, receive_user_no, content)
 		VALUES(#{send_user_no}, #{receive_user_no}, #{content})
@@ -47,7 +101,5 @@
 		WHERE receive_user_no = #{receive_user_no}
  	</delete>
  	
- 	<!-- 메시지 개수? 100/100 초과 쪽지 쌓이면 자동 삭제 -->
- 	<!-- 안 읽은 메세지 남아있나 알림(쪽지함 위에 빨간 동그라미) -->
  	
  </mapper>

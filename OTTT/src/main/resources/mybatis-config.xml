@@ -10,6 +10,7 @@
   		<typeAlias type="com.ottt.ottt.domain.SearchItem" alias="SearchItem"/>
   		<typeAlias type="com.ottt.ottt.dto.ArticleDTO" alias="ArticleDTO"/>
   		<typeAlias type="com.ottt.ottt.dto.MessageDTO" alias="MessageDTO"/>
+  		<typeAlias type="com.ottt.ottt.domain.MessageSearchItem" alias="MessageSearchItem"/>
 		<typeAlias type="com.ottt.ottt.dto.ArticleSearchDTO" alias="ArticleSearchDTO" />
   		<typeAlias type="com.ottt.ottt.dto.ArticleLikeDTO" alias="ArticleLikeDTO" />
   		<typeAlias type="com.ottt.ottt.dto.CommentDTO" alias="CommentDTO"/>

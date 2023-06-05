@@ -19,24 +19,25 @@
 
 <body>
   <div class="wrap">
-    <div class="sec01">
-      <a href="#">
-        <div class="proimg"><img src="${path}/resources/images/img/profile.png"></div>
-      </a>
-      <div class="nickname">피카츄 님</div>
-    </div>
-
-    <div class="sec02">
-      <div class="write">
-        <textarea placeholder="내용을 입력하세요."></textarea>      
-      	<div class="count"><span>0</span>/1000</div>
-      </div>
-    </div>
-
-    <div class="sec03">
-        <input type="submit" value="보내기">
-    </div>
+  	<form action="" id="form" class="frm" method="post">
+	    <div class="sec01">
+	      <a href="#">
+	        <div class="proimg"><img src="${path}/resources/images/img/profile.png"></div>
+	      </a>
+	      <div class="nickname">${msgNick }</div>
+	    </div>
+	
+	    <div class="sec02">
+	      <div class="write">
+	        <textarea placeholder="내용을 입력하세요."></textarea>      
+	      	<div class="count"><span>0</span>/1000</div>
+	      </div>
+	    </div>
+	
+	    <div class="sec03">
+	        <button type="button" id="writeBtn" class="btn btn-write">보내기</button>
+	    </div>
+	</form>
   </div>
-    
 </body>
 </html>

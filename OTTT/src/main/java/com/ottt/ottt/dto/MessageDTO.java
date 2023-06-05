@@ -19,6 +19,7 @@ public class MessageDTO {
 	private String content;
 	private Date send_date;
 	private char read_yn;
+	private String user_nicknm;
 	
 	public MessageDTO () {}
 	
@@ -65,6 +66,15 @@ public class MessageDTO {
 		this.read_yn = read_yn;
 	}
 	
+	
+	public String getUser_nicknm() {
+		return user_nicknm;
+	}
+
+	public void setUser_nicknm(String user_nicknm) {
+		this.user_nicknm = user_nicknm;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(message_no);

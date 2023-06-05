@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ottt.ottt.dao.message.MessageDao;
+import com.ottt.ottt.domain.MessageSearchItem;
 import com.ottt.ottt.dto.MessageDTO;
 
 @Service
@@ -20,13 +21,13 @@ public class MessageServiceImpl implements MessageService{
 	}
 
 	@Override
-	public List<MessageDTO> loadRecvList(Integer receive_user_no) throws Exception {
-		return messageDao.selectRecv(receive_user_no);
+	public List<MessageDTO> loadRecvList(MessageSearchItem msc) throws Exception {
+		return messageDao.selectRecv(msc);
 	}
 
 	@Override
-	public List<MessageDTO> loadSendList(Integer send_user_no) throws Exception {
-		return messageDao.selectSend(send_user_no);
+	public List<MessageDTO> loadSendList(MessageSearchItem msc) throws Exception {
+		return messageDao.selectSend(msc);
 	}
 
 	@Override
@@ -37,13 +38,27 @@ public class MessageServiceImpl implements MessageService{
 	//하나 삭제랑 전체 삭제랑 뭘..멀 다르게..
 	@Override
 	public int removeMsg(Integer message_no, String user_no) throws Exception {
-		return 0;
+		return messageDao.delete(message_no, user_no);
 	}
 
 	@Override
 	public int removeMsgAll(String user_no) throws Exception {
-		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public int getSendResultCnt(MessageSearchItem msc) throws Exception {
+		return messageDao.sendResultCnt(msc);
+	}
+	
+	@Override
+	public int getRecvResultCnt(MessageSearchItem msc) throws Exception {
+		return messageDao.recvResultCnt(msc);
+	}
+
+	@Override
+	public List<MessageDTO> getSelectPage(MessageSearchItem msc) throws Exception {
+		return messageDao.selectPage(msc);
 	}
 
 }
