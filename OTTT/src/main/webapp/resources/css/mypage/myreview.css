@@ -102,8 +102,7 @@ header{
     height: 32px;
 }
 
-.h-icon > ul > li:last-child > a{
-    background:url("../../images/img/profile.png");
+.h-icon > ul > li:last-child > a > img{
     background-repeat: no-repeat;
     background-position: center;
     background-size: 32px;
@@ -236,6 +235,7 @@ header{
 .main {
     display: flex;
     flex-direction: column;
+    padding: 10px;
 }
 
 .blank {
@@ -246,11 +246,8 @@ header{
 .post {
     width: auto;
     height: 230px;
-    margin: 12px 0;
+    margin: 10px 0;
     background-color: #3F3B3B;
-}
-
-.review {
     display: flex;
     flex-direction: row;
 }
@@ -281,23 +278,15 @@ header{
 .rv-head {
     height: 50px;
     width: 100%;
-
+    display: flex;
 }
 
 .rv-main {
-    height: 100%px;
+    height: 100%;
     width: 100%;
     position: relative;
     margin-left: 5px;
     font-size: 20px;
-}
-
-.star {
-    width: 100px;
-    height: 30px;
-    right: 10px;
-    top: 5%;
-    position: absolute;
 }
 
 .title {
@@ -311,4 +300,29 @@ header{
 
 .mreview {
     color: #33ff33;
+}
+
+.starating {
+	right: 10px;
+	position: absolute;
+}
+
+.title-line{
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+    padding: 10px 0;
+    border-bottom: 1.5px solid #fff;
+    margin: 0 auto;
+}
+.page-link {
+    color: #ffffff; 
+    background-color: #202020;
+    border-color: #ffffff;
+  }
+    
+.page-link:focus, .page-link:hover {
+    color: #33ff33;
+    background-color: #202020; 
+    border-color: #33ff33;
 }
