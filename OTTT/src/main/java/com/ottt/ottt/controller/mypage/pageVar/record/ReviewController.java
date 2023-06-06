@@ -39,10 +39,10 @@ public class ReviewController {
 			sc.setUser(userDTO.getUser_nicknm());
 			sc.setUser_no(user_no);
 			
-			int totalCnt = rs.myReviewCnt(sc);
-			m.addAttribute("myReviewCnt", totalCnt);
+			int myReviewCnt = rs.myReviewCnt(sc);
+			m.addAttribute("myReviewCnt", myReviewCnt);
 			
-			PageResolver pageResolver = new PageResolver(totalCnt,sc);
+			PageResolver pageResolver = new PageResolver(myReviewCnt,sc);
 			
 			List<ReviewDTO> list = rs.getMyReview(sc);
 			m.addAttribute("list", list);

@@ -123,7 +123,7 @@ public class ReviewDaoImpl implements ReviewDao {
 	}
 	@Override
 	public int myReviewCnt(SearchItem sc) throws Exception {
-		return session.selectOne(namespace + "myReviewACnt", sc);
+		return session.selectOne(namespace + "myReviewCnt", sc);
 	}
 
 }

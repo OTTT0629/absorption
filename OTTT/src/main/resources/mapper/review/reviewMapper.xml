@@ -104,7 +104,7 @@
 	  	limit #{pageSize} offset #{offset}
 	</select>
 	
-	<select id="myReviewACnt" parameterType="SearchItem" resultType="int">
+	<select id="myReviewCnt" parameterType="SearchItem" resultType="int">
 		SELECT count(*)
 		FROM tb_review a
 		join tb_content b

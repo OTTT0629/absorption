@@ -87,7 +87,7 @@ public class SearchItem {
 				.build().toString();
 	}
 	
-	public String getMyReviewString(Integer page) {
+	public String getString(Integer page) {
 		return UriComponentsBuilder.newInstance()
 				.queryParam("user", user)
 				.queryParam("page", page)				

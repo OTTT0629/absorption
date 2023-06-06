@@ -235,7 +235,7 @@ header{
 .main {
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    padding-top:  35px;
 }
 
 .blank {

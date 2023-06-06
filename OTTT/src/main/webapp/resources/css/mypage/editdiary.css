@@ -287,11 +287,7 @@ form {
 
 .diary {
     height: 100%;
-}
-
-textarea {
-    font-size: 20px;
-    letter-spacing: 1px;
+    position: relative;
 }
 
 textarea {
@@ -306,6 +302,9 @@ textarea {
     resize: none;
     border: none;
     box-sizing: border-box;
+    position:absolute;
+    font-size: 20px;
+    letter-spacing: 1px;
 }
 
 #story:focus{
