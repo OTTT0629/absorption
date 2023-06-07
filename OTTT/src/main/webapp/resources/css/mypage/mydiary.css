@@ -87,50 +87,6 @@ header{
     margin-top: 12px;
 }
 
-/* .h-icon  img{
-    width: 50px;
-} */
-
-
-
-.h-icon > ul > li:first-child > a{
-    background:url("../../images/icon/search02.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 32px;
-    width: 32px;
-    height: 32px;
-}
-
-.h-icon > ul > li:last-child > a > img{
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 32px;
-    width: 32px;
-    height: 32px;
-}
-
-.h-icon > ul > li:first-child > a:hover{
-    background: url("../../images/icon/search-h.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 32px;
-    width: 32px;
-    height: 32px;
-}
-
-/* .h-icon > ul > li:last-child > a:hover{
-    background: url("../images/icon/user-h.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 32px;
-    width: 32px;
-    height: 32px;
-} */
-
-/* 헤더 */
-
-
 .sec01 {
     width: 1200px;
     height: auto;
@@ -203,6 +159,9 @@ header{
 .main {
     width: 950px;
     height: 100%;
+    padding-top: 3px;
+    display: flex;
+    flex-direction: column;
 }
 
 .Lmenu {
@@ -230,11 +189,6 @@ header{
     width: 30px;
     height: 30px;
     margin-right: 10px;
-}
-
-.main {
-    display: flex;
-    flex-direction: column;
 }
 
 .main-head {
@@ -278,7 +232,6 @@ header{
 .Rside {
     width: 100%;
     height: auto;
-
     position: relative;
 }
 

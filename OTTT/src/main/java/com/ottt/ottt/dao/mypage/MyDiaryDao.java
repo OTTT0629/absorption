@@ -10,5 +10,7 @@ public interface MyDiaryDao {
 	//나의 다이어리
 	List<MyDiaryDTO> myDiaryAll(SearchItem sc) throws Exception;
 	int myDiaryCnt(SearchItem sc) throws Exception;
+	MyDiaryDTO selectDiary(Integer content_no, Integer user_no) throws Exception;
+	int updateDiary(Integer content_no, Integer user_no) throws Exception;
 
 }

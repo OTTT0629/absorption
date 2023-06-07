@@ -2,6 +2,7 @@ package com.ottt.ottt.controller.mypage.pageVar.record;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,12 @@ public class ReviewController {
 	
 	//myreview 메인 
 	@GetMapping(value = "/myreview")
-	public String myreview(SearchItem sc, Model m, HttpSession session) {
+	public String myreview(SearchItem sc, Model m, HttpSession session
+							, HttpServletRequest request) {
+		
+		if(!loginCheck(request))
+			return "redirect:/login";
+		
 		Integer user_no = (Integer) session.getAttribute("user_no");
 		
 		try {
@@ -53,6 +59,12 @@ public class ReviewController {
 		
 	return "/mypage/myprofile/myreview";		
 	}
-		
-		
+	
+	private boolean loginCheck(HttpServletRequest request) {
+		// 1. 세션을 얻어 (false는 session이 없어도 새로 생성하지 않음, 반환값은 null)
+		HttpSession session = request.getSession(false);
+		// 2. 세션에 id가 있는지 확인, 있으면 true를 반환 
+		return session != null && session.getAttribute("id")!=null;
+	}
+
 }

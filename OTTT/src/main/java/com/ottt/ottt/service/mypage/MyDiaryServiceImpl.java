@@ -25,4 +25,9 @@ public class MyDiaryServiceImpl implements MyDiaryService {
 		return myDiaryDao.myDiaryCnt(sc);
 	}
 
+	@Override
+	public MyDiaryDTO getDiary(Integer content_no, Integer user_no) throws Exception {
+		return myDiaryDao.selectDiary(content_no, user_no);
+	}
+
 }

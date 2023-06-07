@@ -10,5 +10,5 @@ public interface MyDiaryService {
 	//나의 다이어리
     List<MyDiaryDTO> getMyDiary(SearchItem sc) throws Exception;
     int myDiaryCnt(SearchItem sc) throws Exception;
-
+    MyDiaryDTO getDiary(Integer content_no, Integer user_no) throws Exception;
 }

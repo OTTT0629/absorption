@@ -20,7 +20,6 @@ public class MypageController {
 	//마이페이지 메인
 	@GetMapping(value = "/mypage")
 	public String mypage(Model m, HttpServletRequest request) {
-
 		
 		if(!loginCheck(request))
 			return "redirect:/login";

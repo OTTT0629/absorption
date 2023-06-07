@@ -43,7 +43,6 @@ header{
     width: 230px;
     height : 95px;   
     margin-top: 30px;
-    margin-right: 32px;
 }
 
 .logo > a > img{
@@ -89,51 +88,6 @@ header{
     padding-left: 2rem;
 }
 
-/* .h-icon  img{
-    width: 50px;
-} */
-
-
-
-.h-icon > ul > li:first-child > a{
-    background:url("../../images/icon/search02.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 32px;
-    width: 32px;
-    height: 32px;
-}
-
-.h-icon > ul > li:last-child > a{
-    background:url("../../images/img/profile.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 32px;
-    width: 32px;
-    height: 32px;
-}
-
-.h-icon > ul > li:first-child > a:hover{
-    background: url("../../images/icon/search-h.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 32px;
-    width: 32px;
-    height: 32px;
-}
-
-/* .h-icon > ul > li:last-child > a:hover{
-    background: url("../images/icon/user-h.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 32px;
-    width: 32px;
-    height: 32px;
-} */
-
-/* 헤더 */
-
-
 .sec01 {
     width: 1200px;
     height: auto;
@@ -148,7 +102,7 @@ header{
 
 .mnb > ul{
     display: flex;
-    padding-left: 2rem;
+    margin-bottom: 0 !important;
 }
 
 .mnb > ul > li{
@@ -319,16 +273,9 @@ textarea {
   
 }
 
-.r-main > div {
+.rTop {
     display: flex;
     flex-direction: column;
-}
-
-.star {
-    width: 100px;
-    height: 30px;
-    margin: 20px 20px 0 0;
-    align-self: flex-end;
 }
 
 .pnp-button {
@@ -339,15 +286,23 @@ textarea {
 
   }
 
-.done {
+.rBot {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-self: flex-end; /* 버튼 아래 정렬 */
+    position: absolute;
+    bottom: 4%;
+    margin-right: 30px;
+    
+}
+
+.btn-write {
     background-color: transparent; /* 배경색 투명으로 설정 */
     border: none; /* 테두리 없애기 */
     color: #fff;
     font-size: 18px;
-    align-self: flex-end; /* 버튼 아래 정렬 */
-    position: absolute;
-    margin-right: 50px;
-    bottom: 4%;
+
 }
 
 .blank {

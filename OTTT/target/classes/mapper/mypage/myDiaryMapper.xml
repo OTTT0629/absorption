@@ -7,7 +7,8 @@
   	
   	<!-- 나의 다이어리  -->
 	<select id="myDiaryAll" parameterType="SearchItem" resultType="MyDiaryDTO">
-		SELECT a.public_yn_cd, a.content_no, a.mydiary_content, a.mydiary_create_dt, a.mydiary_mod_dt, b.content_nm, b.thumbnail
+		SELECT a.public_yn_cd, a.content_no, a.mydiary_content, a.user_no
+		, a.mydiary_create_dt, a.mydiary_mod_dt, b.content_nm, b.thumbnail
 		FROM tb_my_diary a
 		join tb_content b
 		on a.content_no = b.content_no
@@ -26,9 +27,26 @@
 		join tb_user c
 		on a.user_no = c.user_no
 		where c.user_no = #{user_no}
-	</select>  
-  
-  
+	</select>
+	
+	<select id="selectDiary" parameterType="map" resultType="MyDiaryDTO">
+		SELECT a.public_yn_cd, a.content_no, a.mydiary_content, a.user_no
+		, a.mydiary_create_dt, a.mydiary_mod_dt, b.content_nm, b.thumbnail
+		FROM tb_my_diary a
+		join tb_content b
+		on a.content_no = b.content_no
+		join tb_user c
+		on a.user_no = c.user_no
+		where c.user_no = #{user_no}
+		and a.content_no = #{content_no}
+	</select>
+	
+	<!-- 나의 다이어리 수정 -->
+	<update id="updateDiary" parameterType="MyDiaryDTO">
+		UPDATE tb_my_diary
+		SET public_yn_cd=#{public_yn_cd}, mydiary_content=#{mydiary_content}, mydiary_mod_dt=now()
+		WHERE user_no = #{user_no} AND content_no = #{content_no}	
+	</update>  
   
   
   </mapper>
