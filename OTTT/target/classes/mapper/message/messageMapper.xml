@@ -83,7 +83,6 @@
  	
  	<!-- 메시지 보내기 -->
  	<insert id="insertMsg" parameterType="MessageDTO">
- 		
  		INSERT INTO tb_message
 		(send_user_no, receive_user_no, content)
 		VALUES(#{send_user_no}, #{receive_user_no}, #{content})

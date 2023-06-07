@@ -42,7 +42,7 @@ public class MessageDaoImpl implements MessageDao {
 	//메세지 보내기(메세지 생성)
 	@Override
 	public int insert(MessageDTO messageDTO) throws Exception {
-		return session.insert(namespace + "insert", messageDTO);
+		return session.insert(namespace + "insertMsg", messageDTO);
 	}
 
 	//메세지 지우기(해당된 메세지)

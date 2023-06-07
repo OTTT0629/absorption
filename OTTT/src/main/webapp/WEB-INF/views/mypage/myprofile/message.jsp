@@ -96,7 +96,7 @@
 
         <div class="sec-right">
         	<input name="msgno" type="hidden" value="" />
-        	<input name="sendno" type="hidden" value="" />
+        	<input name="sendno" type="hidden" value="${messageDTO.send_user_no}" />
             <div class="msg-nick" id="msgNick">${messageDTO.user_nicknm }</div>
 	        <div class="msg-view-content">${messageDTO.content }</div>
 	        <button type="button" id="msg-write" class="msg-write-btn" >답장</button>

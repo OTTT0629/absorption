@@ -102,51 +102,57 @@ $(document).ready(function() {
       })
 	//왜안되지.,.,.,.,.,.,
 	$("li a").click(function() {
-	  if ($(this).attr("href") === "<c:url value='/mypage/message' />") {
+	  if ($(this).attr("href") === "/ottt/mypage/message") {
 	    $("#btn-recv").addClass("active")
 	    $("#btn-send").removeClass("active")
+	    localStorage.setItem("selectedButton", "recv")
 	  }
 	})
-
-	//현재 머물러 있는 페이지 숫자 색깔 -수정해야함
-	  const pageElements = $(".page")
 	
-	  pageElements.on("click", function() {
-	    $(".page.active").removeClass("active")
 	
-	    $(this).addClass("active")
-	  })
+	//쪽지 내용, 상대 닉네임 불러오기(안됨), 내용 있을 시 답장 버튼 불러옴
 
-	//쪽지 내용, 상대 닉네임 불러오기, 내용 있을 시 답장 버튼 불러옴
 	$(".msg-content").click(function() {
-		var content = $(this).text()
-				
-		$(".msg-view-content").text(content)
-
-			if (content !== "") {
-			  $(".msg-write-btn").show();
-			} else {
-			  $(".msg-write-btn").hide();
-			}
-			
-		var msgNo = $(this).siblings(".msg-no").text()
-		$('input[name=msgno]').attr('value', msgNo)
+	    var content = $(this).text()
+	    $(".msg-view-content").text(content)
+	
+	    if (content !== "") {
+	        $(".msg-write-btn").show()
+	    } else {
+	        $(".msg-write-btn").hide()
+	    }
+		
+		//선택한 쪽지의 번호와 보낸 유저의 번호를 답장 창 url로 넘기기
+	    var msgNo = $(this).siblings(".msg-no").text()
+	    var sendUserNo = $(this).siblings(".msg-name").text()
+	    $('input[name=msgno]').val(msgNo)
+	    $('input[name=sendno]').val(sendUserNo)
+	    
+	    var url = "/ottt/messagewindow/open?message_no=" + encodeURIComponent(msgNo) + "&send_user_no=" + encodeURIComponent(sendUserNo)
+	    $("#msg-write").attr("data-url", url) // 답장 버튼에 URL을 저장
+	
 	    var sendUserNk = $(this).siblings(".msg-nicknm").text()
 	    $("#msg-number").text(msgNo)
 	    $("#msgNick").text(sendUserNk)
 	})
-	  
+
+
 	//답장 새창
 	$("#msg-write").click(function() {
-	    var messageNo = $(this).closest(".sec-right").find('input[name=msgno]').val()
-	    var url = "/ottt/messagewindow/open?message_no=" + encodeURIComponent(messageNo)
-	    window.open(url, 'SEND-MSG', 'width=520, height=750, scrollbars=no')
+	   var url = $(this).attr("data-url")
+	   window.open(url, 'SEND-MSG', 'width=520, height=750, scrollbars=no')
 	})
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
+
+
+
+
 
 
 })

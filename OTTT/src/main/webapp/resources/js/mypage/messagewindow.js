@@ -8,34 +8,15 @@ $(document).ready(function() {
 	    $(this).val(content.substring(0, 1000))
 	    $(".write .count span").html(1000)
 	  }
-	});
+	})
 	
 	//이름 넘기기
 	var sendUserNo = getParameterByName("user_nicknm") + " 님"
 	$(".nickname").text(sendUserNo)
 	
 	//쪽지 전송하기
-	$("#writeBtn").on("click", function() {	//글작성 버튼 눌렀을 때 일어나는 기능 함수
-		let form = $("#form")
-		form.attr("action", "<c:url value='/messagewindow/open' />")
-		form.attr("method", "post")
-		
-	//제목 또는 내용이 채워졌는지 확인해야함
-		if(formCheck()) {
-			form.submit()
-		}
-	})
-	let formCheck = function() {
-		let form = document.getElementById("form")
-		
-		if(form.content.value == "") {
-			alert("내용을 입력하세요")
-			form.content.focus()
-			return false
-		}
-		return true
-	}
-});
+
+})
 
 //이름 가져오기
 function getParameterByName(name) {

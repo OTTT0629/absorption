@@ -3,11 +3,15 @@ package com.ottt.ottt.controller.mypage.pageVar;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ottt.ottt.dao.login.LoginUserDao;
@@ -23,8 +27,9 @@ public class MessageWindowController {
 	
 	@Autowired
 	LoginUserDao loginUserDao;
+	@Autowired
 	MessageService messageService;
-	MessageServiceImpl messageServiceImpl;
+
 	
 	
 	@GetMapping(value = "/open")
@@ -36,23 +41,38 @@ public class MessageWindowController {
 		return "/mypage/myprofile/messagewindow";
 	}
 	
+	
 	@PostMapping(value = "/open")
-	public String writeMsg(MessageDTO messageDTO, RedirectAttributes rattr, Model m, HttpSession session) {
+	@ResponseBody
+	public  ResponseEntity<String> writeMsg(@RequestParam("sendUserNo") int userNo, MessageDTO messageDTO, @RequestParam("content") String content
+							, HttpSession session) {
 		String writer = (String)session.getAttribute("id");
 		UserDTO userDTO = loginUserDao.select(writer);
+		
 		messageDTO.setSend_user_no(userDTO.getUser_no());
+		messageDTO.setContent(content);
+		messageDTO.setReceive_user_no(userNo);		
+		
+		System.out.println("================================== setSend_user_no : " + userDTO.getUser_no() );
+		System.out.println("================================== content : " + content );
+		System.out.println("================================== setReceive_user_no : " + userNo);
+		
+		
+		System.out.println("================================== messageDTO.getReceive_user_no() : " + messageDTO.getReceive_user_no() );
+		System.out.println("================================== messageDTO.getSend_user_no() : " + messageDTO.getSend_user_no() );
+		System.out.println("================================== messageDTO.getContent() : " + messageDTO.getContent());		
+		
 		
 		try {
-			if(messageServiceImpl.writeMsg(messageDTO) != 1) {
+			
+			if(messageService.writeMsg(messageDTO) != 1) {
 				throw new Exception("Send failed");
 			}
-			rattr.addFlashAttribute("msg", "SEND_OK");
-			return "";
+			return new ResponseEntity<String>("Send_OK", HttpStatus.OK);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
-			m.addAttribute("messageDTO", messageDTO);	//등록하려던 내용을 보여줘야함
-			m.addAttribute("msg", "SEND_ERROR");
-			return "/mypage/myprofile/messagewindow";
+			return new ResponseEntity<String>("Send_ERR", HttpStatus.BAD_REQUEST);
 		}
 	}
 }
