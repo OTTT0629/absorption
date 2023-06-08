@@ -26,7 +26,7 @@ public interface MessageService {
 	
 	int removeMsg(Integer message_no, String user_no) throws Exception;
 	
-	int removeMsgAll(String user_no) throws Exception;
+//	int removeMsgAll(String user_no) throws Exception;
 	
 	int getSendResultCnt(MessageSearchItem msc) throws Exception;
 	

@@ -2,7 +2,7 @@ $(document).ready(function() {
 	//기본: 답장 버튼 숨기기
 	$("#msg-write").hide();
 	
-	// 버튼 색 설정-ㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ
+	// 버튼 색 설정
 	const recvButton = $("#btn-recv")
 	const sendButton = $("#btn-send")
 	
@@ -93,14 +93,15 @@ $(document).ready(function() {
                 $(".left-bottom table").append(rows)
             }
             location.href="/ottt/mypage/message/send"
-          },
+		    },
           error: function() {
             alert("error")
             recvButton.click();
           }
         })
       })
-	//왜안되지.,.,.,.,.,.,
+      
+	//해결
 	$("li a").click(function() {
 	  if ($(this).attr("href") === "/ottt/mypage/message") {
 	    $("#btn-recv").addClass("active")
@@ -110,8 +111,7 @@ $(document).ready(function() {
 	})
 	
 	
-	//쪽지 내용, 상대 닉네임 불러오기(안됨), 내용 있을 시 답장 버튼 불러옴
-
+	//쪽지 내용, 상대 닉네임 불러오기, 내용 있을 시 답장 버튼 불러옴
 	$(".msg-content").click(function() {
 	    var content = $(this).text()
 	    $(".msg-view-content").text(content)

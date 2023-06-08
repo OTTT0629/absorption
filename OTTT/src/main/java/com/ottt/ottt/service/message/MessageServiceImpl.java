@@ -41,10 +41,10 @@ public class MessageServiceImpl implements MessageService{
 		return messageDao.delete(message_no, user_no);
 	}
 
-	@Override
-	public int removeMsgAll(String user_no) throws Exception {
-		return 0;
-	}
+//	@Override
+//	public int removeMsgAll(String user_no) throws Exception {
+//		return 0;
+//	}
 
 	@Override
 	public int getSendResultCnt(MessageSearchItem msc) throws Exception {

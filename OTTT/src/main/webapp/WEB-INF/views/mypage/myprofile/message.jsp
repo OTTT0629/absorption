@@ -64,11 +64,9 @@
 		              <tr class="title-line" style="font-weight: 200">
   		              	<td class="msg-no" style="display: none; ">${messageDTO.message_no}</td>
 		                <td class="msg-img">픞</td>
-		                <td class="msg-nicknm">${messageDTO.user_nicknm }</td>
-		                <!-- c:if문 추가 보낸/받은 구분 -->
-		                <td class="msg-name" style="display: none; ">${messageDTO.send_user_no }</td>
-		                
-		                <td class="msg-content" style="cursor: pointer;">${messageDTO.content }</td>
+	                	<td class="msg-nicknm">${messageDTO.user_nicknm }</td>
+	                	<td class="msg-name" style="display: none; ">${messageDTO.send_user_no }</td>
+		                <td class="msg-content" style="cursor: pointer;"><c:out value="${messageDTO.content }"></c:out></td>
 		                <td class="msg-time"><fmt:formatDate value="${messageDTO.send_date}" pattern="yyyy-MM-dd HH:mm" type="date" /></td>
 		                <td class="msg-del"><button class="delBtn" style="border: none; color: red;"><i class="fas fa-times"></i></button></td>
 		              </tr>
@@ -91,14 +89,13 @@
 						</c:if>
 				</div>
 			</div>
-
         </div>
 
         <div class="sec-right">
         	<input name="msgno" type="hidden" value="" />
         	<input name="sendno" type="hidden" value="${messageDTO.send_user_no}" />
             <div class="msg-nick" id="msgNick">${messageDTO.user_nicknm }</div>
-	        <div class="msg-view-content">${messageDTO.content }</div>
+	        <div class="msg-view-content" style="white-space: pre-wrap;">${messageDTO.content }</div>
 	        <button type="button" id="msg-write" class="msg-write-btn" >답장</button>
         </div>
 

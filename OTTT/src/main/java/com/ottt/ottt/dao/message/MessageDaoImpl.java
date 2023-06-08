@@ -54,11 +54,11 @@ public class MessageDaoImpl implements MessageDao {
 		return session.delete(namespace + "delete", map);
 	}
 	
-	//메세지 지우기(전체)
-	@Override
-	public int deleteAll() throws Exception {
-		return session.delete(namespace + "deleteAll");
-	}
+//	//메세지 지우기(전체)
+//	@Override
+//	public int deleteAll() throws Exception {
+//		return session.delete(namespace + "deleteAll");
+//	}
 
 	//sql id 맞춰서 수정 
 	@Override

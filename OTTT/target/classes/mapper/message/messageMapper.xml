@@ -68,17 +68,19 @@
  	<!-- 받은 메시지 리스트 불러오기 -->
  	<select id="selectRecv" parameterType="map" resultType="MessageDTO">
 		<include refid="selectFromMessage" />
-		WHERE receive_user_no = #{user_no}
-		ORDER BY send_date DESC, message_no DESC
+		WHERE a.receive_user_no = #{user_no}
+		ORDER BY a.send_date DESC, a.message_no DESC
 		LIMIT #{pageSize} OFFSET #{offset}
  	</select>
  	
  	<!-- 보낸 메시지 리스트 불러오기 -->
  	<select id="selectSend" parameterType="map" resultType="MessageDTO">
-		<include refid="selectFromMessage" />
-		WHERE send_user_no = #{user_no}
-		ORDER BY send_date DESC, message_no DESC
-		LIMIT #{pageSize} OFFSET #{offset}
+		SELECT a.message_no, a.send_user_no, a.receive_user_no, a.content, a.send_date, read_yn, b.user_nicknm 
+		FROM tb_message a
+		JOIN tb_user b
+		ON a.receive_user_no = b.user_no
+		WHERE a.send_user_no = #{user_no}
+		ORDER BY a.send_date DESC, a.message_no DESC
  	</select>
  	
  	<!-- 메시지 보내기 -->

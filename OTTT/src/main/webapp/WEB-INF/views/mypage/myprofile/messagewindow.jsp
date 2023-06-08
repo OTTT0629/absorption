@@ -51,7 +51,7 @@
 
 					console.log("전송 성공");
 			        alert("쪽지가 전송되었습니다.");
-			        //window.close();
+			        window.close();
 
 				},
 				error: function() {
@@ -77,7 +77,7 @@
 	    <div class="sec02">
 	      <div class="write">
 	        <textarea id="messageContent" name="content" placeholder="내용을 입력하세요."></textarea>      
-	      	<div class="count"><span>0</span>/1000</div>
+	      	<div class="count"><span>0</span>/500</div>
 	      </div>
 	    </div>
 	

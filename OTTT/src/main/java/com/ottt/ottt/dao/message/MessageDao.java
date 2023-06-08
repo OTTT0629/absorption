@@ -24,7 +24,7 @@ public interface MessageDao {
 	int delete(Integer message_no, String user_no) throws Exception;
 	
 	//메시지 전체 삭제
-	int deleteAll() throws Exception;
+//	int deleteAll() throws Exception;
 	
 	//페이지별 게시글 목록 불러오기
 	List<MessageDTO> selectPage(Map map) throws Exception;

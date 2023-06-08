@@ -10,6 +10,8 @@ import java.util.Objects;
 	,content 			varchar(2000) not null
 	,send_date			timestamptz	  not null
 	,read_yn			char(1)		  default '0'		--추가
+	,delete_by_sender		boolean		default false
+	,delete_by_receiver		boolean		default false
  */
 public class MessageDTO {
 
@@ -20,6 +22,8 @@ public class MessageDTO {
 	private Date send_date;
 	private char read_yn;
 	private String user_nicknm;
+	private boolean delete_by_sender;
+	private boolean delete_by_receiver;
 	
 	public MessageDTO () {}
 	
@@ -75,6 +79,22 @@ public class MessageDTO {
 		this.user_nicknm = user_nicknm;
 	}
 
+	public boolean isDelete_by_sender() {
+		return delete_by_sender;
+	}
+
+	public void setDelete_by_sender(boolean delete_by_sender) {
+		this.delete_by_sender = delete_by_sender;
+	}
+
+	public boolean isDelete_by_receiver() {
+		return delete_by_receiver;
+	}
+
+	public void setDelete_by_receiver(boolean delete_by_receiver) {
+		this.delete_by_receiver = delete_by_receiver;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(message_no);
@@ -91,12 +111,16 @@ public class MessageDTO {
 		MessageDTO other = (MessageDTO) obj;
 		return Objects.equals(message_no, other.message_no);
 	}
-	
+
 	@Override
 	public String toString() {
 		return "MessageDTO [message_no=" + message_no + ", send_user_no=" + send_user_no + ", receive_user_no="
-				+ receive_user_no + ", content=" + content + ", send_date=" + send_date + ", read_yn=" + read_yn + "]";
+				+ receive_user_no + ", content=" + content + ", send_date=" + send_date + ", read_yn=" + read_yn
+				+ ", user_nicknm=" + user_nicknm + ", delete_by_sender=" + delete_by_sender + ", delete_by_receiver="
+				+ delete_by_receiver + "]";
 	}
+	
+
 	
 	
 
