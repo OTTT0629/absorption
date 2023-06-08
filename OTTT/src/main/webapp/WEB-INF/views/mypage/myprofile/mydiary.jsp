@@ -138,26 +138,26 @@
     	if(msg == "READ_ERR") alert("접근 권한이 없습니다")
     	
    		function readDiary(content_no, user_no) {
-   			
-	        let form = document.createElement('form');
-	        
-	        form.setAttribute("action", "/ottt/mypage/mydiary/diary");
-	        form.setAttribute("method", "post");
-	        	
+
 	        let data = {
 	                content_no: content_no,
 	                user_no: user_no
-	            };
+	        };
+   			
+	        let form = document.createElement('form');
+	        
+	        form.setAttribute("action", '/ottt/mypage/mydiary/diary${pr.sc.string}');
+	        form.setAttribute("method", "post");
 	            
-	            for (let key in data) {
-	                if (data.hasOwnProperty(key)) {
-	                    let input = document.createElement('input');
-	                    input.setAttribute('type', 'hidden');
-	                    input.setAttribute('name', key);
-	                    input.setAttribute('value', data[key]);
-	                    form.appendChild(input);
-	                }
-	            }
+            for (let key in data) {
+                if (data.hasOwnProperty(key)) {
+                    let input = document.createElement('input');
+                    input.setAttribute('type', 'hidden');
+                    input.setAttribute('name', key);
+                    input.setAttribute('value', data[key]);
+                    form.appendChild(input);
+                }
+            }
 
 	        document.body.appendChild(form);
 	        form.submit();

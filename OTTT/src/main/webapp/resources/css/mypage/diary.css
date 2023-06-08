@@ -235,13 +235,21 @@ form {
 }
 
 .diary-title {
+	border: none;
     font-size: 30px;
     margin-left: 5px;
+    background-color: #0B0C0B;
+    color: #fff;
+}
+
+.diary-title:focus {
+	outline: none;	
 }
 
 .diary {
     height: 100%;
     position: relative;
+    
 }
 
 textarea {

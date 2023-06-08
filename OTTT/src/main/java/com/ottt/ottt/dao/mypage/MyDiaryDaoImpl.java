@@ -36,4 +36,9 @@ public class MyDiaryDaoImpl implements MyDiaryDao {
 		return session.selectOne(namespace + "selectDiary", map);
 	}
 
+	@Override
+	public int updateDiary(MyDiaryDTO myDiaryDTO) throws Exception {
+		return session.update(namespace + "updateDiary", myDiaryDTO);
+	}
+
 }

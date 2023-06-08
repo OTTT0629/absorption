@@ -45,7 +45,7 @@
 	<update id="updateDiary" parameterType="MyDiaryDTO">
 		UPDATE tb_my_diary
 		SET public_yn_cd=#{public_yn_cd}, mydiary_content=#{mydiary_content}, mydiary_mod_dt=now()
-		WHERE user_no = #{user_no} AND content_no = #{content_no}	
+		WHERE user_no = #{user_no} AND content_no = #{content_no}
 	</update>  
   
   

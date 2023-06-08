@@ -17,6 +17,7 @@ public class SearchItem {
 	private String option = "";
 	private String user;
 	private Integer user_no;
+	private Integer content_no;
 	
 	public SearchItem() {};
 	
@@ -24,9 +25,12 @@ public class SearchItem {
 		this(page, pageSize, "", "");
 	}
 	
-	public SearchItem(Integer page, String user) {
+	public SearchItem(Integer page, String user
+				, Integer content_no, Integer user_no) {
 		this.page = page;
 		this.user = user;
+		this.content_no = content_no;
+		this.user_no = user_no;
 	}
 
 	public SearchItem(Integer page, Integer pageSize, String option, String keyword) {
@@ -87,10 +91,14 @@ public class SearchItem {
 				.build().toString();
 	}
 	
+	public String getString() {
+		return getString(page);
+	}
+	
 	public String getString(Integer page) {
 		return UriComponentsBuilder.newInstance()
 				.queryParam("user", user)
-				.queryParam("page", page)				
+				.queryParam("page", page)
 				.build().toString();
 	}
 	
@@ -115,6 +123,14 @@ public class SearchItem {
 	public void setUser_no(Integer user_no) {
 		this.user_no = user_no;
 	}
+
+	public Integer getContent_no() {
+		return content_no;
+	}
+
+	public void setContent_no(Integer content_no) {
+		this.content_no = content_no;
+	}	
 	
 }
 

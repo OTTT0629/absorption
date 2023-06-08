@@ -14,7 +14,7 @@
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 </head>
 <body>
-    <div class="wrap">
+	<div class="wrap">
 		<%@ include file="../../fix/header.jsp" %>
 
 		<section class="sec01">
@@ -42,18 +42,22 @@
 		<section class="sec02">
 			<div class="main">
 				<div class="blank"></div>
-				<form action="#" id="diary-main">
+				<form action="" id="diary-main">
+					<input type="hidden" name="content_no" value="${myDiaryDTO.content_no }"/>
+					<input type="hidden" name="user_no" value="${myDiaryDTO.user_no }"/>
 					<div class="l-main">
 						<img class="poster" src="${myDiaryDTO.thumbnail }" >
+						<input type="hidden" name="thumbnail" value="${myDiaryDTO.thumbnail }"/>
 					</div>
 					
 					<div class="c-main">
 						<div class="c-title">
-							<span class="diary-title">${myDiaryDTO.content_nm }</span>
+							<input class="diary-title" readonly="readonly" name="content_nm" type="text"
+								value="${myDiaryDTO.content_nm }" />
 						</div>
 						<div class="diary">
 							<label for="story"></label>
-							<textarea id="story" name="story"
+							<textarea id="story" name="mydiary_content"
 								${mode=="new" ? "" : "readonly='readonly'" }
 							 spellcheck="false">${myDiaryDTO.mydiary_content }</textarea>
 						</div>
@@ -87,35 +91,74 @@
 							</c:if>
 						</div>
 					</div>
-				 </form>
-			 </div>
-		 </section>
-	 </div>
+				</form>
+			</div>
+		</section>
+	</div>
 	 
-	 <script type="text/javascript">
+	<script type="text/javascript">
 	 	$(document).ready(function() {
-	 		
+
 	 		$('#writeBtn').on('click', function() {
 	 			let form = $('#diary-main')
-	 			let isReadonly = $("textarea[name=story]").attr('readonly')
+	 			
+	 			let isReadonly = $("textarea[name=mydiary_content]").attr('readonly')
 	 			
 	 			//수정상태 변환
 	 			if(isReadonly == 'readonly') {
-	 				$("textarea[name=story]").attr('readonly', false)
+	 				$("textarea[name=mydiary_content]").attr('readonly', false)
 	 				$("#writeBtn").html('등록')
 	 				$("#removeBtn").html('취소')
 	 				return;
 	 			}
 	 			
+	 			form.attr("action", "<c:url value='/mypage/mydiary/modify${searchItem.string}' />")
+	 			form.attr("method", "post")
 	 			
+	 			
+	 			if(formchk()) {
+	 				form.submit()
+	 			}	 			
 				
 			})
+			
+			$('#removeBtn').on('click', function() {
+				
+				let form = $('#diary-main')	 			
+	 			let isReadonly = $("textarea[name=mydiary_content]").attr('readonly')
+	 			
+	 			if(isReadonly != 'readonly') {
+	 				form.attr("action", "<c:url value='/mypage/mydiary/diary${searchItem.string}' />")
+		 			form.attr("method", "post")
+		 			form.submit()
+		 			
+		 			return false;
+	 			}			
+				
+			})
+			
+			
+			let formchk = function() {
+	 			let form = document.getElementById('diary-main')
+	 			
+	 			if(form.story.value == '') {
+	 				alert("내용을 입력해주세요")
+	 				form.story.focus();
+	 				return false;
+	 			}
+	 			
+	 			return true;				
+			}
 	 		
 			
-		})
+		})	 
+	</script>
 	 
-	 
-	 </script>
+	<script type="text/javascript">
+    	let msg = "${msg}"
+    	if(msg == "WRT_ERR") alert("다이어리 등록에 실패했습니다. 다시 시도해 주세요")
+    	if(msg == "MOD_ERR") alert("다이어리 수정에 실패했습니다. 다시 시도해 주세요")
+    </script>
 	 
 
 </body>

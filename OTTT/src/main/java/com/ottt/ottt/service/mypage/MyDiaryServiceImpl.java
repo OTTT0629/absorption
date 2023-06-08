@@ -30,4 +30,9 @@ public class MyDiaryServiceImpl implements MyDiaryService {
 		return myDiaryDao.selectDiary(content_no, user_no);
 	}
 
+	@Override
+	public int modDiary(MyDiaryDTO myDiaryDTO) throws Exception {
+		return myDiaryDao.updateDiary(myDiaryDTO);
+	}
+
 }
