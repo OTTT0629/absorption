@@ -1,5 +1,6 @@
 package com.ottt.ottt.controller.mypage.pageVar;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,37 +43,26 @@ public class MessageController {
 			m.addAttribute("totalCnt", totalCnt);
 			MessagePageResolver msgPageResolver = new MessagePageResolver(totalCnt, msc);
 			
+			//리스트 불러오기
 			List<MessageDTO> list = messageService.loadRecvList(msc);
+			//빈배열 생성
+			List<MessageDTO> msgList = new ArrayList<>();			
 			
-			m.addAttribute("list", list);
+			//삭제 안 한 애들만 넣기
+			for(MessageDTO messageDTO : list) {
+				if(!messageDTO.isDelete_by_receiver()) {
+					msgList.add(messageDTO);
+				}
+			}
+			
+			m.addAttribute("list", msgList);
 			m.addAttribute("mpr", msgPageResolver);
 
 		} catch (Exception e) {e.printStackTrace();}
 		return "/mypage/myprofile/message";
 	}
 
-//	쪽지함에 넣음
-//	@GetMapping(value = "/message/recv")
-//	public String recvMessage(MessageSearchItem msc, Model m, HttpSession session) {
-//		try {
-//			
-//			UserDTO userDTO = loginUserDao.select((String) session.getAttribute("id"));
-//			m.addAttribute("userDTO", userDTO);
-//			msc.setUser_no(userDTO.getUser_no());
-//			
-//			int totalCnt = messageService.getSearchResultCnt(msc);
-//			
-//			m.addAttribute("totalCnt", totalCnt);
-//			MessagePageResolver msgPageResolver = new MessagePageResolver(totalCnt, msc);
-//			
-//			List<MessageDTO> list = messageService.loadRecvList(msc);
-//			
-//			m.addAttribute("list", list);
-//			m.addAttribute("mpr", msgPageResolver);
-//
-//		} catch (Exception e) {e.printStackTrace();}
-//		return "/mypage/myprofile/message";
-//	}
+	
 	
 	@GetMapping(value = "/message/send")
 	public String sendMessage(MessageSearchItem msc, Model m, HttpSession session) {
@@ -85,10 +75,20 @@ public class MessageController {
 			
 			m.addAttribute("totalCnt", totalCnt);
 			MessagePageResolver msgPageResolver = new MessagePageResolver(totalCnt, msc);
-			
+			//먼저 불러오고
 			List<MessageDTO> list = messageService.loadSendList(msc);
+			//빈배열 생성
+			List<MessageDTO> msgList = new ArrayList<>();			
 			
-			m.addAttribute("list", list);
+			//삭제 안 한 애들만 넣기
+			//거짓이어야 트루
+			for(MessageDTO messageDTO : list) {
+				if(!messageDTO.isDelete_by_sender()) {
+					msgList.add(messageDTO);
+				}
+			}			
+			
+			m.addAttribute("list", msgList);
 			m.addAttribute("mpr", msgPageResolver);
 			
 		} catch (Exception e) {e.printStackTrace();}
@@ -97,11 +97,71 @@ public class MessageController {
 	
 	
 	
+	
+	//원래 가진 값이 거짓이었으니 참으로 바꾸면 목록에서 삭제됨
 	//쪽지 삭제(해당 쪽지)
 	@PostMapping("/message/remove")
-	public String removeMsg() {
+	public String removeMsgRecv(HttpSession session, Integer message_no) {		
+		//현재 내 유저번호
+		Integer user_no = (Integer)session.getAttribute("user_no");
+		System.out.println("===============1111111111111===================== message_no : " +message_no);
 		
-		return null;
+		
+		try {
+			MessageDTO messageDTO = messageService.pickOneRecv(message_no);
+			//System.out.println("=================2222222222=================== messageDTO.isDelete_by_receiver() : " +messageDTO.isDelete_by_receiver());
+			System.out.println("=================333333333333333333333=================== user_no : " +user_no);
+			System.out.println("=================44444444444444444444444=================== messageDTO.getReceive_user_no() : " +messageDTO.getReceive_user_no());
+			
+			
+			//맞다면
+			if(user_no.equals(messageDTO.getReceive_user_no())) {
+				System.out.println("-==========================================================0000000=======messageDTO.isDelete_by_receiver(): "+messageDTO.isDelete_by_receiver()); 
+				messageService.removeByReceiver(messageDTO);
+				System.out.println("-==========================================================0000000=======messageDTO.isDelete_by_receiver(): "+messageDTO.isDelete_by_receiver()); 
+				System.out.println("==================55555555555555555555555555================== messageDTO.isDelete_by_receiver() : " +messageDTO.isDelete_by_receiver());
+					if(messageDTO.isDelete()) {
+						messageService.removeMsg(messageDTO.getMessage_no());
+					}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/mypage/message";
+	}
+	
+	
+	
+	//쪽지 삭제(해당 쪽지)
+	@PostMapping("/message/send/remove")
+	public String removeMsgSend(HttpSession session, Integer message_no) {
+		//현재 내 유저번호
+		Integer user_no = (Integer)session.getAttribute("user_no");
+		System.out.println("===============1111111111111===================== message_no : " +message_no);
+		
+		
+		try {
+			MessageDTO messageDTO = messageService.pickOneSend(message_no);
+			//System.out.println("=================2222222222=================== messageDTO.isDelete_by_sender() : " +messageDTO.isDelete_by_sender());
+			System.out.println("=================333333333333333333333=================== user_no : " +user_no);
+			System.out.println("=================44444444444444444444444=================== messageDTO.getSend_user_no() : " +messageDTO.getSend_user_no());
+			
+			
+			//맞다면
+			if(user_no.equals(messageDTO.getSend_user_no())) {
+				System.out.println("-==========================================================0000000=======messageDTO.isDelete_by_sender(): "+messageDTO.isDelete_by_sender()); 
+				messageService.removeBySender(messageDTO);
+				System.out.println("-==========================================================0000000=======messageDTO.isDelete_by_sender(): "+messageDTO.isDelete_by_sender()); 
+				System.out.println("==================55555555555555555555555555================== messageDTO.isDelete_by_sender() : " +messageDTO.isDelete());
+					if(messageDTO.isDelete()) {
+						messageService.removeMsg(messageDTO.getMessage_no());
+					}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "redirect:/mypage/message/send";
 	}
 	
 	//유저 프로필 선택 시 그 사람 마이페이지로 넘어가게 하는 ?? 기능??

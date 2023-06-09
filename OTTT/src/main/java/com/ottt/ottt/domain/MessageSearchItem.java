@@ -67,24 +67,6 @@ public class MessageSearchItem {
 				.build().toString();
 	}
 	
-	//받은 쪽지 네비바
-	public String getQueryStringRecv(Integer page) {
-		return UriComponentsBuilder.newInstance()
-				.path("/mypage/message/recv")
-				.queryParam("page", page)
-				.queryParam("pageSize", pageSize)
-				.build().toString();
-	}
-	
-	//보낸 쪽지 네비바
-	public String getQueryStringSend(Integer page) {
-		return UriComponentsBuilder.newInstance()
-				.path("/mypage/message/send")
-				.queryParam("page", page)
-				.queryParam("pageSize", pageSize)
-				.build().toString();
-	}
-	
 	public Integer getUser_no() {
 		return user_no;
 	}

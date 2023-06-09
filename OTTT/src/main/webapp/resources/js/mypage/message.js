@@ -5,11 +5,13 @@ $(document).ready(function() {
 	// 버튼 색 설정
 	const recvButton = $("#btn-recv")
 	const sendButton = $("#btn-send")
+	const delButton = $('button[name="deleteBtn"]')
 	
 	recvButton.click(function() {
 	  if (!recvButton.hasClass("active")) {
 	    $(".sec00 button").removeClass("active")
 	    recvButton.addClass("active")
+	    delButton.attr("class", "delrecvBtn");
 	    localStorage.setItem("selectedButton", "recv") // 선택한 버튼 정보를 로컬 스토리지에 저장
 	  }
 	})
@@ -18,6 +20,7 @@ $(document).ready(function() {
 	  if (!sendButton.hasClass("active")) {
 	    $(".sec00 button").removeClass("active")
 	    sendButton.addClass("active")
+	    delButton.attr("class", "delsendBtn");
 	    localStorage.setItem("selectedButton", "send") // 선택한 버튼 정보를 로컬 스토리지에 저장
 	  }
 	})
@@ -26,8 +29,11 @@ $(document).ready(function() {
 	const selectedButton = localStorage.getItem("selectedButton")
 	if (selectedButton === "recv") {
 	  recvButton.addClass("active")
+	  delButton.attr("class", "delrecvBtn");
+	  
 	} else if (selectedButton === "send") {
 	  sendButton.addClass("active")
+	  	  delButton.attr("class", "delsendBtn");
 	}	
 	
 	//쪽지 리스트 불러오기(받은 / 보낸)
@@ -142,17 +148,5 @@ $(document).ready(function() {
 	   var url = $(this).attr("data-url")
 	   window.open(url, 'SEND-MSG', 'width=520, height=750, scrollbars=no')
 	})
-
-
-
-
-
-
-
-
-
-
-
-
 
 })

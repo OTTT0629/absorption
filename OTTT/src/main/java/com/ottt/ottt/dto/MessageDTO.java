@@ -22,7 +22,11 @@ public class MessageDTO {
 	private Date send_date;
 	private char read_yn;
 	private String user_nicknm;
+	
+	//데이터베이스에 직접 집어넣는 게 아니므로 데이터베이스 컬럼엔 추가하지 않고 여기서만 만들어 놓음
+	//보낸 메시지 지우기
 	private boolean delete_by_sender;
+	//받은 메시지 지우기
 	private boolean delete_by_receiver;
 	
 	public MessageDTO () {}
@@ -78,7 +82,7 @@ public class MessageDTO {
 	public void setUser_nicknm(String user_nicknm) {
 		this.user_nicknm = user_nicknm;
 	}
-
+	
 	public boolean isDelete_by_sender() {
 		return delete_by_sender;
 	}
@@ -119,8 +123,19 @@ public class MessageDTO {
 				+ ", user_nicknm=" + user_nicknm + ", delete_by_sender=" + delete_by_sender + ", delete_by_receiver="
 				+ delete_by_receiver + "]";
 	}
+	//보낸 메시지 지우기
+	public void deleteBySender() {
+		this.setDelete_by_sender(true);
+	}
 	
-
+	//받은 메시지 지우기
+	public void deleteByReceiver() {
+		this.setDelete_by_receiver(true);
+	}
+	
+	public boolean isDelete() {
+		return this.isDelete_by_receiver() && this.isDelete_by_sender();
+	}
 	
 	
 
