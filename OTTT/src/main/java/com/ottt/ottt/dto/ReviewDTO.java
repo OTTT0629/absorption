@@ -31,8 +31,17 @@ public class ReviewDTO {
 	private String content_nm;
 	private String thumbnail;
 	
+	private int check_like_count;
+	private Integer like_count;
 	
+	private String image;
 	
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
 	public int getComment_cnt() {
 		return comment_cnt;
 	}
@@ -114,17 +123,33 @@ public class ReviewDTO {
 		this.comment_cnt = comment_cnt;
 	}
 	
+	public int getCheck_like_count() {
+		return check_like_count;
+	}
+	public void setCheck_like_count(int check_like_count) {
+		this.check_like_count = check_like_count;
+	}
+	public Integer getLike_count() {
+		return like_count;
+	}
+	public void setLike_count(Integer like_count) {
+		this.like_count = like_count;
+	}
+
 	@Override
 	public String toString() {
 		return "ReviewDTO [review_no=" + review_no + ", content_no=" + content_no + ", rating=" + rating + ", user_no="
 				+ user_no + ", review_content=" + review_content + ", review_create_dt=" + review_create_dt
 				+ ", review_mod_dt=" + review_mod_dt + ", comment_cnt=" + comment_cnt + ", user_nicknm=" + user_nicknm
-				+ ", content_nm=" + content_nm + ", thumbnail=" + thumbnail + ", userDTO=" + userDTO + "]";
+				+ ", content_nm=" + content_nm + ", thumbnail=" + thumbnail + ", check_like_count=" + check_like_count
+				+ ", like_count=" + like_count + ", image=" + image + ", userDTO=" + userDTO + "]";
 	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(content_no, review_no, user_no);
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -137,8 +162,5 @@ public class ReviewDTO {
 		return Objects.equals(content_no, other.content_no) && Objects.equals(review_no, other.review_no)
 				&& Objects.equals(user_no, other.user_no);
 	}
-	
-	
-	
 	
 }

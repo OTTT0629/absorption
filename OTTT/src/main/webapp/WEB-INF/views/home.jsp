@@ -73,19 +73,14 @@
     background-color: transparent;
     border-style: solid;
     color: #33FF33; 
-}    
+}
+
     </style>
 
 </head>
 <body style="background-color: #202020; color: #fff;">
     <div class="wrap"> 
         <div style="background-color: black; text-align: center; height: 850px;">
-
-        	<%-- <div class="user">
-                <a href="<c:url value='${loginoutlink}' /> " class="${loginout}">
-                    <img src="${path}/resources/images/img/profile.png" class="user-img">
-                </a>
-            </div> --%>
             <img src="${path}/resources/images/logo/메인이미지.png" style="width: 1200px; background-position: center; margin-top: 150px;"/>
             
             <div>
@@ -111,78 +106,26 @@
 
         <div style="height: 230px; background: linear-gradient(to top, #202020, black);"></div>
 
-        <header class="header" style="position: sticky; top: 0;">
-            <div class="logo">
-            <a href="<c:url value="/" />">
-				  <img src="${path}/resources/images/logo/OTTT.png" alt="로고">
-				</a>
-			</div>
-			<nav class="gnb">
-				<ul>
-            <li>
-              <a href="<c:url value="/genre/movie" />">영화</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/drama" />">드라마</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/interest" />">예능</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/animation" />">애니</a>
-            </li>
-            <li>
-              <a href="<c:url value="/community/freecommunity" />">게시판</a>
-            </li>
-          </ul>
-        </nav>
-        <div class="h-icon">
-          <ul>
-            <li>
-              <a href="<c:url value='/search' />">
-                <!-- <img src="./images/icon/search02.png" alt="검색"> -->
-              </a>
-            </li>
-            <li>
-                <a href="<c:url value='/mypage' /> " class="${loginout}" >
-                    <c:if test="${sessionScope.id != null}">
-                        <img src="${user_img }" id="profile" class="${loginout}">              	
-                    </c:if>              	
-                </a>
-              </li>
-            </ul>
-              </div>
-          </header>
+        <%@ include file="fix/header.jsp" %>
                   
         <script type="text/javascript">
         $(document).ready(function() {
-        	
-        	let img = function() {
-                if ('${userDTO.user_id}' != '') {
-                    $('#profile').attr("src", '${userDTO.image}')
-                }     				
-                return true
-            }
-            
-            img()
             
         	  $(document).on("click", "#tonojjim", function(event) {
-        	    event.preventDefault();
-        	    // 버튼을 클릭했을 때 실행되는 코드
+          	    event.preventDefault();
         	    let content_no = $(this).closest(".work-info").find("#noInput").val()
-    			let user_no = '${sessionScope.no}'
+    			let user_no = '${sessionScope.user_no}'
         	    $.ajax({
         	      type: 'DELETE',
         	      url: '/ottt/jjim?content_no=' + content_no + '&user_no=' + user_no,
         	      headers: {"content-type":"application/json"},
         	      data: JSON.stringify({content_no:content_no, user_no:user_no}),
         	      success: function(result){
-        	    	  document.location.reload(true)
         	        $(".body").html("찜 해제 되었습니다.")
         	        $('#Modal').modal('show')
-        	        /* $('#checkBtn').on('click', function() {
+        	        $('#checkBtn').on('click', function() {
         	        	document.location.reload(true)
-					})*/ 	        
+					})	        
         	      },
         	      error: function() {
         	        $(".body").html("찜해제에 실패했습니다. 다시 시도해주세요.")
@@ -192,22 +135,20 @@
         	  })
         	  
         	  $(document).on("click", "#tojjim", function(event) {
-        	    event.preventDefault();
-        	    // 버튼을 클릭했을 때 실행되는 코드
+          	    event.preventDefault();
         	    let content_no = $(this).closest(".work-info").find("#noInput").val()
-    			let user_no = '${sessionScope.no}'
+    			let user_no = '${sessionScope.user_no}'
         	    $.ajax({
         	      type: 'PATCH',
         	      url: '/ottt/jjim?content_no=' + content_no + '&user_no=' + user_no,
         	      headers: {"content-type":"application/json"},
         	      data: JSON.stringify({content_no:content_no, user_no:user_no}),
         	      success: function(result){
-        	    	  document.location.reload(true)
         	        $(".body").html("찜 등록 되었습니다.")
         	        $('#Modal').modal('show') 
-        	        /* $('#checkBtn').on('click', function() {
+        	        $('#checkBtn').on('click', function() {
         	        	document.location.reload(true)
-					}) */ 
+					})
         	      },
         	      error: function() {
         	        $(".body").html("찜등록에 실패했습니다. 다시 시도해주세요.")
@@ -218,10 +159,9 @@
 
         	  $(document).on("click", "#nojjim", function(event) {
         		event.preventDefault()
-        	    $(".body2").html("로그인이 필요합니다.")
-        	    $('#Modal2').modal('show')
-        	  });
-        	  
+        	    $(".body").html("로그인이 필요합니다.")
+        	    $('#Modal').modal('show')
+        	  });        	  
         })       
         </script>
 
@@ -273,7 +213,7 @@
 										        <c:when test="${sessionScope.id != null}">
 										            <c:set var="isInWishlist" value="false" />
 										            <c:forEach var="wishlistDTO" items="${wishList}">
-										                <c:if test="${wishlistDTO.content_no == Integer.parseInt(contentDTO.content_no) && sessionScope.no == wishlistDTO.user_no}">
+										                <c:if test="${wishlistDTO.content_no == Integer.parseInt(contentDTO.content_no) && sessionScope.user_no == wishlistDTO.user_no}">
 										                    <c:set var="isInWishlist" value="true" />
 										                </c:if>
 										            </c:forEach>
@@ -1005,24 +945,7 @@
 	              </div>
 	              <div class="modal-body body">
 	              </div>
-	              <div class="modal-footer" id="modal-footer" style="height: 60px;">
-	                <!-- <button type="button" id="checkBtn" class="btn btn-secondary" data-bs-dismiss="modal">확인</button> -->
-	              </div>
-	            </div>
-	          </div>
-	        </div>
-	        
-	        <!-- Modal -->
-	        <div class="modal fade" id="Modal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	          <div class="modal-dialog modal-dialog-centered">
-	            <div class="modal-content">
-	              <div class="modal-header">
-	                <h1 class="modal-title fs-5" id="exampleModalLabel">알림</h1>
-	                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	              </div>
-	              <div class="modal-body body2">
-	              </div>
-	              <div class="modal-footer" id="modal-footer2">
+	              <div class="modal-footer" id="modal-footer">
 	                <button type="button" id="checkBtn" class="btn btn-secondary" data-bs-dismiss="modal">확인</button>
 	              </div>
 	            </div>

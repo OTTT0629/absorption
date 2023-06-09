@@ -63,7 +63,7 @@ public class CommunityController {
 
 	}
 	
-	//community 저장
+	//게시글 community 저장
 	@PostMapping("/freecommunity")
 	public String freecommunity_post(ArticleDTO articleDTO, HttpServletRequest request, Model m) {
 		
@@ -115,15 +115,19 @@ public class CommunityController {
 			HttpSession session = request.getSession();
 			
 			UserDTO userDTO = loginUserDao.select((String)session.getAttribute("id"));
+			
 
 			if(userDTO != null) {
 				dto.setUser_no(userDTO.getUser_no());
 			}
 			
 			ArticleDTO articleDTO = communityService.select(dto);
+			//UserDTO writer = loginUserDao.selectNo(articleDTO.getUser_no());
 
 			m.addAttribute("articleDTO", articleDTO);
 			m.addAttribute("mode", "view");
+			m.addAttribute("userDTO", userDTO);
+
 		
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -217,12 +221,6 @@ public class CommunityController {
 
 	}
 	
-	public boolean loginCheck(HttpServletRequest request) {
-		 //1. 세션을 얻어 (false는 session이 없어도 새로 생성하지 않음, 반환값은 null)
-		HttpSession session = request.getSession(false);
-		 //2. 세션에 id가 있는지 확인, 있으면 true를 반환 
-		return session != null && session.getAttribute("id")!=null;
-	}
 	
 	//메인 new 목록
 	@PostMapping("/ajax/getArticleList")
@@ -235,16 +233,9 @@ public class CommunityController {
 		Map<String, Object> result = new HashMap<String,Object>();
 		
 		UserDTO userDTO = loginUserDao.select((String)session.getAttribute("id"));
-		
-		//왼쪽 카테고리가 "내가쓴글","내가 좋아요한 글", "내가 댓글단 글" 일때 회원번호를 ArticleSearchDTO에 담는다.
-		if( "myPost".equals(dto.getCategory()) 
-				|| "myLike".equals(dto.getCategory()) 
-					|| "myComment".equals(dto.getCategory())) {
-			
+		if(userDTO != null) {
 			dto.setUser_no(userDTO.getUser_no());
-
 		}
-
 		result.put("message", "success");
 		result.put("list", communityService.getArticleList(dto));
 		result.put("totalCount", communityService.getArticleTotalCount(dto));
@@ -295,6 +286,7 @@ public class CommunityController {
         }
 		dto.setUser_no(userDTO.getUser_no());
 
+		
 		result.put("message", "success");
 		result.put("success", communityService.insertLike(dto) );
 		
@@ -317,7 +309,8 @@ public class CommunityController {
     		result.put("message", "로그인이 필요합니다.");
     		return result;
         }
-		dto.setUser_no(userDTO.getUser_no());
+
+    	dto.setUser_no(userDTO.getUser_no());
 
 		result.put("message", "success");
 		result.put("success", communityService.deleteLike(dto) );

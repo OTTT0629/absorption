@@ -19,14 +19,12 @@ public class WishlistDaoImpl implements WishlistDao {
 
 	@Override
 	public List<WishlistDTO> wishSelect(Integer user_no) throws Exception {
-		// TODO Auto-generated method stub
 		return session.selectList(namespace+"wishSelect", user_no);
 	}
 
 	@Override
 	public int wishInsert(Integer user_no, Integer content_no) throws Exception {
-		Map map = new HashMap();
-		
+		Map map = new HashMap();		
 		map.put("user_no", user_no);
 		map.put("content_no", content_no);
 		return session.insert(namespace+"wishInsert", map);
@@ -34,7 +32,6 @@ public class WishlistDaoImpl implements WishlistDao {
 
 	@Override
 	public int wishDelete(Map map) throws Exception {
-
 		return session.delete(namespace+"wishDelete", map);
 	}
 	

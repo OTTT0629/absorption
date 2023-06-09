@@ -26,7 +26,7 @@
  	</head>
   	<body style="background-color: #202020;">
     	<div class="wrap">
-		<a href="#" class="upBtn">&uarr;</a>
+<!-- 		<a href="#" class="upBtn" style="z-index: 999;">&uarr;</a> -->
       		<%@ include file="../../fix/header.jsp" %>
       		<!--meun bar Start-->  
         	<div id="line-1" >
@@ -97,7 +97,7 @@
 		                  		<li class="btn_s">
 									<div class="form-group">
 										<input id="fileInput" name="upFile"   accept="image/*" type="file" tabindex="-1" style="position: absolute; clip: rect(0px 0px 0px 0px);" onchange="readURL(this)">
-										<input type="text" id="userfile" name="userfile">
+										<input type="hidden" id="userfile" name="userfile" >
 		                      			<label for="fileInput" for="btn_file" ><img src="${path}/resources/images/img/writeImg.png" class="img_file"></label>
 									</div>
 		                      		<img src="${path}/resources/images/img/commit.png" alt="commit" class="btn_commit"	 data-bs-toggle="modal" data-bs-target="#commitBtn">      
@@ -111,7 +111,7 @@
 			                          			</div>
 			                          			<div class="modal-body">등록하시겠습니까?</div>
 			                          			<div class="modal-footer">
-			                          				<button type="button" id="saveBtn"class="btn btn-primary">Yes</button>
+			                          				<button type="button" id="saveBtn"class="btn btn-primary" data-bs-dismiss="modal">Yes</button>
 			                            			<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
 			                          			</div>
 			                       			</div>
@@ -139,6 +139,7 @@
 			let TOTAL_COUNT = 0;
 			let CATEGORY =  "${category}" != "" ? "${category}" : "all";
 			let schText = "${schText}";
+			let INDEX = 0;
 			console.log("path :"+PATH);
 			console.log("url  :"+URL);
 			
@@ -173,12 +174,6 @@
 					 	return;
 	      			}
 					
-	     			if(!fnValidFileNameSize(filename)){
-			     		alert("파일명이 20자를 초과합니다.");
-			     		$(this).val(null);
-			     		return;
-				 	}
-	     			
 			 		// 추출한 파일명 삽입
 					$("#userfile").val(filename);
 
@@ -245,6 +240,7 @@
 					if(LOGIN_YN == null || LOGIN_YN == ""){
 						swal("로그인 후 이용가능합니다.","로그인을 해주세요.", "warning")
 						.then(function(){
+							window.localStorage.setItem("returnUrl", PATH+"/community/freecommunity");
 							location.href="/ottt/login";                   
 						});
 						return;					
@@ -333,7 +329,7 @@
 					
 					//화살표 함수형 foreach 반복문
 					list.forEach( function(v,i) {
-
+						INDEX ++;
 						//등록일 날짜형식 변경 timestamp to yyyy_MM-dd
 						let date = new Date(v.article_create_dt);
 						let formattedDate = date.toISOString().slice(0, 10);
@@ -345,18 +341,20 @@
 						createHtml +=				'<a href="#"><span class="nickname">'+ v.user_nicknm +'</span></a>';
 						createHtml +=				'<span id="current_date" >'+ formattedDate +'</span>';
 						createHtml +=			'</div>';
-						createHtml +=			'<div>';
-						createHtml +=				'<div>';	
-						createHtml +=					'<button type="button" class="btn_warning" data-bs-toggle="dropdown" >신고</button>';
-						createHtml +=					'<ul class="dropdown-menu" >';
-						createHtml +=						'<li><a class="dropdown-item" href="#">욕설/비방</a></li>';
-						createHtml +=						'<li><a class="dropdown-item" href="#">광고/도배</a></li>';
-						createHtml +=						'<li><a class="dropdown-item" href="#">악의적인 스포</a></li>';
-						createHtml +=						'<li><a class="dropdown-item" href="#">선정성</a></li>';
-						createHtml +=					'</ul>';                   
-						createHtml +=				'</div>';
-						createHtml +=			'</div>';
-						createHtml +=		'</div>'                
+						if(v.writer_chk == "N"){
+							createHtml +=			'<div>';
+							createHtml +=				'<div>';	
+							createHtml +=					'<button type="button" class="btn_warning" data-bs-toggle="dropdown" >신고</button>';
+							createHtml +=					'<ul class="dropdown-menu" >';
+							createHtml +=						'<li><a class="dropdown-item" href="#">욕설/비방</a></li>';
+							createHtml +=						'<li><a class="dropdown-item" href="#">광고/도배</a></li>';
+							createHtml +=						'<li><a class="dropdown-item" href="#">악의적인 스포</a></li>';
+							createHtml +=						'<li><a class="dropdown-item" href="#">선정성</a></li>';
+							createHtml +=					'</ul>';                   
+							createHtml +=				'</div>';
+							createHtml +=			'</div>';
+						}
+						createHtml +=		'</div>'							
 						createHtml +=		'<div style="width: 900px;">';
 						createHtml +=			'<a href="'+ URL + v.article_no +'" class="main_article" >'+ v.article_content +'</a>';
 						//이미지의 데이터가 있으면 태그를 생성
@@ -370,10 +368,10 @@
 						//로그인 여부 및 내가 누른하트표시 on off
 						let heartOnOffImg = (v.check_like_count == 1 ? "on" : "off");
 						
-						createHtml +=				'<input onclick="javascript:fnPushHeart('+ v.article_no +','+i+');" class="heart_img" type="image" id="pushHeart_'+i+'" src="'+ PATH +'/resources/images/img/heart_'+heartOnOffImg+'.png" alt="heart">';
-						createHtml +=				'<span id="likeCount_'+i+'"	>'+ v.like_count +'</span>'; 
-						createHtml +=				'<input class="re_comment_img" type="image" src="'+ PATH +'/resources/images/img/comment.png" alt="comment">';
-						createHtml +=				'<span>'+ v.comment_count +'</span>';                  
+						createHtml +=				'<input onclick="javascript:fnPushHeart('+ v.article_no +','+INDEX+');" class="heart_img" type="image" id="pushHeart_'+INDEX+'" src="'+ PATH +'/resources/images/img/heart_'+heartOnOffImg+'.png" alt="heart">';
+						createHtml +=				'<span style="margin-left: 4px;" id="likeCount_'+INDEX+'"	>'+ v.like_count +'</span>'; 
+						createHtml +=				'<input class="re_comment_img" type="image" src="'+ PATH +'/resources/images/img/comment.png" onclick="javascript:fnPageMovePost('+v.article_no+')" alt="comment">';
+						createHtml +=				'<span style="margin-left: 4px;">'+ v.comment_count +'</span>';                  
 						createHtml +=			'</div>';
 						createHtml +=		'</div>';
 						createHtml +=	'</ul>';
@@ -406,6 +404,7 @@
 				if(LOGIN_YN == null || LOGIN_YN == ""){
 					swal("로그인 후 이용가능합니다.","로그인을 해주세요.", "warning")
 					.then(function(){
+						window.localStorage.setItem("returnUrl", PATH+"/community/freecommunity");
 						location.href="/ottt/login";                   
 					});
 					return;					
@@ -427,16 +426,6 @@
 			    }else{
 					return true;
 			    }
-			}
-
-			//파일명 길이체크
-			function fnValidFileNameSize(filename){
-		    	
-				if(filename.length > 20){ //20자
-					return false;
-			    }else{
-					return true;
-		    	}
 			}
 
 			//이미지 미리보기
@@ -464,6 +453,7 @@
 				if(LOGIN_YN == null || LOGIN_YN == ""){
 					swal("로그인 후 이용가능합니다.","로그인을 해주세요.", "warning")
 					.then(function(){
+						window.localStorage.setItem("returnUrl", PATH+"/community/freecommunity");
 						location.href="/ottt/login";                   
 					});
 					return;					
@@ -517,9 +507,16 @@
 						    );
 				    		
 				    	}
-				    	
 				    }
 				)	
+			}
+			
+			/**
+			*	상세 페이지 이동
+			* 	@param article_no 상세페이지 번호
+			*/
+			function fnPageMovePost(article_no){
+				location.href = PATH+"/community/post?article_no="+article_no;    				
 			}
 			
 		</script>

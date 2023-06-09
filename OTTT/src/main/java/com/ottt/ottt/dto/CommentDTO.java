@@ -30,15 +30,31 @@ public class CommentDTO {
 	private int		report_cnt;
 	
 	private String user_nicknm;
+	private String image;
+	private String writer_chk;
 	
 	
+	public String getWriter_chk() {
+		return writer_chk;
+	}
+
+	public void setWriter_chk(String writer_chk) {
+		this.writer_chk = writer_chk;
+	}
+
 	public CommentDTO() {}
 
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
 
 	public Integer getCmt_no() {
 		return cmt_no;
 	}
-
 
 	public void setCmt_no(Integer cmt_no) {
 		this.cmt_no = cmt_no;
@@ -48,7 +64,6 @@ public class CommentDTO {
 	public int getUser_no() {
 		return user_no;
 	}
-
 
 	public void setUser_no(int user_no) {
 		this.user_no = user_no;
@@ -165,13 +180,12 @@ public class CommentDTO {
 				&& user_no == other.user_no;
 	}
 
-
 	@Override
 	public String toString() {
 		return "CommentDTO [cmt_no=" + cmt_no + ", user_no=" + user_no + ", article_no=" + article_no + ", review_no="
 				+ review_no + ", cmt_content=" + cmt_content + ", cmt_writer=" + cmt_writer + ", cmt_dt=" + cmt_dt
 				+ ", cmt_mod_dt=" + cmt_mod_dt + ", cmt_like_count=" + cmt_like_count + ", report_cnt=" + report_cnt
-				+ ", user_nicknm=" + user_nicknm + "]";
+				+ ", user_nicknm=" + user_nicknm + ", image=" + image + ", writer_chk=" + writer_chk + "]";
 	}
 
 }

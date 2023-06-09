@@ -55,6 +55,7 @@ public class LoginController {
 		session.setAttribute("id", user_id);
 		session.setAttribute("admin", userDTO.getAdmin());
 		session.setAttribute("user_no", userDTO.getUser_no());
+		session.setAttribute("user_nicknm", userDTO.getUser_nicknm());
 		session.setAttribute("user_img", userDTO.getImage());
 
 

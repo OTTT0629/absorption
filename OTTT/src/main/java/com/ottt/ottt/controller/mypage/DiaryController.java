@@ -1,4 +1,4 @@
-package com.ottt.ottt.controller.mypage.pageVar.record;
+package com.ottt.ottt.controller.mypage;
 
 import java.util.List;
 

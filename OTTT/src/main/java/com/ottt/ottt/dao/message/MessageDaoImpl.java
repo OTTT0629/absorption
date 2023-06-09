@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ottt.ottt.domain.MessageSearchItem;
 import com.ottt.ottt.dto.MessageDTO;
 
 
@@ -28,35 +29,84 @@ public class MessageDaoImpl implements MessageDao {
 	
 	//받은 메세지 목록 불러오기
 	@Override
-	public List<MessageDTO> selectRecv(Integer receive_user_no) throws Exception {
-		return session.selectList(namespace + "selectRecv", receive_user_no);
+	public List<MessageDTO> selectRecv(MessageSearchItem msc) throws Exception {
+		return session.selectList(namespace + "selectRecv", msc);
 	}
 
 	//보낸 메세지 목록 불러오기
 	@Override
-	public List<MessageDTO> selectSend(Integer send_user_no) throws Exception {
-		return session.selectList(namespace + "selectSend", send_user_no);
+	public List<MessageDTO> selectSend(MessageSearchItem msc) throws Exception {
+		return session.selectList(namespace + "selectSend", msc);
 	}
 
 	//메세지 보내기(메세지 생성)
 	@Override
 	public int insert(MessageDTO messageDTO) throws Exception {
-		return session.insert(namespace + "insert", messageDTO);
+		return session.insert(namespace + "insertMsg", messageDTO);
 	}
 
 	//메세지 지우기(해당된 메세지)
 	@Override
-	public int delete(Integer message_no, String user_no) throws Exception {
-		Map map = new HashMap();
-		map.put("message_no", message_no);
-		map.put("user_no", user_no);
-		return session.delete(namespace + "delete", map);
+	public int delete(Integer message_no) throws Exception {
+		return session.delete(namespace + "delete", message_no);
 	}
 	
-	//메세지 지우기(전체)
+//	//메세지 지우기(전체)
+//	@Override
+//	public int deleteAll() throws Exception {
+//		return session.delete(namespace + "deleteAll");
+//	}
+
+	//sql id 맞춰서 수정 
 	@Override
-	public int deleteAll() throws Exception {
-		return session.delete(namespace + "deleteAll");
+	public List<MessageDTO> selectPage(Map map) throws Exception {
+		return session.selectList(namespace + "selectPage", map);
+	}
+
+	
+	@Override
+	public int recvCount() throws Exception {
+		return session.selectOne(namespace + "recvCount");
+	}
+
+	@Override
+	public int sendCount() throws Exception {
+		return session.selectOne(namespace + "sendCount");
+	}
+
+	@Override
+	public int recvResultCnt(MessageSearchItem msc) throws Exception {
+		return session.selectOne(namespace + "recvResultCnt", msc);
+	}
+	
+	@Override
+	public int sendResultCnt(MessageSearchItem msc) throws Exception {
+		return session.selectOne(namespace + "sendResultCnt", msc);
+	}
+
+	@Override
+	public List<MessageDTO> selectPage(MessageSearchItem msc) throws Exception {
+		return session.selectList(namespace + "selectPage", msc);
+	}
+	
+	@Override
+	public MessageDTO selectOneRecv(Integer message_no) throws Exception {
+		return session.selectOne(namespace + "selectOneRecv", message_no);
+	}
+	
+	@Override
+	public MessageDTO selectOneSend(Integer message_no) throws Exception {
+		return session.selectOne(namespace + "selectOneSend", message_no);
+	}
+	
+	@Override
+	public int deleteByReceiver(MessageDTO messageDTO) throws Exception {
+		return session.update(namespace + "deleteByReceiver", messageDTO);
+	}
+	
+	@Override
+	public int deleteBySender(MessageDTO messageDTO) throws Exception {
+		return session.update(namespace + "deleteBySender", messageDTO);
 	}
 
 

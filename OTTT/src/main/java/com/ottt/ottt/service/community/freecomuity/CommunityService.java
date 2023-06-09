@@ -11,6 +11,11 @@ public interface CommunityService {
 	//service는 메서드의 이름을 dao와 dto와는 다른느낌
 	
 	/**
+	 * 페이징용 목록
+	 */
+	List<ArticleDTO> getArticleList(ArticleSearchDTO dto) throws Exception;
+	
+	/**
 	 * 상세조회
 	 */
 	ArticleDTO select(ArticleDTO article_no) throws Exception;
@@ -30,11 +35,7 @@ public interface CommunityService {
 	 */
 	int modify(ArticleDTO articleDTO) throws Exception;
 	
-	/**
-	 * 페이징용 목록
-	 */
-	List<ArticleDTO> getArticleList(ArticleSearchDTO dto) throws Exception;
-	
+
 	/**
 	 * 총 건수
 	 */

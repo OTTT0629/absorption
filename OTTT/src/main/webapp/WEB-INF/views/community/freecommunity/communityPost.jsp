@@ -15,10 +15,10 @@
     	<meta charset="utf-8">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
     	<title>communityPost</title>
-    	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" >
     	<script type="text/javascript" src="${path}/resources/js/community/main.js"></script>
     	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> 
-    	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+    	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     	<link rel="stylesheet" href="${path}/resources/css/community/freecommunity/communityPost.css" >
@@ -76,20 +76,9 @@
            				<input type="hidden" name="article_no" id="article_no" value="${articleDTO.article_no}">
            				<div class="pro-dan">
                				<div>
-               					<a href="#"><img class="profile" src="${path}/resources/images/icon/user01.png" alt="profile" ></a>
+               					<a href="#"><img class="profile" src="${articleDTO.image }" alt="profile" ></a>
                  				<a class="nickname" href="../ottt박소율/mypageshow.html">${articleDTO.user_nicknm }</a>
                				</div>
-                 			<div class="btn_warning_div">
-                   				<button type="button" class="btn_warning2" data-bs-toggle="dropdown" aria-expanded="false">
-                    					신고
-                   				</button>
-                   				<ul class="dropdown-menu">
-                  					<li><a class="dropdown-item" href="#">비방/욕설</a></li>
-			                      	<li><a class="dropdown-item" href="#">광고/도배</a></li>
-			                      	<li><a class="dropdown-item" href="#">악의적인 스포</a></li>
-			                      	<li><a class="dropdown-item" href="#">선정성</a></li>
-                   				</ul>
-                 			</div>
                			</div>
            				<div class="wirted">
          					<!-- 입력 폼 -->
@@ -221,37 +210,44 @@
 					</div>
 					<!--댓글-->
 					<ul class="Comment">
-			        	<li class="comment_write">
-			       			<a href="#"><img class="profile" src="${path}/resources/images/icon/user01.png" alt="profile" ></a>
-			                <a class="nickname" href="#">${sessionScope.user_nicknm }</a>
-			        		<div>
-			                	<textarea class="writeHere" placeholder="Write Here" onkeydown="resize(this)" onkeyup="resize(this)" ></textarea>
-			                	<input class="btn_commit" type="image" src="${path}/resources/images/img/commit.png" alt="commit">
-			                </div>
-			          	</li>
-						<li class="comment_show">
-							<div class="pro-dan">
-          						<div>
-			                  		<a href="#"><img class="profile" src="${path}/resources/images/icon/user01.png" alt="profile" ></a>
-			                  		<a class="nickname" href="../ottt박소율/mypageshow.html">user</a>
-               					</div>
-               					<div class="btn_warning_div">
-				                    <button type="button" class="btn_warning2" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #202020">
-				                     신고
-				                    </button>
-                 						<ul class="dropdown-menu">
-			                      		<li><a class="dropdown-item" href="#">비방/욕설</a></li>
-				                      	<li><a class="dropdown-item" href="#">광고/도배</a></li>
-				                      	<li><a class="dropdown-item" href="#">악의적인 스포</a></li>
-				                      	<li><a class="dropdown-item" href="#">선정성</a></li>
-                   					</ul>
-               					</div>
-               				</div>
-               				<div class="comment_write_box">
-               					<p>댓글 내용이 나타남</p>
-               				</div>
-      					</li> 
+						<c:choose>
+							<c:when test="${not empty sessionScope.user_no}">
+								<li class="comment_write" id="commentCard">
+				       				<a href="#"><img class="profile" src="${userDTO.image }" alt="profile"/> </a>
+				                	<a class="nickname" href="#">${sessionScope.user_nicknm}</a>
+				                	<div>
+			                			<textarea class="writeHere" name="cmt_content" placeholder="Write Here" onkeydown="resize(this)" onkeyup="resize(this)" ></textarea>
+			                			<input class="btn_commit" onclick="javascript:fnInsertComment();" type="image" src="${path}/resources/images/img/commit.png" alt="commit">
+			                		</div>
+			                	</li>
+							</c:when>
+							<c:otherwise>
+								<li class="comment_write" id="commentCard">
+									<div>로그인이 필요합니다.</div>
+				                	<div>
+			                			<textarea class="writeHere" name="cmt_content" placeholder="Write Here" onkeydown="resize(this)" onkeyup="resize(this)" readonly="readonly"></textarea>
+			                			<input class="btn_commit" onclick="javascript:fnInsertComment();" type="image" src="${path}/resources/images/img/commit.png" alt="commit">
+			                		</div>
+			                	</li>
+							</c:otherwise>
+						</c:choose>
+
+			      
 					</ul>
+		        	<div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		          		<div class="modal-dialog modal-dialog-centered">
+		            		<div class="modal-content">
+			              		<div class="modal-header">
+			                		<h1 class="modal-title fs-5" id="exampleModalLabel">알림</h1>
+			                		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			              		</div>
+			              		<div class="modal-body body"></div>
+			              		<div class="modal-footer">
+			                		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">확인</button>
+			              		</div>
+			            	</div>
+			          	</div>
+		        	</div>
 				</div>
        		</div>
        	</div>
@@ -260,8 +256,10 @@
 			/********************************************************************************/
 			/* 자바스크립트 전역변수 영역, 대문자로 정의												*/
 			/********************************************************************************/
-			let LOGIN_YN = '${sessionScope.user_no}';	//로그인여부
-			let PATH = "<c:out value='${path}'/>"; 	//이미지 root 경로
+			let LOGIN_YN = '${sessionScope.user_no}';		//로그인여부
+			let ARTICLE_NO = "${articleDTO.article_no}"		//게시글 번호
+			let PATH = "<c:out value='${path}'/>"; 				//이미지 root 경로
+         	let BEFORE_TEXTAREA = "";      						//댓글의 텍스트아레아 변경전 값
 			
 			
 			/********************************************************************************/
@@ -269,7 +267,9 @@
 			/* 작성자 gahhyun																	*/
 			/********************************************************************************/
 			$(document).ready(function(){
-
+			// jQuery 라이브러리를 사용
+			//페이지의 모든 요소가 로드되고 준비된 후에 JavaScript 코드를 실행하고자 할 때 사용
+			
 				/********************************************************************************/
 				/*	이미지 미리보기 											*/
 				/********************************************************************************/
@@ -290,11 +290,6 @@
 					 	return;
 	      			}
 					
-	     			if(!fnValidFileNameSize(filename)){
-			     		alert("파일명이 20자를 초과합니다.");
-			     		$(this).val(null);
-			     		return;
-				 	}
 	     			
 			 		// 추출한 파일명 삽입
 					$("#userfile").val(filename);
@@ -303,12 +298,15 @@
 
 				}); 
 				
-				//좋아요 누르기 클릭 이벤트
+				/********************************************************************************/
+				//좋아요 누르기 클릭 이벤트											*/
+				/********************************************************************************/				
 				$("#pushHeart").click(function(){
 
 					if(LOGIN_YN == null || LOGIN_YN == ""){
 						swal("로그인 후 이용가능합니다.","로그인을 해주세요.", "warning")
 						.then(function(){
+							window.localStorage.setItem("returnUrl", PATH+"/community/post?article_no=${articleDTO.article_no}");
 							location.href="/ottt/login";                   
 						});
 						return;					
@@ -363,9 +361,11 @@
 					)	
 					
 				});
-
 				
-				//검색어버튼 Click Event
+				/********************************************************************************/
+				//검색어버튼 Click Event											*/
+				/********************************************************************************/		
+				//enter을 눌렀을 경우 Click Event
 				$("#schText").keydown(function(event) {
 			  		// Enter 키의 keyCode는 13입니다.
 				  	if (event.keyCode === 13) {
@@ -378,33 +378,24 @@
 				$("#schBtn").click(function(){
 					$("#schForm").submit();					
 				});
+
 				
+				//코맨트 목록 공통 ajax 함수 호출 
+				fnGetCommentList();
 				
 	   		});
 			
-			/* swal icon
-				success 
-				error 
-				warning 
-				info 
-				question
-	     	*/
-			//목록 호출 함수
-			function fnCallAjaxSelectArticleList(param){
-				//ajax-post방식 축약버전 호출방식
-				$.post(
-					"/ottt/community/ajax/getArticleList"
-				    ,param
-				    ,fnCreatArticleList
-				)				
-			}
-	     	
-	     	
+         	
+         	
+			/* swal icon : success / error / warning / info / question */
+				 
+			
 	     	function post_delete(){
 	   			//폼서브밋 방식으로 삭제요청
 				if(LOGIN_YN == null || LOGIN_YN == ""){
 					swal("로그인 후 이용가능합니다.","로그인을 해주세요.", "warning")
 					.then(function(){
+						window.localStorage.setItem("returnUrl", PATH+"/community/post?article_no=${articleDTO.article_no}");
 						location.href="/ottt/login";                   
 					});
 					return;					
@@ -416,6 +407,7 @@
 				if(LOGIN_YN == null || LOGIN_YN == ""){
 					swal("로그인 후 이용가능합니다.","로그인을 해주세요.", "warning")
 					.then(function(){
+						window.localStorage.setItem("returnUrl", PATH+"/community/post?article_no=${articleDTO.article_no}");
 						location.href="/ottt/login";                   
 					});
 					return;					
@@ -430,16 +422,6 @@
 			    }else{
 					return true;
 			    }
-			}
-
-			//파일명 길이체크
-			function fnValidFileNameSize(filename){
-		    	
-				if(filename.length > 20){ //20자
-					return false;
-			    }else{
-					return true;
-		    	}
 			}
 
 			//이미지 미리보기
@@ -459,7 +441,242 @@
 			       	reader.readAsDataURL(input.files[0]);
 		   		}
        		}
-	
+
+			/* ============================================================
+			* 	댓글 기능 스크립트
+			* ============================================================ */
+			
+			//코맨트 목록 공통 ajax 함수 호출 
+			function fnGetCommentList(){
+				fnCallAjax("/comment/getCommentList", {"article_no" : ARTICLE_NO}, fnCreateCommentList);				
+			}
+			
+			/**
+			* 댓글목록을 문자열로 그리는 함수
+			* @param {json} response : 컨트롤러에서 리턴받은 json
+			*/
+			function fnCreateCommentList(response){
+
+				console.log("ajax 목록호출 통신결과");
+				console.log(response);
+
+				let list = response;
+				
+				//댓글목록 초기화
+				$("#commentCard").nextAll().remove();
+				
+				let createHtml = "";
+				
+				if(list.length > 0){
+
+					list.forEach(function(v ,i){
+					
+						//등록일 날짜형식 변경 timestamp to yyyy_MM-dd
+						let date = new Date(v.cmt_dt);
+						let formattedDate = date.toISOString().slice(0, 10);
+						
+						/*
+						if(formattedDate > ddd)
+							dateString = "방금전";
+						else if
+						1시간전
+						else if
+						5시간전 
+						else {
+							dateString = date.toISOString().slice(0, 10);
+						}
+						*/
+						
+						createHtml +=	'<li class="comment_show">';
+						createHtml +=		'<div class="pro-dan">';
+						createHtml +=			'<div style="display: flex;">';
+						createHtml +=				'<a href="#"><img class="profile" src="'+v.image+'" alt="profile" ></a>';
+						createHtml +=				'<a class="nickname" href="../ottt박소율/mypageshow.html">'+v.cmt_writer+'</a>';
+						createHtml +=				'<p id="current_date"  style="position: relative; left: 35px; bottom: 24px;" >'+formattedDate+'</p>';
+						createHtml +=			'</div>';
+
+						//로그인사용자랑 댓글작성자랑 일치하는지 확인,같다면 수정/삭제 버튼 태그를 그린다.
+						if(v.writer_chk == "Y"){
+							createHtml += 		'<div class="btn_area">';
+							createHtml += 			'<button class="btn btn-secondary" style="text-align: center; width: 56px; height: 35px; font-size: 16px;" onclick="jaascript:fnUpdateForm(\''+i+'\',\'U\')">수정</button>';
+							createHtml += 			'<button class="btn btn-secondary" style="display:none; text-align: center; width: 56px; height: 35px; font-size: 16px;" onclick="jaascript:fnUpdateComment('+v.cmt_no+','+i+')">등록</button>';
+							createHtml += 			'<button class="btn btn-secondary" style="display:none; text-align: center; width: 56px; height: 35px; font-size: 16px;" onclick="jaascript:fnUpdateForm(\''+i+'\',\'C\')">취소</button>';
+							createHtml += 			'<button class="btn btn-secondary" style="text-align: center; width: 56px; height: 35px; font-size: 16px;" onclick="javacript:fnDeleteComment('+v.cmt_no+')" >삭제</button>';
+							createHtml +=		'</div>';
+							createHtml +=	'</div>';							
+						}else {
+							createHtml +=			'<div class="btn_warning_div">';
+							createHtml +=				'<button type="button" class="btn_warning2" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #202020">신고</button>';
+							createHtml +=				'<ul class="dropdown-menu">';
+							createHtml +=					'<li><a class="dropdown-item" href="#">비방/욕설</a></li>';
+							createHtml +=					'<li><a class="dropdown-item" href="#">광고/도배</a></li>';
+							createHtml +=					'<li><a class="dropdown-item" href="#">악의적인 스포</a></li>';
+							createHtml +=					'<li><a class="dropdown-item" href="#">선정성</a></li>';
+							createHtml +=				'</ul>';
+							createHtml +=			'</div>';
+							createHtml +=		'</div>';							
+						}
+							createHtml +=		'<div class="comment_write_box">';
+						//로그인을 안할 경우
+						if(LOGIN_YN == null || LOGIN_YN == ""){
+							
+							let formattedContent = v.cmt_content.replace(/\n/gi, "<br/>"); 
+							
+							createHtml +=			'<p style="margin-top: 10px; margin-left: 10px; width: 760px; max-height: max-content; position: relative; left: 54px; bottom: 42px;" >' + formattedContent + '</p>';
+						//로그인을 했을 경우
+						} else {
+							if(v.writer_chk == "Y"){
+								createHtml +=			'<p>';
+								createHtml +=				'<textarea readonly="readonly" class="textarea-auto-height"style="background-color: #202020; width: 100%; height: max-content; color: #fff; border: none;  resize:none;">'+v.cmt_content+'</textarea>';
+								createHtml +=			'</p>';									
+							}else {
+								let formattedContent = v.cmt_content.replace(/\n/gi, "<br/>"); 
+								createHtml +=			'<p style="margin-top: 10px; margin-left: 10px; width: 760px; max-height: max-content; position: relative; left: 54px; bottom: 42px;" >' + formattedContent + '</p>';								
+							}
+						}
+						createHtml +=		'</div>';
+						createHtml +=	'</li>'; 
+					
+					});
+					$("#commentCard").after(createHtml);
+				}else {
+					$("#commentCard").after("<li>등록된 댓글이 없습니다. </li>");
+				}
+			}
+			
+			/**
+			* 댓글을 저장하는 함수
+			*/
+			function fnInsertComment(){
+				//로그인 여부 체크
+				if(LOGIN_YN == null || LOGIN_YN == ""){
+					swal("로그인 후 이용가능합니다.","로그인을 해주세요.", "warning")
+					.then(function(){
+						window.localStorage.setItem("returnUrl", PATH+"/community/post?article_no=${articleDTO.article_no}");
+						location.href= PATH+"/login";                   
+					});
+					return;					
+				}
+				let cmt_content = $("textarea[name=cmt_content]").val();	
+				//댓글내용 유효성 검사
+				if(cmt_content.trim() == ""){
+					$(".body").html("댓글을 입력해 주세요.")
+		   	    	$("#commentModal").modal("show");
+					$("textarea[name=cmt_content]").focus();
+					return
+				}
+				//코맨트 저장하기, 공통 ajax 함수 호출 
+				fnCallAjax("/comment/insertComment" ,{"article_no" : ARTICLE_NO, "cmt_content" : cmt_content}, fnSaveCallBack)
+
+			}
+
+			/**
+			* 댓글을 삭제하는 함수
+			* @param {String} cmt_no : 댓글번호
+			*/				
+			function fnDeleteComment(cmt_no){
+				//코맨트 삭제하기, 공통 ajax 함수 호출 
+				fnCallAjax("/comment/deleteComment" ,{"cmt_no" : cmt_no}, fnSaveCallBack);
+			}
+			
+			/**
+			* 댓글을 수정모드로 바꾸는 함수
+			* @param {String} i li 위치
+			* @param {String} type 수정모드/취소모드 타입
+			*/				
+			function fnUpdateForm( i, type ){
+
+				//해당 row의 텍스트아레아 정보 가져오기
+				let textarea = $("#commentCard").nextAll("li").eq(i).find('div.comment_write_box textarea');
+				textarea.focus();
+				//덱스트아레아 영역 리드온리 풀기
+				textarea.removeAttr("readonly");
+				
+				//해당 row의 버튼정보 가져오기
+				let btn = $("#commentCard").nextAll("li").eq(i).find('div.btn_area button');
+				
+				/*
+					$(btn[0]); 수정
+					$(btn[1]); 등록
+					$(btn[2]); 취소
+					$(btn[3); 삭제
+				*/
+				if(type == "U"){
+              		BEFORE_TEXTAREA = textarea.val();
+					$(btn[0]).hide();
+					$(btn[3]).hide();
+					$(btn[1]).show();
+					$(btn[2]).show();
+				}else {
+					$(btn[0]).show();
+					$(btn[3]).show();
+					$(btn[1]).hide();
+					$(btn[2]).hide();			
+               		//취소를 하면 원래 내용으로 되돌린다.
+      			 	textarea.attr("readonly","readonly");
+   					textarea.val(BEFORE_TEXTAREA);	
+				}
+			}
+			
+			/**
+			* @param {String} cmt_no 코맨트 번호
+			* @param {String} i li 위치
+			*/
+			function fnUpdateComment(cmt_no, i){
+
+				//해당 row의 텍스트아레아 정보 가져오기
+				let textarea = $("#commentCard").nextAll("li").eq(i).find('div.comment_write_box textarea');			
+				let cmt_content = textarea.val();
+
+				if(cmt_content.trim() == ""){
+					$(".body").html("내용을 입력해 주세요.")
+		   	    	$("#commentModal").modal("show");
+					textarea.focus();
+					return
+				}
+
+				//저장하는 함수 
+				fnCallAjax("/comment/updateComment" ,{"cmt_no" : cmt_no, "cmt_content" : cmt_content}, fnSaveCallBack);
+
+			}
+			
+			/**
+			* 댓글 저장/수정/삭제 요청 콜백함수
+			* @param {json} response : 컨트롤러에서 리턴받은 값
+			*/				
+			function fnSaveCallBack(response){
+				console.log("fnSaveCallBack ajax 통신결과");
+				console.log(response);		
+				if(response.result > 0){
+					$(".body").html(response.message);
+		   	    	$("#commentModal").modal("show");
+					$("textarea[name=cmt_content]").val("");
+					fnGetCommentList();
+				}else {
+					$(".body").html(response.message)
+	   	    		$("#commentModal").modal("show");					
+				}
+			}
+			
+			/**
+			* 공통 ajax 호출 함
+			* @param {String} url ajax 호출 URL
+			* @param {Object} sendData 컨트롤러로 전송하는 데이터
+			* @param {Function} callbackFunction ajax 호출이 성공하다음에 실행할 함수
+			*/
+			function fnCallAjax(url ,sendData, callbackFunction){
+				$.post(PATH+url, sendData)
+			  	.done(callbackFunction)		//ajax 호출 성공후 실행하는 함수
+			  	.fail(function(jqXHR, textStatus, errorThrown) {  // 요청이 실패한 경우 실행되는 함수
+					$(".body").html("처리중 오류가 발생하였습니다.")
+	   	    		$("#commentModal").modal("show");	
+			  		console.log("요청이 실패했습니다.");
+				    console.log(jqXHR); // 실패한 XMLHttpRequest 객체에 대한 정보
+				    console.log(textStatus); // 실패한 상태에 대한 설명
+				    console.log(errorThrown); // 선택적인 예외 개체 (프레임워크에서 제공되는 경우)
+			  	});				
+			}
+			
     	</script>
 	</body>
 </html>

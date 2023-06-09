@@ -8,22 +8,31 @@ import com.ottt.ottt.dto.ArticleSearchDTO;
 
 public interface CommunityDao {
 	
-	ArticleDTO select(ArticleDTO dto) throws Exception;
-	
-	int insert(ArticleDTO dto) throws Exception;
-	
-	int delete(Integer article_no) throws Exception;
-	
-	int update(ArticleDTO articleDTO) throws Exception;
-
+	//게시글 전체 목록
 	List<ArticleDTO> getArticleList(ArticleSearchDTO dto) throws Exception;
 	
+	//게시글 클릭시 하나만 선택
+	ArticleDTO select(ArticleDTO dto) throws Exception;
+	
+	//게시글 저장
+	int insert(ArticleDTO dto) throws Exception;
+	
+	//게시글 삭제
+	int delete(Integer article_no) throws Exception;
+	
+	//게시글 수정
+	int update(ArticleDTO articleDTO) throws Exception;
+
+	//게시글 전체 개수??
 	int getArticleTotalCount(ArticleSearchDTO dto) throws Exception;
 	
+	//좋아요 선택 여부확인
 	int selectLikeCount(ArticleLikeDTO dto) throws Exception;
 	
+	//좋아요 저장
 	int insertLike(ArticleLikeDTO dto) throws Exception;
 
+	//좋아요 삭제
 	int deleteLike(ArticleLikeDTO dto) throws Exception;
 	
 }

@@ -117,7 +117,18 @@ body{background-color: #202020; color: #fff;}
 .wrap{width: 100%;height: 100%;position: relative;}
 
 /* header Start*/
-header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;position: relative;display: flex; z-index: 999; background-color: #202020;}
+header{
+	width: 1200px;
+	height: 130px;
+	box-sizing: border-box;
+	margin: 0 auto;
+	position: relative;
+	display: flex;
+	z-index: 999;
+	background-color: #202020;
+	position: sticky;
+	top: 0;
+}
 
 .logo{    width: 230px;
     height : 95px;   
@@ -161,12 +172,6 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
     margin-top: 12px;
 }
 
-/* .h-icon  img{
-    width: 50px;
-} */
-
-
-
 .h-icon > ul > li:first-child > a{
     background:url("../../images/icon/search02.png");
     background-repeat: no-repeat;
@@ -186,7 +191,7 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
 }
 
 .h-icon > ul > li > .logout{
-	background: url("../../images/icon/user01.png");
+    background: url("../../images/icon/user01.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 32px;
@@ -439,10 +444,14 @@ input[type="text"] {
 } */
 
 .search01{
-    color: #ffffff;
+	position: fixed;
+	color: #ffffff;
     font-weight: bold;
     font-size: 25px;
-    margin-top: 10px;       
+    display: flex; 
+    margin: 10px auto; 
+    position: relative;
+    left: 200px;
 }
 
 .search-style{
@@ -562,4 +571,32 @@ input[type="checkbox"]:checked{
     background-size: 50px;
     width: 50px;
     height: 50px;
+}
+
+/* 검색 자동완성 */
+.autocomplete > div.active {
+  background: #333;
+  color: #eee;
+}
+
+.autocomplete > div{
+	background-color: #4b4b4b;
+	padding: 7px 20px;
+	font-size: 20px;
+	border-radius: 10px;
+	margin: 0.1px;
+}
+
+.autocomplete > div > a{
+	color: #fff;
+	text-decoration: none;
+}
+
+.autocomplete{
+	position: relative;
+	left: 560px;
+	position: fixed;
+	border-radius: 10px;
+	z-index: 999;
+	width: 800px;	
 }

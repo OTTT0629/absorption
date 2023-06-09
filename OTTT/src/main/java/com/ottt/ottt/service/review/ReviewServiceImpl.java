@@ -9,6 +9,7 @@ import com.ottt.ottt.dao.review.ReviewDao;
 import com.ottt.ottt.domain.SearchItem;
 import com.ottt.ottt.dto.CommentDTO;
 import com.ottt.ottt.dto.ReviewDTO;
+import com.ottt.ottt.dto.ReviewLikeDTO;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
@@ -35,15 +36,15 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public int getCount() throws Exception {
+	public int getCount(int content_no) throws Exception {
 		
-		return reviewDao.count();
+		return reviewDao.count(content_no);
 	}
 
 	@Override
-	public List<ReviewDTO> getReview() throws Exception {
+	public List<ReviewDTO> getReview(int content_no) throws Exception {
 		
-		return reviewDao.selectAll();
+		return reviewDao.selectAll(content_no);
 	}
 
 	@Override
@@ -53,9 +54,9 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public double getRatingAvg() throws Exception {
+	public double getRatingAvg(Integer content_no) throws Exception {
 		
-		return reviewDao.ratingAvg();
+		return reviewDao.ratingAvg(content_no);
 	}
 	
 	
@@ -67,7 +68,7 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public List<CommentDTO> getreply(Integer review_no) throws Exception {
+	public List<CommentDTO> getallreply(Integer review_no) throws Exception {
 		
 		return reviewDao.allreply(review_no);
 	}
@@ -104,6 +105,49 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public int myReviewCnt(SearchItem sc) throws Exception {
 		return reviewDao.myReviewCnt(sc);
-	}    
+	}
+
+	@Override
+	public int getDuplication(Integer content_no, int user_no) throws Exception {
+		// TODO Auto-generated method stub
+		return reviewDao.reviewDuplication(content_no, user_no);
+	}
+
+	@Override
+	public int selectLikeCount(ReviewLikeDTO dto) throws Exception {
+		// TODO Auto-generated method stub
+		return reviewDao.selectLikeCount(dto);
+	}
+
+	@Override
+	public int insertLike(ReviewLikeDTO dto) throws Exception {
+		// TODO Auto-generated method stub
+		return reviewDao.insertLike(dto);
+	}
+
+	@Override
+	public int deleteLike(ReviewLikeDTO dto) throws Exception {
+		// TODO Auto-generated method stub
+		return reviewDao.deleteLike(dto);
+	}
+
+	@Override
+	public int removeReplyReview(Integer review_no, Integer user_no) throws Exception {
+		// TODO Auto-generated method stub
+		return reviewDao.deleteReplyReview(review_no, user_no);
+	}
+
+	@Override
+	public int modifyReplyReview(ReviewDTO reviewDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return reviewDao.updateReplyReview(reviewDTO);
+	}
+
+	@Override
+	public int modifyReply(CommentDTO CommentDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return reviewDao.updateReply(CommentDTO);
+	}
+ 
 
 }
