@@ -41,4 +41,12 @@ public class MyDiaryDaoImpl implements MyDiaryDao {
 		return session.update(namespace + "updateDiary", myDiaryDTO);
 	}
 
+	@Override
+	public int delete(Integer content_no, Integer user_no) throws Exception {
+		Map map = new HashMap();
+		map.put("user_no", user_no);
+		map.put("content_no", content_no);
+		return session.delete(namespace  + "delete" , map);
+	}
+
 }

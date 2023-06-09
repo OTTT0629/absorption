@@ -101,7 +101,8 @@ public class DiaryController {
 			if (ds.modDiary(myDiaryDTO) != 1)
 				throw new Exception("Modify failed");
 
-			rattr.addFlashAttribute("msg", "MOD_OK");			
+			rattr.addFlashAttribute("msg", "MOD_OK");
+			//return "redirect:/mypage/mydiary/diary"+sc.getString();
 			return "forward:/mypage/mydiary/diary"+sc.getString();
 
 		} catch (Exception e) {
@@ -114,6 +115,35 @@ public class DiaryController {
 			return "/mypage/myprofile/mydiary";
 		}
 
+	}
+	
+	@PostMapping("/mydiary/remove")
+	public String rmvDiary (MyDiaryDTO myDiaryDTO, SearchItem sc
+			, RedirectAttributes rattr, Model m, HttpSession session) {
+		Integer user_no = (Integer) session.getAttribute("user_no");
+		System.out.println("====================================== remove 진입 ");
+		System.out.println("====================================== myDiaryDTO.toString() : " + myDiaryDTO.toString());
+		System.out.println("====================================== user_no " + user_no);
+		System.out.println("====================================== myDiaryDTO.getUser_no() " + myDiaryDTO.getUser_no());
+		
+		if(user_no.equals(myDiaryDTO.getUser_no()) ) {
+			System.out.println("====================================== if 진입 ");
+			try {
+				if(ds.remove(myDiaryDTO.getContent_no(), user_no) != 1)
+					throw new Exception("Delete failed");	
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				rattr.addFlashAttribute("msg", "DEL_ERR");
+				return "forward:/mypage/mydiary/diary"+sc.getString();
+			}
+			
+			rattr.addAttribute("page", sc.getPage());
+			rattr.addAttribute("pageSize", sc.getPageSize());
+			rattr.addFlashAttribute("msg", "DEL_OK");
+		}
+		
+		return "redirect:/mypage/mydiary";
 	}
 
 	// mydiary 글작성

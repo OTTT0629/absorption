@@ -12,4 +12,5 @@ public interface MyDiaryService {
     int myDiaryCnt(SearchItem sc) throws Exception;
     MyDiaryDTO getDiary(Integer content_no, Integer user_no) throws Exception;
     int modDiary(MyDiaryDTO myDiaryDTO) throws Exception;
+    int remove(Integer content_no, Integer user_no) throws Exception;
 }

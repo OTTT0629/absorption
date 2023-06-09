@@ -136,6 +136,7 @@
    	<script type="text/javascript">
    		let msg = "${msg}"
     	if(msg == "READ_ERR") alert("접근 권한이 없습니다")
+    	if(msg == "DEL_OK") alert("다이어리 삭제에 성공했습니다")
     	
    		function readDiary(content_no, user_no) {
 

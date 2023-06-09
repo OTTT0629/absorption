@@ -112,6 +112,9 @@
 	 				return;
 	 			}
 	 			
+	 			if (!confirm("수정하시겠습니까?")) return;
+	 			alert("수정되었습니다")
+	 			
 	 			form.attr("action", "<c:url value='/mypage/mydiary/modify${searchItem.string}' />")
 	 			form.attr("method", "post")
 	 			
@@ -133,7 +136,13 @@
 		 			form.submit()
 		 			
 		 			return false;
-	 			}			
+	 			}
+
+				if (!confirm("정말로 삭제하시겠습니까?")) return;
+				
+				form.attr("action", "<c:url value='/mypage/mydiary/remove${searchItem.queryString}' />")
+				form.attr("method", "post")
+				form.submit()
 				
 			})
 			
@@ -158,6 +167,7 @@
     	let msg = "${msg}"
     	if(msg == "WRT_ERR") alert("다이어리 등록에 실패했습니다. 다시 시도해 주세요")
     	if(msg == "MOD_ERR") alert("다이어리 수정에 실패했습니다. 다시 시도해 주세요")
+    	if(msg == "DEL_ERR") alert("다이어리 삭제에 실패했습니다. 다시 시도해 주세요") 	
     </script>
 	 
 
