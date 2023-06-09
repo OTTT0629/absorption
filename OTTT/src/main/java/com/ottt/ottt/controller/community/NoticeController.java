@@ -18,7 +18,7 @@ import com.ottt.ottt.domain.SearchItem;
 import com.ottt.ottt.dto.ArticleDTO;
 import com.ottt.ottt.dto.UserDTO;
 import com.ottt.ottt.service.community.notice.ArticleService;
-
+import com.ottt.ottt.service.community.notice.ArticleServiceImpl;
 
 
 @Controller
@@ -26,7 +26,7 @@ import com.ottt.ottt.service.community.notice.ArticleService;
 public class NoticeController {
 	
 	@Autowired
-	ArticleService articleService;
+	ArticleServiceImpl articleService;
 	@Autowired
 	LoginUserDao loginUserDao;
 	
@@ -100,7 +100,6 @@ public class NoticeController {
 			m.addAttribute("msg", "MOD_ERR");		
 			return "/community/notice/noticeboard";
 		}
-		
 	}
 	
 	@PostMapping("/notice/remove")
@@ -121,6 +120,32 @@ public class NoticeController {
 		rattr.addFlashAttribute("msg", msg);
 		
 		return "redirect:/community/notice";
+	}
+	
+	@GetMapping("/notice/write")
+	public String write(Model m) {
+		m.addAttribute("mode", "new");
+		return "/community/notice/noticeboard";
+	}
+	
+	@PostMapping("/notice/write")
+	public String writePost(ArticleDTO articleDTO, RedirectAttributes rattr, Model m, HttpSession session) {
+		String writer = (String)session.getAttribute("id");
+		UserDTO userDTO = loginUserDao.select(writer);
+		articleDTO.setUser_no(userDTO.getUser_no());
+		try {
+			if(articleService.write(articleDTO) != 1) {
+				throw new Exception("Write failed");
+			}
+			rattr.addFlashAttribute("msg", "WRT_OK");
+			return "redirect:/community/notice";
+		} catch (Exception e) {
+			e.printStackTrace();
+			m.addAttribute("mode", "new");			//글쓰기 모드
+			m.addAttribute("articleDTO", articleDTO);	//등록하려던 내용을 보여줘야함
+			m.addAttribute("msg", "WRT_ERR");
+			return "/community/notice/noticeboard";
+		}
 	}
 		
 }

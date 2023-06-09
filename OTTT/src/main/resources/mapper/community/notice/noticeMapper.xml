@@ -8,27 +8,32 @@
   	<select id="selectList" parameterType="SearchItem" resultType="ArticleDTO" >
   		SELECT article_title, article_create_dt, article_no
 		FROM tb_article
-		where article_index_no = '3'
+		where article_index_no = '3' and
+		(article_title like concat('%', #{keyword}, '%')
+		or article_content like concat('%', #{keyword}, '%'))
 		order by article_no desc 
 		limit #{pageSize} offset #{offset}
   	</select>
   	
   	<insert id="insert" parameterType="ArticleDTO">
   		INSERT INTO tb_article
-		(article_index_no, article_content, article_title, article_create_dt)
-		VALUES('3', #{article_content}, #{article_title}, now())
+		(article_index_no, article_content, article_title, article_create_dt, user_no)
+		VALUES('3', #{article_content}, #{article_title}, now(), #{user_no})
   	</insert>
   	
   	<select id="count" parameterType="SearchItem" resultType="int">
 		select count(*) 
 		from tb_article 
-		where article_index_no = '3'  	
+		where article_index_no = '3' and
+		(article_title like concat('%', #{keyword}, '%')
+		or article_content like concat('%', #{keyword}, '%')) 	
   	</select>
   	
   	<select id="selectOne" parameterType="int" resultType="ArticleDTO">
   		select * from tb_article
-  		where article_no = #{article_no}
+  		where article_no = #{article_no} 
   	</select>
+  	
   	
   	<update id="update" parameterType="ArticleDTO">
   		update tb_article

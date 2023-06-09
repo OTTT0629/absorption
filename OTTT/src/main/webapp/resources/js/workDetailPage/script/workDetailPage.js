@@ -30,6 +30,13 @@ $(document).ready(function(){
   const reviewsContainer = document.getElementById('reviews-container');
   const reviewResult = document.getElementById('review-result');
   
+  const modButton = $('.modOnBtn');
+         const modPopup = $('.mod-popup');
+         const submitModButton = $('.submitMod-review');
+         const modCancelButton = $('.modcancel-review');
+  
+  
+  
   reviewButton.addEventListener('click', () => {
     reviewPopup.style.display = 'block';
     $(".review-back").fadeIn();
@@ -50,6 +57,25 @@ $(document).ready(function(){
     reviewPopup.style.display = 'none';
     $(".review-back").fadeOut();
   });
+  
+  modButton.on('click', function() {           
+           modPopup.css('display', 'block');
+           $('.review-back').fadeIn();
+           $('.popup12').fadeIn();
+           
+           
+         });
+         
+         submitModButton.on('click', function() {
+           modPopup.css('display', 'none');
+           $('.review-back').fadeOut();
+         });
+
+         modCancelButton.on('click', function() {
+           modPopup.css('display', 'none');
+           $('.review-back').fadeOut();
+         });
+  
 });
 
 

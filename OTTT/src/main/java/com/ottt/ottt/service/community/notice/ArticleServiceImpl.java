@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ottt.ottt.dao.community.notice.ArticleNoticeDao;
+import com.ottt.ottt.dao.community.notice.ArticleNoticeDaoImpl;
 import com.ottt.ottt.domain.SearchItem;
 import com.ottt.ottt.dto.ArticleDTO;
 
@@ -13,7 +13,7 @@ import com.ottt.ottt.dto.ArticleDTO;
 public class ArticleServiceImpl implements ArticleService {
 
 	@Autowired
-	ArticleNoticeDao articleNoticeDao;
+	ArticleNoticeDaoImpl articleNoticeDao;
 
 	@Override
 	public List<ArticleDTO> getPage(SearchItem sc) throws Exception {

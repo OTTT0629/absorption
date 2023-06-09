@@ -102,38 +102,30 @@ li a:hover{
 }
 
 
-/* header */
-
-header{
-    width: 1200px;
-    height: 130px;
-    background-color: #202020;
-    /* border: 1px solid red; */
-    box-sizing: border-box;
-    margin: 0 auto;
-    position: relative;
-    display: flex;
-}
-
-.header{
-    z-index: 999;
-}
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
 
 
-.logo{
-    width: 230px;
+*{margin: 0;padding: 0;font-family: 'Noto Sans KR', sans-serif;}
+ 
+a{text-decoration: none;color: inherit;display: block;}
+
+ul,li,ol{list-style: none;}
+
+body{background-color: #202020; color: #fff;}
+
+.wrap{width: 100%;height: 100%;position: relative;}
+
+/* header Start*/
+header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;position: relative;display: flex; z-index: 999; background-color: #202020;}
+
+.logo{    width: 230px;
     height : 95px;   
-    margin-top: 30px;
-}
+    margin-top: 30px;}
+ 
+.logo > a > img{margin-top: 2.5px;width: 200px;}
 
-.logo > a > img{
-    margin-top: 2.5px;
-    width: 200px;
-}
-
-.gnb > ul{
-    display: flex;
-}
+.gnb > ul{display: flex;}
 
 .gnb > ul > li{
     width: 70px;
@@ -143,6 +135,7 @@ header{
     margin-top: 30px;
     margin-right:5px;
 }
+
 
 .gnb a{
     font-size: 22px;
@@ -168,9 +161,9 @@ header{
     margin-top: 12px;
 }
 
-.h-icon  img{
+/* .h-icon  img{
     width: 50px;
-}
+} */
 
 
 
@@ -193,15 +186,13 @@ header{
 }
 
 .h-icon > ul > li > .logout{
-    background:url("../../images/icon/user01.png");
+	background: url("../../images/icon/user01.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 32px;
     width: 32px;
     height: 32px;
 }
-
-
 
 .h-icon > ul > li > .logout:hover{
     background: url("../../images/icon/user-h.png");
@@ -212,25 +203,13 @@ header{
     height: 32px;
 }
 
-.h-icon > ul > li > .login{
-    background:url("../../images/img/profile.png");
+.h-icon > ul > li > a > .login{
     background-repeat: no-repeat;
     background-position: center;
     background-size: 32px;
     width: 32px;
     height: 32px;
 }
-
-
-
-/* .h-icon > ul > li:last-child > a:hover{
-    background: url("./image/icon/user-h.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 32px;
-    width: 32px;
-    height: 32px;
-} */
 
 .sec_2{
     width: 1200px;
@@ -246,6 +225,7 @@ header{
     text-align: center;
     display: flex;
     overflow: hidden;
+    width: 1213px;
 }
 
 .main-work a{
@@ -264,12 +244,12 @@ header{
 }
 
 .right-button1, .right-button2, .right-button3{
-    margin-right: 20px;
+    margin: 0 10px;
     z-index: 997;
 }
 
 .cont01{
-    width: 1155px;
+    width: 1213px;
     height: 300px;
     margin: 0 auto;
     position: relative;
@@ -290,7 +270,6 @@ header{
     width: 2296px;
     height: 300px;
     /* border: 1px solid red; */
-    box-sizing: border-box;
     display: flex;
     overflow: hidden;
     padding: 20px 0px;
@@ -309,49 +288,30 @@ header{
 
 
 .work-review{
-    position: relative;
-    top: -110px;
+    position: absolute;
     display: none;
-    width: 160px;
-    height: 130px;
-    background-color: #202020;
-    opacity: 80%;
+    height: 220px;
+    width: 150px;
 }
 
 .work-cat{
-    width: 150px;
-    display: flex;
-    justify-content: space-around;
     position: absolute;
-    left: -75px;
-    top: -10px;
-}
-
-.work-cat div{
-    color: #fff;
-    font-size: 16px;
-    font-weight: bold;
-    padding-left: 4px;
+    top: 210px;
+    display: flex;
+    justify-content: space-between;
+    width: 160px;
 }
 
 .ott-img{
     position: absolute;
     display: flex;
-    text-align: center;
-    left: -75px;
-    top: -50px;
+   /*  top: -5x; */
+    top: 170px;
 }
 
 .ott-img img{
     width: 30px;
     margin-right: 5px;
-}
-
-.work-my{
-    position: absolute;
-    left: 15px;
-    top: 60px;
-    display: flex;
 }
 
 .work-info:hover .work-review{
@@ -360,29 +320,26 @@ header{
 }
 
 .work-info:hover .poster{
-    scale: 1.3;
+    scale: 1.2;
     z-index: 992;
+    opacity: 0.4;
 }
 
 .star-img{
-    width: 100px;
-    position: absolute;
-    top: 17px;
-    left: -50px;
+    display: flex;
 }
 
-.work-review a{
-    color: #fff;
-    text-decoration: none;
+
+.score{
+    color: white;
+    margin: 5xp;
     font-size: 20px;
-    margin: 0 3px;
-    position: relative;
-    top: 35px;
-
+    font-weight: bold;
+    margin-left: 8px;
 }
 
-.work-review a:hover{
-    color: #33FF33;
+.star-img img{
+    width: 30px;
 }
 
 /* Search Page*/
@@ -458,6 +415,7 @@ header{
     border-bottom-style: solid;
     border-bottom-width: 1vb;
     border-bottom-color: #33FF33;  
+    outline: none;
 }
 
 .search-main{
@@ -465,8 +423,16 @@ header{
     margin-top: 5vb;
 }
 
+input[type="text"] {
+    outline: none;
+    color: #fff;
+    font-size: 28px;
+    font-weight: bold;
+    padding: 10px;
+  }
+
 /* .search{
-    color: #ffffff;
+    color: #fff;
     font-weight: bold;
     font-size: 2.5vb;
     margin-top: 2vb;    
@@ -527,14 +493,14 @@ input[type="checkbox"]:checked{
 
 
 /* search 돋보기이미지*/
-.search{
+/* .search{
     color: #ffffff;
     font-weight: bold;
     font-size: 2.5vb;
     margin-top: 2vb;    
 }
-
-.search span a{
+ */
+.search span:last-child{
     width: 120px;
     height: 58px;
     position: relative;
@@ -543,13 +509,13 @@ input[type="checkbox"]:checked{
     transform: translateY(-50%);
 }
 
-.search span a img{
+.search span:last-child{
     width: 50px;
 }
 
 
 
-.search span a{
+.search span:last-child{
     background:url("../../images/icon/search02.png");
     background-repeat: no-repeat;
     background-position: center;
@@ -558,7 +524,7 @@ input[type="checkbox"]:checked{
     height: 50px;
 }
 
-.search span a:hover{
+.search span:last-child:hover{
     background: url("../../images/icon/search-h.png");
     background-repeat: no-repeat;
     background-position: center;
@@ -569,7 +535,7 @@ input[type="checkbox"]:checked{
 
 /* main 돋보기, 프로필 이미지*/
 
-.user-img, .search-img{
+.search-img{
     width: 120px;
     height: 58px;
     position: relative;
@@ -597,32 +563,3 @@ input[type="checkbox"]:checked{
     width: 50px;
     height: 50px;
 }
- 
-.user-img{
-	background: url("../../images/icon/search-h.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 50px;
-    height: 50px;
-    position: relative;
-    left: 600px;
-    margin-top: 20px;
-}
-
-
-
-.user{
-    width: 1200px;
-    margin: 0 auto;
-}
-
-
-
-/* .user-img:hover{
-    background: url("./image/icon/user-h.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 50px;
-    width: 50px;
-    height: 50px;
-} */

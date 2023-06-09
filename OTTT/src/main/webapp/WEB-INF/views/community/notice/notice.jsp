@@ -14,6 +14,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     <link rel="stylesheet" href="${path}/resources/css/community/notice/notice.css" >
     <script type="text/javascript" src="${path}/resources/js/community/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
 
 <style type="text/css">
@@ -38,22 +39,9 @@
     justify-content: flex-end;
 }
  
-.modi-del{
-	display: flex;
-    justify-content: flex-end;
-}
-
-
-.qa-main p{
-    display: flex;
-    justify-content: flex-end;
-    font-weight: bold;
-}
-
 .btn{
     color: #fff;
     background-color: transparent;
-    border-style: none;
     border-color: #fff; 
     font-size: 23px; 
     text-decoration: none;
@@ -74,50 +62,11 @@
 <body style="background-color: #202020;">
      
     <div class="wrap">
-      <header >
-        <div class="logo">
-          <a href="<c:url value="/" />">
-            <img src="${path}/resources/images/logo/OTTT.png" alt="로고">
-          </a>
-        </div>
-        <nav class="gnb">
-          <ul>
-            <li>
-              <a href="<c:url value="/genre/movie" />">영화</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/drama" />">드라마</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/interest" />">예능</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/animation" />">애니</a>
-            </li>
-            <li>
-              <a href="<c:url value="/community" />" style="color: #33ff33;">게시판</a>
-            </li>
-          </ul>
-        </nav>
-        <div class="h-icon">
-          <ul>
-            <li>
-              <a href="<c:url value='/search' />">
-                <!-- <img src="./images/icon/search02.png" alt="검색"> -->
-              </a>
-            </li>
-            <li>
-              <a href="<c:url value='${loginoutlink}' /> " class="${loginout}">
-                <!-- <img src="./images/icon/user01.png" alt="내 정보"> -->
-              </a>
-            </li>
-          </ul>
-        </div>
-      </header>
+    	<%@ include file="../../fix/header.jsp" %>
 
         <div id="line-1" >
           <nav class="nav">
-          <a class="nav-link1" href="<c:url value='/community' />">자유게시판</a>
+          <a class="nav-link1" href="<c:url value='/community/freecommunity' />">자유게시판</a>
           <a class="nav-link1" href="<c:url value='/community/endmovie/tving' />">종료예정작</a>
           <a class="nav-link1" href="<c:url value='/community/priceInfoTving' />">가격정보</a>
           <a class="nav-link1" href="<c:url value='/community/QnA' />">Q&A</a>
@@ -138,23 +87,35 @@
 	   	        $(".body").html("삭제 실패했습니다. 다시 시도해주세요.");
 	   	     	$('#Modal').modal('show');
 	   	    }
- 
+	   	if(msg == 'WRT_OK') {
+   	        $(".body").html("글이 등록되었습니다.");
+   	     	$('#Modal').modal('show');
+   	    }
 	   	});
+   	</script>
+   	
+   	<script type="text/javascript">
+   		$(document).ready(function() {
+			$("#writeBtn").on("click", function() {
+				location.href="<c:url value='/community/notice/write' />"
+			})
+		})
    	</script>
 
 
         <!--글작성 관련 시작-->
       <div class="qa-main">
         <!-- 검색 배너-->
-        <div class="search-var">
-          <span>제목+내용</span>
-          <input  type="text" class="search-input"/>
-          <button type="button" class="btn btn-outline-success">검색</button>
-        </div>
-        
+        <form action="<c:url value="/community/notice" />" method="get">
+	        <div class="search-var">
+	          <span>제목+내용</span>
+	          <input  type="text" class="search-input" name="keyword" value="${param.keyword }"/>
+	          <button type="button" class="btn btn-outline-success" id="btn">검색</button>
+	        </div>
+        </form>    
         <c:if test="${userDTO.admin.toString() == 'Y' }">
-	        <div style="margin-top:30px; justify-content: flex-end; display: flex;">
-	          <button type="button" class="btn btn-outline-success" style="position: relative; left: -100px;">글작성</button> 
+	        <div style="justify-content: flex-end; display: flex;">
+	          <button type="button" id="writeBtn" class="btn btn-outline-success" style="position: relative; left: -100px; margin-top: 10px;">글작성</button> 
 	        </div>
         </c:if>
         
