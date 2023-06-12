@@ -138,7 +138,6 @@ $(document).ready(function() {
 	    $("#msg-write").attr("data-url", url) // 답장 버튼에 URL을 저장
 	
 	    var sendUserNk = $(this).siblings(".msg-nicknm").text()
-	    $("#msg-number").text(msgNo)
 	    $("#msgNick").text(sendUserNk)
 	})
 
