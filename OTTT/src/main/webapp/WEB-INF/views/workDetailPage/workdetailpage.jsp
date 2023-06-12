@@ -28,9 +28,38 @@
     <link rel="stylesheet" href="${path}/resources/css/workDetailPage/workDetailPage.css" >
     <script src="${path }/resources/js/workDetailPage/script/jquery-3.6.1.min.js"></script>
     <script src="${path}/resources/js/workDetailPage/script/workDetailPage.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
    
   </head>
   <body id="area">
+  	<script type="text/javascript">
+  	let path = window.location.href;
+	
+	function goProfile(user_no) {
+		let form = document.createElement('form');				
+		
+		let data = {
+				user_no : user_no,
+				toURL : path
+        };
+		
+		for (let key in data) {
+	        if (data.hasOwnProperty(key)) {
+	            let obj = document.createElement('input');
+	            obj.setAttribute('type', 'hidden');
+	            obj.setAttribute('name', key);
+	            obj.setAttribute('value', data[key]);
+	            form.appendChild(obj);
+	        }
+	    }
+		
+		form.setAttribute('method','post');
+		form.setAttribute('action','/ottt/profile');
+		
+		document.body.appendChild(form);
+		form.submit();				
+	}
+  	</script>
     <div class="wrap">
       <div class="popupback"></div>
       <div class="popup-video">
@@ -656,7 +685,9 @@
         <div class="review-box">      
           <div class="review-box-header">
             <div class="user-icon">
-              <img src="${ReviewDTO.image }" >
+            	<a href="javascript:goProfile(${ReviewDTO.user_no })">
+              		<img src="${ReviewDTO.image }" >
+             	</a>
             </div>
             <div class="user-name">
               <a href="../ottt박소율/mypageshow.html">
@@ -794,7 +825,9 @@
     </div>
     
    <script type="text/javascript">
-   $(document).ready(function() {   
+   $(document).ready(function() {
+	   
+	   
       $('#submit-review').on("click", function(){
          let form = $("#review-form")
              form.attr("action", "<c:url value='/write'/>")

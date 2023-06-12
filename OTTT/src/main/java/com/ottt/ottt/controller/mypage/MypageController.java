@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.ottt.ottt.dto.UserDTO;
 import com.ottt.ottt.service.user.UserService;
@@ -35,6 +36,43 @@ public class MypageController {
 		}
 		
 		return "/mypage/myprofile/mypage";
+	}
+
+	@PostMapping("/profile")
+	public String profile (Integer user_no, HttpSession session, HttpServletRequest request
+							, Model m, String toURL) {
+		
+		Integer my_no = (Integer) session.getAttribute("user_no");
+		System.out.println("=================================== my_no : " + session.getAttribute("user_no"));
+		
+		System.out.println("=================================== user_no : " + user_no);
+		
+		System.out.println("=================================== my_no != null : " + (my_no != null));
+				
+		
+		// 내 프로필인지 아닌지 확인
+		if((my_no != null)) {
+			if((my_no.equals(user_no))) {
+				UserDTO userDTO;
+				try {
+					userDTO = us.getUser(my_no);
+					m.addAttribute(userDTO);
+					return "redirect:/mypage";
+					
+				} catch (Exception e) { e.printStackTrace(); }
+			}
+		}
+		
+		UserDTO userDTO;
+		try {
+			userDTO = us.getUser(user_no);
+			m.addAttribute(userDTO);
+			
+			return "/mypage/profile/profile";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "redirect:"+toURL;			
+		}
 	}
 	
 	private boolean loginCheck(HttpServletRequest request) {

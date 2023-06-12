@@ -307,6 +307,33 @@
 				    ,fnCreatArticleList
 				)				
 			}
+			
+			let path = window.location.href;
+			
+			function goProfile(user_no) {
+				let form = document.createElement('form');				
+				
+				let data = {
+						user_no : user_no,
+						toURL : path
+		        };
+				
+				for (let key in data) {
+			        if (data.hasOwnProperty(key)) {
+			            let obj = document.createElement('input');
+			            obj.setAttribute('type', 'hidden');
+			            obj.setAttribute('name', key);
+			            obj.setAttribute('value', data[key]);
+			            form.appendChild(obj);
+			        }
+			    }
+				
+				form.setAttribute('method','post');
+				form.setAttribute('action','/ottt/profile');
+				
+				document.body.appendChild(form);
+				form.submit();				
+			}
 				
 			//목록 생성 함수, $.post 에서 success 함수로 사용
 			function fnCreatArticleList(response){
@@ -337,7 +364,7 @@
 						createHtml += 	'<ul class="post" >';
 						createHtml += 		'<div class="post_info">';
 						createHtml +=			'<div style="display: flex;">';
-						createHtml +=				'<a href="#"><img class="usur_img" src="'+ v.image +'" alt="profile"></a>';
+						createHtml +=				'<a href="javascript:goProfile('+v.user_no +')"><img class="usur_img" src="'+ v.image +'" alt="profile"></a>';
 						createHtml +=				'<a href="#"><span class="nickname">'+ v.user_nicknm +'</span></a>';
 						createHtml +=				'<span id="current_date" >'+ formattedDate +'</span>';
 						createHtml +=			'</div>';
@@ -518,6 +545,7 @@
 			function fnPageMovePost(article_no){
 				location.href = PATH+"/community/post?article_no="+article_no;    				
 			}
+			
 			
 		</script>
 	</body>
