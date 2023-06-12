@@ -45,38 +45,40 @@
 		})
      </script> -->
      
-	<script type="text/javascript">
-		$(document).ready(function() {
-		  $(".delsendBtn").on('click', function(event) {
-			  
-			  if(!confirm("쪽지가 삭제됩니다.")) return;
-		    	deletemsg(event);
-		  });
+<script type="text/javascript">
+$(document).ready(function() {
+	  $(".delsendBtn").on('click', function(event) {
 		  
-		  function deletemsg(event) {
-			//버튼 테이블에 있는 메세지 넘버 받아오기
-		    var messageNo = $(event.target).closest("tr").find("input[name='message_no']").val();
-		    
-		    //폼태그 생성하기
-		    let form = document.createElement('form');
-		    //인풋태그 생성하기
-		    let input = document.createElement('input');
-		    //인풋 속성
-		    input.setAttribute('type', 'hidden');
-		    input.setAttribute('name', 'message_no');
-		    input.setAttribute('value', messageNo);
-		    form.appendChild(input);
-		    
-		    form.setAttribute("action", '/ottt/mypage/message/send/remove');
-		    form.setAttribute("method", "post");
-		    
-		    document.body.appendChild(form);
-		    form.submit();
-		  }
-		});
-     </script>
-     <!-- 폼태그를 사용하면 아이디를 쓰든 클래스를 사용하든 테이블 가장 맨 위에 잇는 애만 된다 버튼 눌를 때마다 폼태그 생성 -->
+		  if(!confirm("쪽지가 삭제됩니다.")) return;
+	    	deletemsg(event);
+	  });
+	  
+	  function deletemsg(event) {
+		//버튼 테이블에 있는 메세지 넘버 받아오기
+	    var messageNo = $(event.target).closest("tr").find("input[name='message_no']").val();
+	    
+	    //폼태그 생성하기
+	    let form = document.createElement('form');
+	    //인풋태그 생성하기
+	    let input = document.createElement('input');
+	    //인풋 속성
+	    input.setAttribute('type', 'hidden');
+	    input.setAttribute('name', 'message_no');
+	    input.setAttribute('value', messageNo);
+	    form.appendChild(input);
+	    
+	    form.setAttribute("action", '/ottt/mypage/message/send/remove');
+	    form.setAttribute("method", "post");
+	    
+	    document.body.appendChild(form);
+	    form.submit();
+	  }
+	});
      
+     
+	     
+     
+     </script>
     <div class="warp">
 	<%@ include file="../../fix/header.jsp" %>
 
@@ -119,6 +121,7 @@
 							<div style="display: flex; margin-top: 20px; justify-content: center; color: #8f8f8f;">보관된 쪽지가 없습니다.</div>
 						</c:if>
 			            <c:forEach var="messageDTO" items="${list }">
+			            <!-- 폼태그를 사용하명 아이디를 쓰든 클래스를 사용하든 맨 위에 잇는 애만 된다 버튼 눌를 때 폼태그 생강 -->
 							<tr class="title-line" style="font-weight: 200">
 								<td class="msg-no" style="display: none; ">${messageDTO.message_no}</td>
 								<input name="message_no" type="hidden" value="${messageDTO.message_no}" />

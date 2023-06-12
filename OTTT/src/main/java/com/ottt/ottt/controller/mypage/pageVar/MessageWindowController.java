@@ -56,14 +56,16 @@ public class MessageWindowController {
 		messageDTO.setDelete_by_receiver(false);
 		messageDTO.setDelete_by_sender(false);
 		
-//		System.out.println("================================== setSend_user_no : " + userDTO.getUser_no() );
-//		System.out.println("================================== content : " + content );
-//		System.out.println("================================== setReceive_user_no : " + userNo);
-//		System.out.println("================================== messageDTO.getReceive_user_no() : " + messageDTO.getReceive_user_no() );
-//		System.out.println("================================== messageDTO.getSend_user_no() : " + messageDTO.getSend_user_no() );
-//		System.out.println("================================== messageDTO.getContent() : " + messageDTO.getContent());		
+		System.out.println("================================== setSend_user_no : " + userDTO.getUser_no() );
+		System.out.println("================================== content : " + content );
+		System.out.println("================================== setReceive_user_no : " + userNo);
+
+		System.out.println("================================== messageDTO.getReceive_user_no() : " + messageDTO.getReceive_user_no() );
+		System.out.println("================================== messageDTO.getSend_user_no() : " + messageDTO.getSend_user_no() );
+		System.out.println("================================== messageDTO.getContent() : " + messageDTO.getContent());		
 		
 		try {
+			
 			if(messageService.writeMsg(messageDTO) != 1) {
 				throw new Exception("Send failed");
 			}

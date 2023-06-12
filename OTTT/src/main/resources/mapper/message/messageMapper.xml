@@ -41,13 +41,12 @@
  	</select>
  	
  	<!-- 네비바 사용을 위한 검색에 해당되는 개수 세기 -->
- 	<!-- 받은 메시지 -->
+ 	<!-- 보낸 메시지 -->
  	<select id="recvResultCnt" parameterType="MessageSearchItem" resultType="int">
  		SELECT count(*) FROM tb_message
  		WHERE receive_user_no = #{user_no}
  	</select>
- 	<!-- 네비바 사용을 위한 검색에 해당되는 개수 세기 -->
- 	<!-- 보낸 메시지 -->
+ 	<!-- 받은 메시지 -->
   	<select id="sendResultCnt" parameterType="MessageSearchItem" resultType="int">
  		SELECT count(*) FROM tb_message
  		WHERE send_user_no = #{user_no}
@@ -81,7 +80,7 @@
  	</select>
  	
  	
- 	<!-- 개수를 제한하여 받은 메시지 리스트 불러오기 -->
+ 	<!-- 받은 메시지 리스트 불러오기 -->
  	<select id="selectRecv" parameterType="map" resultType="MessageDTO">
 		<include refid="selectFromMessage" />
 		WHERE a.receive_user_no = #{user_no}
@@ -89,7 +88,7 @@
 		LIMIT #{pageSize} OFFSET #{offset}
  	</select>
  	
- 	<!-- 개수를 제한하여 보낸 메시지 리스트 불러오기 -->
+ 	<!-- 보낸 메시지 리스트 불러오기 -->
  	<select id="selectSend" parameterType="map" resultType="MessageDTO">
 		SELECT a.message_no, a.send_user_no, a.receive_user_no, a.content, a.send_date, read_yn, b.user_nicknm 
 		FROM tb_message a
