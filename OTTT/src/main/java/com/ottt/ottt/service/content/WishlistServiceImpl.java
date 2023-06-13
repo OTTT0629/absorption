@@ -18,13 +18,11 @@ public class WishlistServiceImpl implements WishlistService {
 
 	@Override
 	public List<WishlistDTO> getWishlist(Integer user_no) throws Exception {
-		// TODO Auto-generated method stub
 		return wishlistDao.wishSelect(user_no);
 	}
 
 	@Override
 	public int wishCheck(Integer user_no, Integer content_no) throws Exception {
-		// TODO Auto-generated method stub
 		return wishlistDao.wishInsert(user_no, content_no);
 	}
 

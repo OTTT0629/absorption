@@ -2,6 +2,7 @@ package com.ottt.ottt.service.message;
 
 import java.util.List;
 
+import com.ottt.ottt.domain.MessageSearchItem;
 import com.ottt.ottt.dto.MessageDTO;
 
 /*
@@ -17,14 +18,28 @@ public interface MessageService {
 
 	MessageDTO read(Integer message_no) throws Exception;
 	
-	List<MessageDTO> loadRecvList(Integer receive_user_no) throws Exception;
+	List<MessageDTO> loadRecvList(MessageSearchItem msc) throws Exception;
 	
-	List<MessageDTO> loadSendList(Integer send_user_no) throws Exception;
+	List<MessageDTO> loadSendList(MessageSearchItem msc) throws Exception;
 	
 	int writeMsg(MessageDTO messageDTO) throws Exception;
 	
-	int removeMsg(Integer message_no, String user_no) throws Exception;
+	int removeMsg(Integer message_no) throws Exception;
 	
-	int removeMsgAll(String user_no) throws Exception;
+//	int removeMsgAll(String user_no) throws Exception;
+	
+	int getSendResultCnt(MessageSearchItem msc) throws Exception;
+	
+	int getRecvResultCnt(MessageSearchItem msc) throws Exception;
+	
+	List<MessageDTO> getSelectPage(MessageSearchItem msc) throws Exception;
+	
+	MessageDTO pickOneRecv(Integer message_no) throws Exception;
+	
+	MessageDTO pickOneSend(Integer message_no) throws Exception;
+	
+	int removeByReceiver(MessageDTO messageDTO) throws Exception;
+	
+	int removeBySender(MessageDTO messageDTO) throws Exception;
 
 }

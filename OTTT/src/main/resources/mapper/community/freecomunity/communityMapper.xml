@@ -52,7 +52,6 @@
 			, ta.article_mod_dt						-- 수정일
 			-- , to_char(ta.article_create_dt,'YYYY-MM-DD') AS article_create_dt	-- 등록일
 			-- , to_char(ta.article_mod_dt,'YYYY-MM-DD') AS article_create_dt	-- 수정일
-			, ta.report_cnt
 			, tu.user_nicknm				-- 사용자 닉네임
 			, tu.image						-- 사용자 프로필사진
 			, CASE	
@@ -177,7 +176,8 @@
 	<!-- 좋아요를 눌렀는지 카운트를 조회한다. -->
 	<select id="selectLikeCount" parameterType="ArticleDTO" resultType="int">
 		/*com.ottt.ottt.dao.CommunityMapper.selectLikeCount 호출*/
-        SELECT count(*) as count FROM tb_article_like 
+        SELECT count(*) as count 
+        FROM tb_article_like 
 		WHERE article_no = #{article_no} 
 		AND user_no = #{user_no} 
 	</select>

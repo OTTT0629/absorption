@@ -237,6 +237,12 @@ button {
     padding: 5px 12px;
 }
 
+button.active {
+  background-color: #33FF33;
+  color: black;
+  font-weight: 600;
+}
+
 .sec00 {
     /* border: 1px solid red; */
     width: 1200px;
@@ -254,9 +260,11 @@ button {
     display: flex;
     box-sizing: border-box;
 }
-.sec-left {
+.left-bottom {
 /*     border: 1px solid pink; */
+	height: 490px;
     overflow: auto;
+    margin-bottom: 2px;
 }
 
 .sec-right {
@@ -279,6 +287,10 @@ th, td {
     width: 310px;
     text-align: center;
     padding: 12px 10px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 200px;
 }
 
 .msg-img {width: 90px;}
@@ -325,16 +337,35 @@ th, td {
     background: transparent;
 }
 
-.sec-left::-webkit-scrollbar {
+.left-bottom::-webkit-scrollbar {
     width: 5px;
 }
 
-.sec-left::-webkit-scrollbar-thumb {
+.left-bottom::-webkit-scrollbar-thumb {
     height: 30%;
     background: #8f8f8f;
     border-radius: 10px;
 }
 
-.sec-left::-webkit-scrollbar-track {
+.left-bottom::-webkit-scrollbar-track {
     background: transparent;
+}
+
+.paging-container {
+  display: flex;
+  justify-content: center;
+}
+
+.paging {
+  display: flex;
+  flex-direction: row;
+  font-weight: 200;
+}
+
+.page {
+  margin-right: 20px;
+}
+
+.page.active {
+  color: #33ff33;
 }

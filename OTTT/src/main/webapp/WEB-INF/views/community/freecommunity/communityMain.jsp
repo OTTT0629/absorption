@@ -46,7 +46,7 @@
 	              		<li style="display: flex;">
 	                		<div class="list-group">
 	                    		<a href="#" class="list-group-item list-group-item-action" onclick="javascript:fnCategory('myPost');">
-	                      			<img class="side_img" src="${path}/resources/images/img/KakaoTalk_20230411_161709664.png" alt="post">내가 쓴 게시글
+	                      			<img class="side_img" src="${path}/resources/images/img/KakaoTalk_20230411_161709664.png" alt="post">내가 작성한 게시글
 	                    		</a>
 	                		</div>
 	              		</li>
@@ -60,7 +60,7 @@
 	              		<li style="display: flex;">
 	                  		<div class="list-group">
 	                     		<a href="#" class="list-group-item list-group-item-action" onclick="javascript:fnCategory('myComment');">
-	                       			<img class="side_img" src="${path}/resources/images/img/comment.png" >댓글 작성 게시물
+	                       			<img class="side_img" src="${path}/resources/images/img/comment.png" >댓글 작성 게시글
 		                      	</a>
 	                 		</div>
 	             		</li>
@@ -356,7 +356,8 @@
 						}
 						createHtml +=		'</div>'							
 						createHtml +=		'<div style="width: 900px;">';
-						createHtml +=			'<a href="'+ URL + v.article_no +'" class="main_article" >'+ v.article_content +'</a>';
+						let formattedContent = v.article_content.replace(/\n/gi, "<br/>"); 
+						createHtml +=			'<a href="'+ URL + v.article_no +'" class="main_article" >'+ formattedContent +'</a>';
 						//이미지의 데이터가 있으면 태그를 생성
 						if(v.article_image+"" != "" && v.article_image != null){
 							createHtml +=		'<a href="'+ URL + v.article_no +'" class="main_article"><img style="width:400px; height:400px; border-radius: 5px; margin-bottom: 25px; object-fit: cover;" src="data:image/png;base64, '+v.article_image+'" alt="이미지"></a>';

@@ -8,6 +8,7 @@
   		<typeAlias type="com.ottt.ottt.dto.UserDTO" alias="UserDTO"/>
   		<typeAlias type="com.ottt.ottt.dto.UserOTTDTO" alias="UserOTTDTO"/>
   		<typeAlias type="com.ottt.ottt.domain.SearchItem" alias="SearchItem"/>
+		<typeAlias type="com.ottt.ottt.domain.MessageSearchItem" alias="MessageSearchItem"/>
   		<typeAlias type="com.ottt.ottt.dto.ArticleDTO" alias="ArticleDTO"/>
   		<typeAlias type="com.ottt.ottt.dto.MessageDTO" alias="MessageDTO"/>
 		<typeAlias type="com.ottt.ottt.dto.ArticleSearchDTO" alias="ArticleSearchDTO" />
@@ -17,6 +18,10 @@
 		<typeAlias type="com.ottt.ottt.dto.ContentOTTDTO" alias="ContentOTTDTO"/>
 		<typeAlias type="com.ottt.ottt.dto.WishlistDTO" alias="WishlistDTO"/>
 		<typeAlias type="com.ottt.ottt.dto.ReviewDTO" alias="ReviewDTO"/>
+		<typeAlias type="com.ottt.ottt.dto.MyDiaryDTO" alias="MyDiaryDTO"/>
+		<typeAlias type="com.ottt.ottt.dto.SearchWordDTO" alias="SearchWordDTO"/>
+		<typeAlias type="com.ottt.ottt.dto.ReviewLikeDTO" alias="ReviewLikeDTO"/>
+		<typeAlias type="com.ottt.ottt.dto.GenreDTO" alias="GenreDTO"/>
   	</typeAliases>
   </configuration>
   

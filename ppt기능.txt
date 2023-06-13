@@ -1,0 +1,107 @@
+if(LOGIN_YN == null || LOGIN_YN == ""){
+swal("로그인 후 이용가능합니다.","로그인을 해주세요.", "warning")
+.then(function(){
+window.localStorage.setItem("returnUrl", PATH+"/community/freecommunity");
+location.href="/ottt/login";  
+
+let value = $("#article_content").val();
+if(value == "" || value == null){
+    swal("내용을 입력해주세요.", "", "warning");
+    return;
+}				
+$("#insertForm").submit();
+
+
+
+if (!articleDTO.getUpFile().isEmpty()) {
+    Base64.Encoder encoder = Base64.getEncoder();
+    byte[] photoEncode = encoder.encode(articleDTO.getUpFile().getBytes());
+    articleDTO.setArticle_image( new String(photoEncode, "UTF8") );
+    articleDTO.setArticle_image_name(articleDTO.getUpFile().getOriginalFilename());	
+}
+
+LIKE CONCAT('%', #{schText}, '%')
+if($.trim(schText) != ""){
+$("#schText").val(schText);
+$("#schBtn").trigger("click");
+}
+
+
+<if test="category != null and category == 'myPost'">
+    AND ta.article_no NOTNULL 
+    AND ta.user_no = #{user_no}
+</if>	
+<if test="category != null and category == 'myComment'">
+    AND tc.article_no NOTNULL 
+    AND tc.user_no = #{user_no}
+</if>
+<if test="category != null and category == 'myLike'">
+    AND tal.article_no NOTNULL 
+    AND tal.user_no = #{user_no}
+</if>
+
+@RequestParam(value = "category", required = false) String category
+
+
+function fnCategory(category){
+    CATEGORY = category;
+    //ajax 함수 호출
+    fnCallAjaxSelectArticleList({ "offset": OFFSET, "category": CATEGORY});
+}
+
+@ResponseBody
+public Map<String,Object> getArticleList(ArticleSearchDTO dto, HttpSession session) throws Exception {
+
+
+FROM tb_article ta
+INNER JOIN tb_user tu				
+ON ta.user_no = tu.user_no 	
+LEFT OUTER JOIN tb_comment tc		
+ON ta.article_no = tc.article_no 
+LEFT OUTER JOIN TB_ARTICLE_LIKE tal
+ON ta.article_no = tal.article_no 
+
+
+$(window).scroll(function() {
+let scrollTop = $(window).scrollTop();		// 현재 스크롤 위치
+let windowHeight = $(window).height();  		// 창의 높이
+let documentHeight = $(document).height();  	// 문서 전체의 높이
+// 스크롤 위치가 문서 전체의 높이에서 창의 높이를 뺀 값(바닥 영역)에 도달하면 이벤트 발생
+if (scrollTop + windowHeight >= documentHeight) {
+	//아티클 목록을 불러오는 ajax 함수 호출
+
+
+JavaScript로 작성한 함수를 이용해 좋아요 기능을 처리하도록 구현했습니다.
+
+$.post(
+"/ottt/community/ajax/selectLikeCount"
+, {"user_no": "${sessionScope.user_no}" , "article_no" : article_no }
+, function(data){
+if(result == 0){
+$.post(
+"/ottt/community/ajax/insertLike"
+, {"user_no": "${sessionScope.user_no}" , "article_no" : article_no }
+, function(data){
+$("#pushHeart_"+index).attr("src", PATH+"/resources/images/img/heart_on.png");
+$("#likeCount_"+index).text(Number($("#likeCount_"+index).text())+1);
+}
+);
+}else {
+$.post(
+	"/ottt/community/ajax/deleteLike"
+	, {"user_no": "${user_no}" , "article_no" : "${articleDTO.article_no}" }
+	, function(data){
+$("#pushHeart").attr("src", PATH+"/resources/images/img/heart_off.png");
+$("#likeCount").text(Number($("#likeCount").text())-1);
+}
+ );
+}
+
+
+
+
+
+
+
+
+

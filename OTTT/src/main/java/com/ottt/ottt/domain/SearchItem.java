@@ -8,18 +8,29 @@ import static java.lang.Math.*;
 public class SearchItem {
 	
 	public static final int DEFAULT_PAGE_SIZE = 10;
-	public static final int MIN_PAGE_SIZE = 5;
+	public static final int MIN_PAGE_SIZE = 1;
 	public static final int MAX_PAGE_SIZE = 50;
 	
 	private Integer page = 1;
 	private Integer pageSize = DEFAULT_PAGE_SIZE;
 	private String keyword = "";
 	private String option = "";
+	private String user;
+	private Integer user_no;
+	private Integer content_no;
 	
 	public SearchItem() {};
 	
 	public SearchItem(Integer page, Integer pageSize) {
 		this(page, pageSize, "", "");
+	}
+	
+	public SearchItem(Integer page, String user
+				, Integer content_no, Integer user_no) {
+		this.page = page;
+		this.user = user;
+		this.content_no = content_no;
+		this.user_no = user_no;
 	}
 
 	public SearchItem(Integer page, Integer pageSize, String option, String keyword) {
@@ -80,11 +91,46 @@ public class SearchItem {
 				.build().toString();
 	}
 	
+	public String getString() {
+		return getString(page);
+	}
+	
+	public String getString(Integer page) {
+		return UriComponentsBuilder.newInstance()
+				.queryParam("user", user)
+				.queryParam("page", page)
+				.build().toString();
+	}
+	
 	public Integer getOffset() {
 		int result = (page-1)*pageSize;
 		if(result < 0) result = 0;
 		return result;
 	}
+
+	public String getUser() {
+		return user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
+	}
+
+	public Integer getUser_no() {
+		return user_no;
+	}
+
+	public void setUser_no(Integer user_no) {
+		this.user_no = user_no;
+	}
+
+	public Integer getContent_no() {
+		return content_no;
+	}
+
+	public void setContent_no(Integer content_no) {
+		this.content_no = content_no;
+	}	
 	
 }
 

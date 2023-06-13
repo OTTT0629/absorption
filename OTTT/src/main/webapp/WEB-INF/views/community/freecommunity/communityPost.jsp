@@ -83,12 +83,12 @@
            				<div class="wirted">
          					<!-- 입력 폼 -->
 							<form name="updateForm" id="updateForm"	enctype="multipart/form-data" action="<c:url value="/community/update"/>" method="post">
-             					<div>
+             					<div style="margin-bottom: 10px;">
 					         		<input type="hidden" name="article_no" value="${articleDTO.article_no}"/>
 					         		<input type="hidden" name="user_no" value="${articleDTO.user_no}"/>
 									<!--  ${mode == "view" ? "readonly='readonly" : ""}  -->
 									<!-- 보기모드일때 textarea에  readonly="readonly"를 넣고 수정모드일때는 지운다. -->
-       								<textarea class="writeHere"	placeholder="Write Here" id="article_content" name="article_content" <c:if test="${mode == 'view' }">readonly='readonly'</c:if>  onkeydown="resize(this)" onkeyup="resize(this)" name="article_content" > ${articleDTO.article_content } </textarea>
+       								<p class="writeHere"	placeholder="Write Here" id="article_content" name="article_content" <c:if test="${mode == 'view' }">readonly='readonly'</c:if>  onkeydown="resize(this)" onkeyup="resize(this)" name="article_content" > ${articleDTO.article_content } </p>
              					</div>
              					<c:choose>
 									<c:when test="${mode == 'view' }">		
@@ -471,28 +471,13 @@
 
 					list.forEach(function(v ,i){
 					
-						//등록일 날짜형식 변경 timestamp to yyyy_MM-dd
-						let date = new Date(v.cmt_dt);
-						let formattedDate = date.toISOString().slice(0, 10);
-						
-						/*
-						if(formattedDate > ddd)
-							dateString = "방금전";
-						else if
-						1시간전
-						else if
-						5시간전 
-						else {
-							dateString = date.toISOString().slice(0, 10);
-						}
-						*/
-						
+
 						createHtml +=	'<li class="comment_show">';
 						createHtml +=		'<div class="pro-dan">';
 						createHtml +=			'<div style="display: flex;">';
 						createHtml +=				'<a href="#"><img class="profile" src="'+v.image+'" alt="profile" ></a>';
 						createHtml +=				'<a class="nickname" href="../ottt박소율/mypageshow.html">'+v.cmt_writer+'</a>';
-						createHtml +=				'<p id="current_date"  style="position: relative; left: 35px; bottom: 24px;" >'+formattedDate+'</p>';
+						createHtml +=				'<p id="current_date"  style="position: relative; left: 35px; bottom: 24px;" >'+fnTimeForToday(v.cmt_dt)+'</p>';
 						createHtml +=			'</div>';
 
 						//로그인사용자랑 댓글작성자랑 일치하는지 확인,같다면 수정/삭제 버튼 태그를 그린다.
@@ -676,6 +661,44 @@
 				    console.log(errorThrown); // 선택적인 예외 개체 (프레임워크에서 제공되는 경우)
 			  	});				
 			}
+			
+			
+			
+	         /**
+	         *   날짜 계산(몇일전, 몇시간전, 몇분전)
+	         *   @param dateValue{String} 날짜
+	         */
+	         function fnTimeForToday(dateValue) {
+	            
+	            const today = new Date();
+	            const timeValue = new Date(dateValue);
+
+	            const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
+	              
+	              if (betweenTime < 1) {
+	                 return '방금 전';
+	              }
+	             
+	              if (betweenTime < 60) {
+	                  return betweenTime+"분 전";
+	              }
+
+	              var betweenTimeHour = Math.floor(betweenTime / 60);
+	              
+	              if (betweenTimeHour < 24) {
+	                  return betweenTimeHour+"시간 전";
+	              }
+
+	              var betweenTimeDay = Math.floor(betweenTime / 60 / 24);
+	              
+	              if (betweenTimeDay < 365) {
+	                  return betweenTimeDay+"일 전";
+	              }
+
+	              return Math.floor(betweenTimeDay / 365)+"년 전";
+	          }
+	   
+			
 			
     	</script>
 	</body>

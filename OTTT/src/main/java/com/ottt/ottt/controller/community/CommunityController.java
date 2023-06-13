@@ -266,7 +266,6 @@ public class CommunityController {
 		result.put("result", communityService.selectLikeCount(dto) );
 		
 		return result;
-
 	}
 	
 	//좋아요 저장
@@ -291,7 +290,6 @@ public class CommunityController {
 		result.put("success", communityService.insertLike(dto) );
 		
 		return result;
-
 	}
 	
 	//좋아요 삭제
@@ -316,7 +314,6 @@ public class CommunityController {
 		result.put("success", communityService.deleteLike(dto) );
 		
 		return result;
-
 	}
 }
 

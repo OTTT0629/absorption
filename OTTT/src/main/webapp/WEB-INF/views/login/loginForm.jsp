@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ page import= "java.net.URLDecoder"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <!doctype html>
 <html lang="ko">
@@ -64,7 +63,7 @@
 			
 				<div id="msg">
 					<c:if test= "${not empty param.msg}" >
-					<i class="fa fa-exclamation-circle">${URLDecoder.decode(param.msg)}</i>
+					<i class="fa fa-exclamation-circle"> ${URLDecoder.decode(param.msg)}</i>
 					</c:if>
 				</div>
 				
@@ -93,36 +92,35 @@
             	</a>
            	</div>
 		</form>
-	</div>		
-
+	</div>
+	
+	<script type="text/javascript">
 		
-		
-		<script type="text/javascript">
-			function frmCheck(frm) {
-				let msg = ''
-				
-				if (frm.id.value.length == 0){
-					setMessage("id를 입력해주세요", frm.id)
-					return false;
-				}
-				
-				if (frm.pwd.value.length == 0){
-					setMessage("비밀번호를 입력해주세요", frm.pwd)
-					return false;
-				}
-				
-				return true;
-				
+		function frmCheck(frm) {
+			let msg = ''
+			
+			if (frm.user_id.value.length == 0){
+				setMessage("id를 입력해주세요", frm.id)
+				return false;
 			}
 			
-			function setMessage(msg, element) {
-				document.getElementById("msg").innerHTML
-						= `<i class="fa fa-exclamation-circle">${'${msg}'}</i>`
-				if(element) {
-					element.select()	//값이 잘못 입력되었을 때 다시 입력 
-				}
+			if (frm.user_pwd.value.length == 0){
+				setMessage("비밀번호를 입력해주세요", frm.pwd)
+				return false;
 			}
-	
+			
+			return true;
+			
+		}
+			
+		function setMessage(msg, element) {
+			document.getElementById("msg").innerHTML
+					= `<i class="fa fa-exclamation-circle"> ${'${msg}'}</i>`
+			if(element) {
+				element.select()	//값이 잘못 입력되었을 때 다시 입력 
+			}
+		}
+		
 	</script>
 
   </body>

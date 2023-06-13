@@ -22,16 +22,7 @@ public class ArticleDTO {
 	private MultipartFile upFile;
 	private String article_image_name;
 	private String image;
-	private String	writer_chk;
 	
-	public String getWriter_chk() {
-		return writer_chk;
-	}
-
-	public void setWriter_chk(String writer_chk) {
-		this.writer_chk = writer_chk;
-	}
-
 	public String getUser_nicknm() {
 		return user_nicknm;
 	}
@@ -177,8 +168,6 @@ public class ArticleDTO {
 		this.image = image;
 	}
 
-
-
 	@Override
 	public String toString() {
 		return "ArticleDTO [article_no=" + article_no + ", user_no=" + user_no + ", article_index_no="
@@ -186,8 +175,8 @@ public class ArticleDTO {
 				+ ", article_title=" + article_title + ", article_create_dt=" + article_create_dt + ", article_mod_dt="
 				+ article_mod_dt + ", like_count=" + like_count + ", comment_count=" + comment_count + ", report_cnt="
 				+ report_cnt + ", user_nicknm=" + user_nicknm + ", check_like_count=" + check_like_count + ", upFile="
-				+ upFile + ", article_image_name=" + article_image_name + ", image=" + image + ", writer_chk="
-				+ writer_chk + ", userDTO=" + userDTO + "]";
+				+ upFile + ", article_image_name=" + article_image_name + ", image=" + image + ", userDTO=" + userDTO
+				+ "]";
 	}
 
 	@Override
