@@ -1,5 +1,7 @@
 package com.ottt.ottt.controller.mypage;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -45,6 +47,18 @@ public class DiaryController {
 			sc.setPageSize(3);
 			sc.setUser(userDTO.getUser_nicknm());
 			sc.setUser_no(user_no);
+			
+			System.out.println("=============mydiary=============== ");
+			
+			System.out.println("============================ sc.getPage()" + sc.getPage());
+			
+			System.out.println("============================ sc.getUser()" + sc.getUser());
+			
+			System.out.println("============================ sc.getContent_no()" + sc.getContent_no());
+			
+			System.out.println("============================ sc.getUser_no()" + sc.getUser_no());
+			
+			
 
 			int myDiaryCnt = ds.myDiaryCnt(sc);
 			m.addAttribute("myDiaryCnt", myDiaryCnt);
@@ -61,23 +75,34 @@ public class DiaryController {
 
 		return "/mypage/myprofile/mydiary";
 	}
-
+	
 	// mydiary 클릭 시(작성글 보기)
-	@PostMapping(value = "/mydiary/diary")
-	public String readdiary(Integer content_no, Integer user_no, SearchItem sc
-							, HttpSession session, Model m, RedirectAttributes rattr) {
-		
+	@GetMapping("/mydiary/diary")
+	public String readdiary(SearchItem sc, Integer content, Model m, HttpSession session
+							, RedirectAttributes rattr) {
 		Integer my_no = (Integer) session.getAttribute("user_no");
 		
 		sc.setPageSize(3);
-
+		sc.setContent_no(content);
+		
+		System.out.println("=============get read=============== ");
+		
+		System.out.println("============================ sc.getPage() : " + sc.getPage());
+		
+		System.out.println("============================ sc.getUser() : " + sc.getUser());
+		
+		System.out.println("============================ sc.getContent_no() : " + sc.getContent_no());
+		
+		System.out.println("============================ sc.getUser_no() : " + sc.getUser_no());
+		
 		try {
-			MyDiaryDTO myDiaryDTO = ds.getDiary(content_no, user_no);
+			Integer user_no = userDao.selectNoId(sc.getUser());
+			MyDiaryDTO myDiaryDTO = ds.getDiary(sc.getContent_no(),user_no);
 			m.addAttribute(myDiaryDTO);
 			char pub_stat = myDiaryDTO.getPublic_yn_cd();
 
 			if (!my_no.equals(user_no) && pub_stat != '1')
-				rattr.addFlashAttribute("msg", "READ_ERR");			
+				rattr.addFlashAttribute("msg", "READ_ERR");
 
 			return "/mypage/myprofile/diary";
 
@@ -86,12 +111,23 @@ public class DiaryController {
 			return "redirect:/mypage/mydiary";
 		}
 	}
+	
 
 	@PostMapping("/mydiary/modify")
-	public String modDiary(MyDiaryDTO myDiaryDTO, SearchItem sc
-						, RedirectAttributes rattr, Model m, HttpSession session) {
+	public String modDiary(MyDiaryDTO myDiaryDTO, SearchItem sc, RedirectAttributes rattr
+							, Model m, HttpSession session, HttpServletRequest request) {
 		
 		sc.setPageSize(3);
+		
+		System.out.println("=============modify=============== ");
+		
+		System.out.println("============================ sc.getPage()" + sc.getPage());
+		
+		System.out.println("============================ sc.getUser()" + sc.getUser());
+		
+		System.out.println("============================ sc.getContent_no()" + sc.getContent_no());
+		
+		System.out.println("============================ sc.getUser_no()" + sc.getUser_no());
 
 		Integer user_no = (Integer) session.getAttribute("user_no");
 		myDiaryDTO.setUser_no(user_no);
@@ -102,8 +138,14 @@ public class DiaryController {
 				throw new Exception("Modify failed");
 
 			rattr.addFlashAttribute("msg", "MOD_OK");
-			//return "redirect:/mypage/mydiary/diary"+sc.getString();
-			return "forward:/mypage/mydiary/diary"+sc.getString();
+
+			String encodedUser = URLEncoder.encode(sc.getUser(), StandardCharsets.UTF_8);
+			String queryString = "user=" + encodedUser + "&content=" + sc.getContent_no();
+	        return "redirect:/mypage/mydiary/diary?" + queryString;
+			
+			
+			//return "redirect:/mypage/mydiary/diary";
+			//return "forward:/mypage/mydiary/diary"+sc.getString();
 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -122,7 +122,7 @@ $(document).ready(function() {
 	    var content = $(this).text()
 	    $(".msg-view-content").text(content)
 	
-	    if (content !== "") {
+	    if ((content !== "") && recvButton.hasClass("active")) {
 	        $(".msg-write-btn").show()
 	    } else {
 	        $(".msg-write-btn").hide()

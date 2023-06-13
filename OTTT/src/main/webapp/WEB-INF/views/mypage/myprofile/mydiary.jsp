@@ -74,7 +74,7 @@
 	          	
 	          	<c:forEach var="MydiaryDTO" items="${list }" >
 				
-					<a href="javascript:readDiary('${MydiaryDTO.content_no}', '${MydiaryDTO.user_no}')" class="mydiary">
+					<a href="<c:url value="/mypage/mydiary/diary${pr.sc.string}=${MydiaryDTO.content_no }"/>" class="mydiary">
 						<div class="post">					  	
 						    <div class="Lside">
 						      	<img class="poster" src="${MydiaryDTO.thumbnail}">

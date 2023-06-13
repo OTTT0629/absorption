@@ -65,22 +65,24 @@
 					
 					<div class="r-main">
 						<div class="rTop">
-							<fieldset class="pnp-button">
-								<input type="radio" id="pub"
-								 name="public_yn_cd" value="1"
-								 ${myDiaryDTO.public_yn_cd.toString()=='1' ? "checked" : "" }>
-								<label for="pub">전체 공개</label><br>
-								
-			                    <input type="radio" id="Npub"
-			                    name="public_yn_cd" value="0"
-			                    ${myDiaryDTO.public_yn_cd.toString()=='0' ? "checked" : "" }>
-			                    <label for="Npub">비공개</label><br>
-	
-			                    <input type="radio" id="Fpub"
-			                    name="public_yn_cd" value="2"
-			                    ${myDiaryDTO.public_yn_cd.toString()=='2' ? "checked" : "" }>
-			                    <label for="Fpub">팔로워</label><br>
-	                		</fieldset>
+
+								<fieldset class="pnp-button">
+									<input type="radio" id="pub"
+									 name="public_yn_cd" value="1"
+									 ${myDiaryDTO.public_yn_cd.toString()=='1' ? "checked" : "" }>
+									<label for="pub">전체 공개</label><br>
+									
+				                    <input type="radio" id="Npub"
+				                    name="public_yn_cd" value="0"
+				                    ${myDiaryDTO.public_yn_cd.toString()=='0' ? "checked" : "" }>
+				                    <label for="Npub">비공개</label><br>
+		
+				                    <input type="radio" id="Fpub"
+				                    name="public_yn_cd" value="2"
+				                    ${myDiaryDTO.public_yn_cd.toString()=='2' ? "checked" : "" }>
+				                    <label for="Fpub">팔로워</label><br>
+		                		</fieldset>
+
 						</div>
 						
 						<div class="rBot">
@@ -131,9 +133,7 @@
 	 			let isReadonly = $("textarea[name=mydiary_content]").attr('readonly')
 	 			
 	 			if(isReadonly != 'readonly') {
-	 				form.attr("action", "<c:url value='/mypage/mydiary/diary${searchItem.string}' />")
-		 			form.attr("method", "post")
-		 			form.submit()
+	 				location.href = "<c:url value='/mypage/mydiary/diary?user=${myDiaryDTO.user_nicknm}&content=${myDiaryDTO.content_no}' />";
 		 			
 		 			return false;
 	 			}

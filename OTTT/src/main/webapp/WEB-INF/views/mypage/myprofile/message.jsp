@@ -132,7 +132,7 @@ $(document).ready(function() {
 								<input name="message_no" type="hidden" value="${messageDTO.message_no}" />
 								<td class="msg-img">픞</td>
 								<td class="msg-nicknm">${messageDTO.user_nicknm }</td>
-								<td class="msg-name" style="display: none; ">${messageDTO.send_user_no }</td>
+								<td class="msg-name" style="display: none; ">${(messageDTO.send_user_no != sessionScope.user_no) ? messageDTO.send_user_no : messageDTO.receive_user_no }</td>
 								<td class="msg-content" style="cursor: pointer;"><c:out value="${messageDTO.content }"></c:out></td>
 								<td class="msg-time"><fmt:formatDate value="${messageDTO.send_date}" pattern="yyyy-MM-dd HH:mm" type="date" /></td>
 								<td class="msg-del"><button class="delBtn" name="deleteBtn" style="border: none; color: red;"><i class="fas fa-times"></i></button></td>

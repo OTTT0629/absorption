@@ -19,9 +19,29 @@
     <title>Document</title>
 </head>
 <body>
-   <script type="text/javascript">
-
-       </script>
+	<script type="text/javascript">
+		let path = window.location.href;
+	
+		/*function goLogin() {
+		  let toURL = path;
+		  let form = document.createElement('form');
+	
+		  form.setAttribute('method', 'get');
+		  form.setAttribute('action', '/ottt/mypage?toURL='+toURL);
+		  
+		  document.body.appendChild(form);
+		  
+		  form.submit();
+		  
+		} */
+	
+	function goLogin() {
+		let toURL = path;
+		console.log(toURL)
+		location.href = "/ottt/mypage?toURL=" + toURL;
+	}
+	
+	</script>
    <header>
       <div class="logo">
          <a href="<c:url value="/" />">
@@ -53,7 +73,8 @@
                     <a href="<c:url value='/search' />" class="searchnav"></a>
                   </li>                  
                <li>
-                  <a href="<c:url value='/mypage' /> " class="${loginout}" >
+                  <%-- <a href="<c:url value='/mypage' /> " class="${loginout}" > --%>
+                  <a href="javascript:goLogin()" class="${loginout}" >
                      <c:if test="${sessionScope.id != null}">
                         <img src="${user_img }" id="profile" class="${loginout}">
                      </c:if>

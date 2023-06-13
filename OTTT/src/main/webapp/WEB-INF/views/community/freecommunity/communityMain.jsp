@@ -308,9 +308,9 @@
 				)				
 			}
 			
-			let path = window.location.href;
 			
-			function goProfile(user_no) {
+			/********************************************************************************/
+			function goProfile(user_no, user_nicknm) {
 				let form = document.createElement('form');				
 				
 				let data = {
@@ -329,11 +329,12 @@
 			    }
 				
 				form.setAttribute('method','post');
-				form.setAttribute('action','/ottt/profile');
-				
+				form.setAttribute('action','/ottt/profile?user=' +user_nicknm);
+								
 				document.body.appendChild(form);
 				form.submit();				
 			}
+			/********************************************************************************/
 				
 			//목록 생성 함수, $.post 에서 success 함수로 사용
 			function fnCreatArticleList(response){
@@ -364,8 +365,8 @@
 						createHtml += 	'<ul class="post" >';
 						createHtml += 		'<div class="post_info">';
 						createHtml +=			'<div style="display: flex;">';
-						createHtml +=				'<a href="javascript:goProfile('+v.user_no +')"><img class="usur_img" src="'+ v.image +'" alt="profile"></a>';
-						createHtml +=				'<a href="#"><span class="nickname">'+ v.user_nicknm +'</span></a>';
+						createHtml +=				'<a href="javascript:goProfile('+v.user_no +',\''+v.user_nicknm+'\')"><img class="usur_img" src="'+ v.image +'" alt="profile"></a>';
+						createHtml +=				'<a href="javascript:goProfile('+v.user_no +',\''+v.user_nicknm+'\')"><span class="nickname">'+ v.user_nicknm +'</span></a>';
 						createHtml +=				'<span id="current_date" >'+ formattedDate +'</span>';
 						createHtml +=			'</div>';
 						if(v.writer_chk == "N"){

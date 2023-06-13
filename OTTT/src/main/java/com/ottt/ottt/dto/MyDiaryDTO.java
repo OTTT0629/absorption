@@ -23,6 +23,7 @@ public class MyDiaryDTO {
 	
 	private String content_nm;
 	private String thumbnail;
+	private String user_nicknm;
 	
 	
 	public Integer getUser_no() {
@@ -72,14 +73,19 @@ public class MyDiaryDTO {
 	}
 	public void setThumbnail(String thumbnail) {
 		this.thumbnail = thumbnail;
+	}	
+	public String getUser_nicknm() {
+		return user_nicknm;
 	}
-		
+	public void setUser_nicknm(String user_nicknm) {
+		this.user_nicknm = user_nicknm;
+	}
 	@Override
 	public String toString() {
 		return "MyDiaryDTO [user_no=" + user_no + ", content_no=" + content_no + ", public_yn_cd=" + public_yn_cd
 				+ ", mydiary_content=" + mydiary_content + ", mydiary_create_dt=" + mydiary_create_dt
 				+ ", mydiary_mod_dt=" + mydiary_mod_dt + ", content_nm=" + content_nm + ", thumbnail=" + thumbnail
-				+ "]";
+				+ ", user_nicknm=" + user_nicknm + "]";
 	}
 	
 	@Override

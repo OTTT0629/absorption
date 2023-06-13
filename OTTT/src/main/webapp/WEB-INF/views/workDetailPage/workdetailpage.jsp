@@ -27,39 +27,11 @@
     />
     <link rel="stylesheet" href="${path}/resources/css/workDetailPage/workDetailPage.css" >
     <script src="${path }/resources/js/workDetailPage/script/jquery-3.6.1.min.js"></script>
-    <script src="${path}/resources/js/workDetailPage/script/workDetailPage.js"></script>
+    <script type="text/javascript" src="${path}/resources/js/workDetailPage/script/workDetailPage.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
    
   </head>
   <body id="area">
-  	<script type="text/javascript">
-  	let path = window.location.href;
-	
-	function goProfile(user_no) {
-		let form = document.createElement('form');				
-		
-		let data = {
-				user_no : user_no,
-				toURL : path
-        };
-		
-		for (let key in data) {
-	        if (data.hasOwnProperty(key)) {
-	            let obj = document.createElement('input');
-	            obj.setAttribute('type', 'hidden');
-	            obj.setAttribute('name', key);
-	            obj.setAttribute('value', data[key]);
-	            form.appendChild(obj);
-	        }
-	    }
-		
-		form.setAttribute('method','post');
-		form.setAttribute('action','/ottt/profile');
-		
-		document.body.appendChild(form);
-		form.submit();				
-	}
-  	</script>
     <div class="wrap">
       <div class="popupback"></div>
       <div class="popup-video">
@@ -167,7 +139,7 @@
 
     <section class="sec01">
       <div class="main-left">
-          <img src="${path}/resources/images/main01.png" alt="서부전선 이상없다">
+          <img src="${contentDTO.main_img}" >
           <div class="m-txt">
             ${contentDTO.content_nm }
           </div>
@@ -517,10 +489,12 @@
         <div class="review-box">      
           <div class="review-box-header">
             <div class="user-icon">
-              <img class="aaa" src="${myReview.image}" >
+            	<a href="javascript:goProfile('${myReview.user_no }', '${myReview.user_nicknm}')">
+            		<img class="aaa" src="${myReview.image}" >
+           		</a>
             </div>
             <div class="user-name1">
-              <a href="../ottt박소율/mypageshow.html">
+              <a href="javascript:goProfile('${myReview.user_no }', '${myReview.user_nicknm}')">
                 <p class="user_nicknm"> ${myReview.user_nicknm} </p></a>
                 <p class="date-insert1" name="review_create_dt"><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${myReview.review_create_dt}"/></p>
               
@@ -685,12 +659,12 @@
         <div class="review-box">      
           <div class="review-box-header">
             <div class="user-icon">
-            	<a href="javascript:goProfile(${ReviewDTO.user_no })">
+            	<a href="javascript:goProfile('${ReviewDTO.user_no }', '${ReviewDTO.user_nicknm}')">
               		<img src="${ReviewDTO.image }" >
              	</a>
             </div>
             <div class="user-name">
-              <a href="../ottt박소율/mypageshow.html">
+              <a href="javascript:goProfile('${ReviewDTO.user_no }', '${ReviewDTO.user_nicknm}')">
                 <p class="user_nicknm"> ${ReviewDTO.user_nicknm} </p></a>
                 <p class="date-insert" name="review_create_dt"><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${ReviewDTO.review_create_dt}"/></p>
               

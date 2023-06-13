@@ -16,7 +16,6 @@ public class ArticleDTO {
 	private Date	article_mod_dt;
 	private Integer	like_count;
 	private Integer	comment_count;
-	private Integer	report_cnt;
 	private String  user_nicknm;
 	private Integer	check_like_count;
 	private MultipartFile upFile;
@@ -128,14 +127,6 @@ public class ArticleDTO {
 		this.comment_count = comment_count;
 	}
 
-	public Integer getReport_cnt() {
-		return report_cnt;
-	}
-
-	public void setReport_cnt(Integer report_cnt) {
-		this.report_cnt = report_cnt;
-	}
-
 	public Integer getCheck_like_count() {
 		return check_like_count;
 	}
@@ -173,10 +164,9 @@ public class ArticleDTO {
 		return "ArticleDTO [article_no=" + article_no + ", user_no=" + user_no + ", article_index_no="
 				+ article_index_no + ", article_content=" + article_content + ", article_image=" + article_image
 				+ ", article_title=" + article_title + ", article_create_dt=" + article_create_dt + ", article_mod_dt="
-				+ article_mod_dt + ", like_count=" + like_count + ", comment_count=" + comment_count + ", report_cnt="
-				+ report_cnt + ", user_nicknm=" + user_nicknm + ", check_like_count=" + check_like_count + ", upFile="
-				+ upFile + ", article_image_name=" + article_image_name + ", image=" + image + ", userDTO=" + userDTO
-				+ "]";
+				+ article_mod_dt + ", like_count=" + like_count + ", comment_count=" + comment_count + ", user_nicknm="
+				+ user_nicknm + ", check_like_count=" + check_like_count + ", upFile=" + upFile
+				+ ", article_image_name=" + article_image_name + ", image=" + image + ", userDTO=" + userDTO + "]";
 	}
 
 	@Override

@@ -74,4 +74,9 @@ public class UserServiceImpl implements UserService {
 		return userDao.select(user_no);
 	}
 
+	@Override
+	public int getUserNoId(String user_nicknm) throws Exception {
+		return userDao.selectNoId(user_nicknm);
+	}
+
 }

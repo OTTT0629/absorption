@@ -27,6 +27,7 @@ public class LoginController {
 	//로그인 페이지
 	@GetMapping(value = "/login")
 	public String login(String toURL) {
+		System.out.println("==========login=============== toURL : " + toURL);
 		
 	return "/login/loginForm";		
 	}

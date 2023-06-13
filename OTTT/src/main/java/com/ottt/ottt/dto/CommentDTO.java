@@ -13,7 +13,6 @@ import java.util.Objects;
 	, cmt_dt			timestamptz		not null
 	, cmt_mod_dt		timestamptz		not null
 	, cmt_like_count	int				not null
-	, report_cnt		int				not null
  */
 
 public class CommentDTO {
@@ -27,7 +26,6 @@ public class CommentDTO {
 	private Date	cmt_dt;
 	private Date	cmt_mod_dt;
 	private int		cmt_like_count;
-	private int		report_cnt;
 	
 	private String user_nicknm;
 	private String image;
@@ -74,87 +72,50 @@ public class CommentDTO {
 		return article_no;
 	}
 
-
 	public void setArticle_no(int article_no) {
 		this.article_no = article_no;
 	}
 
-	
-	
 	public int getReview_no() {
 		return review_no;
 	}
-
-
 	public void setReview_no(int review_no) {
 		this.review_no = review_no;
 	}
-
-
 	public String getCmt_content() {
 		return cmt_content;
 	}
-
-
 	public void setCmt_content(String cmm_content) {
 		this.cmt_content = cmm_content;
 	}
-
-
 	public String getCmt_writer() {
 		return cmt_writer;
 	}
-
-
 	public void setCmt_writer(String cmm_writer) {
 		this.cmt_writer = cmm_writer;
 	}
-
-
 	public Date getCmt_dt() {
 		return cmt_dt;
 	}
-
-
 	public void setCmt_dt(Date cmt_dt) {
 		this.cmt_dt = cmt_dt;
 	}
-
-
 	public Date getCmt_mod_dt() {
 		return cmt_mod_dt;
 	}
-
-
 	public void setCmt_mod_dt(Date cmt_mod_dt) {
 		this.cmt_mod_dt = cmt_mod_dt;
 	}
-
-
 	public int getCmt_like_count() {
 		return cmt_like_count;
 	}
-
-
 	public void setCmt_like_count(int cmt_like_count) {
 		this.cmt_like_count = cmt_like_count;
-	}
-
-
-	public int getReport_cnt() {
-		return report_cnt;
-	}
-
-
-	public void setReport_cnt(int report_cnt) {
-		this.report_cnt = report_cnt;
 	}
 	
 	public String getUser_nicknm() {
 		return user_nicknm;
 	}
-
-
 	public void setUser_nicknm(String user_nicknm) {
 		this.user_nicknm = user_nicknm;
 	}
@@ -184,8 +145,8 @@ public class CommentDTO {
 	public String toString() {
 		return "CommentDTO [cmt_no=" + cmt_no + ", user_no=" + user_no + ", article_no=" + article_no + ", review_no="
 				+ review_no + ", cmt_content=" + cmt_content + ", cmt_writer=" + cmt_writer + ", cmt_dt=" + cmt_dt
-				+ ", cmt_mod_dt=" + cmt_mod_dt + ", cmt_like_count=" + cmt_like_count + ", report_cnt=" + report_cnt
-				+ ", user_nicknm=" + user_nicknm + ", image=" + image + ", writer_chk=" + writer_chk + "]";
+				+ ", cmt_mod_dt=" + cmt_mod_dt + ", cmt_like_count=" + cmt_like_count + ", user_nicknm=" + user_nicknm
+				+ ", image=" + image + ", writer_chk=" + writer_chk + "]";
 	}
 
 }

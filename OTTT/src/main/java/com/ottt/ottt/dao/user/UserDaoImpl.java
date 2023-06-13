@@ -85,4 +85,9 @@ public class UserDaoImpl implements UserDao {
 		return session.selectOne(namespace + "selectNo", user_no);
 	}
 
+	@Override
+	public int selectNoId(String user_nicknm) throws Exception {
+		return session.selectOne(namespace+ "selectNoId", user_nicknm);
+	}
+
 }

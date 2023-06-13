@@ -25,14 +25,6 @@ public class SearchItem {
 		this(page, pageSize, "", "");
 	}
 	
-	public SearchItem(Integer page, String user
-				, Integer content_no, Integer user_no) {
-		this.page = page;
-		this.user = user;
-		this.content_no = content_no;
-		this.user_no = user_no;
-	}
-
 	public SearchItem(Integer page, Integer pageSize, String option, String keyword) {
 		this.page = page;
 		this.pageSize = pageSize;
@@ -98,7 +90,17 @@ public class SearchItem {
 	public String getString(Integer page) {
 		return UriComponentsBuilder.newInstance()
 				.queryParam("user", user)
-				.queryParam("page", page)
+				.queryParam("content", content_no)
+				.build().toString();
+	}
+	
+	public String getUserString() {
+		return getUserString(user);
+	}
+	
+	public String getUserString(String user) {
+		return UriComponentsBuilder.newInstance()
+				.queryParam("user", user)
 				.build().toString();
 	}
 	
