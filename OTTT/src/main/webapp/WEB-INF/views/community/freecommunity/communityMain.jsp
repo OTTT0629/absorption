@@ -46,7 +46,7 @@
 	              		<li style="display: flex;">
 	                		<div class="list-group">
 	                    		<a href="#" class="list-group-item list-group-item-action" onclick="javascript:fnCategory('myPost');">
-	                      			<img class="side_img" src="${path}/resources/images/img/KakaoTalk_20230411_161709664.png" alt="post">내가 작성한 게시글
+	                      			<img class="side_img" src="${path}/resources/images/img/KakaoTalk_20230411_161709664.png" alt="post">내가 쓴 게시글
 	                    		</a>
 	                		</div>
 	              		</li>
@@ -60,7 +60,7 @@
 	              		<li style="display: flex;">
 	                  		<div class="list-group">
 	                     		<a href="#" class="list-group-item list-group-item-action" onclick="javascript:fnCategory('myComment');">
-	                       			<img class="side_img" src="${path}/resources/images/img/comment.png" >댓글 작성 게시글
+	                       			<img class="side_img" src="${path}/resources/images/img/comment.png" >댓글 작성 게시물
 		                      	</a>
 	                 		</div>
 	             		</li>
@@ -111,7 +111,7 @@
 			                          			</div>
 			                          			<div class="modal-body">등록하시겠습니까?</div>
 			                          			<div class="modal-footer">
-			                          				<button type="button" id="saveBtn"class="btn btn-primary" data-bs-dismiss="modal">Yes</button>
+			                          				<button type="button" id="saveBtn"class="btn btn-primary">Yes</button>
 			                            			<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
 			                          			</div>
 			                       			</div>
@@ -240,7 +240,6 @@
 					if(LOGIN_YN == null || LOGIN_YN == ""){
 						swal("로그인 후 이용가능합니다.","로그인을 해주세요.", "warning")
 						.then(function(){
-							window.localStorage.setItem("returnUrl", PATH+"/community/freecommunity");
 							location.href="/ottt/login";                   
 						});
 						return;					
@@ -330,34 +329,31 @@
 					//화살표 함수형 foreach 반복문
 					list.forEach( function(v,i) {
 						INDEX ++;
+						console.log("INDEX : "+INDEX);
 						//등록일 날짜형식 변경 timestamp to yyyy_MM-dd
 						let date = new Date(v.article_create_dt);
 						let formattedDate = date.toISOString().slice(0, 10);
 
 						createHtml += 	'<ul class="post" >';
 						createHtml += 		'<div class="post_info">';
-						createHtml +=			'<div style="display: flex;">';
-						createHtml +=				'<a href="#"><img class="usur_img" src="'+ v.image +'" alt="profile"></a>';
-						createHtml +=				'<a href="#"><span class="nickname">'+ v.user_nicknm +'</span></a>';
-						createHtml +=				'<span id="current_date" >'+ formattedDate +'</span>';
-						createHtml +=			'</div>';
-						if(v.writer_chk == "N"){
-							createHtml +=			'<div>';
-							createHtml +=				'<div>';	
-							createHtml +=					'<button type="button" class="btn_warning" data-bs-toggle="dropdown" >신고</button>';
-							createHtml +=					'<ul class="dropdown-menu" >';
-							createHtml +=						'<li><a class="dropdown-item" href="#">욕설/비방</a></li>';
-							createHtml +=						'<li><a class="dropdown-item" href="#">광고/도배</a></li>';
-							createHtml +=						'<li><a class="dropdown-item" href="#">악의적인 스포</a></li>';
-							createHtml +=						'<li><a class="dropdown-item" href="#">선정성</a></li>';
-							createHtml +=					'</ul>';                   
-							createHtml +=				'</div>';
+						if(v.writer_chk == "Y"){
+							createHtml +=			'<div style="display: flex;">';
+							createHtml +=				'<a href="#"><img class="usur_img" src="'+ v.image +'" alt="profile"></a>';
+							createHtml +=				'<a href="#"><span class="nickname">'+ v.user_nicknm +'</span></a>';
+							createHtml +=				'<span id="current_date" >'+ formattedDate +'</span>';
 							createHtml +=			'</div>';
+							createHtml +=		'</div>'										
+						}else {
+							createHtml +=			'<div style="display: flex;">';
+							createHtml +=				'<a href="#"><img class="usur_img" src="'+ v.image +'" alt="profile"></a>';
+							createHtml +=				'<a href="#"><span class="nickname">'+ v.user_nicknm +'</span></a>';
+							createHtml +=				'<span id="current_date" >'+ formattedDate +'</span>';
+							createHtml +=			'</div>';
+							createHtml +=		'</div>'							
 						}
-						createHtml +=		'</div>'							
 						createHtml +=		'<div style="width: 900px;">';
 						let formattedContent = v.article_content.replace(/\n/gi, "<br/>"); 
-						createHtml +=			'<a href="'+ URL + v.article_no +'" class="main_article" >'+ formattedContent +'</a>';
+						createHtml +=			'<a href="'+ URL + v.article_no +'" class="main_article" >'+ formattedContent +'</a><br>';
 						//이미지의 데이터가 있으면 태그를 생성
 						if(v.article_image+"" != "" && v.article_image != null){
 							createHtml +=		'<a href="'+ URL + v.article_no +'" class="main_article"><img style="width:400px; height:400px; border-radius: 5px; margin-bottom: 25px; object-fit: cover;" src="data:image/png;base64, '+v.article_image+'" alt="이미지"></a>';
@@ -371,7 +367,7 @@
 						
 						createHtml +=				'<input onclick="javascript:fnPushHeart('+ v.article_no +','+INDEX+');" class="heart_img" type="image" id="pushHeart_'+INDEX+'" src="'+ PATH +'/resources/images/img/heart_'+heartOnOffImg+'.png" alt="heart">';
 						createHtml +=				'<span style="margin-left: 4px;" id="likeCount_'+INDEX+'"	>'+ v.like_count +'</span>'; 
-						createHtml +=				'<input class="re_comment_img" type="image" src="'+ PATH +'/resources/images/img/comment.png" onclick="javascript:fnPageMovePost('+v.article_no+')" alt="comment">';
+						createHtml +=				'<input class="re_comment_img" type="image" src="'+ PATH +'/resources/images/img/comment.png" alt="comment">';
 						createHtml +=				'<span style="margin-left: 4px;">'+ v.comment_count +'</span>';                  
 						createHtml +=			'</div>';
 						createHtml +=		'</div>';
@@ -405,12 +401,10 @@
 				if(LOGIN_YN == null || LOGIN_YN == ""){
 					swal("로그인 후 이용가능합니다.","로그인을 해주세요.", "warning")
 					.then(function(){
-						window.localStorage.setItem("returnUrl", PATH+"/community/freecommunity");
 						location.href="/ottt/login";                   
 					});
 					return;					
 				}
-				
 				OFFSET = 0;
 				TOTAL_COUNT = 0;
 				CATEGORY = category;
@@ -427,6 +421,16 @@
 			    }else{
 					return true;
 			    }
+			}
+
+			//파일명 길이체크
+			function fnValidFileNameSize(filename){
+		    	
+				if(filename.length > 20){ //20자
+					return false;
+			    }else{
+					return true;
+		    	}
 			}
 
 			//이미지 미리보기
@@ -454,7 +458,6 @@
 				if(LOGIN_YN == null || LOGIN_YN == ""){
 					swal("로그인 후 이용가능합니다.","로그인을 해주세요.", "warning")
 					.then(function(){
-						window.localStorage.setItem("returnUrl", PATH+"/community/freecommunity");
 						location.href="/ottt/login";                   
 					});
 					return;					
@@ -491,7 +494,7 @@
 	
 				    	}else {
 	
-				    		//삭제하는 post ajax
+		    				//삭제하는 post ajax
 				    		//1. 비동기 post ajax로 저장하는 컨트롤러 호출 , 필수값 보내야함
 				    		//2. 필수값 : 아티클번호, 회원번호
 				    		//3. 주소는 이거  /ottt/community//ajax/deleteLike
@@ -500,24 +503,15 @@
 								"/ottt/community/ajax/deleteLike"
 				    			, {"user_no": "${sessionScope.user_no}" , "article_no" : article_no }
 							    , function(data){
-
 							    	$("#pushHeart_"+index).attr("src", PATH+"/resources/images/img/heart_off.png");
 									$("#likeCount_"+index).text(Number($("#likeCount_"+index).text())-1);
-
 							    }
-						    );
+					    	);
 				    		
 				    	}
+				    	
 				    }
 				)	
-			}
-			
-			/**
-			*	상세 페이지 이동
-			* 	@param article_no 상세페이지 번호
-			*/
-			function fnPageMovePost(article_no){
-				location.href = PATH+"/community/post?article_no="+article_no;    				
 			}
 			
 		</script>

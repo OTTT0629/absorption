@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ottt.ottt.dao.login.LoginUserDao;
 import com.ottt.ottt.dto.ContentDTO;
 import com.ottt.ottt.dto.ContentOTTDTO;
+import com.ottt.ottt.dto.UserDTO;
 import com.ottt.ottt.dto.WishlistDTO;
 import com.ottt.ottt.service.content.ContentServiceImpl;
 import com.ottt.ottt.service.content.WishlistService;
@@ -33,9 +35,11 @@ public class HomeController {
 	ContentServiceImpl contentServiceImpl;
 	@Autowired
 	WishlistService wishlistService;
+	@Autowired
+	LoginUserDao loginUserDao;
 
 	@GetMapping(value = "/")
-	public String home(Model m, HttpSession session) {	
+	public String home(Model m, HttpSession session) {
 		
 		try {
 			List<ContentDTO> contentList = contentServiceImpl.getRating();
@@ -48,11 +52,12 @@ public class HomeController {
 			}
 			m.addAttribute("ottList", map);
 			
-			if(session.getAttribute("id") != null) {
+			if(session.getAttribute("no") != null) {
 				Integer user_no = (Integer) session.getAttribute("user_no");
 				List<WishlistDTO> wishList = wishlistService.getWishlist(user_no);
 				m.addAttribute("wishList", wishList);
-			}	
+			}			
+			
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -74,7 +79,8 @@ public class HomeController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<String>("찜 등록 실패 에러", HttpStatus.BAD_REQUEST);
-		}		
+		}
+		
 	}
 	
 	@DeleteMapping("/jjim")
@@ -87,6 +93,7 @@ public class HomeController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<String>("찜 헤제 실패 에러", HttpStatus.BAD_REQUEST);
-		}		
+		}
+		
 	}
 }

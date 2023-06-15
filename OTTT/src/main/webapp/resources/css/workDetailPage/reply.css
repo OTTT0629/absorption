@@ -13,29 +13,6 @@ button{
     all: unset;
 }
 
-
-.net-logo{
-	
-    width:  300px;
-    height: 200px; 
-    padding: 10px;
-    display: flex;
-    border: 1px solid red;
-    box-sizing: border-box;
-    overflow: hidden;
-    flex-wrap: wrap;
-    
-
-}
-
-
-
-
-.net-logo img{
-	margin: 10px 13px;
-	
-}
-
 .date-insert{
 	position: absolute;
 	right: 140px;
@@ -447,7 +424,7 @@ header{
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
+    z-index: 9995;
   }
 
 
@@ -458,7 +435,7 @@ header{
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    z-index: 2000;
+    z-index: 9999;
     width: 795px;
     height: 600px;
     overflow: hidden;
@@ -472,23 +449,13 @@ header{
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    z-index: 2000;
+    z-index: 9999;
     width: 795px;
     height: 600px;
     overflow: hidden;
   }
   
- .popup13{
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    z-index: 2000;
-    width: 795px;
-    height: 600px;
-    overflow: hidden;
-  } 
+ 
   
 
 #modify-review{
@@ -512,20 +479,8 @@ header{
     text-align: center;
   }
   
-    .submit-review{
-    width: 100px;
-    height: 40px;
-    line-height: 40px;
-    background-color: #202020;
-    color: #33ff33;
-    border-radius: 7px;
-    text-align: center;
-  }
   
     .submitMod-review{
-    position:absolute;
-    top:0px;
-	right:1px;
     width: 100px;
     height: 40px;
     line-height: 40px;
@@ -533,35 +488,11 @@ header{
     color: #33ff33;
     border-radius: 7px;
     text-align: center;
-   
-  }
-  
-      .submitMod-reply{
-    position:absolute;
-    top:0px;
-	right:1px;
-    width: 100px;
-    height: 40px;
-    line-height: 40px;
-    background-color: #202020;
-    color: #33ff33;
-    border-radius: 7px;
-    text-align: center;
-    margin-left: 15px;
   }
 
   #reply-text{
     width: 794px;
     height: 500px;
-    /* position:absolute;
-    top: 100px;
-    right: 0px; */
-    border-radius: 0;
-}
-
-  #review-text{
-    width: 794px;
-    height: 502px;
     /* position:absolute;
     top: 100px;
     right: 0px; */
@@ -586,14 +517,6 @@ header{
     border-radius: 0;
 }
 
-#replymod-text{
-	    width: 794px;
-    height: 500px;
-    /* position:absolute;
-    top: 100px;
-    right: 0px; */
-    border-radius: 0;
-}
 
 
 textarea{
@@ -673,9 +596,6 @@ form label{
     background-color: #0ba70b;
     border-radius: 7px;
 }
-
-
-
 .modcancel-review > ul{
     width: 100%;
     height: 100%;
@@ -708,81 +628,7 @@ form label{
     transform: rotate(180deg);
 }
 
-.modcancel-review > ul{
-    width: 100%;
-    height: 100%;
-    position: relative;
-    transition: all 0.5s ease;
-}
 
-.modcancel-review > ul > li{
-    width: 30px;
-    height: 4px;
-    background-color: #fff;
-    position: absolute;
-    top: 45%;
-    left: 9.7%;
-    transform: translate(-50%,-50%);
-    border-radius: 3px;
-}
-
-.replymodcancel-review{
-    width: 35px;
-    height: 35px;
-    position: absolute;
-    top: 7.5px;
-    right: 10px;
-    background-color: #0ba70b;
-    border-radius: 7px;
-}
-
-.replymodcancel-review > ul{
-    width: 100%;
-    height: 100%;
-    position: relative;
-    transition: all 0.5s ease;
-}
-
-.replymodcancel-review > ul > li{
-    width: 30px;
-    height: 4px;
-    background-color: #fff;
-    position: absolute;
-    top: 45%;
-    left: 9.7%;
-    transform: translate(-50%,-50%);
-    border-radius: 3px;
-}
-
-.replymodcancel-review > ul > li:first-child{
-    transform: rotate(45deg);
-}
-
-.replymodcancel-review > ul > li:last-child{
-    transform: rotate(135deg);
-}
-
-.replymodcancel-review:hover > ul{
-    transform: rotate(180deg);
-}
-
-.replymodcancel-review > ul{
-    width: 100%;
-    height: 100%;
-    position: relative;
-    transition: all 0.5s ease;
-}
-
-.replymodcancel-review > ul > li{
-    width: 30px;
-    height: 4px;
-    background-color: #fff;
-    position: absolute;
-    top: 45%;
-    left: 9.7%;
-    transform: translate(-50%,-50%);
-    border-radius: 3px;
-}
 
 .checkedblur{
     cursor: pointer;
@@ -791,33 +637,13 @@ form label{
     text-align: center;
 }
 
-.checkedblur1{
-	position: relative;
-	    cursor: pointer;
-    width: 250px;
-    height: 40px;
-    text-align: center;
-    transform: translate(-130px,-40px);
-   
-  
-}
-.checkedblur1 input{
-	position: relative;
-	cursor: pointer;
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
-     transform: translate(2px,4px);
-}
-
-.checkedblur input{
+.checkedblur > input{
     cursor: pointer;
     width: 20px;
     height: 20px;
     margin-right: 5px;
     transform: translateY(4px);
 }
-
 
 
 
@@ -862,63 +688,6 @@ form label{
 }
 
 .reply-bottom > div{
-    display: inline-block;
-}
-
-.modreply-bottom{
-    width: 490px;
-    height: 40px;
-    text-align: right;
-    line-height: 40px;
-    margin-left: 170px;
-}
-
-.modreply-bottom > div{
-    display: inline-block;
-}
-/**/
-
-.review-star-footer{
-    background-color: #202020;
-    width: 100%;
-    height: 40px;
-    /* left: 0px;
-    bottom: 0px;
-    position: absolute; */
-    border-radius: 5px;
-    line-height: 40px;
-    text-align: left;
-    transform: translateY(-4.5px);
-}
-
-.review-star-footer > div{
-    display: inline-block;
-    /* transform: translateY(-5px); */
-}
-
-.review-star{
-    width: 300px;
-    height: 40px;
-    line-height: 40px;
-    padding-left: 5px;
-}
-
-.star3{
-    width: 120px;
-    object-fit: cover;
-    margin-left: 15px;
-    margin-bottom: 5px;
-}
-
-.review-bottom{
-    width: 490px;
-    height: 40px;
-    text-align: right;
-    line-height: 40px;
-    margin-left: 300px;
-}
-
-.review-bottom > div{
     display: inline-block;
 }
 
@@ -1047,7 +816,7 @@ form label{
 
 .starpoint_box{
     position:relative;
-    background:url(https://hsecode.github.io/images_codepen/codepen_sp_star.png) 0 0 no-repeat;
+    background:url(https://ido-archive.github.io/svc/etc/element/img/sp_star.png) 0 0 no-repeat;
     font-size:0;
     width: 100px;
     height: 20px;
@@ -1062,7 +831,7 @@ form label{
     top:0;
     left:0;
     height:18px;
-    background:url(https://hsecode.github.io/images_codepen/codepen_sp_star.png) 0 -20px no-repeat;
+    background:url(https://ido-archive.github.io/svc/etc/element/img/sp_star.png) 0 -20px no-repeat;
     pointer-events:none;
 }
 
@@ -1148,7 +917,7 @@ form label{
 
 .starpoint_box2{
     position:relative;
-    background:url(https://hsecode.github.io/images_codepen/codepen_sp_star.png) 0 0 no-repeat;
+    background:url(https://ido-archive.github.io/svc/etc/element/img/sp_star.png) 0 0 no-repeat;
     font-size:0;
     width: 100px;
     height: 20px;
@@ -1163,7 +932,7 @@ form label{
     top:0;
     left:0;
     height:18px;
-    background:url(https://hsecode.github.io/images_codepen/codepen_sp_star.png) 0 -20px no-repeat;
+    background:url(https://ido-archive.github.io/svc/etc/element/img/sp_star.png) 0 -20px no-repeat;
     pointer-events:none;
 }
 
@@ -1494,54 +1263,4 @@ form label{
 	background-color: gray;
 	height: 35px;
 	width: 245px;
-}
-
-/* 모달 */
-.modal-content{
-    background-color: #202020;
-}
-
-.modal-body{
-    font-size: 26px;
-    text-align: center;
-    border: 1px solid #fff;
-}
-
-.modal-header{
-    border: 1px solid #fff;
-}
-
-.modal-footer{
-    border: 1px solid #fff;
-    display: flex;
-    justify-content: flex-end;
-}
- 
-.modi-del{
-   display: flex;
-    justify-content: flex-end;
-}
-
-
-.qa-main p{
-    display: flex;
-    justify-content: flex-end;
-    font-weight: bold;
-}
-
-.btn{
-    color: #fff;
-    background-color: transparent;
-    border-style: none;
-    border-color: #fff; 
-    font-size: 23px; 
-    text-decoration: none;
-}
-
-
-.btn:hover{
-    border-color: #33FF33;
-    background-color: transparent;
-    border-style: solid;
-    color: #33FF33; 
 }

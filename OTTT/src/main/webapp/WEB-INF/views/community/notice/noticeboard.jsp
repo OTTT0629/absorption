@@ -231,9 +231,12 @@
       <form action="" id="form" class="frm" method="post">
       <div class="modi-del">
 			<c:if test="${userDTO.admin.toString() == 'Y'}">
+	          <!-- Button trigger modal -->
 	        <button type="button" class="btn btn-secondary" id="modi" data-bs-toggle="modal" data-bs-target="#exampleModal">
 	          수정
 	        </button>
+	 
+	        <!-- Modal -->
 	        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	          <div class="modal-dialog modal-dialog-centered">
 	            <div class="modal-content">
@@ -251,9 +254,13 @@
 	            </div>
 	          </div>
 	        </div>
+	
+	        <!-- Button trigger modal -->
 	        <button type="button" class="btn btn-secondary" id="del" data-bs-toggle="modal" data-bs-target="#exampleModa2">
 	          삭제
 	        </button>
+	
+	        <!-- Modal -->
 	        <div class="modal fade" id="exampleModa2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	          <div class="modal-dialog modal-dialog-centered">
 	            <div class="modal-content">
@@ -307,14 +314,14 @@
           <div class="title-mainline">
             <input type="hidden" name="article_no" value="${articleDTO.article_no}"/>
             <div style="display: flex; justify-content: space-between;">
-            	<div><input type="text" name="article_title" value="${articleDTO.article_title}" ${mode=="new" ? "" : "readonly='readonly'" } placeholder="제목을 입력해주세요." style="width:900px;" /></div>
+            	<div><input type="text" name="article_title" value="${articleDTO.article_title}" ${mode=="new" ? "" : "readonly='readonly'" } style="width:900px;" /></div>
             	<div style="font-size: 20px;"><fmt:formatDate value="${articleDTO.article_create_dt}" pattern="yyyy-MM-dd" type="date"/></div>
             </div>
             
           </div>
 		 
           <div class="title-line">
-            <textarea name="article_content" ${mode=="new" ? "" : "readonly='readonly'" } placeholder="내용을 입력해주세요." style="background-color: #202020; width: 100%; height: 100%; color: #fff; border: none; outline: none;">${articleDTO.article_content}</textarea>
+            <textarea name="article_content" ${mode=="new" ? "" : "readonly='readonly'" } style="background-color: #202020; width: 100%; height: 100%; color: #fff; border: none; outline: none;">${articleDTO.article_content}</textarea>
           </div>
           
         </div>

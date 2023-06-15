@@ -47,5 +47,14 @@ public class CommentDaoImpl implements CommentDao {
 	public int updateComment(CommentDTO dto) throws Exception {
 		return session.insert(namespace + "updateComment", dto);
 	}
+	
+
+	/**
+	 * 댓글 신고
+	 */
+	@Override
+	public int communityCmtReport(CommentDTO dto) throws Exception {
+		return session.insert(namespace + "communityCmtReport", dto);
+	}
 
 }

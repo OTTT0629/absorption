@@ -80,9 +80,4 @@ public class UserDaoImpl implements UserDao {
 		return session.update(namespace +"up_profile" , userDTO);
 	}
 
-	@Override
-	public UserDTO select(Integer user_no) throws Exception {
-		return session.selectOne(namespace + "selectNo", user_no);
-	}
-
 }

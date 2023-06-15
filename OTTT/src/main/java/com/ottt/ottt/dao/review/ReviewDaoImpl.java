@@ -8,10 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.ottt.ottt.domain.SearchItem;
 import com.ottt.ottt.dto.CommentDTO;
 import com.ottt.ottt.dto.ReviewDTO;
-import com.ottt.ottt.dto.ReviewLikeDTO;
 
 @Repository
 public class ReviewDaoImpl implements ReviewDao {
@@ -39,14 +37,14 @@ public class ReviewDaoImpl implements ReviewDao {
 		return session.insert(namespace+"insert", dto);
 	}
 	@Override
-	public int count(int content_no) throws Exception {
+	public int count() throws Exception {
 		
-		return session.selectOne(namespace+"count",content_no);
+		return session.selectOne(namespace+"count");
 	}
 	@Override
-	public List<ReviewDTO> selectAll(int content_no) throws Exception {
+	public List<ReviewDTO> selectAll() throws Exception {
 		
-		return session.selectList(namespace+"selectAll",content_no);
+		return session.selectList(namespace+"selectAll");
 	}
 	@Override
 	public ReviewDTO selectReview(Integer content_no, Integer user_no) throws Exception {
@@ -56,8 +54,8 @@ public class ReviewDaoImpl implements ReviewDao {
 		return session.selectOne(namespace + "selectReview", map);
 	}
 	@Override
-	public double ratingAvg(Integer content_no) throws Exception {
-		Double average = session.selectOne(namespace + "ratingAvg", content_no);
+	public double ratingAvg() throws Exception {
+		Double average = session.selectOne(namespace + "ratingAvg");
 		return (average != null) ? average : 0.0;
 	}
 	
@@ -86,7 +84,7 @@ public class ReviewDaoImpl implements ReviewDao {
 	}
 	
 	@Override
-	public ReviewDTO replyReview(Integer content_no,  Integer review_no) {
+	public ReviewDTO replyReview(Integer content_no,  Integer review_no) throws Exception {
 		Map map = new HashMap();
 		map.put("content_no", content_no );
 		map.put("review_no", review_no);
@@ -117,53 +115,6 @@ public class ReviewDaoImpl implements ReviewDao {
 		map.put("cmt_no", cmt_no);
 		map.put("user_no", user_no);
 		return session.insert(namespace + "deleteReply", map);
-	}
-	@Override
-	public List<ReviewDTO> myReviewAll(SearchItem sc) throws Exception {
-		return session.selectList(namespace + "myReviewAll", sc);
-	}
-	@Override
-	public int myReviewCnt(SearchItem sc) throws Exception {
-		return session.selectOne(namespace + "myReviewCnt", sc);
-	}
-	@Override
-	public int reviewDuplication(Integer content_no, int user_no) throws Exception {
-		Map map = new HashMap();
-		map.put("content_no", content_no);
-		map.put("user_no", user_no);
-		return session.selectOne(namespace + "reviewDuplication", map);
-	}
-	@Override
-	public int selectLikeCount(ReviewLikeDTO dto) throws Exception {
-		// TODO Auto-generated method stub
-		return session.selectOne(namespace+"selectLikeCount", dto);
-	}
-	@Override
-	public int insertLike(ReviewLikeDTO dto) throws Exception {
-		// TODO Auto-generated method stub
-		return session.insert(namespace+"insertLike", dto);
-	}
-	@Override
-	public int deleteLike(ReviewLikeDTO dto) throws Exception {
-		// TODO Auto-generated method stub
-		return session.delete(namespace+"deleteLike", dto);
-	}
-	@Override
-	public int deleteReplyReview(Integer review_no, int user_no) throws Exception {
-		Map map = new HashMap();
-		map.put("review_no", review_no);
-		map.put("user_no", user_no);		
-		return session.delete(namespace+"deleteReplyReview", map);
-	}
-	@Override
-	public int updateReplyReview(ReviewDTO reviewDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return session.update(namespace + "updateReplyReview", reviewDTO);
-	}
-	@Override
-	public int updateReply(CommentDTO CommentDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return session.update(namespace + "updateReply", CommentDTO);
 	}
 
 }

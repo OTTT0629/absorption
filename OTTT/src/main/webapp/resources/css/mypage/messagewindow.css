@@ -75,6 +75,19 @@ textarea {
     transform: translate(0, -50%);
   }
 
+.push-alarm{
+    width: 640px;
+    height: 100%;
+    font-size: 23px;
+    margin-top: 17px;
+}
+
+.push-alarm p{
+    display: flex;
+    justify-content: flex-end;
+    font-weight: bold;
+}
+
 .nickname {
     font-size: 20px;
     font-weight: 500;
@@ -85,10 +98,10 @@ textarea {
     transform: translate(0, -50%);
 }
 
-.btn-write {
+input {
     background-color: #33ff33;
     border: 3px;
-    width: 70px;
+    width: 60px;
     height: 40px;
     border-radius: 10px;
     position: relative;

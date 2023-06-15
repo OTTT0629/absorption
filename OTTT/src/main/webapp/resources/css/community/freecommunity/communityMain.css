@@ -286,7 +286,6 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
     border: none;
     background-color: #0B0C0B;
     width: 800px;
-    min-height: 70px;
     max-height: max-content;
     margin-left: 58px;
 }

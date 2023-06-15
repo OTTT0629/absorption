@@ -29,5 +29,13 @@ public interface CommentService {
 	 * 댓글 수정
 	 */
 	int updateComment(CommentDTO dto) throws Exception;
+
+
+
+	/**
+	 * 댓글 신고
+	 */
+	int communityCmtReport(CommentDTO dto) throws Exception;
+
 }
 

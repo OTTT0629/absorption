@@ -47,6 +47,7 @@ public class QnAController {
 			
 			try {
 				UserDTO userDTO = loginUserDao.select((String) session.getAttribute("id"));
+				m.addAttribute(userDTO);
 				char admin = (char) session.getAttribute("admin");
 				if(admin=='Y') {
 					int totalCnt = serviceImpl.getAllCount(sc);

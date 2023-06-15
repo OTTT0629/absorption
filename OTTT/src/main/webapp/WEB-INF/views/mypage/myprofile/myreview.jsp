@@ -67,67 +67,62 @@
 				</div>
 			</div>
 		
-			<div class="main">				
-				<c:forEach var="ReviewDTO" items="${list }" >
+			<div class="main">
+				<div class="blank"></div>
+				<div class="post">
+				  	<a href="#" class="review">
+				    <div class="Lside">
+				      	<img class="poster" src="${path}/resources/images/poster/whiplash.jpg" alt="위플래쉬">
+				    </div>
+				    <div class="Rside">
+				    	<div class="rv-head">
+				    		<span class="title">위플래쉬</span>
+				        	<img class="star" src="./images/icon/point.png" alt="별점">
+				      	</div>
 				
-					<a href="<c:url value="#"/>" class="review">
-						<div class="post">					  	
-						    <div class="Lside">
-						      	<img class="poster" src="${ReviewDTO.thumbnail}">
-						    </div>
-						    <div class="Rside">
-						    	<div class="rv-head">
-						    		<span class="title">${ReviewDTO.content_nm}</span>
-						    		<div class="starating">
-						    			<img class="star" src="./images/icon/point.png">
-						        		<span>${ReviewDTO.rating}</span>						    		
-						    		</div>
-						      	</div>
-						
-								<div class="rv-main">
-								  <span>${ReviewDTO.review_content}</span>
-								</div>
-						    </div>
-					  	</div>
-				  	</a>			  	
-			  	</c:forEach>
-			  	
-			  	<div class=paging-container>
-		    		<div class="paging">
-		    			<c:if test="${myReviewCnt == null || myReviewCnt == 0 }">		    			
-		    				<div class="title-line" style="text-align: center;">
-		    					내가 쓴 리뷰가 없습니다.
-		    				</div>
-		    			</c:if>
-		    			
-		    			<c:if test="${myReviewCnt != null || myReviewCnt != 0 }">
-		    			<!-- 페이지 번호 배너-->
-				        <div class="page-num" style="margin-top: 10px;">
-				        	<nav aria-label="Page navigation example" class="d-flex flex-row justify-content-center">
-				          	<ul class="pagination">				          		
-					            <c:if test="${pr.showPrev}">
-						            <li class="page-item">
-						            	<a class="page-link" href="<c:url value="/mypage/myreview${pr.sc.getString(pr.beginPage-1) }" />">&lt;</a>
-					            	</li>
-					            </c:if>
-					            <c:forEach var="i" begin="${pr.beginPage }" end="${pr.endPage }">
-					            	<li class="page-item">
-					            		<a class="page-link" href="<c:url value="/mypage/myreview${pr.sc.getString(i) }" />">${i }</a>
-				            		</li>
-				            	</c:forEach>
-			            		<c:if test="${pr.showNext}">
-			            			<li class="page-item">
-			            				<a class="page-link" href="<c:url value="/mypage/myreview${pr.sc.getString(pr.endPage+1) }" />" >&gt;</a>
-		            				</li>
-            					</c:if>
-       						</ul>
-   							</nav>
+						<div class="rv-main">
+						  <span>내용</span>
 						</div>
-						</c:if>  			
-		    			
-		    		</div>	    	
-	    		</div>	    	
+				    </div>
+				  	</a>
+				</div>
 			
+				<div class="post">
+				  	<a href="<c:url value="/detailPage" />" class="review">
+				    <div class="Lside">
+				    	<img class="poster" src="./images/poster/subu.jpg" alt="서부전선">
+				    </div>
+				    
+				    <div class="Rside">
+				    	<div class="rv-head">
+				        	<span class="title">서부전선</span>
+				        	<img class="star" src="./images/icon/point.png" alt="별점">
+		        		</div>
+		        		
+		        		<div class="rv-main">
+		        			<span>내용</span>
+	        			</div>
+        			</div>
+				  	</a>
+			  	</div>
+			
+				<div class="post">
+					<a href="#" class="review">
+					<div class="Lside">
+						<img class="poster" src="./images/poster/no.jfif" alt="노인을 위한 나라는 없다">
+					</div>
+					<div class="Rside">
+						<div class="rv-head">
+							<span class="title">노인을 위한 나라는 없다</span>
+					      	<img class="star" src="./images/icon/point.png" alt="별점">
+					    </div>
+					
+					    <div class="rv-main">
+					    	<span>내용</span>
+					    </div>
+				    </div>
+					</a>
+				</div>
 			</div>
 		</section>
 	</div>

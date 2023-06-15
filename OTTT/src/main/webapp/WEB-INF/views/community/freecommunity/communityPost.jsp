@@ -15,10 +15,10 @@
     	<meta charset="utf-8">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
     	<title>communityPost</title>
-    	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" >
+    	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     	<script type="text/javascript" src="${path}/resources/js/community/main.js"></script>
     	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> 
-    	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"></script>
+    	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     	<link rel="stylesheet" href="${path}/resources/css/community/freecommunity/communityPost.css" >
@@ -73,23 +73,45 @@
        			</div>
        			<div class="Rcontent" >
            			<div class="maintext">
-           				<input type="hidden" name="article_no" id="article_no" value="${articleDTO.article_no}">
+           				<input type="hidden" name="article_no" id="article_no" value="${articleDTO.article_no}">         				
            				<div class="pro-dan">
                				<div>
                					<a href="#"><img class="profile" src="${articleDTO.image }" alt="profile" ></a>
                  				<a class="nickname" href="../ottt박소율/mypageshow.html">${articleDTO.user_nicknm }</a>
                				</div>
+			         			<input type="hidden" name="article_no"  value="${articleDTO.article_no}"/> 
+			         			<input type="hidden" name="target_user_no" id="target_user_no" value="${articleDTO.user_no}"> 
+	               				<div class="btn_warning_div">
+				                    <button type="button" class="btn_warning2" data-bs-toggle="dropdown" aria-expanded="false">
+				                     신고
+				                    </button>
+				                    <ul class="dropdown-menu">
+				                      <li><button class="dropdown-item" type="button" name="report_type" value="1">비방/욕설</button></li>
+				                      <li><button class="dropdown-item" type="button" name="report_type" value="2">광고/도배</button></li>
+				                      <li><button class="dropdown-item" type="button" name="report_type" value="3">악의적인 스포</button></li>
+				                      <li><button class="dropdown-item" type="button" name="report_type" value="4">선정성</button></li>
+				                    </ul>
+				                </div>
+				      
                			</div>
            				<div class="wirted">
          					<!-- 입력 폼 -->
 							<form name="updateForm" id="updateForm"	enctype="multipart/form-data" action="<c:url value="/community/update"/>" method="post">
-             					<div style="margin-bottom: 10px;">
+             					<div>
 					         		<input type="hidden" name="article_no" value="${articleDTO.article_no}"/>
 					         		<input type="hidden" name="user_no" value="${articleDTO.user_no}"/>
 									<!--  ${mode == "view" ? "readonly='readonly" : ""}  -->
 									<!-- 보기모드일때 textarea에  readonly="readonly"를 넣고 수정모드일때는 지운다. -->
-       								<p class="writeHere"	placeholder="Write Here" id="article_content" name="article_content" <c:if test="${mode == 'view' }">readonly='readonly'</c:if>  onkeydown="resize(this)" onkeyup="resize(this)" name="article_content" > ${articleDTO.article_content } </p>
+             						<c:choose>
+										<c:when test="${mode == 'view' }">		
+											<a onclick="return false;" style="white-space: pre-wrap;" id="textP">${articleDTO.article_content }</a>
+										</c:when>
+										<c:otherwise>
+       										<textarea class="writeHere" rows="10"	placeholder="Write Here" id="article_content" name="article_content"   onkeydown="resize(this)" onkeyup="resize(this)" name="article_content" > ${articleDTO.article_content } </textarea>
+										</c:otherwise>
+									</c:choose>	
              					</div>
+             					<br>
              					<c:choose>
 									<c:when test="${mode == 'view' }">		
 										<c:if test="${articleDTO.article_image != null}">
@@ -99,11 +121,21 @@
 										</c:if>
 									</c:when>
 									<c:otherwise>
-										<c:if test="${articleDTO.article_image != null}">
-											<div  class="container" style="margin-left: 70px">
-					                  			<img src="data:image/png;base64,${articleDTO.article_image}" id="preview" style="border-radius: 5px;"/>
-					                  		</div>
-				                  		</c:if>
+										<c:choose>
+											<c:when test="${articleDTO.article_image != null}">
+												<div  class="container" style="margin-left: 70px;">
+		                  							<img src="data:image/png;base64,${articleDTO.article_image}" id="preview" style="border-radius: 5px;"/>
+			                  					</div>
+											</c:when>
+			                  				<c:otherwise>
+												<div  class="container" style="margin-left: 70px; display: none">
+	                  								<img src="" id="preview" style="border-radius: 5px;"/>
+	                  							</div>
+			                  				</c:otherwise>
+										</c:choose>
+										<div>
+											<button type="button" id="imgDelete" onclick="javascript:fnFileDelete('Y');">이미지 삭제</button>
+										</div>
 										<div>
 											<div class="inImg">
 												<input id="fileInput" name="upFile"	 accept="image/*" type="file" tabindex="-1" style="position: absolute; clip: rect(0px 0px 0px 0px);">
@@ -225,7 +257,7 @@
 								<li class="comment_write" id="commentCard">
 									<div>로그인이 필요합니다.</div>
 				                	<div>
-			                			<textarea class="writeHere" name="cmt_content" placeholder="Write Here" onkeydown="resize(this)" onkeyup="resize(this)" readonly="readonly"></textarea>
+			                			<textarea class="writeHere" name="cmt_content" placeholder="Write Here" onkeydown="resize(this)" onkeyup="resize(this)" ></textarea>
 			                			<input class="btn_commit" onclick="javascript:fnInsertComment();" type="image" src="${path}/resources/images/img/commit.png" alt="commit">
 			                		</div>
 			                	</li>
@@ -256,10 +288,9 @@
 			/********************************************************************************/
 			/* 자바스크립트 전역변수 영역, 대문자로 정의												*/
 			/********************************************************************************/
-			let LOGIN_YN = '${sessionScope.user_no}';		//로그인여부
-			let ARTICLE_NO = "${articleDTO.article_no}"		//게시글 번호
-			let PATH = "<c:out value='${path}'/>"; 				//이미지 root 경로
-         	let BEFORE_TEXTAREA = "";      						//댓글의 텍스트아레아 변경전 값
+			let LOGIN_YN = '${sessionScope.user_no}';	//로그인여부
+			let ARTICLE_NO = "${articleDTO.article_no}"
+			let PATH = "<c:out value='${path}'/>"; 	//이미지 root 경로
 			
 			
 			/********************************************************************************/
@@ -267,9 +298,9 @@
 			/* 작성자 gahhyun																	*/
 			/********************************************************************************/
 			$(document).ready(function(){
-			// jQuery 라이브러리를 사용
-			//페이지의 모든 요소가 로드되고 준비된 후에 JavaScript 코드를 실행하고자 할 때 사용
-			
+				
+				
+
 				/********************************************************************************/
 				/*	이미지 미리보기 											*/
 				/********************************************************************************/
@@ -295,18 +326,16 @@
 					$("#userfile").val(filename);
 
 			     	fnReadImage($(this)[0]); //미리보기
+		   			$(".container").show();
 
 				}); 
 				
-				/********************************************************************************/
-				//좋아요 누르기 클릭 이벤트											*/
-				/********************************************************************************/				
+				//좋아요 누르기 클릭 이벤트
 				$("#pushHeart").click(function(){
 
 					if(LOGIN_YN == null || LOGIN_YN == ""){
 						swal("로그인 후 이용가능합니다.","로그인을 해주세요.", "warning")
 						.then(function(){
-							window.localStorage.setItem("returnUrl", PATH+"/community/post?article_no=${articleDTO.article_no}");
 							location.href="/ottt/login";                   
 						});
 						return;					
@@ -362,10 +391,46 @@
 					
 				});
 				
-				/********************************************************************************/
-				//검색어버튼 Click Event											*/
-				/********************************************************************************/		
-				//enter을 눌렀을 경우 Click Event
+				
+				 $('.dropdown-item').on('click', function() {
+				  	  event.stopPropagation();
+				  	  var report_type = $(this).val(); 
+				  	  var user_no = "${user_no}"; 
+				  	  var target_user_no = $('#target_user_no').val(); 
+					  var article_no = $('#article_no').val(); 
+				  	  
+
+				  	  // Ajax 요청을 통해 신고 데이터를 서버로 전송합니다.
+
+						$.ajax({
+							type: "POST",
+							url: "/ottt/community/ajax/report",
+							 $.ajax({
+								type: "POST",
+								url: "/ottt/community/ajax/report",
+								data: {
+								user_no: user_no,
+								article_no: article_no,
+								target_user_no: target_user_no,
+								report_type: report_type
+								},
+							success: function(response) {
+								// 신고 처리 성공 시에 대한 처리를 수행합니다.
+								$(".body").html("정상적으로 신고되었습니다.");
+								$('#Modal').modal('show');
+								$('.dropdown-menu').removeClass('show');
+							},
+							error: function(xhr, status, error) {
+								// 신고 처리 실패 시에 대한 처리를 수행합니다.
+								$(".body").html("신고 처리 중 오류가 발생했습니다.");
+								$('#Modal').modal('show');
+							}
+						});
+			  		});
+			 });
+
+			
+				//검색어버튼 Click Event
 				$("#schText").keydown(function(event) {
 			  		// Enter 키의 keyCode는 13입니다.
 				  	if (event.keyCode === 13) {
@@ -380,22 +445,19 @@
 				});
 
 				
-				//코맨트 목록 공통 ajax 함수 호출 
-				fnGetCommentList();
-				
-	   		});
-			
-         	
-         	
-			/* swal icon : success / error / warning / info / question */
-				 
-			
+			/* swal icon
+				success 
+				error 
+				warning 
+				info 
+				question
+	     	*/
+	     	
 	     	function post_delete(){
 	   			//폼서브밋 방식으로 삭제요청
 				if(LOGIN_YN == null || LOGIN_YN == ""){
 					swal("로그인 후 이용가능합니다.","로그인을 해주세요.", "warning")
 					.then(function(){
-						window.localStorage.setItem("returnUrl", PATH+"/community/post?article_no=${articleDTO.article_no}");
 						location.href="/ottt/login";                   
 					});
 					return;					
@@ -407,7 +469,6 @@
 				if(LOGIN_YN == null || LOGIN_YN == ""){
 					swal("로그인 후 이용가능합니다.","로그인을 해주세요.", "warning")
 					.then(function(){
-						window.localStorage.setItem("returnUrl", PATH+"/community/post?article_no=${articleDTO.article_no}");
 						location.href="/ottt/login";                   
 					});
 					return;					
@@ -422,6 +483,16 @@
 			    }else{
 					return true;
 			    }
+			}
+
+			//파일명 길이체크
+			function fnValidFileNameSize(filename){
+		    	
+				if(filename.length > 20){ //20자
+					return false;
+			    }else{
+					return true;
+		    	}
 			}
 
 			//이미지 미리보기
@@ -470,14 +541,14 @@
 				if(list.length > 0){
 
 					list.forEach(function(v ,i){
-					
 
+						
 						createHtml +=	'<li class="comment_show">';
 						createHtml +=		'<div class="pro-dan">';
 						createHtml +=			'<div style="display: flex;">';
 						createHtml +=				'<a href="#"><img class="profile" src="'+v.image+'" alt="profile" ></a>';
 						createHtml +=				'<a class="nickname" href="../ottt박소율/mypageshow.html">'+v.cmt_writer+'</a>';
-						createHtml +=				'<p id="current_date"  style="position: relative; left: 35px; bottom: 24px;" >'+fnTimeForToday(v.cmt_dt)+'</p>';
+						createHtml +=				'<p id="current_date"  style="position: relative; left: 35px; bottom: 24px; margin-top: 15px;" >'+fnTimeForToday(v.cmt_dt)+'</p>';
 						createHtml +=			'</div>';
 
 						//로그인사용자랑 댓글작성자랑 일치하는지 확인,같다면 수정/삭제 버튼 태그를 그린다.
@@ -504,20 +575,17 @@
 							createHtml +=		'<div class="comment_write_box">';
 						//로그인을 안할 경우
 						if(LOGIN_YN == null || LOGIN_YN == ""){
-							
-							let formattedContent = v.cmt_content.replace(/\n/gi, "<br/>"); 
-							
-							createHtml +=			'<p style="margin-top: 10px; margin-left: 10px; width: 760px; max-height: max-content; position: relative; left: 54px; bottom: 42px;" >' + formattedContent + '</p>';
+							createHtml +=			'<p style="margin-top: 10px; margin-left: 10px; width: 760px; max-height: max-content; position: relative; left: 54px; bottom: 42px;" >' + v.cmt_content + '</p>';
 						//로그인을 했을 경우
 						} else {
 							if(v.writer_chk == "Y"){
-								createHtml +=			'<p>';
-								createHtml +=				'<textarea readonly="readonly" class="textarea-auto-height"style="background-color: #202020; width: 100%; height: max-content; color: #fff; border: none;  resize:none;">'+v.cmt_content+'</textarea>';
-								createHtml +=			'</p>';									
+							createHtml +=			'<p>';
+							createHtml +=				'<textarea readonly="readonly" style="background-color: #202020; width: 100%; height: max-content; color: #fff; border: none;  resize:none;">'+v.cmt_content+'</textarea>';
+							createHtml +=			'</p>';									
 							}else {
-								let formattedContent = v.cmt_content.replace(/\n/gi, "<br/>"); 
-								createHtml +=			'<p style="margin-top: 10px; margin-left: 10px; width: 760px; max-height: max-content; position: relative; left: 54px; bottom: 42px;" >' + formattedContent + '</p>';								
+							createHtml +=			'<p style="margin-top: 10px; margin-left: 10px; width: 760px; max-height: max-content; position: relative; left: 54px; bottom: 42px;" >' + v.cmt_content + '</p>';								
 							}
+						
 						}
 						createHtml +=		'</div>';
 						createHtml +=	'</li>'; 
@@ -533,11 +601,11 @@
 			* 댓글을 저장하는 함수
 			*/
 			function fnInsertComment(){
+
 				//로그인 여부 체크
 				if(LOGIN_YN == null || LOGIN_YN == ""){
 					swal("로그인 후 이용가능합니다.","로그인을 해주세요.", "warning")
 					.then(function(){
-						window.localStorage.setItem("returnUrl", PATH+"/community/post?article_no=${articleDTO.article_no}");
 						location.href= PATH+"/login";                   
 					});
 					return;					
@@ -573,7 +641,7 @@
 
 				//해당 row의 텍스트아레아 정보 가져오기
 				let textarea = $("#commentCard").nextAll("li").eq(i).find('div.comment_write_box textarea');
-				textarea.focus();
+
 				//덱스트아레아 영역 리드온리 풀기
 				textarea.removeAttr("readonly");
 				
@@ -587,7 +655,6 @@
 					$(btn[3); 삭제
 				*/
 				if(type == "U"){
-              		BEFORE_TEXTAREA = textarea.val();
 					$(btn[0]).hide();
 					$(btn[3]).hide();
 					$(btn[1]).show();
@@ -597,9 +664,7 @@
 					$(btn[3]).show();
 					$(btn[1]).hide();
 					$(btn[2]).hide();			
-               		//취소를 하면 원래 내용으로 되돌린다.
-      			 	textarea.attr("readonly","readonly");
-   					textarea.val(BEFORE_TEXTAREA);	
+					fnGetCommentList();					
 				}
 			}
 			
@@ -662,13 +727,11 @@
 			  	});				
 			}
 			
-			
-			
 	         /**
 	         *   날짜 계산(몇일전, 몇시간전, 몇분전)
 	         *   @param dateValue{String} 날짜
 	         */
-	         function fnTimeForToday(dateValue) {
+         	function fnTimeForToday(dateValue) {
 	            
 	            const today = new Date();
 	            const timeValue = new Date(dateValue);
@@ -676,30 +739,51 @@
 	            const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
 	              
 	              if (betweenTime < 1) {
-	                 return '방금 전';
+	                 return '방금전';
 	              }
 	             
 	              if (betweenTime < 60) {
-	                  return betweenTime+"분 전";
+	                  return betweenTime+"분전";
 	              }
 
 	              var betweenTimeHour = Math.floor(betweenTime / 60);
 	              
 	              if (betweenTimeHour < 24) {
-	                  return betweenTimeHour+"시간 전";
+	                  return betweenTimeHour+"시간전";
 	              }
 
 	              var betweenTimeDay = Math.floor(betweenTime / 60 / 24);
 	              
 	              if (betweenTimeDay < 365) {
-	                  return betweenTimeDay+"일 전";
+	                  return betweenTimeDay+"일전";
 	              }
 
-	              return Math.floor(betweenTimeDay / 365)+"년 전";
-	          }
-	   
-			
-			
+	              return Math.floor(betweenTimeDay / 365)+"년전";
+       		}
+	         
+	         
+	         /**
+	         *   게시글 수정 시 이미지 삭제
+	         */
+	   		function fnFileDelete(type){
+
+				// form 요소의 참조를 가져옵니다.
+  				var form = document.getElementById("updateForm");
+  				
+	   			// hidden input 요소를 생성합니다.
+	   			var hiddenInput = document.createElement('input');
+	   			hiddenInput.type = "hidden";
+	   			hiddenInput.name = "fileDeleteYn"; // hidden 필드의 이름을 지정합니다.
+	   			hiddenInput.value = "Y"; // hidden 필드의 값을 지정합니다.
+
+  				// form에 hidden input을 추가합니다.
+   				form.appendChild(hiddenInput);
+	
+	   			$("#userfile").val("");			//파일명 없애기	   			
+	   			$("#preview").attr("src","");	//이미지 없애기
+	   			$(".container").hide();
+	   		}
+
     	</script>
 	</body>
 </html>

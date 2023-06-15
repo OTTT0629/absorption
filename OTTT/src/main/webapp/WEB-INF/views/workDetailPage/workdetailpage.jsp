@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="user_no" value="${sessionScope.user_no}" />
 <c:set var="path" value="${pageContext.request.contextPath}"/> 
 <c:set var="loginId" value="${sessionScope.id }"/>
 <c:set var="loginout" value="${sessionScope.id == null ? 'logout' : 'login'}" />
@@ -30,7 +29,7 @@
     <script src="${path}/resources/js/workDetailPage/script/workDetailPage.js"></script>
    
   </head>
-  <body id="area">
+  <body>
     <div class="wrap">
       <div class="popupback"></div>
       <div class="popup-video">
@@ -140,11 +139,11 @@
       <div class="main-left">
           <img src="${path}/resources/images/main01.png" alt="서부전선 이상없다">
           <div class="m-txt">
-            ${contentDTO.content_nm }
+            서부 전선 이상 없다
           </div>
           <div class="main-txt">
             <h3>작품 내용</h3>
-            <p>${contentDTO.content_info }</p>
+            <p>파울이 전쟁에 참여한다 > 죽는다 > 끝.</p>
           </div>
 
       </div>
@@ -297,47 +296,10 @@
               </ul>
             </div>
             <div class="net-logo">
-
-				<c:forEach var="ContentOTTDTO" items="${contentOTTlist}" >
-				  <c:set var="ottImage" value="" />
-				  <c:set var="ottLink" value="#" />
-				
-				  <c:choose>
-				    <c:when test="${ContentOTTDTO.ott_no == 1}">
-				      <c:set var="ottImage" value="${ContentOTTDTO.ott_img}"  />
-				      <c:set var="ottLink" value="https://www.tving.com" />
-				    </c:when>
-				    <c:when test="${ContentOTTDTO.ott_no == 2}">
-				      <c:set var="ottImage" value="${ContentOTTDTO.ott_img}" />
-				      <c:set var="ottLink" value="https://www.netflix.com/" />
-				    </c:when>
-				        <c:when test="${ContentOTTDTO.ott_no == 3}">
-				      <c:set var="ottImage" value="${ContentOTTDTO.ott_img}"  />
-				      <c:set var="ottLink" value="https://www.wavve.com/" />
-				    </c:when>
-				        <c:when test="${ContentOTTDTO.ott_no == 4}">
-				      <c:set var="ottImage" value="${ContentOTTDTO.ott_img}"  />
-				      <c:set var="ottLink" value="https://www.coupangplay.com/" />
-				    </c:when>
-				        <c:when test="${ContentOTTDTO.ott_no == 5}">
-				      <c:set var="ottImage" value="${ContentOTTDTO.ott_img}"  />
-				      <c:set var="ottLink" value="https://watcha.com/" />
-				    </c:when>
-				        <c:when test="${ContentOTTDTO.ott_no == 6}">
-				      <c:set var="ottImage" value="${ContentOTTDTO.ott_img}"  />
-				      <c:set var="ottLink" value="https://www.disneyplus.com/ko-kr" />
-				    </c:when>
-				  </c:choose>
-				
-				  <a href="${ottLink}"><img src="${ottImage}" alt="OTT 로고"></a>
-				
-				  
-				</c:forEach>
-
-            	
+              <a href="https://www.netflix.com/watch/81260280?trackId=255824129&tctx=0%2C0%2CNAPA%40%40%7Cfe45a776-cd54-4ea6-a3bc-f0f6ce3da1e0-30173404_titles%2F1%2F%2F%EC%84%9C%EB%B6%80%EC%A0%84%EC%84%A0%2F0%2F0%2CNAPA%40%40%7Cfe45a776-cd54-4ea6-a3bc-f0f6ce3da1e0-30173404_titles%2F1%2F%2F%EC%84%9C%EB%B6%80%EC%A0%84%EC%84%A0%2F0%2F0%2Cunknown%2C%2Cfe45a776-cd54-4ea6-a3bc-f0f6ce3da1e0-30173404%7C1%2CtitlesResults%2C81260280%2CVideo%3A81260280%2CdetailsPagePlayButton">
+                <img src="${path }/resources/images/icon/netplix.png" alt="넷플릭스 로고">
+              </a>
                 </div>
-                
-
               </div>
             
         </div>
@@ -366,7 +328,6 @@
               <label for="review-text" style="background-color: #202020;">리뷰를 작성해주세요</label>
 				<input type="hidden" name="user_no" value="${sessionScope.user_no}" >
 				<input type="hidden" name="review_no" value="${reviewDTO.review_no }"  />
-				<input type="text" name="content_no" value="${content_no}" />
               <textarea id="review-text" name="review_content"></textarea>
               <div class="reveiw-star-footer">
                 <div class="review-star" >별점을 매겨주세요:
@@ -455,17 +416,13 @@
       <div class="bottom-right">
         
         <div class="right-text">
-          <span>${contentDTO.content_nm }</span>
+          <span>Im Westen nichts Neues</span>
         </br>
-            
-            <span>${contentDTO.country } ·</span>
-            
-            <c:forEach var="GenreDTO" items="${genrenmlist}" varStatus="loop">
-            	<span class="a1"><a href="#">${GenreDTO.genre_nm}</a></span>
-            	<c:if test="${!loop.last}">&nbsp;·</c:if>
-            </c:forEach>
-            <span>· ${contentDTO.content_runtime }분 ·</span>
-            <span>${contentDTO.age }세</span>
+            <span>2023 ·</span>
+            <span>미국 ·</span>
+            <span class="a1"><a href="#">전쟁</a></span>
+            <span>· 148분 ·</span>
+            <span>청불</span>
               <br/>
             <span>감독 : 에드워드 버거</span>
               <br/>
@@ -484,11 +441,10 @@
 			<c:if test="${myReview != null || myReview.user_nicknm != null}">
         	<input type="hidden" name="user_no" value="${myReview.user_no }">
     		<input type="hidden" name="review_no" value="${myReview.review_no }"  />
-    		
         <div class="review-box">      
           <div class="review-box-header">
             <div class="user-icon">
-              <img class="aaa" src="${myReview.image}" >
+              <img class="aaa" src="${path}/resources/images/icon/user.png" alt="유저 이미지파일">
             </div>
             <div class="user-name1">
               <a href="../ottt박소율/mypageshow.html">
@@ -499,21 +455,16 @@
             <ul>
               <li class="rating1">
               <div class="bbb">
-              	<img src="${path}/resources/images/img/starone.png" alt="별점">
+              	<img src="${path}/resources/images/img/starone.PNG" alt="별점">
                 ${myReview.rating}
                 </div>
               </li>
               <li>
                 <div class="heart1">        
                     <div>
-                    <c:choose>
-						<c:when test="${myReview.check_like_count == 1}">
-	                      	<input class="LikeBtn" id="heart-on" type="image" src="${path}/resources/images/img/heart_on.png" width="35" height="80%"  data-review-no="${myReview.review_no}" >
-	                    </c:when>
-					<c:otherwise>
-						<input class="LikeBtn" id="heart-off" type="image" src="${path}/resources/images/img/heart_off.png" width="35" height="80%"  data-review-no="${myReview.review_no}" >
-					</c:otherwise>
-					</c:choose>		
+					   <button class="LikeBtn">
+                      	 <img id="myImage-${myReview.review_no}" src="${path}/resources/images/img/heart_off.png" width="35" height="80%">
+                      </button>					
                     </div>             
                 </div>
               </li>
@@ -531,12 +482,10 @@
                   <div class="like">
                     <img src="${path}/resources/images/img/좋아요.png" alt="좋아요아이콘">
                   </div>
-				<div class="like-count">
-                    <p id="likeCount">
-                      ${myReview.like_count}개
+                  <div class="like-count">
+                    <p>
+                      9999개
                     </p>
-                    
-                 
                   </div>
                 </li>
                 <li>
@@ -545,7 +494,7 @@
                   </div>
                   <div class="comment-count">
                     <p>
-                      ${myReview.comment_cnt }개
+                      9999개
                     </p>
                   </div>
                 </li>
@@ -566,9 +515,7 @@
           <div class="popup12 mod-popup">     
               <label for="mod-text" style="background-color: #202020;">리뷰를 작성해주세요</label>
               <input type="hidden" name="user_no" value="${sessionScope.user_no}" > 
-              <input type="hidden" name="review_no" class="review_no" value="${myReview.review_no}">
-              <input type="hidden" name="review_no" class="review_no" value="${myReview.review_no}">
-              <input type="hidden" name="content_no" value="${content_no}" />              
+              <input type="hidden" name="review_no" class="review_no" value="${myReview.review_no}">            
               <textarea id="review-text" name="review_content" >${ReviewDTO.review_content}</textarea>
               <div class="reveiw-star-footer">
                 <div class="review-star" >별점을 매겨주세요:
@@ -652,11 +599,11 @@
         </div>
         <c:forEach var="ReviewDTO" items="${list}">
         
-        <input type="hidden" name="review_no" value="${ReviewDTO.review_no }" data-review-no="${ReviewDTO.review_no}"  />
+        <input type="hidden" name="review_no" value="${ReviewDTO.review_no }"  />
         <div class="review-box">      
           <div class="review-box-header">
             <div class="user-icon">
-              <img src="${ReviewDTO.image }" >
+              <img src="${path}/resources/images/icon/user.png" alt="유저 이미지파일">
             </div>
             <div class="user-name">
               <a href="../ottt박소율/mypageshow.html">
@@ -666,20 +613,15 @@
             </div>
             <ul>
               <li class="rating">
-              	<img src="${path}/resources/images/img/starone.png" alt="별점">
+              	<img src="${path}/resources/images/img/starone.PNG" alt="별점">
                 ${ReviewDTO.rating}
               </li>
               <li>
                 <div class="heart">        
                     <div>
-                    <c:choose>
-						<c:when test="${ReviewDTO.check_like_count == 1}">
-	                      	<input class="LikeBtn" id="heart-on" type="image" src="${path}/resources/images/img/heart_on.png" width="35" height="80%"  data-review-no="${ReviewDTO.review_no}" >
-	                    </c:when>
-					<c:otherwise>
-						<input class="LikeBtn" id="heart-off" type="image" src="${path}/resources/images/img/heart_off.png" width="35" height="80%"  data-review-no="${ReviewDTO.review_no}" >
-					</c:otherwise>
-					</c:choose>		
+					  <button  class="LikeBtn">
+                      	<img id="myImage" src="${path}/resources/images/img/heart_off.png" width="35" height="80%">
+                      </button>					
                     </div>             
                 </div>
               </li>
@@ -687,7 +629,7 @@
           </div>
           <a href="<c:url value='/detailPage/reply' />?content_no=${ReviewDTO.content_no}&review_no=${ReviewDTO.review_no}">
           <div class="review-box-body">				
-            <p class="review-box-text review_content">${ReviewDTO.review_content}</p>
+            <p class="review-box-text review_content">${ReviewDTO.review_content }</p>
           </div>
         </a>
           <div class="review-box-footer">
@@ -698,11 +640,9 @@
                     <img src="${path}/resources/images/img/좋아요.png" alt="좋아요아이콘">
                   </div>
                   <div class="like-count">
-                    <p id="likeCount">
-                      ${ReviewDTO.like_count}개
+                    <p>
+                      9999개
                     </p>
-                    
-                 
                   </div>
                 </li>
                 <li>
@@ -711,7 +651,7 @@
                   </div>
                   <div class="comment-count">
                     <p>
-                      ${ReviewDTO.comment_cnt }개
+                      9999개
                     </p>
                   </div>
                 </li>
@@ -760,22 +700,7 @@
           </div>
           </section>
       </div>
-                          <!-- Modal -->
-           <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index: 9999;">
-             <div class="modal-dialog modal-dialog-centered">
-               <div class="modal-content">
-                 <div class="modal-header">
-                   <h1 class="modal-title fs-5" id="exampleModalLabel">알림</h1>
-                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                 </div>
-                 <div class="modal-body body">
-                 </div>
-                 <div class="modal-footer">
-                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">확인</button>
-                 </div>
-               </div>
-             </div>
-           </div>  
+
   </div>
   
   
@@ -786,224 +711,139 @@
         
     </div>
     
+<script type="text/javascript">
+	
+	let msg = "${msg}"
+		if(msg=="DEL_OK") alert("성공적으로 삭제 되었습니다.")
+		if(msg=="DEL_ERR") alert("이미 삭제 되었거나 리뷰가 존재하지 않습니다.")
 
-    <footer>
+		let review_no = $("input[name=review_no]").val()
 
-    </footer>    
-        
-    </div>
-    
-   <script type="text/javascript">
-   $(document).ready(function() {   
-      $('#submit-review').on("click", function(){
-         let form = $("#review-form")
-             form.attr("action", "<c:url value='/write'/>")
-             form.attr("method", "post")
-                 
-         if(formCheck()){
-            form.submit()           
-         }else{
-        	 return false
-         }
+	
+
+	$(document).ready(function() {	
+		$('#submit-review').on("click", function(){
+			let form = $("#review-form")
+			form.attr("action", "<c:url value='/detailPage/review/write'/>")
+			form.attr("method", "post")
+			
+			if(formCheck()){
+				form.submit()
+			}
+			alert("리뷰등록됬다잉.")
+		})
+		
+		let formCheck = function() {
+			let form = document.getElementById("review-form")
+			if(form.user_no.value==""){
+				alert("로그인 해라 좋은 말로 할때")
+				form.content.focus()
+				return false
+			}			
+			if(form.review_content.value=="") {
+				alert("내용이 비었다 후딱 채워라잉")
+				form.content.focus()
+				return false
+			}
+			return true
+		}
+		
+		
+		
+		$(".removeBtn").on("click", function() {
+            if (!confirm("리뷰를 삭제하시겠습니까?"))
+            	return;
+            
+            let form = $("button")
+            form.attr("action", "<c:url value='/remove' />")
+            form.attr("method", "post")
+            form.submit()   
+         })
          
-      })
-      
-      let formCheck = function() {
-         let form = document.getElementById("review-form")
-         if(form.user_no.value==""){		
-              $(".body").html("로그인 후 리뷰를 등록해주세요.");
-              $('#Modal').modal('show');              
-            document.getElementById("review-text").focus();
-            return false;
-         }         
-         if(form.review_content.value=="") {
-              $(".body").html("내용을 입력해 주세요.");
-              $('#Modal').modal('show');           
-            document.getElementById("review-text").focus();
-            return false;
-         }
-         if(form.rating.value==""){
-    		  $(".body").html("별점을 입력해 주세요.");
-              $('#Modal').modal('show');
-        	 document.getElementById("review-text").focus();
-        	 return false
-         }  
-         return true;
-      }
-      
-   // 중복 메시지 표시
-      <c:if test="${not empty msg}">
-          <c:choose>
-              <c:when test="${msg eq 'success'}">
-     		  $(".body").html("정상적으로 등록되었습니다.");
-              $('#Modal').modal('show');
-              </c:when>
-              <c:when test="${msg eq 'fail'}">
-         		  $(".body").html("이미 리뷰가 등록되어 있습니다.");
-                  $('#Modal').modal('show');
-              </c:when>
-          </c:choose>
-      </c:if>
-      
-   
-
-      $(".removeBtn").on("click", function() {
-    	  let modalBody = $(".body");
-    	  modalBody.html("리뷰를 삭제하시겠습니까?");
-    	  $('#Modal').modal('show');
-
-    	  // 확인 버튼 클릭 시 리뷰 삭제 실행
-    	  $('.btn-secondary').on('click', function() {
-    	    let form = $("form");
-    	    form.attr("action", "<c:url value='/remove' />");
-    	    form.attr("method", "post");
-    	    form.submit();
-    	  })
-    	})
-      
-      <c:if test="${not empty msg}">
-          <c:choose>
-              <c:when test="${msg eq 'DEL_OK'}">
-     		  $(".body").html("삭제가 완료되었습니다.");
-              $('#Modal').modal('show');
-              </c:when>
-              <c:when test="${msg eq 'DEL_ERR'}">
-         		  $(".body").html("다시 시도해 주세요.");
-                  $('#Modal').modal('show');
-              </c:when>
-          </c:choose>
-      </c:if>
-      
-      
-      
-      $(".submitMod-review").on("click", function(){
+         $(".submitMod-review").on("click", function(){
          let form = $("#mod-form")
          
-         form.attr("action", "<c:url value='/modify'/>")
+         form.attr("action", "<c:url value='/detailPage/review/modify'/>")
          form.attr("method", "post")
            if(modformCheck())  
             form.submit()
-           
+            
+            alert("수정이 정상적으로 완료되었습니다.")
       })
-
+      
       let modformCheck = function() {
          let form = document.getElementById("mod-form")
          if(form.user_no.value==""){
-   		  $(".body").html("로그인 후 리뷰를 등록해주세요.");
-          $('#Modal').modal('show');
-          document.getElementById("review-text").focus();
+            alert("로그인 후 리뷰를 등록해주세요.")
+            form.content.focus()
             return false
          }         
          if(form.review_content.value=="") {
-   		  $(".body").html("내용을 입력해 주세요.");
-          $('#Modal').modal('show');
-          document.getElementById("review-text").focus();
+            alert("내용을 입력해 주세요.")
+            form.content.focus()
             return false
          }
          if(form.rating.value==""){
-   		  $(".body").html("별점을 입력해 주세요.");
-          $('#Modal').modal('show');
-          document.getElementById("review-text").focus();
+        	 alert("별점을 입력해 주세요.")
+        	 form.content.focus()
         	 return false
          }
          return true
       }
-  <c:if test="${not empty msg}">
-      <c:choose>
-          <c:when test="${msg eq 'MOD_OK'}">
- 		  $(".body").html("수정이 완료되었습니다.");
-          $('#Modal').modal('show');
-          </c:when>
-          <c:when test="${msg eq 'MOD_ERR'}">
-     		  $(".body").html("다시 시도해 주세요.");
-              $('#Modal').modal('show');
-          </c:when>
-      </c:choose>
-  </c:if> 
-      
-   });
-   </script>
+	})
 	
-	<script type="text/javascript">
-	let LOGIN_YN = '${sessionScope.user_no}';
-	let PATH = "<c:out value='${path}'/>";
-
-	$(document).ready(function() {
-	    // 좋아요 상태 확인 및 버튼 이미지 설정
-	    $('.LikeBtn').each(function() {
-	        const review_no = $(this).data('review-no');
-	        const btn = $(this);
-	        var likeCount = btn.closest('.review-box').find('.review-box-footer #likeCount');
-
-	        $.post(
-	            '/ottt/selectLikeCount',
-	            { 'user_no': '${user_no}', 'review_no': review_no },
-	            function(data) {
-	                let result = data.result;
-
-	                if (result == 0) {
-	                    // 좋아요 상태인 경우
-	                    btn.attr('src', PATH + '/resources/images/img/heart_off.png');
-	                } else {
-	                    // 좋아요 상태가 아닌 경우
-	                    btn.attr('src', PATH + '/resources/images/img/heart_on.png');
-	                }
-	            }
-	        );
-	    });
-
-	    $(".LikeBtn").click(function() {
-	        let btn = $(this);
-	        const review_no = $(this).data('review-no');
-	        $('input[name="review_no"]').val(review_no);
-	        var likeCount = btn.closest('.review-box').find(".review-box-footer #likeCount");
-	        var likeCount1 = btn.closest('.review-box1').find(".review-box-footer #likeCount");
-	        if (LOGIN_YN == null || LOGIN_YN == "") {
-	            alert("로그인 후 이용가능합니다.", "로그인을 해주세요.", "warning");
-
-	            location.href = "/ottt/login";
-
-	            return;
-	        }
-
-	        $.post(
-	            "/ottt/selectLikeCount",
-	            { "user_no": "${user_no}", "review_no": review_no },
-	            function(data) {
-	                let result = data.result;
-
-	                if (result == 0) {
-	                    // 저장하는 post ajax
-	                    $.post(
-	                        "/ottt/insertLike",
-	                        { "user_no": "${user_no}", "review_no": review_no },
-	                        function(data) {
-	                            btn.attr("src", PATH + "/resources/images/img/heart_on.png");
-	                            likeCount.text(parseInt(likeCount.text()) + 1 + '개');
-	                            likeCount1.text(parseInt(likeCount1.text()) + 1 + '개');
-	                            console.log(likeCount);
-	                        }
-	                    );
-	                } else {
-	                    // 삭제하는 post ajax
-	                    $.post(
-	                        "/ottt/deleteLike",
-	                        { "user_no": "${user_no}", "review_no": review_no },
-	                        function(data) {
-	                            btn.attr("src", PATH + "/resources/images/img/heart_off.png");
-	                            likeCount.text(parseInt(likeCount.text()) - 1 + '개');
-	                            likeCount1.text(parseInt(likeCount1.text()) - 1 + '개');
-	                            console.log(likeCount);
-	                        }
-	                    );
-	                }
-	            }
-	        );
-	    });
-	});
+	
+	
+	
 	</script>
+	
 
 
+	<script type="text/javascript">
+	var likeval = ${like};
+	
+	let review_no = ${Detail.review_no};
+	let user_no = '${login.user_id}';
+	if(likeval > 0){
+		console.log(likeval + "좋아요 누름");
+		$('.LikeBtn img').attr('src', '${path}/resources/images/img/likeon.png');
+		$('.LikeBtn').click(function() {
+			$.ajax({
+				type :'post',
+				url : '<c:url value ="/detailPage/likeDown"/>',
+				contentType: 'application/json',
+				data : JSON.stringify(
+						{
+							"review_no" : review_no,
+							"user_no" : user_no
+						}		
+					),
+				success : function(data) {
+					alert('취소 성공');
+				}
+			})
+		})
+
+	}else{
+		console.log(likeval + "좋아요 안누름")
+		console.log(user_no);
+		$('.LikeBtn').click(function() {
+			$.ajax({
+				type :'post',
+				url : '<c:url value ="/detailPage/likeUp"/>',
+				contentType: 'application/json',
+				data : JSON.stringify(
+						{
+							"review_no" : review_no,
+							"user_no" : user_no
+						}		
+					),
+				success : function(data) {
+					alert('성공염');
+				}
+			})
+		})
+	</script>
 	
     
     <script

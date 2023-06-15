@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>나의 다이어리</title>
+    <title>게시판</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     <link rel="stylesheet" href="${path}/resources/css/mypage/mydiary.css" >
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
@@ -71,99 +71,61 @@
 	        	<div class="main-head">
 	        		<a href="<c:url value="/mypage/mydiary/create" />" class="write">글쓰기</a>
 	          	</div>
-	          	
-	          	<c:forEach var="MydiaryDTO" items="${list }" >
-				
-					<a href="javascript:readDiary('${MydiaryDTO.content_no}', '${MydiaryDTO.user_no}')" class="mydiary">
-						<div class="post">					  	
-						    <div class="Lside">
-						      	<img class="poster" src="${MydiaryDTO.thumbnail}">
-						    </div>
-						    <div class="Rside">
-						    	<div class="rv-head">
-						    		<span class="title">${MydiaryDTO.content_nm}</span>
-						      	</div>
-						
-								<div class="rv-main">
-								  <span>${MydiaryDTO.mydiary_content}</span>
-								</div>
-						    </div>
-					  	</div>
-				  	</a>			  	
-			  	</c:forEach>
-			  	
-			  	<div class=paging-container>
-		    		<div class="paging">
-		    			<c:if test="${myDiaryCnt == null || myDiaryCnt == 0 }">		    			
-		    				<div class="title-line" style="text-align: center;">
-		    					내가 쓴 다이어리가 없습니다.
-		    				</div>
-		    			</c:if>
-		    			
-		    			<c:if test="${myDiaryCnt != null || myDiaryCnt != 0 }">
-		    			<!-- 페이지 번호 배너-->
-				        <div class="page-num" style="margin-top: 10px;">
-				        	<nav aria-label="Page navigation example" class="d-flex flex-row justify-content-center">
-				          	<ul class="pagination">				          		
-					            <c:if test="${pr.showPrev}">
-						            <li class="page-item">
-						            	<a class="page-link" href="<c:url value="/mypage/mydiary${pr.sc.getString(pr.beginPage-1) }" />">&lt;</a>
-					            	</li>
-					            </c:if>
-					            <c:forEach var="i" begin="${pr.beginPage }" end="${pr.endPage }">
-					            	<li class="page-item">
-					            		<a class="page-link" href="<c:url value="/mypage/mydiary${pr.sc.getString(i) }" />">${i }</a>
-				            		</li>
-				            	</c:forEach>
-			            		<c:if test="${pr.showNext}">
-			            			<li class="page-item">
-			            				<a class="page-link" href="<c:url value="/mypage/mydiary${pr.sc.getString(pr.endPage+1) }" />" >&gt;</a>
-		            				</li>
-            					</c:if>
-       						</ul>
-   							</nav>
-						</div>
-						</c:if>  			
-		    			
-		    		</div>	    	
-	    		</div>
-			  	
+	          	<div class="post">
+	            	<a href="<c:url value="/mypage/mydiary/poster" />" class="review">
+	            	<div class="Lside">
+	            		<img class="poster" src="${path}/resources/images/poster/lala.jfif" alt="라라랜드">
+	              	</div>
+	              	<div class="Rside">
+	              		<div class="rv-head">
+		                  <span class="title">라라랜드</span>
+		                  <img class="star" src="./images/icon/point.png" alt="별점">
+		                </div>
+	
+		                <div class="rv-main">
+		                  <span>내용</span>
+		                </div>
+	                </div>
+	                </a>
+                </div>
+
+				<div class="post">
+		            <a href="#" class="review">
+		            <div class="Lside">
+						<img class="poster" src="./images/poster/killing.jpg" alt="킬링디어">
+		            </div>
+		            <div class="Rside">
+		            	<div class="rv-head">
+		            		<span class="title">킬링디어</span>
+		                  	<img class="star" src="./images/icon/point.png" alt="별점">
+		                </div>
+		
+		                <div class="rv-main">
+		                  <span>내용</span>
+		                </div>
+	                </div>
+		            </a>
+				</div>
+
+	          	<div class="post">
+	            	<a href="#" class="review">
+					<div class="Lside">
+	                	<img class="poster" src="./images/poster/thgolry.jpg" alt="더글로리">
+	                </div>
+	              	<div class="Rside">
+	                	<div class="rv-head">
+	                		<span class="title">더글로리</span>
+	                  		<img class="star" src="./images/icon/point.png" alt="별점">
+                  		</div>
+	               		<div class="rv-main">
+	               			<span>내용</span>
+		                </div>
+                	</div>
+	            	</a>
+	          	</div>
           	</div>
        	</section>
    	</div>
-   	
-   	
-   	<script type="text/javascript">
-   		let msg = "${msg}"
-    	if(msg == "READ_ERR") alert("접근 권한이 없습니다")
-    	if(msg == "DEL_OK") alert("다이어리 삭제에 성공했습니다")
-    	
-   		function readDiary(content_no, user_no) {
-
-	        let data = {
-	                content_no: content_no,
-	                user_no: user_no
-	        };
-   			
-	        let form = document.createElement('form');
-	        
-	        form.setAttribute("action", '/ottt/mypage/mydiary/diary${pr.sc.string}');
-	        form.setAttribute("method", "post");
-	            
-            for (let key in data) {
-                if (data.hasOwnProperty(key)) {
-                    let input = document.createElement('input');
-                    input.setAttribute('type', 'hidden');
-                    input.setAttribute('name', key);
-                    input.setAttribute('value', data[key]);
-                    form.appendChild(input);
-                }
-            }
-
-	        document.body.appendChild(form);
-	        form.submit();
-	    }
-	</script>
 
 </body>
 </html>

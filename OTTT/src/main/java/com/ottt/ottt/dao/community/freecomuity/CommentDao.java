@@ -13,4 +13,7 @@ public interface CommentDao {
 	int deleteComment(Integer cmt_no) throws Exception;
 
 	int updateComment(CommentDTO dto) throws Exception;
+	
+	//댓글 신고
+	int communityCmtReport(CommentDTO dto) throws Exception;
 }

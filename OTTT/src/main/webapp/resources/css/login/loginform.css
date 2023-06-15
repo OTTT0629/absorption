@@ -156,13 +156,10 @@ input[type="text"], input[type="password"] {
     margin-bottom: 6px;
     border-radius: 6px;
     background-color:#3F3B3B;
-    color: #ffffff;
+    color: #33ff33;
     position: relative;
     top: 20px;
   }
-input[type="text"]:focus, input[type="password"]:focus {
-	outline: none;
-}
 
 .join{
     position: relative;

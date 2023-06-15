@@ -69,9 +69,4 @@ public class UserServiceImpl implements UserService {
 		return userDao.up_profile(userDTO);
 	}
 
-	@Override
-	public UserDTO getUser(Integer user_no) throws Exception {
-		return userDao.select(user_no);
-	}
-
 }

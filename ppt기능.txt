@@ -97,6 +97,27 @@ $("#likeCount").text(Number($("#likeCount").text())-1);
  );
 }
 
+$("#schText").keydown(function(event) {
+if (event.keyCode === 13) {   // Enter 키의 keyCode는 13입니다.
+
+
+var contents = document.querySelector('textarea');
+contents = contents.value.replace(/(\n|\r\n)/g,'<br>');
+
+
+<c:if test="${articleDTO.user_no eq user_no }">
+	<c:choose>
+		<c:when test="${mode == 'view' }">	
+
+
+
+
+
+
+
+
+
+
 
 
 

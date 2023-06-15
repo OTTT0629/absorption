@@ -18,12 +18,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ottt.ottt.dao.login.LoginUserDao;
 import com.ottt.ottt.dto.ArticleDTO;
 import com.ottt.ottt.dto.ArticleLikeDTO;
 import com.ottt.ottt.dto.ArticleSearchDTO;
 import com.ottt.ottt.dto.UserDTO;
+import com.ottt.ottt.dto.ReportDTO;
 import com.ottt.ottt.service.community.freecomuity.CommunityService;
 
 
@@ -38,7 +40,7 @@ public class CommunityController {
 
 	private static final Logger logger = LoggerFactory.getLogger(CommunityController.class);
 	
-	//freecommunity 메인호출
+	// freecommunity 메인호출
 	@GetMapping("/freecommunity")
 	public String freecommunity(@RequestParam(value = "schText", required = false) String schText,@RequestParam(value = "category", required = false) String category,
 									Model m, HttpServletRequest request, HttpSession session, String toURL) throws Exception {
@@ -188,6 +190,7 @@ public class CommunityController {
         		logger.info(">>>>>> 업로드 파일 이름은? "+articleDTO.getUpFile().getOriginalFilename());
 
         		articleDTO.setArticle_image_name(articleDTO.getUpFile().getOriginalFilename());
+        		articleDTO.setFileDeleteYn("N");
         		
         	}
         	
@@ -266,6 +269,7 @@ public class CommunityController {
 		result.put("result", communityService.selectLikeCount(dto) );
 		
 		return result;
+
 	}
 	
 	//좋아요 저장
@@ -290,6 +294,7 @@ public class CommunityController {
 		result.put("success", communityService.insertLike(dto) );
 		
 		return result;
+
 	}
 	
 	//좋아요 삭제
@@ -314,28 +319,66 @@ public class CommunityController {
 		result.put("success", communityService.deleteLike(dto) );
 		
 		return result;
+
 	}
-}
-
-
-
-
 	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	
+	
+	
+	  //게시글 신고 (AJAX)
+	  
+	@PostMapping("/ajax/report")
+	public String ReviewReport(ArticleDTO articleDTO, ReportDTO reportDTO, RedirectAttributes attr, HttpSession session, @RequestParam("article_no") int article_no) {
+		try {					
+			 if (communityService.communnityReport(reportDTO) != 1) {
+	                throw new Exception("Write failed");
+	            }
+			 attr.addFlashAttribute("msg", "success");
+			 return "redirect:/community/post?article_no="+ article_no ;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			attr.addFlashAttribute("msg", "fail");
+			return "redirect:/community/post?article_no="+ article_no ;
+		}				
+	}
+	 
+	
+	
+	/*
+	 * //게시글 신고
+	 * 
+	 * @PostMapping("/postReport") public String communityReport(ArticleDTO
+	 * articleDTO, ReportDTO reportDTO, HttpServletRequest request, Model m ,
+	 * Integer article_no ) {
+	 * 
+	 * logger.
+	 * info(">>>>>>>>>>>>>>>>>>>>> @PostMapping /postReport communityReport 진입 ");
+	 * 
+	 * try {
+	 * 
+	 * HttpSession session = request.getSession();
+	 * 
+	 * UserDTO userDTO = loginUserDao.select((String)session.getAttribute("id"));
+	 * 
+	 * if (userDTO == null) { logger.info("!!!! 로그인이 필요합니다. !!!!"); return
+	 * "redirect:/login"; }
+	 * 
+	 * 
+	 * articleDTO.setUser_no(userDTO.getUser_no());
+	 * communityService.communnityReport(reportDTO);
+	 * 
+	 * } catch (Exception e) { e.printStackTrace(); }
+	 * 
+	 * return "redirect:/community/post?article_no="+ article_no ;
+	 * 
+	 * }
+	 */
+	
+	
+	
+	
+}
 
 
 

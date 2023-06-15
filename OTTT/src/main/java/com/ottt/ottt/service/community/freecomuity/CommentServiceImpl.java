@@ -47,4 +47,12 @@ public class CommentServiceImpl implements CommentService{
 		return commentDao.updateComment(dto);
 	}
 
+	/**
+	 * 댓글 신고
+	 */
+	@Override
+	public int communityCmtReport(CommentDTO dto) throws Exception {
+		return commentDao.communityCmtReport(dto);
+	}
+
 }

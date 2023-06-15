@@ -13,29 +13,6 @@ button{
     all: unset;
 }
 
-.net-logo{
-	
-    width:  300px;
-    height: 200px; 
-    padding: 10px;
-    display: flex;
-    border: 1px solid red;
-    box-sizing: border-box;
-    overflow: hidden;
-    flex-wrap: wrap;
-    
-
-}
-
-
-
-
-.net-logo img{
-	margin: 10px 13px;
-	
-}
-
-
 .date-insert{
 	position: absolute;
 	right: 140px;
@@ -437,7 +414,7 @@ header{
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
+    z-index: 9995;
   }
 
 
@@ -448,7 +425,7 @@ header{
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    z-index: 2000;
+    z-index: 9999;
     width: 795px;
     height: 600px;
     overflow: hidden;
@@ -462,7 +439,7 @@ header{
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    z-index: 2000;
+    z-index: 9999;
     width: 795px;
     height: 600px;
     overflow: hidden;
@@ -810,7 +787,7 @@ form label{
 
 .starpoint_box{
     position:relative;
-    background:url(https://hsecode.github.io/images_codepen/codepen_sp_star.png) 0 0 no-repeat;
+    background:url(https://ido-archive.github.io/svc/etc/element/img/sp_star.png) 0 0 no-repeat;
     font-size:0;
     width: 100px;
     height: 20px;
@@ -819,14 +796,13 @@ form label{
     bottom: 4px;
 }
 
-
 .starpoint_box .starpoint_bg{
     display:block;
     position:absolute;
     top:0;
     left:0;
     height:18px;
-    background:url(https://hsecode.github.io/images_codepen/codepen_sp_star.png) 0 -20px no-repeat;
+    background:url(https://ido-archive.github.io/svc/etc/element/img/sp_star.png) 0 -20px no-repeat;
     pointer-events:none;
 }
 
@@ -906,18 +882,17 @@ form label{
     position: absolute;
     right: 150px;
     top: 15px;
-    z-index:9999;
 }
 
 
 
 .starpoint_box2{
     position:relative;
-    background:url(https://hsecode.github.io/images_codepen/codepen_sp_star.png) 0 0 no-repeat;
+    background:url(https://ido-archive.github.io/svc/etc/element/img/sp_star.png) 0 0 no-repeat;
     font-size:0;
     width: 100px;
     height: 20px;
-	z-index:9999;
+
     right: 410px;
     bottom: 4px;
 }
@@ -928,7 +903,7 @@ form label{
     top:0;
     left:0;
     height:18px;
-    background:url(https://hsecode.github.io/images_codepen/codepen_sp_star.png) 0 -20px no-repeat;
+    background:url(https://ido-archive.github.io/svc/etc/element/img/sp_star.png) 0 -20px no-repeat;
     pointer-events:none;
 }
 
@@ -1208,55 +1183,3 @@ form label{
 	height: 35px;
 	width: 245px;
 }
-
-/* 모달 */
-
-.modal-content{
-    background-color: #202020;
-}
-
-.modal-body{
-    font-size: 26px;
-    text-align: center;
-    border: 1px solid #fff;
-}
-
-.modal-header{
-    border: 1px solid #fff;
-}
-
-.modal-footer{
-    border: 1px solid #fff;
-    display: flex;
-    justify-content: flex-end;
-}
- 
-.modi-del{
-   display: flex;
-    justify-content: flex-end;
-}
-
-
-.qa-main p{
-    display: flex;
-    justify-content: flex-end;
-    font-weight: bold;
-}
-
-.btn{
-    color: #fff;
-    background-color: transparent;
-    border-style: none;
-    border-color: #fff; 
-    font-size: 23px; 
-    text-decoration: none;
-}
-
-
-.btn:hover{
-    border-color: #33FF33;
-    background-color: transparent;
-    border-style: solid;
-    color: #33FF33; 
-}
-

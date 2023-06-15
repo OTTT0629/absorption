@@ -8,6 +8,8 @@ a{text-decoration: none;color: inherit;display: inline-block}
 
 ul,li,ol{list-style: none;}
 
+p{margin: 0;}
+
 body{background-color: #202020;color: #fff;}
 
 .wrap{width: 100%;height: 100%;position: relative;}
@@ -181,9 +183,7 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
 }
 
 .wirted{
-    margin:35px 90px 0px 70px; 
-    position: relative;
-    bottom: 35px;
+    margin:-10px 90px 0px 70px; 
     font-size: large;
 }
 
@@ -206,9 +206,8 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
     
 }
 
-#current_date{
-    margin-top: 15px;
-}
+
+
 .heart{
 	margin-top: 3px;
     width: 25px;
@@ -249,7 +248,6 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
 
 .pro-total{
     width: 820px;
-    display: flex;
     justify-content: space-between;
     margin-left: 70px;
 }
@@ -363,13 +361,22 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
     color: #fff;
 }
 
+#imgDelete{
+	background-color: #0B0C0B;
+    color: #fff;
+    border: solid 1px #fff;
+    border-radius: 27px;
+    width: 116px;
+    height: 44px;	
+}
+
 
 .btn-primary {
     --bs-btn-color: #fff;
     --bs-btn-bg: #0B0C0B;
     --bs-btn-border-color: #6c757d;
     --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: #33ff33;
+    --bs-btn-hover-bg: #0B0C0B;
     --bs-btn-hover-border-color: #33ff33;
     --bs-btn-focus-shadow-rgb: 49,132,253;
     --bs-btn-active-color: #fff;

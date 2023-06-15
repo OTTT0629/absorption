@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.ottt.ottt.dto.ArticleDTO;
 import com.ottt.ottt.dto.ArticleLikeDTO;
 import com.ottt.ottt.dto.ArticleSearchDTO;
+import com.ottt.ottt.dto.ReportDTO;
 
 @Repository
 public class CommunityDaoImpl implements CommunityDao {
@@ -76,6 +77,15 @@ public class CommunityDaoImpl implements CommunityDao {
 	@Override
 	public int deleteLike(ArticleLikeDTO dto) throws Exception {
 		return session.delete(namespace + "deleteLike", dto);
+	}
+	
+	
+	/**
+	 * 게시글 신고
+	 */
+	@Override
+	public int communnityReport(ReportDTO dto) throws Exception {
+		return session.insert(namespace + "communnityReport", dto);
 	}
 
 }

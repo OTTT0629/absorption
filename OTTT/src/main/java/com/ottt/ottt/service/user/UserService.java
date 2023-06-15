@@ -15,5 +15,4 @@ public interface UserService {
 	int selectNicknmCnt(String user_nicknm) throws Exception;
 	int mod_pwd(UserDTO userDTO) throws Exception;
 	int mod_img(UserDTO userDTO) throws Exception;
-	UserDTO getUser(Integer user_no) throws Exception;
 }

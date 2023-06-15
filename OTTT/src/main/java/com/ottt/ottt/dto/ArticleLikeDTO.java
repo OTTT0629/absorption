@@ -4,7 +4,6 @@ public class ArticleLikeDTO {
 	
 	private Integer	article_no;
 	private Integer user_no;
-	
 	public ArticleLikeDTO() {}
 
 	public Integer getArticle_no() {

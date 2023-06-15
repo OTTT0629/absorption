@@ -87,6 +87,50 @@ header{
     margin-top: 12px;
 }
 
+/* .h-icon  img{
+    width: 50px;
+} */
+
+
+
+.h-icon > ul > li:first-child > a{
+    background:url("../../images/icon/search02.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 32px;
+    width: 32px;
+    height: 32px;
+}
+
+.h-icon > ul > li:last-child > a > img{
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 32px;
+    width: 32px;
+    height: 32px;
+}
+
+.h-icon > ul > li:first-child > a:hover{
+    background: url("../../images/icon/search-h.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 32px;
+    width: 32px;
+    height: 32px;
+}
+
+/* .h-icon > ul > li:last-child > a:hover{
+    background: url("../images/icon/user-h.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 32px;
+    width: 32px;
+    height: 32px;
+} */
+
+/* 헤더 */
+
+
 .sec01 {
     width: 1200px;
     height: auto;
@@ -159,9 +203,6 @@ header{
 .main {
     width: 950px;
     height: 100%;
-    padding-top: 3px;
-    display: flex;
-    flex-direction: column;
 }
 
 .Lmenu {
@@ -191,6 +232,11 @@ header{
     margin-right: 10px;
 }
 
+.main {
+    display: flex;
+    flex-direction: column;
+}
+
 .main-head {
     position: relative;
 }
@@ -204,10 +250,8 @@ header{
 .post {
     width: auto;
     height: 230px;
-    margin: 10px 0;
+    margin: 12px 0;
     background-color: #3F3B3B;
-    display: flex;
-    flex-direction: row;    
 }
 
 .review {
@@ -232,6 +276,7 @@ header{
 .Rside {
     width: 100%;
     height: auto;
+
     position: relative;
 }
 
@@ -268,24 +313,4 @@ header{
 
 .mreview{
     color: #33ff33;
-}
-
-.title-line{
-    width: 100%;
-    height: 50px;
-    font-size: 20px;
-    padding: 10px 0;
-    border-bottom: 1.5px solid #fff;
-    margin: 0 auto;
-}
-.page-link {
-    color: #ffffff; 
-    background-color: #202020;
-    border-color: #ffffff;
-  }
-    
-.page-link:focus, .page-link:hover {
-    color: #33ff33;
-    background-color: #202020; 
-    border-color: #33ff33;
 }

@@ -29,9 +29,9 @@
 	          				<span>${userDTO.user_nicknm }</span>
           				</li>
 		              	<li class="user-follow">
-		                	<span class="user-follow-l"><a href="<c:url value="/mypage/follower" />">팔로우</a></span>
+		                	<span class="user-follow-l"><a href="<c:url value="/mypage/follower" />">팔로워</a></span>
 		                	&nbsp;|&nbsp;
-		                	<span class="user-follow-l"><a href="<c:url value="/mypage/following" />">팔로워</a></span>
+		                	<span class="user-follow-l"><a href="<c:url value="/mypage/following" />">팔로잉</a></span>
 		              	</li>
 	              	</ul>
               	</div>

@@ -1,8 +1,6 @@
 package com.ottt.ottt.controller.workDetailPage;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -11,68 +9,48 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ottt.ottt.dao.login.LoginUserDao;
-import com.ottt.ottt.dto.ContentDTO;
-import com.ottt.ottt.dto.ContentOTTDTO;
-import com.ottt.ottt.dto.GenreDTO;
 import com.ottt.ottt.dto.ReviewDTO;
 import com.ottt.ottt.dto.ReviewLikeDTO;
 import com.ottt.ottt.dto.UserDTO;
-import com.ottt.ottt.service.content.ContentService;
-
+import com.ottt.ottt.service.review.ReviewLikeService;
 import com.ottt.ottt.service.review.ReviewService;
 
 @Controller
 public class DetailController {
 	@Autowired
 	private ReviewService reviewService;
-
 	@Autowired
-	LoginUserDao loginUserDao;
-	@Autowired
-	ContentService contentService;
-	
+	private ReviewLikeService reviewLikeService;
 	
 	
 	@GetMapping(value = "/detailPage")
-	public String workDetailPage(Model m, HttpServletRequest request, HttpSession session, @RequestParam("content_no") int content_no) {         //, Integer content_no) 
-		
+	public String workDetailPage(Model m, HttpServletRequest request, HttpSession session) {         //, Integer content_no) 
+
 		Integer user_no = (Integer) session.getAttribute("user_no");
-		m.addAttribute("content_no", content_no);
-		
-		if(session.getAttribute("id") != null) {
-			UserDTO userDTO = loginUserDao.select((String) session.getAttribute("id"));
-			m.addAttribute(userDTO);
-		}
-			
+					
 		try {
 			
-			List<ReviewDTO> list = reviewService.getReview(content_no);
+			List<ReviewDTO> list = reviewService.getReview();
 
-			int count = reviewService.getCount(content_no);
-			 double rating = reviewService.getRatingAvg(content_no);
+			int count = reviewService.getCount();
+			 double rating = reviewService.getRatingAvg();
 			
 			 m.addAttribute("rating", rating);
-	       
-	        
-			ReviewDTO myReview = reviewService.getReviewNo(content_no, user_no);
+	         request.setAttribute("rating", rating);
+	         System.out.println(rating);
+			ReviewDTO myReview = reviewService.getReviewNo(1, user_no);
 			
 			
-			ContentDTO contentDTO = contentService.getContent(content_no);
-			List<GenreDTO> genreDTO = contentService.getGenrenm(content_no);
-			List<ContentOTTDTO> contentOTTlist = contentService.getOTT(content_no);
-			m.addAttribute("contentOTTlist", contentOTTlist);
-			m.addAttribute("genrenmlist", genreDTO);
-			m.addAttribute("contentDTO", contentDTO);
+			
 			m.addAttribute("list", list);
 			m.addAttribute("count", count);
 			m.addAttribute("myReview", myReview);
-			
 		} catch (Exception e) {
 			
 			e.printStackTrace();
@@ -89,42 +67,33 @@ public class DetailController {
 //	}
 //	
 
-	@PostMapping(value = "/write")
+	@PostMapping(value = "/detailPage")
 	public String write(ReviewDTO reviewDTO, Model m, RedirectAttributes attr, HttpSession session) {
-		
+	    
 		try {
 			
-			int duplication = reviewService.getDuplication(reviewDTO.getContent_no(), reviewDTO.getUser_no());
-			if(duplication == 0) {
 			if(reviewService.writeReview(reviewDTO)!=1) {
-				throw new Exception("Write failed");
+				throw new Exception("error");
 			}
-			attr.addFlashAttribute("msg", "success");
-			} else {
-				attr.addFlashAttribute("msg", "fail");
-				
-				
-			}
+			attr.addFlashAttribute("msg", "fail");
 			
-			return "redirect:/detailPage?content_no="+ reviewDTO.getContent_no(); 
-			
+			return "redirect:/detailPage"; 
 		} catch (Exception e) {
 			e.printStackTrace();
-		
+			m.addAttribute("msg", "ok");
 			
 			
-			return "redirect:/detailPage?content_no="+ reviewDTO.getContent_no(); 
+			return "/workDetailPage/workdetailpage";
 			
 			
 		}
-		
 		
 		
 	}
 	
 	
 	@PostMapping("/remove")
-	public String remove(Integer review_no,RedirectAttributes rattr, HttpSession session, Model m,ReviewDTO reviewDTO) {
+	public String remove(Integer review_no,RedirectAttributes rattr, HttpSession session, Model m) {
 		int user_no = (int) session.getAttribute("user_no");
 		
 		
@@ -142,7 +111,7 @@ public class DetailController {
 		
 		
 		
-		return "redirect:/detailPage?content_no="+reviewDTO.getContent_no();
+		return "redirect:/detailPage";
 	}
 	
 	
@@ -164,86 +133,55 @@ public class DetailController {
 	         
 	         
 	         rattr.addFlashAttribute("msg", "MOD_OK");
-	         return "redirect:/detailPage?content_no="+reviewDTO.getContent_no();
+	         return "redirect:/detailPage";
 	      } catch (Exception e) {
 	         e.printStackTrace();
 	         m.addAttribute("reviewDTO", reviewDTO);
 	         m.addAttribute("msg", "MOD_ERR");
-	         return "redirect:/detailPage?content_no=" + reviewDTO.getContent_no();
+	         return "redirect:/detailPage";
 	      }
 	   }
 	
+	@GetMapping("/like")
+	public String getReviewLikeCnt(Integer review_no, Integer user_no, Model m) {
+		reviewLikeService.getReviewLikeYN(review_no, user_no);
 
-	//좋아요 시작
-	@PostMapping("/selectLikeCount")
-	@ResponseBody
-	public Map<String,Object> selectLikeCount(ReviewLikeDTO dto, HttpSession session) throws Exception {
-			
-	
-			Map<String, Object> result = new HashMap<String,Object>();
-			
-			UserDTO userDTO = loginUserDao.select((String)session.getAttribute("id"));
-	    	if (userDTO == null) {	   
-	    		result.put("message", "로그인이 필요합니다.");
-	    		return result;
-	        }
-	
-	    	dto.setUser_no(userDTO.getUser_no());
-	
-			result.put("message", "success");
-			result.put("result", reviewService.selectLikeCount(dto));
-			
-			return result;
-	
-		}
-	
-	
-	
-	
-	
-		@PostMapping("/insertLike")
-		@ResponseBody
-		public Map<String,Object> insertLike(ReviewLikeDTO dto, HttpSession session) throws Exception {
-			
-			
-
-			Map<String, Object> result = new HashMap<String,Object>();
-			
-			UserDTO userDTO = loginUserDao.select((String)session.getAttribute("id"));
-	    	if (userDTO == null) {	   
-	    		result.put("message", "로그인이 필요합니다.");
-	    		return result;
-	        }
-			dto.setUser_no(userDTO.getUser_no());
-
-			result.put("message", "success");
-			result.put("success", reviewService.insertLike(dto));
-			
-			
-			return result;
-
-		}
 		
-	//좋아요 삭제
-		@PostMapping("/deleteLike")
-		@ResponseBody
-		public Map<String,Object> deleteLike(ReviewLikeDTO dto, HttpSession session) throws Exception {
 
-			Map<String, Object> result = new HashMap<String,Object>();
+		
+		
+	        
+			m.addAttribute("Detail", reviewLikeService.getReviewLikeYN(review_no, user_no));
+			m.addAttribute("getLike", reviewLikeService.getReviewCount(review_no));
+
 			
-			UserDTO userDTO = loginUserDao.select((String)session.getAttribute("id"));
-	    	if (userDTO == null) {	   
-	    		result.put("message", "로그인이 필요합니다.");
-	    		return result;
-	        }
-			dto.setUser_no(userDTO.getUser_no());
-
-			result.put("message", "success");
-			result.put("success", reviewService.deleteLike(dto));
 			
-			return result;
-
-		}
+		return "/detailPage";
+	}
+	
+	
+	
+	@PostMapping("/detailPage/likeUp")
+	public void likeUp(Integer review_no, Integer user_no, Model m) {
+		reviewLikeService.addLike(review_no, user_no);
+		m.addAttribute("likeUp", reviewLikeService.addLike(review_no, user_no));
+		
+		
+	}
+	
+	
+	@PostMapping("/detailPage/likeDown")
+	public void likeDown(Integer review_no, Integer user_no, Model m) {
+		reviewLikeService.removeLike(review_no, user_no);
+		m.addAttribute("likeDown", reviewLikeService.removeLike(review_no, user_no));
+		
+	}
+	
+	
+	
+	
+	
+	
 
 	
 	
