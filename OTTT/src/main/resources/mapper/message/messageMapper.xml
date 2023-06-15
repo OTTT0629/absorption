@@ -6,36 +6,29 @@
  <mapper namespace="com.ottt.ottt.dao.message.MessageMapper">
     
     <sql id="selectFromMessage">
-       SELECT a.message_no, a.send_user_no, delete_by_receiver, delete_by_sender
-       , a.receive_user_no, a.content, a.send_date, read_yn, b.user_nicknm
+      SELECT a.message_no, a.send_user_no, delete_by_receiver, delete_by_sender
+      , a.receive_user_no, a.content, a.send_date, read_yn, b.user_nicknm, b.image
       FROM tb_message a
       join tb_user b on a.send_user_no = b.user_no 
     </sql>
-    
-    <!-- 메시지 개수 세기 -->
-    <select id="count" resultType="int">
-       SELECT count(*)
-      FROM tb_message
-    </select>
-    
+
     <!-- 받은 메시지 개수 세기 -->
     <select id="recvCount" parameterType="MessageSearchItem" resultType="int">
-       SELECT count(*)
+      SELECT count(*)
       FROM tb_message
       WHERE receive_user_no = #{user_no}
     </select>    
     
     <!-- 보낸 메시지 개수 세기 -->
     <select id="sendCount" parameterType="MessageSearchItem" resultType="int">
-       SELECT count(*)
+      SELECT count(*)
       FROM tb_message
       WHERE send_user_no = #{user_no}
     </select>
-    
 
     <!-- 페이지 개수 제한해서 출력하기 -->
     <select id="selectPage" parameterType="map" resultType="MessageDTO">
-       <include refid="selectFromMessage" />
+      <include refid="selectFromMessage" />
       ORDER BY send_date DESC, message_no DESC
       LIMIT #{pageSize} OFFSET #{offset}
     </select>
@@ -55,7 +48,7 @@
  
     <!-- 검색어가 있을 때는 이쪽 사용 -->
     <select id="searchSelectPage" parameterType="MessageSearchItem" resultType="MessageDTO">
-       <include refid="selectFromMessage" />
+      <include refid="selectFromMessage" />
       WHERE true
       ORDER BY send_date DESC, message_no DESC
       LIMIT #{pageSize} OFFSET #{offset}
@@ -69,7 +62,7 @@
     
     <!-- 메시지 하나 선택하기(받은 메시지 삭제용) -->
     <select id="selectOneRecv" parameterType="Integer" resultType="MessageDTO">
-       SELECT message_no, receive_user_no, delete_by_receiver, delete_by_sender
+      SELECT message_no, receive_user_no, delete_by_receiver, delete_by_sender
       FROM tb_message
       WHERE message_no = #{message_no}      
     </select>
@@ -91,8 +84,8 @@
     
     <!-- 개수를 제한하여 보낸 메시지 리스트 불러오기 -->
     <select id="selectSend" parameterType="map" resultType="MessageDTO">
-      SELECT a.message_no, a.send_user_no, a.receive_user_no
-      , a.content, a.send_date, read_yn, b.user_nicknm, delete_by_receiver, delete_by_sender 
+      SELECT a.message_no, a.send_user_no, a.receive_user_no, a.content, a.send_date,
+      read_yn, b.user_nicknm, delete_by_receiver, delete_by_sender, b.image
       FROM tb_message a
       JOIN tb_user b
       ON a.receive_user_no = b.user_no

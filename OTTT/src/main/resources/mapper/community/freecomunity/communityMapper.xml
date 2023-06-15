@@ -52,7 +52,6 @@
 			, ta.article_mod_dt						-- 수정일
 			-- , to_char(ta.article_create_dt,'YYYY-MM-DD') AS article_create_dt	-- 등록일
 			-- , to_char(ta.article_mod_dt,'YYYY-MM-DD') AS article_create_dt	-- 수정일
-			, ta.report_cnt
 			, tu.user_nicknm				-- 사용자 닉네임
 			, tu.image						-- 사용자 프로필사진
 			, CASE	

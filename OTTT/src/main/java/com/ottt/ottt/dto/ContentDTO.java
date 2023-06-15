@@ -23,6 +23,7 @@ public class ContentDTO {
 	private String country;
 	private String category_nm;
 	private float  rating;
+	private String main_img;
 
 	public ContentDTO() {}
 	
@@ -31,32 +32,30 @@ public class ContentDTO {
 	public Integer getContent_no() {
 		return content_no;
 	}
+	
+	public String getMain_img() {
+		return main_img;
+	}
 
-
+	public void setMain_img(String main_img) {
+		this.main_img = main_img;
+	}
 
 	public void setContent_no(Integer content_no) {
 		this.content_no = content_no;
 	}
 
-
-
 	public String getContent_nm() {
 		return content_nm;
 	}
-
-
 
 	public void setContent_nm(String content_nm) {
 		this.content_nm = content_nm;
 	}
 
-
-
 	public String getContent_info() {
 		return content_info;
 	}
-
-
 
 	public void setContent_info(String content_info) {
 		this.content_info = content_info;
@@ -133,7 +132,7 @@ public class ContentDTO {
 	public String toString() {
 		return "ContentDTO [content_no=" + content_no + ", content_nm=" + content_nm + ", content_info=" + content_info
 				+ ", content_runtime=" + content_runtime + ", thumbnail=" + thumbnail + ", age=" + age + ", country="
-				+ country + ", category_nm=" + category_nm + ", rating=" + rating + "]";
+				+ country + ", category_nm=" + category_nm + ", rating=" + rating + ", main_img=" + main_img + "]";
 	}
 		
 }

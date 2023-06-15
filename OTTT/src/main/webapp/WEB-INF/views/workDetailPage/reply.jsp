@@ -20,7 +20,8 @@
     rel="stylesheet"
     integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
     crossorigin="anonymous">
-    <link rel="stylesheet" href="${path}/resources/css/workDetailPage/reply.css" >  
+    <link rel="stylesheet" href="${path}/resources/css/workDetailPage/reply.css" >
+    <script type="text/javascript" src="${path}/resources/js/workDetailPage/script/reply.js"></script>
   </head>
   <body style="background-color: #202020; color: #fff;" id="area">
     <div class="wrap">
@@ -210,11 +211,13 @@
         </div>
                <div class="review-box1">      
           <div class="review-box-header">
-            <div class="user-icon"> 
-              <img src="${Review.image}" >
+            <div class="user-icon">
+            	<a href="javascript:goProfile('${Review.user_no }', '${Review.user_nicknm}')">
+            		<img src="${Review.image}" >
+           		</a>
             </div>
             <div class="user-name">
-              <a href="../ottt박소율/mypageshow.html">
+              <a href="javascript:goProfile('${Review.user_no }', '${Review.user_nicknm}')">
                 <p class="user_nicknm"> ${Review.user_nicknm} </p>
               </a>
               <p class="date-insert" name="review_create_dt"><fmt:formatDate pattern="yy-MM-dd hh:mm" value="${Review.review_create_dt}"/></p>

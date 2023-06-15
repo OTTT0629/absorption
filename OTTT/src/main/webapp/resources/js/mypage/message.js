@@ -53,7 +53,7 @@ $(document).ready(function() {
 	        	
 	        	$.each(data, function(index, message) {
 	        		rows += '<tr class="title-line" style="font-weight: 200">'
-	        		rows += '<td class="msg-img">픞</td>'
+	        		rows += '<td class="msg-img">'		+ message.image			+ '</td>'
 	        		rows += '<td class="msg-nicknm">'	+ message.user_nicknm	+ '</td>'
 	        		rows += '<td class="msg-name">'		+ message.send_user_no	+ '</td>'
 	        		rows += '<td class="msg-content">'	+ message.content		+ '</td>'
@@ -88,7 +88,7 @@ $(document).ready(function() {
                 
                 $.each(data, function(index, message) {
                     rows += '<tr class="title-line" style="font-weight: 200">'
-                    rows += '<td class="msg-img">픞</td>'
+                    rows += '<td class="msg-img">'		+ message.image			+ '</td>'
                     rows += '<td class="msg-nicknm">'	+ message.user_nicknm	+ '</td>'
                     rows += '<td class="msg-name">'		+ message.receive_user_no	+ '</td>'
                     rows += '<td class="msg-content">'	+ message.content		+ '</td>'
@@ -122,7 +122,7 @@ $(document).ready(function() {
 	    var content = $(this).text()
 	    $(".msg-view-content").text(content)
 	
-	    if (content !== "") {
+	    if ((content !== "") && recvButton.hasClass("active")) {
 	        $(".msg-write-btn").show()
 	    } else {
 	        $(".msg-write-btn").hide()
@@ -134,7 +134,7 @@ $(document).ready(function() {
 	    $('input[name=msgno]').val(msgNo)
 	    $('input[name=sendno]').val(sendUserNo)
 	    
-	    var url = "/ottt/messagewindow/open?message_no=" + encodeURIComponent(msgNo) + "&send_user_no=" + encodeURIComponent(sendUserNo)
+	    var url = "/ottt/messagewindow/open?send_user_no=" + encodeURIComponent(sendUserNo) + "&message_no=" + encodeURIComponent(msgNo)
 	    $("#msg-write").attr("data-url", url) // 답장 버튼에 URL을 저장
 	
 	    var sendUserNk = $(this).siblings(".msg-nicknm").text()

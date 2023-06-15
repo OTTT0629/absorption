@@ -20,9 +20,11 @@
     rel="stylesheet"
     integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
     crossorigin="anonymous">
-    <link rel="stylesheet" href="${path}/resources/css/workDetailPage/review.css" >  
+    <link rel="stylesheet" href="${path}/resources/css/workDetailPage/review.css" >
+	<script type="text/javascript" src="${path}/resources/js/workDetailPage/script/review.js"></script>
   </head>
   <body style="background-color: #202020; color: #fff;" class="area">
+
     <div class="wrap">
     
       <%@ include file="../fix/header.jsp" %>
@@ -239,11 +241,13 @@
 			<c:if test="${myReview != null || myReview.user_nicknm != null}">
                <div class="review-box1">      
           <div class="review-box-header">
-            <div class="user-icon"> 
-              <img src="${myReview.image}" >
+            <div class="user-icon">
+            	<a href="javascript:goProfile('${myReview.user_no }', '${myReview.user_nicknm}')">
+            		<img class="aaa" src="${myReview.image}" >
+           		</a>
             </div>
             <div class="user-name">
-              <a href="../ottt박소율/mypageshow.html">
+              <a href="javascript:goProfile('${myReview.user_no }', '${myReview.user_nicknm}')">
                 <p class="user_nicknm"> ${myReview.user_nicknm} </p>
               </a>
               <p class="date-insert" name="review_create_dt"><fmt:formatDate pattern="yy-MM-dd hh:mm" value="${myReview.review_create_dt}"/></p>
@@ -377,11 +381,13 @@
         <c:forEach var="ReviewDTO" items="${list}">
          <div class="review-box">      
           <div class="review-box-header">
-            <div class="user-icon"> 
-              <img src="${ReviewDTO.image}">
+            <div class="user-icon">
+            	<a href="javascript:goProfile('${ReviewDTO.user_no }', '${ReviewDTO.user_nicknm}')">
+            		<img src="${ReviewDTO.image}">
+           		</a>
             </div>
             <div class="user-name">
-              <a href="../ottt박소율/mypageshow.html">
+              <a href="javascript:goProfile('${ReviewDTO.user_no }', '${ReviewDTO.user_nicknm}')">
                 <p class="user_nicknm"> ${ReviewDTO.user_nicknm} </p>
               </a>
               <p class="date-insert" name="review_create_dt"><fmt:formatDate pattern="yy-MM-dd hh:mm" value="${ReviewDTO.review_create_dt}"/></p>
@@ -475,7 +481,8 @@
  
     
    <script type="text/javascript">
-   $(document).ready(function() {   
+   $(document).ready(function() {
+	   
       $('.submit-review').on("click", function(){
          let form = $("#review-form")
              form.attr("action", "<c:url value='/detailPage/review/write'/>")

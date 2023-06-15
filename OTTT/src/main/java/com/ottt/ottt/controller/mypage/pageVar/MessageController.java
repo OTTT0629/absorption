@@ -61,8 +61,6 @@ public class MessageController {
 		} catch (Exception e) {e.printStackTrace();}
 		return "/mypage/myprofile/message";
 	}
-
-	
 	
 	@GetMapping(value = "/message/send")
 	public String sendMessage(MessageSearchItem msc, Model m, HttpSession session) {

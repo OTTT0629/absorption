@@ -13,7 +13,7 @@
   	<!-- 유저 id로 유저 찾기 -->
   	<select id="select" parameterType="String" resultType="UserDTO">
   		SELECT user_no, gr_no, user_id, user_pwd, user_nm, user_nicknm, user_gen
-		, user_email, image, following, followers, report_cnt
+		, user_email, image, following, followers
 		FROM tb_user
 		where user_id = #{user_id}
   	</select>
@@ -21,7 +21,7 @@
   	<!-- 전체 유저 찾기 -->
   	<select id="selectAll" resultType="UserDTO">
   		SELECT user_no, gr_no, user_id, user_pwd, user_nm, user_nicknm, user_gen
-		, user_email, image, following, followers, report_cnt
+		, user_email, image, following, followers
 		FROM tb_user  	
   	</select>
   	
@@ -35,7 +35,7 @@
   	<!-- 유저 no로 유저 찾기 -->
   	<select id="selectNo" parameterType="int" resultType="UserDTO">
   		SELECT user_no, gr_no, user_id, user_pwd, user_nm, user_nicknm, user_gen
-		, user_email, image, following, followers, report_cnt
+		, user_email, image, following, followers
 		FROM tb_user
 		where user_no = #{user_no}
   	</select>

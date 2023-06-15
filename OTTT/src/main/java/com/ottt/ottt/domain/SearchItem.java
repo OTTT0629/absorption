@@ -102,6 +102,16 @@ public class SearchItem {
 				.build().toString();
 	}
 	
+	public String getUserString() {
+		return getUserString(user);
+	}
+	
+	public String getUserString(String user) {
+		return UriComponentsBuilder.newInstance()
+				.queryParam("user", user)
+				.build().toString();
+	}
+	
 	public Integer getOffset() {
 		int result = (page-1)*pageSize;
 		if(result < 0) result = 0;

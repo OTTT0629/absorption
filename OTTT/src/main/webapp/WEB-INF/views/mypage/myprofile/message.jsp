@@ -18,72 +18,70 @@
     
   </head>
 
-  <body>
-<!-- 	<script type="text/javascript">
-     	$(document).ready(function() {
-     		var message_no = $(this).closest("tr").find("input[name='message_no']").val()
-     		
-     		$(".delrecvBtn").on("click", function() {
-     			if(!confirm("쪽지가 삭제됩니다."))
-     				return;
-     				
-     			let form = ("#form")
-     			form.attr("action", "<c:url value='/mypage/message/remove${messageSearchItem.queryString}' />")
-     			form.attr("method", "post")
-     			form.submit()
-     		})
-     		
-     		$(".delsendBtn").on("click", function() {
-     			if(!confirm("쪽지가 삭제됩니다."))
-     				return;
-     				
-     			let form = ("#form")
-     			form.attr("action", "<c:url value='/mypage/message/send/remove' />")
-     			form.attr("method", "post")
-     			form.submit()
-     		})
-		})
-     </script> -->
-     
-<script type="text/javascript">
-$(document).ready(function() {
-	$('button[name="deleteBtn"]').on('click', function(event) {
+  <body>     
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$('button[name="deleteBtn"]').on('click', function(event) {
+			  if(!confirm("쪽지가 삭제됩니다.")) return;
+		    	deletemsg(event);
+		  });
 		  
-		  if(!confirm("쪽지가 삭제됩니다.")) return;
-	    	deletemsg(event);
-	  });
-	  
-	  function deletemsg(event) {
-		//버튼 테이블에 있는 메세지 넘버 받아오기
-	    var messageNo = $(event.target).closest("tr").find("input[name='message_no']").val();
-	    
-	    //폼태그 생성하기
-	    let form = document.createElement('form');
-	    //인풋태그 생성하기
-	    let input = document.createElement('input');
-	    //인풋 속성
-	    input.setAttribute('type', 'hidden');
-	    input.setAttribute('name', 'message_no');
-	    input.setAttribute('value', messageNo);
-	    form.appendChild(input);
-	    
-	    if($('button[name="deleteBtn"]').attr("class") == 'delrecvBtn')
-	    	form.setAttribute("action", '/ottt/mypage/message/remove');
-	    if($('button[name="deleteBtn"]').attr("class") == 'delsendBtn')
-	    	form.setAttribute("action", '/ottt/mypage/message/send/remove');
-	    
-	    form.setAttribute("method", "post");
-	    
-	    document.body.appendChild(form);
-	    form.submit();
-	  }
-	  
-	});
-     
-     
-	     
-     
-     </script>
+		  function deletemsg(event) {
+			//버튼 테이블에 있는 메세지 넘버 받아오기
+		    var messageNo = $(event.target).closest("tr").find("input[name='message_no']").val();
+		    
+		    //폼태그 생성하기
+		    let form = document.createElement('form');
+		    //인풋태그 생성하기
+		    let input = document.createElement('input');
+		    //인풋 속성
+		    input.setAttribute('type', 'hidden');
+		    input.setAttribute('name', 'message_no');
+		    input.setAttribute('value', messageNo);
+		    form.appendChild(input);
+		    
+		    if($('button[name="deleteBtn"]').attr("class") == 'delrecvBtn')
+		    	form.setAttribute("action", '/ottt/mypage/message/remove');
+		    if($('button[name="deleteBtn"]').attr("class") == 'delsendBtn')
+		    	form.setAttribute("action", '/ottt/mypage/message/send/remove');
+		    
+		    form.setAttribute("method", "post");
+		    
+		    document.body.appendChild(form);
+		    form.submit();
+		  }
+		  
+		})
+		
+		function goProfile(user_no, user_nicknm) {
+			let form = document.createElement('form');				
+			
+			let data = {
+					user_no : user_no,
+					toURL : path
+		    };
+			
+			for (let key in data) {
+		        if (data.hasOwnProperty(key)) {
+		            let obj = document.createElement('input');
+		            obj.setAttribute('type', 'hidden');
+		            obj.setAttribute('name', key);
+		            obj.setAttribute('value', data[key]);
+		            form.appendChild(obj);
+		        }
+		    }
+			
+			form.setAttribute('method','post')
+			form.setAttribute('action','/ottt/profile?user=' +user_nicknm)
+							
+			document.body.appendChild(form)
+			form.submit()
+		}
+		
+		
+		
+		
+	</script>
     <div class="warp">
 	<%@ include file="../../fix/header.jsp" %>
 
@@ -130,9 +128,22 @@ $(document).ready(function() {
 							<tr class="title-line" style="font-weight: 200">
 								<td class="msg-no" style="display: none; ">${messageDTO.message_no}</td>
 								<input name="message_no" type="hidden" value="${messageDTO.message_no}" />
-								<td class="msg-img">픞</td>
+								
+								
+								
+								<td class="msg-img">
+								<a href="javascript:goProfile('${(messageDTO.send_user_no != sessionScope.user_no) ? messageDTO.send_user_no : messageDTO.receive_user_no}', '${messageDTO.user_nicknm}')"><img src="${messageDTO.image }" class="user-image" alt="프로필사진" />
+								</a></td>
+
 								<td class="msg-nicknm">${messageDTO.user_nicknm }</td>
-								<td class="msg-name" style="display: none; ">${messageDTO.send_user_no }</td>
+								
+								
+								
+								
+								<td class="msg-name" style="display: none; ">${(messageDTO.send_user_no != sessionScope.user_no) ? messageDTO.send_user_no : messageDTO.receive_user_no}</td>
+								
+								
+								
 								<td class="msg-content" style="cursor: pointer;"><c:out value="${messageDTO.content }"></c:out></td>
 								<td class="msg-time"><fmt:formatDate value="${messageDTO.send_date}" pattern="yyyy-MM-dd HH:mm" type="date" /></td>
 								<td class="msg-del"><button class="delBtn" name="deleteBtn" style="border: none; color: red;"><i class="fas fa-times"></i></button></td>
@@ -163,7 +174,9 @@ $(document).ready(function() {
         	<input name="sendno" type="hidden" value="${messageDTO.send_user_no}" />
             <div class="msg-nick" id="msgNick">${messageDTO.user_nicknm }</div>
 	        <div class="msg-view-content" style="white-space: pre-wrap;">${messageDTO.content }</div>
-	        <button type="button" id="msg-write" class="msg-write-btn" >답장</button>
+	        <c:if test="${messageDTO.send_user_no != sessionScope.user_no }">
+	        	<button type="button" id="msg-write" class="msg-write-btn" >답장</button>
+        	</c:if>
         </div>
 
       </div>
