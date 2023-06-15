@@ -94,6 +94,17 @@ public class SearchItem {
 				.build().toString();
 	}
 	
+	public String getList() {
+		return getList(page);
+	}
+	
+	public String getList(Integer page) {
+		return UriComponentsBuilder.newInstance()
+				.queryParam("user", user)
+				.queryParam("page", page)
+				.build().toString();
+	}
+	
 	public String getUserString() {
 		return getUserString(user);
 	}

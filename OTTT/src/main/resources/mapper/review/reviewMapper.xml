@@ -45,7 +45,7 @@
   
    <select id="selectReview" parameterType="map" resultType="ReviewDTO">
       SELECT review_no, c.content_no, a.rating, review_content, b.image
-      , review_create_dt, b.user_nicknm, b.user_no, comment_cnt  
+      , review_create_dt, b.user_nicknm, b.user_no, comment_cnt, c.main_img
       ,(select count(*) from tb_review_like c1 where c1.review_no = a.review_no) as like_count
       ,(select count(*) from tb_review_like c2 where c2.review_no = a.review_no and c2.user_no = #{user_no}) as check_like_count
       FROM tb_review a, tb_user b, tb_content c
@@ -139,7 +139,7 @@
 
 	<!-- 나의 리뷰  -->
 	<select id="myReviewAll" parameterType="SearchItem" resultType="ReviewDTO">
-		SELECT a.rating, a.review_content, a.content_no, b.content_nm, b.thumbnail
+		SELECT a.review_no, a.rating, a.review_content, a.content_no, b.content_nm, b.thumbnail
 		FROM tb_review a
 		join tb_content b
 		on a.content_no = b.content_no

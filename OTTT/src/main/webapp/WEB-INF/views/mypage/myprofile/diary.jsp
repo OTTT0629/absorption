@@ -48,25 +48,31 @@
 					<div class="l-main">
 						<img class="poster" src="${myDiaryDTO.thumbnail }" >
 						<input type="hidden" name="thumbnail" value="${myDiaryDTO.thumbnail }"/>
+						
+						<div class="lBot">
+							<button id="listBtn" class="btn-write" type="button" >뒤로</button>
+						</div>
 					</div>
+					
 					
 					<div class="c-main">
 						<div class="c-title">
 							<input class="diary-title" readonly="readonly" name="content_nm" type="text"
-								value="${myDiaryDTO.content_nm }" />
+								value="${mode== 'new' ? '' : myDiaryDTO.content_nm}" />
+								
 						</div>
 						<div class="diary">
 							<label for="story"></label>
 							<textarea id="story" name="mydiary_content"
 								${mode=="new" ? "" : "readonly='readonly'" }
-							 spellcheck="false">${myDiaryDTO.mydiary_content }</textarea>
+							 spellcheck="false">${mode== 'new' ? '' : myDiaryDTO.mydiary_content }</textarea>
 						</div>
 					</div>
 					
 					<div class="r-main">
 						<div class="rTop">
 
-								<fieldset class="pnp-button">
+								<fieldset class="pnp-button" style="display: none;">
 									<input type="radio" id="pub"
 									 name="public_yn_cd" value="1"
 									 ${myDiaryDTO.public_yn_cd.toString()=='1' ? "checked" : "" }>
@@ -89,8 +95,8 @@
 							<c:if test="${sessionScope.user_no eq myDiaryDTO.user_no}">
 								<button id="writeBtn" class="btn-write" type="button" >수정</button>
 								&nbsp;/&nbsp;
-								<button id="removeBtn" class="btn-write" type="button" >삭제</button>
-							</c:if>
+								<button id="removeBtn" class="btn-write" type="button" >삭제</button>								
+							</c:if>								
 						</div>
 					</div>
 				</form>
@@ -100,24 +106,27 @@
 	 
 	<script type="text/javascript">
 	 	$(document).ready(function() {
+	 		
+	 		$('#listBtn').on('click', function name() {
+	 			location.href = '<c:url value="/mypage/mydiary${searchItem.list}" />'
+			})
 
 	 		$('#writeBtn').on('click', function() {
-	 			let form = $('#diary-main')
-	 			
+	 			let form = $('#diary-main')	 			
 	 			let isReadonly = $("textarea[name=mydiary_content]").attr('readonly')
 	 			
 	 			//수정상태 변환
 	 			if(isReadonly == 'readonly') {
 	 				$("textarea[name=mydiary_content]").attr('readonly', false)
+	 				$(".pnp-button").show()
 	 				$("#writeBtn").html('등록')
 	 				$("#removeBtn").html('취소')
 	 				return;
 	 			}
 	 			
 	 			if (!confirm("수정하시겠습니까?")) return;
-	 			alert("수정되었습니다")
 	 			
-	 			form.attr("action", "<c:url value='/mypage/mydiary/modify${searchItem.string}' />")
+	 			form.attr("action", "<c:url value='/mypage/mydiary/modify${searchItem.string}&page=${searchItem.page}' />")
 	 			form.attr("method", "post")
 	 			
 	 			
@@ -167,7 +176,9 @@
     	let msg = "${msg}"
     	if(msg == "WRT_ERR") alert("다이어리 등록에 실패했습니다. 다시 시도해 주세요")
     	if(msg == "MOD_ERR") alert("다이어리 수정에 실패했습니다. 다시 시도해 주세요")
-    	if(msg == "DEL_ERR") alert("다이어리 삭제에 실패했습니다. 다시 시도해 주세요") 	
+    	if(msg == "DEL_ERR") alert("다이어리 삭제에 실패했습니다. 다시 시도해 주세요")
+    	if(msg == "MOD_OK") alert("다이어리 수정에 성공했습니다")
+    	if(msg == "DEL_OK") alert("다이어리 삭제에 성공했습니다")
     </script>
 	 
 

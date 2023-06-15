@@ -83,14 +83,15 @@
       </div>      
       
       <div class="main-img">
-        <img src="${path}/resources/images/서부 전선 이상 없다.png" alt="서부 전선 이상 없다 이미지">
+        <img src="${contentDTO.main_img }" >
       </div>
 
       <div class="info">
         <ul>
           <li class="info-title">
-         <h1>${contentDTO.content_nm }</h1>
- 
+          <a href="<c:url value="/detailPage?content_no=${contentDTO.content_no }" />">
+         	<h1>${contentDTO.content_nm }</h1>
+		  </a>
           </li>
           <br>
           <li class="info-detail">

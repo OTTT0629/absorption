@@ -34,7 +34,7 @@ public class DiaryController {
 
 	// mydiary 메인
 	@GetMapping(value = "/mydiary")
-	public String mydiary(SearchItem sc, Model m, HttpSession session, HttpServletRequest request) {
+	public String myDiary(SearchItem sc, Model m, HttpSession session, HttpServletRequest request) {
 
 		if (!loginCheck(request))
 			return "redirect:/login";
@@ -76,9 +76,38 @@ public class DiaryController {
 		return "/mypage/myprofile/mydiary";
 	}
 	
+	
+	@GetMapping("/mydiary/write")
+	public String writeDiary(Integer content_no, HttpSession session,  Model m) {
+		Integer user_no = (Integer) session.getAttribute("user_no");
+		
+		try {
+			MyDiaryDTO mydiaryDTO = ds.getDiary(content_no, user_no);
+			
+			m.addAttribute(mydiaryDTO);
+			m.addAttribute("mode", "new");
+			
+			return "/mypage/myprofile/diary";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "redirect:/detailPage?content_no" +content_no;
+		}		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// mydiary 클릭 시(작성글 보기)
 	@GetMapping("/mydiary/diary")
-	public String readdiary(SearchItem sc, Integer content, Model m, HttpSession session
+	public String readDiary(SearchItem sc, Integer content, Model m, HttpSession session
 							, RedirectAttributes rattr) {
 		Integer my_no = (Integer) session.getAttribute("user_no");
 		
@@ -140,7 +169,7 @@ public class DiaryController {
 			rattr.addFlashAttribute("msg", "MOD_OK");
 
 			String encodedUser = URLEncoder.encode(sc.getUser(), StandardCharsets.UTF_8);
-			String queryString = "user=" + encodedUser + "&content=" + sc.getContent_no();
+			String queryString = "user=" + encodedUser + "&content=" + sc.getContent_no()+"&page=" +sc.getPage();
 	        return "redirect:/mypage/mydiary/diary?" + queryString;
 			
 			

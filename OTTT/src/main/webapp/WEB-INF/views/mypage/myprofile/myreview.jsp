@@ -70,7 +70,7 @@
 			<div class="main">				
 				<c:forEach var="ReviewDTO" items="${list }" >
 				
-					<a href="<c:url value="#"/>" class="review">
+					<a href="<c:url value='/detailPage/reply?content_no=${ReviewDTO.content_no}&review_no=${ReviewDTO.review_no}' />" class="review">
 						<div class="post">					  	
 						    <div class="Lside">
 						      	<img class="poster" src="${ReviewDTO.thumbnail}">
@@ -107,17 +107,17 @@
 				          	<ul class="pagination">				          		
 					            <c:if test="${pr.showPrev}">
 						            <li class="page-item">
-						            	<a class="page-link" href="<c:url value="/mypage/myreview${pr.sc.getString(pr.beginPage-1) }" />">&lt;</a>
+						            	<a class="page-link" href="<c:url value="/mypage/myreview${pr.sc.getList(pr.beginPage-1) }" />">&lt;</a>
 					            	</li>
 					            </c:if>
 					            <c:forEach var="i" begin="${pr.beginPage }" end="${pr.endPage }">
 					            	<li class="page-item">
-					            		<a class="page-link" href="<c:url value="/mypage/myreview${pr.sc.getString(i) }" />">${i }</a>
+					            		<a class="page-link" href="<c:url value="/mypage/myreview${pr.sc.getList(i) }" />">${i }</a>
 				            		</li>
 				            	</c:forEach>
 			            		<c:if test="${pr.showNext}">
 			            			<li class="page-item">
-			            				<a class="page-link" href="<c:url value="/mypage/myreview${pr.sc.getString(pr.endPage+1) }" />" >&gt;</a>
+			            				<a class="page-link" href="<c:url value="/mypage/myreview${pr.sc.getList(pr.endPage+1) }" />" >&gt;</a>
 		            				</li>
             					</c:if>
        						</ul>

@@ -74,7 +74,7 @@
 	          	
 	          	<c:forEach var="MydiaryDTO" items="${list }" >
 				
-					<a href="<c:url value="/mypage/mydiary/diary${pr.sc.string}=${MydiaryDTO.content_no }"/>" class="mydiary">
+					<a href="<c:url value="/mypage/mydiary/diary${pr.sc.string}=${MydiaryDTO.content_no }&page=${pr.sc.page}"/>" class="mydiary">
 						<div class="post">					  	
 						    <div class="Lside">
 						      	<img class="poster" src="${MydiaryDTO.thumbnail}">
@@ -107,17 +107,17 @@
 				          	<ul class="pagination">				          		
 					            <c:if test="${pr.showPrev}">
 						            <li class="page-item">
-						            	<a class="page-link" href="<c:url value="/mypage/mydiary${pr.sc.getString(pr.beginPage-1) }" />">&lt;</a>
+						            	<a class="page-link" href="<c:url value="/mypage/mydiary${pr.sc.getList(pr.beginPage-1) }" />">&lt;</a>
 					            	</li>
 					            </c:if>
 					            <c:forEach var="i" begin="${pr.beginPage }" end="${pr.endPage }">
 					            	<li class="page-item">
-					            		<a class="page-link" href="<c:url value="/mypage/mydiary${pr.sc.getString(i) }" />">${i }</a>
+					            		<a class="page-link" href="<c:url value="/mypage/mydiary${pr.sc.getList(i) }" />">${i }</a>
 				            		</li>
 				            	</c:forEach>
 			            		<c:if test="${pr.showNext}">
 			            			<li class="page-item">
-			            				<a class="page-link" href="<c:url value="/mypage/mydiary${pr.sc.getString(pr.endPage+1) }" />" >&gt;</a>
+			            				<a class="page-link" href="<c:url value="/mypage/mydiary${pr.sc.getList(pr.endPage+1) }" />" >&gt;</a>
 		            				</li>
             					</c:if>
        						</ul>
