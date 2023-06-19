@@ -18,6 +18,36 @@
 
 	<body>
 	<script type="text/javascript">
+		connect();
+		var socket = null;
+		
+		function connect() {
+			console.log("*************")
+			var ws = new WebSocket("ws://localhost:/ottt/replyEcho");	//포트 번호 확인
+			socket = ws;
+			
+			ws.onopen = function () {
+				console.log('Info: connection opened.');
+			};
+			ws.onmessage = function (event) {
+				console.log(event.data+'\n');
+			};
+	
+			ws.onclose = function (event) {
+				console.log('Info: connection closed.');
+				//setTimeout( function(){ connect(); }, 1000); // retry connection!!
+			};
+			
+			ws.onerror = function (event) { console.log('Info: connection closed.'); };		
+		}
+		
+// 		$('#writeBtn').on('click', function(evt) {
+//			evt.preventDefault();
+//			if (socket.readyState !== 1) return;
+//			let msg = $('input#msg').val();
+//			ws.send(msg);
+//		});
+
 		$(document).ready(function() {
 			//쪽지 전송
 			$("#writeBtn").on("click", function() {
@@ -28,22 +58,37 @@
 		        let userNo = searchParams.get("user_no")
 		        
 		        var content = $("#messageContent").val()
-				
-				$.ajax({
-					type: "POST",
-					url: (sendUserNo != null) ? "/ottt/messagewindow/send" : "/ottt/messagewindow/send2",
-					data: (sendUserNo != null) ? {sendUserNo: sendUserNo, content: content }: {userNo:userNo, content: content },
-					success: function(response) {
-						console.log("전송 성공");
-				        alert("쪽지가 전송되었습니다.");
-				        window.close();
-					},
-					error: function() {
-						console.log("전송 실패")
-						alert("쪽지 전송에 실패했습니다. 다시 시도해 주세요.")
-					}
-				})
+		        
+		        //쪽지 내용이 비어있는지 아닌지 체크
+				if(formCheck()) {
+					$.ajax({
+						type: "POST",
+						url: (sendUserNo != null) ? "/ottt/messagewindow/send" : "/ottt/messagewindow/send2",
+						data: (sendUserNo != null) ? {sendUserNo: sendUserNo, content: content }: {userNo:userNo, content: content },
+						success: function(response) {
+							console.log("전송 성공");
+					        alert("쪽지가 전송되었습니다.");
+					        window.close();
+						},
+						error: function() {
+							console.log("전송 실패")
+							alert("쪽지 전송에 실패했습니다. 다시 시도해 주세요.")
+						}
+					})
+				} else {
+					alert("내용을 입력하세요")
+				}
+
 			})
+			
+			let formCheck = function() {
+				let form = document.getElementById("form")
+				if(form.content.value == "") {
+					form.content.focus()
+					return false
+				}
+				return true
+			}
 			
 			//글자수제한
 			$(".write textarea").keyup(function(){

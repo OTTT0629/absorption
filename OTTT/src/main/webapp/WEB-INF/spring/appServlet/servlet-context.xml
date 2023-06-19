@@ -45,16 +45,17 @@
 		<beans:property name="maxInMemorySize" value= "1024" /> <!-- 1KB -->
 	</beans:bean>
 	
-<!-- 웹소켓 추가 중 -->
-<!-- 	<beans:bean id="replyEchochoHandler" class="com.jade.swp.socket.ReplyEchoHandler" /> -->
+<!-- 웹소켓 핸들러 -->
+	<beans:bean id="replyEchochoHandler" class="com.ottt.ottt.handler.ReplyEchoHandler" />
 
-<!-- 	<websocket:handlers> -->
-<!-- 	 <websocket:mapping handler="replyEchochoHandler" path="/replyEcho" /> -->
-<!-- 	 <websocket:handshake-interceptors> -->
-<!-- 	      <beans:bean -->
-<!-- 	          class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/> -->
-<!-- 	 </websocket:handshake-interceptors> -->
-<!-- 	</websocket:handlers> -->
+	<websocket:handlers>
+	 <websocket:mapping handler="replyEchochoHandler" path="/replyEcho" />
+	 <!-- 세션(로그인한 사용자의 정보를 알아야 하니까) -->
+	 <websocket:handshake-interceptors>
+	      <beans:bean
+	          class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
+	 </websocket:handshake-interceptors>
+	</websocket:handlers>
 
 
 

@@ -21,26 +21,12 @@
 <body>
 	<script type="text/javascript">
 		let path = window.location.href;
-	
-		/*function goLogin() {
-		  let toURL = path;
-		  let form = document.createElement('form');
-	
-		  form.setAttribute('method', 'get');
-		  form.setAttribute('action', '/ottt/mypage?toURL='+toURL);
-		  
-		  document.body.appendChild(form);
-		  
-		  form.submit();
-		  
-		} */
-	
-	function goLogin() {
-		let toURL = path;
-		console.log(toURL)
-		location.href = "/ottt/mypage?toURL=" + toURL;
-	}
-	
+		
+		function goLogin() {
+			let toURL = path;
+			console.log(toURL)
+			location.href = "/ottt/mypage?toURL=" + toURL;
+		}
 	</script>
    <header>
       <div class="logo">
@@ -83,5 +69,30 @@
             </ul>
          </div>
       </header>
+      
+	<script type="text/javascript">
+		var socket = null;
+		connect();
+		
+		function connect() {
+			console.log("*************")
+			var ws = new WebSocket("ws://localhost:/ottt/replyEcho");	//포트 번호 확인
+			socket = ws;
+			
+			ws.onopen = function () {
+				console.log('Info: connection opened.');
+			};
+			ws.onmessage = function (event) {
+				console.log(event.data+'\n');
+			};
+	
+			ws.onclose = function (event) {
+				console.log('Info: connection closed.');
+				//setTimeout( function(){ connect(); }, 1000); // retry connection!!
+			};
+			
+			ws.onerror = function (event) { console.log('Info: connection closed.'); };		
+		}
+	</script>
 </body>
 </html>
