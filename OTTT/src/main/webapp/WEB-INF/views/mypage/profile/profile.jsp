@@ -74,7 +74,7 @@
             <ul>
               <li class="mydiary">
                 <img class="mimg" src="${path}/resources/images/img/free-icon-diary-6393039.png" alt="다이어리">
-               <a href="<c:url value="/mypage/mydiary" />">나만의 다이어리</a>
+               <a href="<c:url value="/mypage/mydiary?user=${userDTO.user_nicknm }" />">나만의 다이어리</a>
               </li>
               <li class="myrivew">
                 <img class="mimg" src="${path}/resources/images/img/free-icon-review-3501894.png" alt="리뷰">

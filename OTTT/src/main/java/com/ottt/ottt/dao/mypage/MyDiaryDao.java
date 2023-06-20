@@ -13,4 +13,5 @@ public interface MyDiaryDao {
 	MyDiaryDTO selectDiary(Integer content_no, Integer user_no) throws Exception;
 	int updateDiary(MyDiaryDTO myDiaryDTO) throws Exception;
 	int delete(Integer content_no, Integer user_no) throws Exception;
+	int insert(MyDiaryDTO mydiaryDTO) throws Exception;
 }

@@ -69,7 +69,7 @@
 
 	        <div class="main">
 	        	<div class="main-head">
-	        		<a href="<c:url value="/mypage/mydiary/create" />" class="write">글쓰기</a>
+	        		<a href="<c:url value="/mypage/mydiary/write?content=6" />" class="write">글쓰기</a>
 	          	</div>
 	          	
 	          	<c:forEach var="MydiaryDTO" items="${list }" >
@@ -137,6 +137,7 @@
    		let msg = "${msg}"
     	if(msg == "READ_ERR") alert("접근 권한이 없습니다")
     	if(msg == "DEL_OK") alert("다이어리 삭제에 성공했습니다")
+    	if(msg == "WRT_OK") alert("다이어리 등록에 성공했습니다")
     	
    		function readDiary(content_no, user_no) {
 

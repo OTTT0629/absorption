@@ -43,11 +43,14 @@
 			<div class="main">
 				<div class="blank"></div>
 				<form action="" id="diary-main">
-					<input type="hidden" name="content_no" value="${myDiaryDTO.content_no }"/>
-					<input type="hidden" name="user_no" value="${myDiaryDTO.user_no }"/>
+					<input type="hidden" name="content_no" 
+							value="${mode== 'new' ? contentDTO.content_no : myDiaryDTO.content_no }"/>
+					<input type="hidden" name="user_no" 
+							value="${mode== 'new' ? sessionScope.user_no : myDiaryDTO.user_no }"/>
 					<div class="l-main">
-						<img class="poster" src="${myDiaryDTO.thumbnail }" >
-						<input type="hidden" name="thumbnail" value="${myDiaryDTO.thumbnail }"/>
+						<img class="poster" src="${myDiaryDTO.thumbnail == null ? contentDTO.thumbnail : myDiaryDTO.thumbnail }" >
+						<input type="hidden" name="thumbnail" 
+							value="${myDiaryDTO.thumbnail == null ? contentDTO.thumbnail : myDiaryDTO.thumbnail }"/>
 						
 						<div class="lBot">
 							<button id="listBtn" class="btn-write" type="button" >뒤로</button>
@@ -58,7 +61,7 @@
 					<div class="c-main">
 						<div class="c-title">
 							<input class="diary-title" readonly="readonly" name="content_nm" type="text"
-								value="${mode== 'new' ? '' : myDiaryDTO.content_nm}" />
+								value="${myDiaryDTO.content_nm == null ? contentDTO.content_nm : myDiaryDTO.content_nm}" />
 								
 						</div>
 						<div class="diary">
@@ -71,29 +74,28 @@
 					
 					<div class="r-main">
 						<div class="rTop">
-
-								<fieldset class="pnp-button" style="display: none;">
-									<input type="radio" id="pub"
-									 name="public_yn_cd" value="1"
-									 ${myDiaryDTO.public_yn_cd.toString()=='1' ? "checked" : "" }>
+							<c:if test="${sessionScope.user_no eq myDiaryDTO.user_no || mode == 'new'}">
+								<fieldset class="pnp-button" >
+									<input type="hidden" id="pub" name="public_yn_cd" value="1" style="display: none">
 									<label for="pub">전체 공개</label><br>
 									
-				                    <input type="radio" id="Npub"
-				                    name="public_yn_cd" value="0"
-				                    ${myDiaryDTO.public_yn_cd.toString()=='0' ? "checked" : "" }>
-				                    <label for="Npub">비공개</label><br>
-		
-				                    <input type="radio" id="Fpub"
-				                    name="public_yn_cd" value="2"
-				                    ${myDiaryDTO.public_yn_cd.toString()=='2' ? "checked" : "" }>
-				                    <label for="Fpub">팔로워</label><br>
+				                    <input type="hidden" id="Npub" name="public_yn_cd" value="0" style="display: none">
+				                    <label for="Npub" >비공개</label><br>
+				                    
+				                    <input type="hidden" id="Fpub" name="public_yn_cd" value="2" style="display: none">
+				                    <label for="Fpub" >팔로워</label><br>
+				                    
 		                		</fieldset>
-
+	                		</c:if>
 						</div>
 						
 						<div class="rBot">
-							<c:if test="${sessionScope.user_no eq myDiaryDTO.user_no}">
-								<button id="writeBtn" class="btn-write" type="button" >수정</button>
+							<c:if test="${mode == 'new' }">
+								<button id="writeBtn" class="btn-write" type="button" >등록</button>
+							</c:if>
+							
+							<c:if test="${sessionScope.user_no eq myDiaryDTO.user_no && mode != 'new'}">
+								<button id="modBtn" class="btn-write" type="button" >수정</button>
 								&nbsp;/&nbsp;
 								<button id="removeBtn" class="btn-write" type="button" >삭제</button>								
 							</c:if>								
@@ -107,19 +109,87 @@
 	<script type="text/javascript">
 	 	$(document).ready(function() {
 	 		
+	 		let inputs = document.querySelectorAll('input[name="public_yn_cd"]');
+
+	 		// 선택된 input 요소에 대해 반복문 실행
+	 		inputs.forEach(function(input) {
+		 	  	if (input.value === '${myDiaryDTO.public_yn_cd}') {
+		 	    	input.checked = true
+		 	    	document.querySelector('label[for="' + input.id + '"]').style.color = '#33ff33';
+		 	   	}
+	 		});
+	 		
+	 		/* let publicYnCd = '${myDiaryDTO.public_yn_cd.toString()}';
+
+		 	// 라디오 버튼 요소들을 선택합니다.
+		 	let radioButtons = document.querySelectorAll('input[name="public_yn_cd"]');
+
+		 	// 라디오 버튼을 순회하며 필터링합니다.
+		 	radioButtons.forEach(function(radioButton) {
+		 		if (radioButton.value === publicYnCd) {
+		 			radioButton.checked = true; // 선택 상태로 설정
+		 			
+	 			} else {
+	 				radioButton.style.display = 'none'; // 숨기도록 설정
+	 				
+ 				}
+		 	}); */
+
+	 		
+ 			let isMode = function() {
+ 				let mode = '${mode}'
+ 				
+ 				if(mode == 'new') {
+ 					$(".pnp-button").attr('disabled',false)
+ 					$("#pub").attr("checked",true)
+ 				}
+ 					
+ 			}
+ 			
+ 			isMode()
+ 			
+ 			$('#writeBtn').on('click', function() {
+ 				let form = $("#diary-main")
+				form.attr("action", "<c:url value='/mypage/mydiary/write' />")
+				form.attr("method", "post")
+				
+				if(formCheck()) {
+					form.submit()
+				}
+				
+			})
+			
+			let formCheck = function() {
+    			let form = document.getElementById("diary-main")
+    			
+    			if(form.mydiary_content.value=="") {
+    				alert("내욜 입력해 주세요.")
+    				form.mydiary_content.focus();
+    				return false;
+    			}    			
+    			
+    			return true;
+			}
+	 		
 	 		$('#listBtn').on('click', function name() {
 	 			location.href = '<c:url value="/mypage/mydiary${searchItem.list}" />'
 			})
 
-	 		$('#writeBtn').on('click', function() {
+	 		$('#modBtn').on('click', function() {
 	 			let form = $('#diary-main')	 			
 	 			let isReadonly = $("textarea[name=mydiary_content]").attr('readonly')
 	 			
 	 			//수정상태 변환
 	 			if(isReadonly == 'readonly') {
-	 				$("textarea[name=mydiary_content]").attr('readonly', false)
-	 				$(".pnp-button").show()
-	 				$("#writeBtn").html('등록')
+	 				$("textarea[name=mydiary_content]").attr('readonly', false);
+	 				
+	 				let inputs = document.querySelectorAll('input[name="public_yn_cd"]');
+	 				inputs.forEach(function(input) {
+	 					input.type = 'radio';
+	 					input.style.display = ''
+ 					});
+	 				
+	 				$("#modBtn").html('등록')
 	 				$("#removeBtn").html('취소')
 	 				return;
 	 			}

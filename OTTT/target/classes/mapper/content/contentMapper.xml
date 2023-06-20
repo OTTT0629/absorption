@@ -6,7 +6,7 @@
   <mapper namespace="com.ottt.ottt.controller.ContentMapper">
 
   <select id="select" parameterType="int" resultType="ContentDTO">
-  	SELECT content_no, content_nm, content_info, content_runtime, main_img, age, country
+  	SELECT content_no, content_nm, content_info, content_runtime, main_img, age, country, thumbnail
   	,(SELECT round(avg(a.rating)) FROM tb_review a join tb_content b on a.content_no = b.content_no) as rating 
 	FROM tb_content
 	where content_no = #{content_no}

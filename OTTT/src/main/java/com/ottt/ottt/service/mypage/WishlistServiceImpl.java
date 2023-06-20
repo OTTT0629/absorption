@@ -1,4 +1,4 @@
-package com.ottt.ottt.service.content;
+package com.ottt.ottt.service.mypage;
 
 import java.util.HashMap;
 import java.util.List;
@@ -7,7 +7,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ottt.ottt.dao.content.WishlistDao;
+import com.ottt.ottt.dao.mypage.WishlistDao;
+import com.ottt.ottt.domain.SearchItem;
 import com.ottt.ottt.dto.WishlistDTO;
 
 @Service
@@ -32,6 +33,16 @@ public class WishlistServiceImpl implements WishlistService {
 		map.put("user_no", user_no);
 		map.put("content_no", content_no);
 		return wishlistDao.wishDelete(map);
+	}
+
+	@Override
+	public List<WishlistDTO> getMyWishlist(SearchItem sc) throws Exception {
+		return wishlistDao.myWishListSelect(sc);
+	}
+
+	@Override
+	public int myWishlistCnt(SearchItem sc) throws Exception {
+		return wishlistDao.myWishListCnt(sc);
 	}
 
 }

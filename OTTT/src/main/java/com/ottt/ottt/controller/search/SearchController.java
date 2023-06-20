@@ -26,7 +26,7 @@ import com.ottt.ottt.dto.SearchWordDTO;
 import com.ottt.ottt.dto.WishlistDTO;
 import com.ottt.ottt.service.content.ContentService;
 import com.ottt.ottt.service.content.SearchWordService;
-import com.ottt.ottt.service.content.WishlistService;
+import com.ottt.ottt.service.mypage.WishlistService;
 
 @Controller
 public class SearchController {

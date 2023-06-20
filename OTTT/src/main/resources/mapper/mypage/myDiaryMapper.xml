@@ -48,10 +48,17 @@
 		WHERE user_no = #{user_no} AND content_no = #{content_no}
 	</update>
 	
+	<!-- 나의 다이어리 삭제 -->
 	<delete id="delete" parameterType="map">
 		delete from tb_my_diary
 		where content_no = #{content_no} and user_no = #{user_no}	
 	</delete>
-  
+	
+	<!-- 나의 다이어리 등록 -->
+	<insert id="insert" parameterType="MyDiaryDTO">
+		INSERT INTO tb_my_diary
+		(user_no, content_no, public_yn_cd, mydiary_content)
+		VALUES(#{user_no}, #{content_no}, #{public_yn_cd}, #{mydiary_content});	
+	</insert> 
   
   </mapper>

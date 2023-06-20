@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ottt.ottt.domain.SearchItem;
 import com.ottt.ottt.dto.UserDTO;
@@ -38,6 +39,36 @@ public class MypageController {
 		}
 		
 		return "/mypage/myprofile/mypage";
+	}
+	
+	
+	@GetMapping("/profile")
+	public String profile (String user, HttpSession session, Model m, RedirectAttributes rattr) {
+		
+		Integer my_no = session.getAttribute("user_no") != null ?
+				(Integer) session.getAttribute("user_no") : -1;
+		
+		try {
+			if(us.selectNicknmCnt(user) == 0)
+				throw new Exception("No Uesr");
+			Integer user_no = us.getUserNoId(user);
+			
+			if(my_no.equals(user_no)) {
+				UserDTO userDTO = us.getUser(my_no);
+				m.addAttribute(userDTO);
+				return "redirect:/mypage";			
+			}
+			
+			UserDTO userDTO = us.getUser(user_no);
+			m.addAttribute(userDTO);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			rattr.addFlashAttribute("msg", "NO_USER");
+			return "redirect:/";
+		}
+		
+		return "/mypage/profile/profile";
 	}
 
 	@PostMapping("/profile")

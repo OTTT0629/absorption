@@ -49,4 +49,9 @@ public class MyDiaryDaoImpl implements MyDiaryDao {
 		return session.delete(namespace  + "delete" , map);
 	}
 
+	@Override
+	public int insert(MyDiaryDTO mydiaryDTO) throws Exception {
+		return session.insert(namespace + "insert", mydiaryDTO);
+	}
+
 }

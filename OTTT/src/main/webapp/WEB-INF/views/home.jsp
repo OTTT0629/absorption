@@ -109,6 +109,9 @@
         <%@ include file="fix/header.jsp" %>
                   
         <script type="text/javascript">
+        let msg = "${msg}"
+        	if(msg == "NO_USER") alert("해당 유저가 없습니다. 귀신인가 봐요")
+        	
         $(document).ready(function() {
             
         	  $(document).on("click", "#tonojjim", function(event) {

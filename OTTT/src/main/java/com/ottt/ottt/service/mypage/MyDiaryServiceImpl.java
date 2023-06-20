@@ -40,4 +40,9 @@ public class MyDiaryServiceImpl implements MyDiaryService {
 		return myDiaryDao.delete(content_no, user_no);
 	}
 
+	@Override
+	public int write(MyDiaryDTO myDiaryDTO) throws Exception {
+		return myDiaryDao.insert(myDiaryDTO);
+	}
+
 }

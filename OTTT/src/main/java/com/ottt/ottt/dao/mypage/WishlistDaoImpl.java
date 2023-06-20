@@ -1,4 +1,4 @@
-package com.ottt.ottt.dao.content;
+package com.ottt.ottt.dao.mypage;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ottt.ottt.domain.SearchItem;
 import com.ottt.ottt.dto.WishlistDTO;
 
 @Repository
@@ -15,7 +16,7 @@ public class WishlistDaoImpl implements WishlistDao {
 	
 	@Autowired
 	SqlSession session;
-	private String namespace = "com.ottt.ottt.dao.home.WishlistMapper.";
+	private String namespace = "com.ottt.ottt.dao.mypage.WishlistMapper.";
 
 	@Override
 	public List<WishlistDTO> wishSelect(Integer user_no) throws Exception {
@@ -33,6 +34,16 @@ public class WishlistDaoImpl implements WishlistDao {
 	@Override
 	public int wishDelete(Map map) throws Exception {
 		return session.delete(namespace+"wishDelete", map);
+	}
+
+	@Override
+	public List<WishlistDTO> myWishListSelect(SearchItem sc) throws Exception {
+		return session.selectList(namespace+ "myWishListSelect", sc);
+	}
+
+	@Override
+	public int myWishListCnt(SearchItem sc) throws Exception {
+		return session.selectOne(namespace+ "myWishListCnt", sc);
 	}
 	
 	

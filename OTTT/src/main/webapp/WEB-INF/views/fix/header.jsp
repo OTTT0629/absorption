@@ -22,6 +22,19 @@
 	<script type="text/javascript">
 		let path = window.location.href;
 	
+		function goLogin() {
+		    let toURL = '';
+
+		    if ('${sessionScope.id}' === '') {
+		        toURL = encodeURIComponent(path);
+		        location.href = "/ottt/mypage?toURL=" + toURL;
+		    } else {
+		        console.log(toURL);
+		        location.href = "/ottt/mypage";
+		    }
+		}
+			
+
 		/*function goLogin() {
 		  let toURL = path;
 		  let form = document.createElement('form');
@@ -34,13 +47,6 @@
 		  form.submit();
 		  
 		} */
-	
-	function goLogin() {
-		let toURL = path;
-		console.log(toURL)
-		location.href = "/ottt/mypage?toURL=" + toURL;
-	}
-	
 	</script>
    <header>
       <div class="logo">
