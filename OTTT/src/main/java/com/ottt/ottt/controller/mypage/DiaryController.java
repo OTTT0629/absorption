@@ -75,7 +75,7 @@ public class DiaryController {
 				List<MyDiaryDTO> list = ds.getMyDiary(sc);
 				m.addAttribute("list", list);
 				m.addAttribute("pr", pageResolver);
-
+			
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

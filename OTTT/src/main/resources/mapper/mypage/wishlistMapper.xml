@@ -23,22 +23,23 @@
 	full outer join tb_review d
 	on d.content_no = c.content_no
 	where a.user_no = #{user_no}
-	<include refid="selectCategory"></include>
+	<include refid="selectCategory" />
 	order by a.wish_date desc
+	limit #{pageSize} offset #{offset}
   </select>
   
   <sql id="selectCategory">
   	<choose>
-		<when test='category == "1"'>
+		<when test='category_no == 1'>
 			and b.category_no = 1
 		</when>
-		<when test='option == "2"'>
+		<when test='category_no == 2'>
 			and b.category_no = 2
 		</when>
-		<when test='option == "3"'>
+		<when test='category_no == 3'>
 			and b.category_no = 3
 		</when>
-		<when test='option == "4"'>
+		<when test='category_no == 4'>
 			and b.category_no = 4
 		</when>
 		<otherwise>
@@ -54,7 +55,8 @@
 	from tb_wishlist a
 	join tb_content_category b
 	on a.content_no = b.content_no 
-	where a.user_no = #{user_no} and b.category_no = #{category_no}  
+	where a.user_no = #{user_no}
+	<include refid="selectCategory" />
   </select>
   
   <insert id="wishInsert" parameterType="map">

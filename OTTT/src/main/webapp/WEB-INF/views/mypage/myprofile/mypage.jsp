@@ -57,7 +57,7 @@
 						<a href="<c:url value="/mypage/myreview" />" class="mreview">기록</a>
 					</li>
 					<li>
-					    <a href="<c:url value="/mypage/wishlist" />">찜목록</a>
+					    <a href="<c:url value="/mypage/wishlist?user=${userDTO.user_nicknm}" />">찜목록</a>
 					</li>
 					<li>
 					    <a href="<c:url value="/mypage/watched" />">봤어요</a>

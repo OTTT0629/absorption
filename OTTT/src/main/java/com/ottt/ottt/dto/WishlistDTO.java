@@ -13,8 +13,37 @@ public class WishlistDTO {
 	private int user_no;
 	private int content_no;
 	private Date wish_date;
+	private String content_nm;
+	private float  rating;
+	private String thumbnail;
+	private Integer	category_no;	
+	
 	
 
+	public float getRating() {
+		return rating;
+	}
+	public void setRating(float rating) {
+		this.rating = rating;
+	}
+	public String getThumbnail() {
+		return thumbnail;
+	}
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
+	}
+	public Integer getCategory_no() {
+		return category_no;
+	}
+	public void setCategory_no(Integer category_no) {
+		this.category_no = category_no;
+	}
+	public String getContent_nm() {
+		return content_nm;
+	}
+	public void setContent_nm(String content_nm) {
+		this.content_nm = content_nm;
+	}
 	public int getUser_no() {
 		return user_no;
 	}
@@ -41,7 +70,9 @@ public class WishlistDTO {
 
 	@Override
 	public String toString() {
-		return "WishlistDTO [user_no=" + user_no + ", content_no=" + content_no + ", wish_date=" + wish_date + "]";
+		return "WishlistDTO [user_no=" + user_no + ", content_no=" + content_no + ", wish_date=" + wish_date
+				+ ", content_nm=" + content_nm + ", rating=" + rating + ", thumbnail=" + thumbnail + ", category_no="
+				+ category_no + "]";
 	}
 
 	@Override

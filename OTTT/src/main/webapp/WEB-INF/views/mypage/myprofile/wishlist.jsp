@@ -13,6 +13,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="${path}/resources/css/mypage/wishlist.css" >
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
 </head>
 <body>
@@ -37,19 +38,19 @@
 					<ul>
 						<li>
 							<img class="mimg" src="${path}/resources/images/img/movie.png" alt="영화">
-							<a href="./watched-1movie.html">영화</a>
+							<a onclick="javascript:fnCategory(1)">영화</a>
 						</li>
 						<li>
 							<img class="mimg" src="${path}/resources/images/img/drama.png" alt="드라마">
-							<a href="./watched-1drama.html">드라마</a>
+							<a onclick="javascript:fnCategory(2)">드라마</a>
 	                	</li>
 	                	<li>
 	                  		<img class="mimg" src="${path}/resources/images/img/vrt.png" alt="예능">
-	                  		<a href="./watched-1vrt.html">예능</a>
+	                  		<a onclick="javascript:fnCategory(3)">예능</a>
 	               		</li>
 		                <li>
 		                	<img class="mimg" src="${path}/resources/images/img/free-icon-anime-2314736.png" alt="애니">
-	                		<a href="./watched-1ani.html">애니</a>
+	                		<a onclick="javascript:fnCategory(4)">애니</a>
 	               		</li>
 	           		</ul>
 	      		</div>
@@ -68,55 +69,13 @@
 	 				</div>
 				</section>
 				
-				<div class="main-work">				
-		            	
-	           		<div class="work-info">
-	           			<a href="<c:url value="/detailPage" />">
-	           				<img src="${path}/resources/images/poster/subu.jpg" class="poster"/>
-	                       </a>
-	                       <div style="text-align: right; border: #fff;">
-	                       	<input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off" checked>
-	                           <label class="btn btn-outline-primary" for="btncheck1"><i class="bi bi-bookmark-fill"></i></label>
-	                           <div class="title" style="text-align: center; font-size: 13px;"> 서부 전선 이상 없다</div>
-	                           <div class="review"><img src="${path}/resources/images/img/별1.PNG" class="review-star" alt="star"> 5.0</div>
-						</div>
-					</div>
-					
+				<div class="main-work">					
 
 				</div>
 				
 				<div class=paging-container>
-		    		<div class="paging">
-		    			<c:if test="${myDiaryCnt == null || myDiaryCnt == 0 }">		    			
-		    				<div class="title-line" style="text-align: center;">
-		    					내가 쓴 다이어리가 없습니다.
-		    				</div>
-		    			</c:if>
-		    			
-		    			<c:if test="${myDiaryCnt != null || myDiaryCnt != 0 }">
-			    			<!-- 페이지 번호 배너-->
-					        <div class="page-num" style="margin-top: 10px;">
-					        	<nav aria-label="Page navigation example" class="d-flex flex-row justify-content-center">
-					          	<ul class="pagination">				          		
-						            <c:if test="${pr.showPrev}">
-							            <li class="page-item">
-							            	<a class="page-link" href="<c:url value="/mypage/mydiary${pr.sc.getList(pr.beginPage-1) }" />">&lt;</a>
-						            	</li>
-						            </c:if>
-						            <c:forEach var="i" begin="${pr.beginPage }" end="${pr.endPage }">
-						            	<li class="page-item">
-						            		<a class="page-link" href="<c:url value="/mypage/mydiary${pr.sc.getList(i) }" />">${i }</a>
-					            		</li>
-					            	</c:forEach>
-				            		<c:if test="${pr.showNext}">
-				            			<li class="page-item">
-				            				<a class="page-link" href="<c:url value="/mypage/mydiary${pr.sc.getList(pr.endPage+1) }" />" >&gt;</a>
-			            				</li>
-	            					</c:if>
-	       						</ul>
-	   							</nav>
-							</div>
-						</c:if>		    			
+		    		<div class="paging">		    			
+		    				    			
 		    		</div>	    	
 	    		</div>
 				
@@ -126,9 +85,115 @@
 		</div>
 	
 	<script type="text/javascript">
+		let CATEGORY = '' 
+		let USER = '${userDTO.user_nicknm}'
+		let PAGE = ${pr.sc.page}
+		let PAGESIZE = ${pr.sc.pageSize}
 		
+		let wishListCnt = ${wishListCnt}
+		
+				
+		$(document).ready(function() {			
+			
+			fnGetWishList({
+				"user" : USER
+				, "category_no" : CATEGORY
+				, "page" : PAGE
+				, "pageSize" : PAGESIZE
+			})
+			
+		})
 	
-	
+		function fnGetWishList(param) {
+			
+			$.post(
+					"/ottt/mypage/getwishlist"
+				    ,param
+				    ,fnCreatWishList
+				)
+				
+				console.log("param")
+				console.log(param)
+			
+		}
+		
+		function fnCreatWishList(response) {
+			
+			console.log("ajax 통신결과");
+			console.log(response);
+			
+			let createHtml = "";
+			
+			let list = response.list;
+			let wishListCnt = response.wishListCnt
+			let pr = response.pr
+			
+			list.forEach(function(v) {
+				createHtml += '<div class="work-info">'
+				createHtml += '<a href="<c:url value="/detailPage?content_no=' +v.content_no+ '" />">'
+				createHtml += '<img src="' +v.thumbnail+ '" class="poster"/></a>'
+				createHtml += '<div style="text-align: right; border: #fff;">'
+				createHtml += '<input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off" checked>'
+				createHtml += '<div class="title" style="text-align: center; font-size: 13px;">'+v.content_nm+'</div>'
+				createHtml += '<div class="review"><img src="${path}/resources/images/img/starone.png" class="review-star" alt="star">'+v.rating+'</div>'
+				createHtml += '</div>'
+				createHtml += '</div>'				
+			})
+			
+			$('.main-work').append(createHtml)
+			
+			let createPage = "";
+			
+			 if (response.wishListCnt == null || response.wishListCnt === 0) {
+			        createPage += '<div class="title-line" style="text-align: center;">내가 쓴 다이어리가 없습니다.</div>';
+			    } else {
+			        createPage += '<div class="page-num" style="margin-top: 10px;">';
+			        createPage += '<nav aria-label="Page navigation example" class="d-flex flex-row justify-content-center">';
+			        createPage += '<ul class="pagination">';
+			        if (response.pr.showPrev) {
+			            createPage += '<li class="page-item">';
+			            createPage += '<a class="page-link" onclick="javascript:fnPage('+ (response.pr.beginPage-1) +','+response.pr.sc.category_no+ ')">&lt;</a></li>';
+			        }
+			        for (let i = response.pr.beginPage; i <= response.pr.endPage; i++) {
+			            createPage += '<li class="page-item">';
+			            createPage += '<a class="page-link" onclick="javascript:fnPage('+i+','+response.pr.sc.category_no+ ')">' + i + '</a></li>';
+			        }
+			        if (response.pr.showNext) {
+			            createPage += '<li class="page-item">';
+			            createPage += '<a class="page-link" onclick="javascript:fnPage('+(response.pr.endPage+1)+','+response.pr.sc.category_no+ ')">&gt;</a></li>';
+			        }
+			        createPage += '</ul></nav></div>';
+			    }
+			
+			$('.paging').append(createPage)
+
+							
+		}
+		
+		function fnCategory(category) {
+			$(".main-work").html("");
+			$('.paging').html("");
+			fnGetWishList({
+				"user" : USER
+				, "category_no" : category
+				, "page" : PAGE
+				, "pageSize" : PAGESIZE
+			});
+			
+		}
+		
+		function fnPage(page, category) {
+			$(".main-work").html("");
+			$('.paging').html("");
+			fnGetWishList({
+				"user" : USER
+				, "category_no" : category
+				, "page" : page
+				, "pageSize" : PAGESIZE
+			});
+			
+		}
+		
 	</script>		
 		
 		

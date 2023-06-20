@@ -15,10 +15,12 @@ public class SearchItem {
 	private Integer pageSize = DEFAULT_PAGE_SIZE;
 	private String keyword = "";
 	private String option = "";
+	private Integer offset;
 	private String user;
 	private Integer user_no;
 	private Integer content_no;
-	
+	private Integer category_no;
+
 	public SearchItem() {};
 	
 	public SearchItem(Integer page, Integer pageSize) {
@@ -51,7 +53,6 @@ public class SearchItem {
 		//MIN_PAGE_SIZE <= pageSize <= MAX_PAGE_SIZE
 		this.pageSize = max(MIN_PAGE_SIZE, min(this.pageSize, MAX_PAGE_SIZE));
 	}
-
 
 	public String getKeyword() {
 		return keyword;
@@ -121,6 +122,10 @@ public class SearchItem {
 		return result;
 	}
 
+	public void setOffset(Integer offset) {
+		offset = offset;
+	}
+
 	public String getUser() {
 		return user;
 	}
@@ -143,7 +148,15 @@ public class SearchItem {
 
 	public void setContent_no(Integer content_no) {
 		this.content_no = content_no;
-	}	
+	}
+	
+	public void setCategory_no(Integer category_no) {
+		this.category_no = category_no;
+	}
+
+	public Integer getCategory_no() {
+		return category_no;
+	}
 	
 }
 

@@ -57,7 +57,7 @@ public class CommunityController {
 		logger.info(">>>>>>>>>>>>>>>>>>>>> schText 검색어 : "+schText);
 		
 		m.addAttribute("category",category);
-		m.addAttribute("schText",schText);;
+		m.addAttribute("schText",schText);
 		
 		return "/community/freecommunity/communityMain";		
 
