@@ -20,29 +20,40 @@ import com.ottt.ottt.dao.login.LoginUserDao;
 public class ReplyEchoHandler extends TextWebSocketHandler {
 	@Autowired
 	LoginUserDao loginUserDao;
-	
+	//로그인한 전체
 	List<WebSocketSession> sessions = new ArrayList<>();
-	Map<String, WebSocketSession> userSessions = new HashMap<>();
+	//1 대 1 <-???먼데
+	Map<String, WebSocketSession> userSessions = new HashMap<String, WebSocketSession>();
 	
 	
 	//클라이언트가 서버에 접속했을 때 
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		System.out.println("afterConnectionEstablished: " + session);
+		
+		
 		sessions.add(session);
 		String sendUserId = getId(session);
+		userSessions.put(sendUserId, session);
 	}
 	
 	private String getId(WebSocketSession session) {
-		Map<String, Object> httpsession = session.getAttributes();
-		
-		return null;
+	    Map<String, Object> httpsession = session.getAttributes();
+	    UserDTO loginUserId = loginUserDao.select((String) httpsession.get("id"));
+	    
+	    if(loginUserId == null) {
+	    	return session.getId();
+	    } else {
+		    return loginUserId.getUser_id();
+	    }
 	}
 
 	//소켓에 어떤 메세지를 보냈을 때
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		System.out.println("handleTextMessage: " + session + " :: " + message);
+		
+		
 	}
 	
 	//연결이 닫혔을 때

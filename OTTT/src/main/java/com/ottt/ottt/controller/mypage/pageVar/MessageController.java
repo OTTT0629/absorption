@@ -55,6 +55,8 @@ public class MessageController {
 				}
 			}
 			
+			System.out.println("=============================== msc.getOffset : " + msc.getOffset());
+			
 			m.addAttribute("list", msgList);
 			m.addAttribute("mpr", msgPageResolver);
 
@@ -85,6 +87,7 @@ public class MessageController {
 					msgList.add(messageDTO);
 				}
 			}			
+			System.out.println("=============================== msc.getOffset : " + msc.getOffset());
 			
 			m.addAttribute("list", msgList);
 			m.addAttribute("mpr", msgPageResolver);

@@ -1,18 +1,31 @@
 $(document).ready(function() {
-	//기본: 답장 버튼 숨기기
-	$("#msg-write").hide();
-	
+
 	// 버튼 색 설정
 	const recvButton = $("#btn-recv")
 	const sendButton = $("#btn-send")
 	const delButton = $('button[name="deleteBtn"]')
+
+	//기본: 답장 버튼 숨기기
+	$("#msg-write").hide();
+	
+	// 페이지 로딩 시 초기 선택 상태 설정
+	const selectedButton = sessionStorage.getItem("selectedButton")
+	if (selectedButton === "recv") {
+	  recvButton.addClass("active")
+	  delButton.attr("class", "delrecvBtn");
+	  
+	} else if (selectedButton === "send") {
+	  sendButton.addClass("active")
+	  delButton.attr("class", "delsendBtn");
+	}	
+	
 	
 	recvButton.click(function() {
 	  if (!recvButton.hasClass("active")) {
 	    $(".sec00 button").removeClass("active")
 	    recvButton.addClass("active")
 	    delButton.attr("class", "delrecvBtn");
-	    localStorage.setItem("selectedButton", "recv") // 선택한 버튼 정보를 로컬 스토리지에 저장
+	    sessionStorage.setItem("selectedButton", "recv") // 선택한 버튼 정보를 로컬 스토리지에 저장
 	  }
 	})
 	
@@ -21,20 +34,11 @@ $(document).ready(function() {
 	    $(".sec00 button").removeClass("active")
 	    sendButton.addClass("active")
 	    delButton.attr("class", "delsendBtn");
-	    localStorage.setItem("selectedButton", "send") // 선택한 버튼 정보를 로컬 스토리지에 저장
+	    sessionStorage.setItem("selectedButton", "send") // 선택한 버튼 정보를 로컬 스토리지에 저장
 	  }
 	})
 	
-	// 페이지 로딩 시 초기 선택 상태 설정
-	const selectedButton = localStorage.getItem("selectedButton")
-	if (selectedButton === "recv") {
-	  recvButton.addClass("active")
-	  delButton.attr("class", "delrecvBtn");
-	  
-	} else if (selectedButton === "send") {
-	  sendButton.addClass("active")
-	  	  delButton.attr("class", "delsendBtn");
-	}	
+
 	
 	//쪽지 리스트 불러오기(받은 / 보낸)
 	  $("#btn-recv").click(function() {
@@ -106,16 +110,7 @@ $(document).ready(function() {
           }
         })
       })
-      
-	//해결
-	$("li a").click(function() {
-	  if ($(this).attr("href") === "/ottt/mypage/message") {
-	    $("#btn-recv").addClass("active")
-	    $("#btn-send").removeClass("active")
-	    localStorage.setItem("selectedButton", "recv")
-	  }
-	})
-	
+      	
 	
 	//쪽지 내용, 상대 닉네임 불러오기, 내용 있을 시 답장 버튼 불러옴
 	$(".msg-content").click(function() {
@@ -148,5 +143,14 @@ $(document).ready(function() {
 	   var url = $(this).attr("data-url")
 	   window.open(url, 'SEND-MSG', 'width=520, height=750, scrollbars=no')
 	})
-
+	
+	const currentPath = window.location.pathname;
+	if (currentPath === '/ottt/mypage/message') {
+	  recvButton.addClass('active');
+	  sendButton.removeClass('active');
+	} else if (currentPath === '/ottt/mypage/message/send') {
+	  recvButton.removeClass('active');
+	  sendButton.addClass('active');
+	}
+	
 })

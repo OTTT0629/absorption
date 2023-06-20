@@ -91,6 +91,7 @@
       ON a.receive_user_no = b.user_no
       WHERE a.send_user_no = #{user_no}
       ORDER BY a.send_date DESC, a.message_no DESC
+      LIMIT #{pageSize} OFFSET #{offset}
     </select>
     
     <!-- 메시지 보내기 -->

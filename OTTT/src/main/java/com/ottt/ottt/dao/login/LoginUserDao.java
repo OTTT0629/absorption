@@ -1,4 +1,4 @@
- package com.ottt.ottt.dao.login;
+package com.ottt.ottt.dao.login;
 
 import com.ottt.ottt.dto.UserDTO;
 

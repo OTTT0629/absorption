@@ -80,6 +80,7 @@ public class MessageSearchItem {
 		if(result < 0) {
 			result = 0;
 		}
+		System.out.println("============================ offset : " +result);
 		return result;
 	}
 	

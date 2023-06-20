@@ -21,6 +21,12 @@
   <body>     
 	<script type="text/javascript">
 	$(document).ready(function() {
+		
+		window.onload = function() {
+			  // 특정 버튼에 'active' 클래스 추가
+			  document.getElementById('#btn-recv').classList.add('active');
+			}
+		
 		$('button[name="deleteBtn"]').on('click', function(event) {
 			  if(!confirm("쪽지가 삭제됩니다.")) return;
 		    	deletemsg(event);
@@ -76,10 +82,7 @@
 							
 			document.body.appendChild(form)
 			form.submit()
-		}
-		
-		
-		
+		}	
 		
 	</script>
     <div class="warp">
