@@ -13,7 +13,49 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="${path}/resources/css/mypage/messagewindow.css" >
+    <style type="text/css">
     
+		.modal-content{
+		    background-color: #202020;
+		}
+		
+		.modal-body{
+		    font-size: 26px;
+		    text-align: center;
+		    border: 1px solid #fff;
+		}
+		
+		.modal-header{
+		    border: 1px solid #fff;
+		}
+		
+		.modal-footer{
+		    border: 1px solid #fff;
+		    display: flex;
+		    justify-content: flex-end;
+		}
+		 
+		.modi-del{
+			display: flex;
+		    justify-content: flex-end;
+		}
+		
+		.btn{
+		    color: #fff;
+		    background-color: transparent;
+		    border-style: none;
+		    border-color: #fff; 
+		    font-size: 23px; 
+		    text-decoration: none;
+		}
+		
+		.btn:hover{
+		    border-color: #33FF33;
+		    background-color: transparent;
+		    border-style: solid;
+		    color: #33FF33; 
+		}
+    </style>
   </head>
 
 	<body>
@@ -66,25 +108,27 @@
 						url: (sendUserNo != null) ? "/ottt/messagewindow/send" : "/ottt/messagewindow/send2",
 						data: (sendUserNo != null) ? {sendUserNo: sendUserNo, content: content }: {userNo:userNo, content: content },
 						success: function(response) {
-							console.log("전송 성공");
-					        alert("쪽지가 전송되었습니다.");
-					        window.close();
+							$(".modal-body.body").html("쪽지가 전송되었습니다.");
+					        $('#Modal').modal('show');
+					        $("#checkBtn").on("click", function() {
+					            window.close();
+					          });
 						},
 						error: function() {
-							console.log("전송 실패")
-							alert("쪽지 전송에 실패했습니다. 다시 시도해 주세요.")
+							$(".modal-body.body").html("쪽지 전송에 실패했습니다. 다시 시도해주세요.");
+					        $('#Modal').modal('show');
 						}
 					})
 				} else {
-					alert("내용을 입력하세요")
+					$(".modal-body.body").html("내용을 입력하세요.");
+				    $('#Modal').modal('show');
 				}
-
 			})
 			
 			let formCheck = function() {
 				let form = document.getElementById("form")
 				if(form.content.value == "") {
-					form.content.focus()
+					//form.content.focus()
 					return false
 				}
 				return true
@@ -95,14 +139,34 @@
 				var content = $(this).val()
 				$(".write .count span").html(content.length)
 				if (content.length > 500){
-					alert("최대 500자까지 입력 가능합니다.")
+					$(".modal-body.body").html("최대 공백 포함 500자까지 입력 가능합니다.");
+			        $('#Modal').modal('show');
 					$(this).val(content.substring(0, 500))
 					$(".write .count span").html(500)
 				}
 			})
 			
+
+			
 		})
 	</script>
+	
+       <!-- Modal -->
+       <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog modal-dialog-centered">
+           <div class="modal-content">
+             <div class="modal-header">
+               <h1 class="modal-title fs-5" id="exampleModalLabel">알림</h1>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+             </div>
+             <div class="modal-body body">
+             </div>
+             <div class="modal-footer" id="modal-footer">
+               <button type="button" id="checkBtn" class="btn btn-secondary" data-bs-dismiss="modal">확인</button>
+             </div>
+           </div>
+         </div>
+       </div>
 	
 	  <div class="wrap">
 	  	<form action="" id="form" class="frm" method="post">
@@ -119,7 +183,7 @@
 		    </div>
 		
 		    <div class="sec03">
-		        <button type="button" id="writeBtn" class="btn btn-write">보내기</button>
+		        <button type="button" id="writeBtn" class="btn btn-write" style="color: black; background-color: #33ff33; border: 3px; width: 70px; height: 40px; border-radius: 10px; font-weight: 600; font-size: 16px; font-weight: 600; position: relative; top: 50%; left: 43%; transform: translate(0, -50%);">보내기</button>
 		    </div>
 		</form>
 	  </div>
