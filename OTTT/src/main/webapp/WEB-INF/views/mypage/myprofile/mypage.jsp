@@ -60,7 +60,7 @@
 					    <a href="<c:url value="/mypage/wishlist?user=${userDTO.user_nicknm}" />">찜목록</a>
 					</li>
 					<li>
-					    <a href="<c:url value="/mypage/watched" />">봤어요</a>
+					    <a href="<c:url value="/mypage/watched?user=${userDTO.user_nicknm}" />">봤어요</a>
 					</li>
 					<li>
 					  	<a href="<c:url value="/mypage/alarm" />">알림함</a>

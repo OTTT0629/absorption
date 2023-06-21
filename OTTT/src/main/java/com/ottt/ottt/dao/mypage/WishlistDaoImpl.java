@@ -32,7 +32,10 @@ public class WishlistDaoImpl implements WishlistDao {
 	}
 
 	@Override
-	public int wishDelete(Map map) throws Exception {
+	public int wishDelete(Integer user_no, Integer content_no) throws Exception {
+		Map map = new HashMap();		
+		map.put("user_no", user_no);
+		map.put("content_no", content_no);
 		return session.delete(namespace+"wishDelete", map);
 	}
 

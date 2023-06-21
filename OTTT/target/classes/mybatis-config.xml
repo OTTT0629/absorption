@@ -22,6 +22,7 @@
 		<typeAlias type="com.ottt.ottt.dto.SearchWordDTO" alias="SearchWordDTO"/>
 		<typeAlias type="com.ottt.ottt.dto.ReviewLikeDTO" alias="ReviewLikeDTO"/>
 		<typeAlias type="com.ottt.ottt.dto.GenreDTO" alias="GenreDTO"/>
+		<typeAlias type="com.ottt.ottt.dto.WatchedDTO" alias="WatchedDTO"/>
   	</typeAliases>
   </configuration>
   

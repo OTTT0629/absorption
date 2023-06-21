@@ -1,8 +1,6 @@
 package com.ottt.ottt.service.mypage;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,10 +27,7 @@ public class WishlistServiceImpl implements WishlistService {
 
 	@Override
 	public int wishCancel(Integer user_no, Integer content_no) throws Exception {
-		Map map = new HashMap();
-		map.put("user_no", user_no);
-		map.put("content_no", content_no);
-		return wishlistDao.wishDelete(map);
+		return wishlistDao.wishDelete(user_no, content_no);
 	}
 
 	@Override

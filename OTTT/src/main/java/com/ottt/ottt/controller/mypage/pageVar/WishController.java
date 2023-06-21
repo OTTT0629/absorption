@@ -36,14 +36,11 @@ public class WishController {
 
 		//wishlist 메인 
 		@GetMapping(value = "/wishlist")
-		public String wishlist(String user, SearchItem sc, HttpSession session, Model m
-								, @RequestParam(value = "category", required = false) String category) {
+		public String wishlist(String user, SearchItem sc, HttpSession session, Model m) {
 			
 			logger.info("================================== wishlist 진입");			
 			
 			logger.info("================================== user : " + user);
-			
-			logger.info("================================== category : " + category);
 			
 			logger.info("================================== sc.getUser : " + sc.getUser());
 			
@@ -126,8 +123,7 @@ public class WishController {
 				result.put("list", ws.getMyWishlist(sc));
 				result.put("wishListCnt", wishListCnt);
 				result.put("pr", pageResolver);
-				
-				m.addAttribute("category", sc.getCategory_no());
+
 
 			} catch (Exception e) {
 				e.printStackTrace();
