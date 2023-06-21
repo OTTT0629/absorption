@@ -85,19 +85,6 @@ textarea {
     transform: translate(0, -50%);
 }
 
-.btn-write {
-    background-color: #33ff33;
-    border: 3px;
-    width: 70px;
-    height: 40px;
-    border-radius: 10px;
-    position: relative;
-    top: 50%;
-    left: 43%;
-    transform: translate(0, -50%);
-    font-weight: 600;
-}
-
 textarea::-webkit-scrollbar {
     width: 5px;
 }
