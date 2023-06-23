@@ -8,4 +8,4 @@ application.properties
 
 
 
-/src/main/webapp/WEB-INF/spring/root-context.xml
+webapp/WEB-INF/spring/root-context.xml
