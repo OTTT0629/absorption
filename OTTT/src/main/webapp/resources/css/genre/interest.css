@@ -84,7 +84,7 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
 }
 
 .h-icon > ul > li:first-child > a:hover{
-    background: url("../images/icon/searchh.png");
+    background: url("../images/icon/search-h.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 32px;

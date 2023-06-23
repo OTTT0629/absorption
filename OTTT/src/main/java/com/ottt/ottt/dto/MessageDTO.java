@@ -10,8 +10,9 @@ import java.util.Objects;
 	,content 			varchar(2000) not null
 	,send_date			timestamptz	  not null
 	,read_yn			char(1)		  default '0'		--추가
-	,delete_by_sender		boolean		default false
-	,delete_by_receiver		boolean		default false
+	,delete_by_sender	boolean		  default false
+	,delete_by_receiver	boolean	  	  default false
+	,image				text		  null
  */
 public class MessageDTO {
 
@@ -22,6 +23,7 @@ public class MessageDTO {
 	private Date send_date;
 	private char read_yn;
 	private String user_nicknm;
+	private String image;
 	
 	//데이터베이스에 직접 집어넣는 게 아니므로 데이터베이스 컬럼엔 추가하지 않고 여기서만 만들어 놓음
 	//보낸 메시지 지우기
@@ -74,7 +76,6 @@ public class MessageDTO {
 		this.read_yn = read_yn;
 	}
 	
-	
 	public String getUser_nicknm() {
 		return user_nicknm;
 	}
@@ -104,6 +105,14 @@ public class MessageDTO {
 		return Objects.hash(message_no);
 	}
 	
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -120,15 +129,16 @@ public class MessageDTO {
 	public String toString() {
 		return "MessageDTO [message_no=" + message_no + ", send_user_no=" + send_user_no + ", receive_user_no="
 				+ receive_user_no + ", content=" + content + ", send_date=" + send_date + ", read_yn=" + read_yn
-				+ ", user_nicknm=" + user_nicknm + ", delete_by_sender=" + delete_by_sender + ", delete_by_receiver="
-				+ delete_by_receiver + "]";
+				+ ", user_nicknm=" + user_nicknm + ", image=" + image + ", delete_by_sender=" + delete_by_sender
+				+ ", delete_by_receiver=" + delete_by_receiver + "]";
 	}
-	//보낸 메시지 지우기
+
+	//보낸 메시지 지우기(상태 변경)
 	public void deleteBySender() {
 		this.setDelete_by_sender(true);
 	}
 	
-	//받은 메시지 지우기
+	//받은 메시지 지우기(상태 변경)
 	public void deleteByReceiver() {
 		this.setDelete_by_receiver(true);
 	}
@@ -137,6 +147,4 @@ public class MessageDTO {
 		return this.isDelete_by_receiver() && this.isDelete_by_sender();
 	}
 	
-	
-
 }

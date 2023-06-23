@@ -153,8 +153,10 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
 }
 
 .nav-link2{
-    width: 50px;
-    inline-size: 50px 50px;
+    display: inline-block;
+    padding: 0;
+    border: none;
+    background: none;
 }
 
 .ott_icon{
@@ -269,5 +271,9 @@ select#month{
 
 .movie-sub{
     margin: 100px;
+}
+
+.selected {
+	border: 2px solid #33ff33;
 }
 

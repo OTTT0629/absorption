@@ -30,8 +30,6 @@ import java.util.Objects;
 	,following		bigint			default 0	
 	--팔로워
 	,followers 		bigint			default 0	
-	--신고개수
-	,report_cnt		int				default 0
  */
 public class UserDTO {
 
@@ -48,10 +46,8 @@ public class UserDTO {
 	private String 	image;
 	private Integer following;
 	private Integer followers;
-	private Integer report_cnt;
 	
 	public UserDTO() {}
-	
 	
 
 	public UserDTO(String user_id, String user_pwd, String user_nm, String user_nicknm, int user_gen,
@@ -64,8 +60,6 @@ public class UserDTO {
 		this.user_gen = user_gen;
 		this.user_email = user_email;
 	}
-
-
 
 	public Integer getUser_no() {
 		return user_no;
@@ -131,8 +125,6 @@ public class UserDTO {
 		this.user_email = user_email;
 	}
 	
-	
-
 	public Date getReg_date() {
 		return reg_date;
 	}
@@ -173,14 +165,6 @@ public class UserDTO {
 		this.followers = followers;
 	}
 
-	public int getReport_cnt() {
-		return report_cnt;
-	}
-
-	public void setReport_cnt(int report_cnt) {
-		this.report_cnt = report_cnt;
-	}
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(user_email, user_gen, user_id, user_nicknm, user_nm, user_no, user_pwd);
@@ -205,8 +189,8 @@ public class UserDTO {
 	public String toString() {
 		return "UserDTO [user_no=" + user_no + ", gr_no=" + gr_no + ", user_id=" + user_id + ", user_pwd=" + user_pwd
 				+ ", user_nm=" + user_nm + ", user_nicknm=" + user_nicknm + ", user_gen=" + user_gen + ", user_email="
-				+ user_email + ", admin=" + admin + ", image=" + image + ", following=" + following + ", followers="
-				+ followers + ", report_cnt=" + report_cnt + "]";
+				+ user_email + ", reg_date=" + reg_date + ", admin=" + admin + ", image=" + image + ", following="
+				+ following + ", followers=" + followers + "]";
 	}
 	
 	

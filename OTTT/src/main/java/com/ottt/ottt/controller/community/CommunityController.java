@@ -23,6 +23,7 @@ import com.ottt.ottt.dao.login.LoginUserDao;
 import com.ottt.ottt.dto.ArticleDTO;
 import com.ottt.ottt.dto.ArticleLikeDTO;
 import com.ottt.ottt.dto.ArticleSearchDTO;
+import com.ottt.ottt.dto.ReportDTO;
 import com.ottt.ottt.dto.UserDTO;
 import com.ottt.ottt.service.community.freecomuity.CommunityService;
 
@@ -38,7 +39,8 @@ public class CommunityController {
 
 	private static final Logger logger = LoggerFactory.getLogger(CommunityController.class);
 	
-	//freecommunity 메인호출
+	
+	// freecommunity 메인호출 *************************************************************************************************
 	@GetMapping("/freecommunity")
 	public String freecommunity(@RequestParam(value = "schText", required = false) String schText,@RequestParam(value = "category", required = false) String category,
 									Model m, HttpServletRequest request, HttpSession session, String toURL) throws Exception {
@@ -56,14 +58,70 @@ public class CommunityController {
 
 		logger.info(">>>>>>>>>>>>>>>>>>>>> schText 검색어 : "+schText);
 		
-		m.addAttribute("category",category);
-		m.addAttribute("schText",schText);;
+		m.addAttribute("schText", schText);
+		m.addAttribute("category", category);
 		
 		return "/community/freecommunity/communityMain";		
 
 	}
 	
-	//community 저장
+	
+	//메인 new 목록 *************************************************************************************************
+	@PostMapping("/ajax/getArticleList")
+	@ResponseBody
+	public Map<String,Object> getArticleList(ArticleSearchDTO dto, HttpSession session) throws Exception {
+		
+		logger.info(">>>>>>>>>>>>>>>>>>>>> @PostMapping /ajax/getArticleList getArticleList 진입 ");
+		logger.info(">>>>>>>>>>>>>>>>>>>>> ArticleSearchDTO >>>> "+dto.toString());
+
+		Map<String, Object> result = new HashMap<String,Object>();
+		
+		UserDTO userDTO = loginUserDao.select((String)session.getAttribute("id"));
+		if(userDTO != null) {
+			dto.setUser_no(userDTO.getUser_no());
+		}
+		result.put("message", "success");
+		result.put("list", communityService.getArticleList(dto));
+		result.put("totalCount", communityService.getArticleTotalCount(dto));
+		
+		return result;
+
+	}
+	
+	//community 글 자세히보기 *************************************************************************************************
+	@GetMapping("/post")
+	public String freecommunityPost(ArticleDTO dto, HttpServletRequest request, Model m ) {
+		
+		logger.info(">>>>>>>>>>>>>>>>>>>>> @GetMapping /post freecommunityPost 진입 ");
+		
+		try {
+		
+			HttpSession session = request.getSession();
+			
+			UserDTO userDTO = loginUserDao.select((String)session.getAttribute("id"));
+			
+
+			if(userDTO != null) {
+				dto.setUser_no(userDTO.getUser_no());
+			}
+			
+			ArticleDTO articleDTO = communityService.select(dto);
+			//UserDTO writer = loginUserDao.selectNo(articleDTO.getUser_no());
+
+			m.addAttribute("articleDTO", articleDTO);
+			m.addAttribute("mode", "view");
+			m.addAttribute("userDTO", userDTO);
+
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "redirect:/community";
+		}
+		return "/community/freecommunity/communityPost";		
+	}
+	
+	
+	//게시글 community 저장 *************************************************************************************************
 	@PostMapping("/freecommunity")
 	public String freecommunity_post(ArticleDTO articleDTO, HttpServletRequest request, Model m) {
 		
@@ -104,35 +162,10 @@ public class CommunityController {
 		return "redirect:/community/freecommunity";
 	}
 	
-	//community 글 자세히보기
-	@GetMapping("/post")
-	public String freecommunityPost(ArticleDTO dto, HttpServletRequest request, Model m ) {
-		
-		logger.info(">>>>>>>>>>>>>>>>>>>>> @GetMapping /post freecommunityPost 진입 ");
-		
-		try {
-		
-			HttpSession session = request.getSession();
-			
-			UserDTO userDTO = loginUserDao.select((String)session.getAttribute("id"));
 
-			if(userDTO != null) {
-				dto.setUser_no(userDTO.getUser_no());
-			}
-			
-			ArticleDTO articleDTO = communityService.select(dto);
 
-			m.addAttribute("articleDTO", articleDTO);
-			m.addAttribute("mode", "view");
-		
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "redirect:/community";
-		}
-		return "/community/freecommunity/communityPost";		
-	}
 	
-	//community 글 수정모드로 진입
+	//community 글 수정모드로 진입 *************************************************************************************************
 	@GetMapping("/updatePost")
 	public String freecommunityUpdatePost(ArticleDTO dto, Model m ) {
 		
@@ -153,7 +186,7 @@ public class CommunityController {
 
 	}
 	
-	//수정하기
+	//수정하기 *************************************************************************************************
 	@PostMapping("/update")
 	public String freecommunitUpdate(ArticleDTO articleDTO, HttpServletRequest request) {
 		
@@ -184,6 +217,7 @@ public class CommunityController {
         		logger.info(">>>>>> 업로드 파일 이름은? "+articleDTO.getUpFile().getOriginalFilename());
 
         		articleDTO.setArticle_image_name(articleDTO.getUpFile().getOriginalFilename());
+        		articleDTO.setFileDeleteYn("N");
         		
         	}
         	
@@ -202,7 +236,7 @@ public class CommunityController {
 	}
 	
 	
-	//삭제하기
+	//삭제하기 *************************************************************************************************
 	@PostMapping("/delete")
 	public String freecommunitDelete(Locale locale, Model m, Integer article_no) throws Exception{
 
@@ -216,44 +250,9 @@ public class CommunityController {
 		}
 
 	}
+
 	
-	public boolean loginCheck(HttpServletRequest request) {
-		 //1. 세션을 얻어 (false는 session이 없어도 새로 생성하지 않음, 반환값은 null)
-		HttpSession session = request.getSession(false);
-		 //2. 세션에 id가 있는지 확인, 있으면 true를 반환 
-		return session != null && session.getAttribute("id")!=null;
-	}
-	
-	//메인 new 목록
-	@PostMapping("/ajax/getArticleList")
-	@ResponseBody
-	public Map<String,Object> getArticleList(ArticleSearchDTO dto, HttpSession session) throws Exception {
-		
-		logger.info(">>>>>>>>>>>>>>>>>>>>> @PostMapping /ajax/getArticleList getArticleList 진입 ");
-		logger.info(">>>>>>>>>>>>>>>>>>>>> ArticleSearchDTO >>>> "+dto.toString());
-
-		Map<String, Object> result = new HashMap<String,Object>();
-		
-		UserDTO userDTO = loginUserDao.select((String)session.getAttribute("id"));
-		
-		//왼쪽 카테고리가 "내가쓴글","내가 좋아요한 글", "내가 댓글단 글" 일때 회원번호를 ArticleSearchDTO에 담는다.
-		if( "myPost".equals(dto.getCategory()) 
-				|| "myLike".equals(dto.getCategory()) 
-					|| "myComment".equals(dto.getCategory())) {
-			
-			dto.setUser_no(userDTO.getUser_no());
-
-		}
-
-		result.put("message", "success");
-		result.put("list", communityService.getArticleList(dto));
-		result.put("totalCount", communityService.getArticleTotalCount(dto));
-		
-		return result;
-
-	}
-	
-	//좋아요 눌렀는지 조회
+	//좋아요 눌렀는지 조회 *************************************************************************************************
 	@PostMapping("/ajax/selectLikeCount")
 	@ResponseBody
 	public Map<String,Object> selectLikeCount(ArticleLikeDTO dto, HttpSession session) throws Exception {
@@ -278,7 +277,7 @@ public class CommunityController {
 
 	}
 	
-	//좋아요 저장
+	//좋아요 저장 *************************************************************************************************
 	@PostMapping("/ajax/insertLike")
 	@ResponseBody
 	public Map<String,Object> insertLike(ArticleLikeDTO dto, HttpSession session) throws Exception {
@@ -295,6 +294,7 @@ public class CommunityController {
         }
 		dto.setUser_no(userDTO.getUser_no());
 
+		
 		result.put("message", "success");
 		result.put("success", communityService.insertLike(dto) );
 		
@@ -302,7 +302,7 @@ public class CommunityController {
 
 	}
 	
-	//좋아요 삭제
+	//좋아요 삭제 *************************************************************************************************
 	@PostMapping("/ajax/deleteLike")
 	@ResponseBody
 	public Map<String,Object> deleteLike(ArticleLikeDTO dto, HttpSession session) throws Exception {
@@ -317,7 +317,8 @@ public class CommunityController {
     		result.put("message", "로그인이 필요합니다.");
     		return result;
         }
-		dto.setUser_no(userDTO.getUser_no());
+
+    	dto.setUser_no(userDTO.getUser_no());
 
 		result.put("message", "success");
 		result.put("success", communityService.deleteLike(dto) );
@@ -325,29 +326,30 @@ public class CommunityController {
 		return result;
 
 	}
-}
-
-
-
-
 	
+	//신고하기 *************************************************************************************************
+	@PostMapping("/ajax/insertReport")
+	@ResponseBody
+	public Map<String,Object> insertReport(ReportDTO dto, HttpSession session) throws Exception {
+		
+		logger.info(">>>>>>>>>>>>>>>>>>>>> @PostMapping /ajax/insertReport insertReport 진입 ");
+		logger.info(">>>>>>>>>>>>>>>>>>>>> ReportDTO >>>> "+dto.toString());
 
+		Map<String, Object> result = new HashMap<String,Object>();
+		
+		UserDTO userDTO = loginUserDao.select((String)session.getAttribute("id"));
 
+		if(userDTO != null) {
+			dto.setUser_no(userDTO.getUser_no());
+		}
+		
+		if(communityService.insertReport(dto) > 0) {
+			result.put("result", 1);
+			result.put("message", "신고되었습니다.");
+		}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		return result;
+		
+	}
+}
 

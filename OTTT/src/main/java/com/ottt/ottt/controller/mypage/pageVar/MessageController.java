@@ -61,8 +61,6 @@ public class MessageController {
 		} catch (Exception e) {e.printStackTrace();}
 		return "/mypage/myprofile/message";
 	}
-
-	
 	
 	@GetMapping(value = "/message/send")
 	public String sendMessage(MessageSearchItem msc, Model m, HttpSession session) {
@@ -86,7 +84,7 @@ public class MessageController {
 				if(!messageDTO.isDelete_by_sender()) {
 					msgList.add(messageDTO);
 				}
-			}			
+			}
 			
 			m.addAttribute("list", msgList);
 			m.addAttribute("mpr", msgPageResolver);
@@ -99,7 +97,7 @@ public class MessageController {
 	
 	
 	//원래 가진 값이 거짓이었으니 참으로 바꾸면 목록에서 삭제됨
-	//쪽지 삭제(해당 쪽지)
+	//받은 쪽지 삭제(해당 쪽지)
 	@PostMapping("/message/remove")
 	public String removeMsgRecv(HttpSession session, Integer message_no) {		
 		//현재 내 유저번호
@@ -109,18 +107,23 @@ public class MessageController {
 		
 		try {
 			MessageDTO messageDTO = messageService.pickOneRecv(message_no);
-			//System.out.println("=================2222222222=================== messageDTO.isDelete_by_receiver() : " +messageDTO.isDelete_by_receiver());
 			System.out.println("=================333333333333333333333=================== user_no : " +user_no);
 			System.out.println("=================44444444444444444444444=================== messageDTO.getReceive_user_no() : " +messageDTO.getReceive_user_no());
 			
 			
 			//맞다면
 			if(user_no.equals(messageDTO.getReceive_user_no())) {
-				System.out.println("-==========================================================0000000=======messageDTO.isDelete_by_receiver(): "+messageDTO.isDelete_by_receiver()); 
+				System.out.println("-====================================55555555555555555555555555======messageDTO.isDelete_by_sender(): "+messageDTO.isDelete_by_receiver());  
+				//디비에 저장하고
 				messageService.removeByReceiver(messageDTO);
-				System.out.println("-==========================================================0000000=======messageDTO.isDelete_by_receiver(): "+messageDTO.isDelete_by_receiver()); 
-				System.out.println("==================55555555555555555555555555================== messageDTO.isDelete_by_receiver() : " +messageDTO.isDelete_by_receiver());
+				//현재 값을 변경 - 일시적이라 컨틀로러에서만 돼서 디비에 저장 안 되니 위에랑 같이쓰기
+				//messageService로 이동햇ㄷ음
+				//messageDTO.setDelete_by_receiver(true);
+
+				System.out.println("-======================================6666666666666666=======messageDTO.isDelete_by_receiver(): "+messageDTO.isDelete_by_receiver()); 
+				System.out.println("==================77777777777777777================== messageDTO.isDelete_by_sender() : " +messageDTO.isDelete_by_sender());
 					if(messageDTO.isDelete()) {
+						System.out.println("==================8888888888888888888888================= messageDTO.getMessage_no() : " +messageDTO.getMessage_no());
 						messageService.removeMsg(messageDTO.getMessage_no());
 					}
 			}
@@ -132,7 +135,7 @@ public class MessageController {
 	
 	
 	
-	//쪽지 삭제(해당 쪽지)
+	//보낸 쪽지 삭제(해당 쪽지)
 	@PostMapping("/message/send/remove")
 	public String removeMsgSend(HttpSession session, Integer message_no) {
 		//현재 내 유저번호
@@ -149,11 +152,16 @@ public class MessageController {
 			
 			//맞다면
 			if(user_no.equals(messageDTO.getSend_user_no())) {
-				System.out.println("-==========================================================0000000=======messageDTO.isDelete_by_sender(): "+messageDTO.isDelete_by_sender()); 
+				System.out.println("-====================================55555555555555555555555555======messageDTO.isDelete_by_sender(): "+messageDTO.isDelete_by_sender()); 
+				
+				//여기도 바꿔
 				messageService.removeBySender(messageDTO);
-				System.out.println("-==========================================================0000000=======messageDTO.isDelete_by_sender(): "+messageDTO.isDelete_by_sender()); 
-				System.out.println("==================55555555555555555555555555================== messageDTO.isDelete_by_sender() : " +messageDTO.isDelete());
+				messageDTO.setDelete_by_sender(true);
+				
+				System.out.println("-======================================6666666666666666=======messageDTO.isDelete_by_sender(): "+messageDTO.isDelete_by_sender()); 
+				System.out.println("==================77777777777777777================== messageDTO.isDelete_by_receiver() : " +messageDTO.isDelete_by_receiver());
 					if(messageDTO.isDelete()) {
+						System.out.println("==================8888888888888888888888================= messageDTO.getMessage_no() : " +messageDTO.getMessage_no());
 						messageService.removeMsg(messageDTO.getMessage_no());
 					}
 			}
@@ -163,8 +171,6 @@ public class MessageController {
 		
 		return "redirect:/mypage/message/send";
 	}
-	
-	//유저 프로필 선택 시 그 사람 마이페이지로 넘어가게 하는 ?? 기능??
 
 	//쪽지함 환경설정
 	@GetMapping(value = "/messagesetting")

@@ -69,4 +69,39 @@ public class UserServiceImpl implements UserService {
 		return userDao.up_profile(userDTO);
 	}
 
+	@Override
+	public UserDTO getUser(Integer user_no) throws Exception {
+		return userDao.select(user_no);
+	}
+
+	@Override
+	public int getUserNoId(String user_nicknm) throws Exception {
+		return userDao.selectNoId(user_nicknm);
+	}
+
+	@Override
+	public int putUserOTT(Map map) throws Exception {
+		return userDao.insertUserOTT(map);
+	}
+
+	@Override
+	public int putUserGenre(Map map) throws Exception {
+		return userDao.insertUserGenre(map);
+	}
+
+	@Override
+	public UserDTO getUserEmail(String user_email) throws Exception {
+		return userDao.selectEmail(user_email);
+	}
+
+	@Override
+	public UserDTO getFindPwd(String user_email, String user_id) throws Exception {
+		return userDao.selectPwd(user_email, user_id);
+	}
+
+	@Override
+	public int resetPwd(String user_id, String user_pwd) throws Exception {
+		return userDao.resetPwd(user_id, user_pwd);
+	}
+
 }

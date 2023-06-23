@@ -29,9 +29,9 @@
 	          				<span>${userDTO.user_nicknm }</span>
           				</li>
 		              	<li class="user-follow">
-		                	<span class="user-follow-l"><a href="<c:url value="/mypage/follower" />">팔로워</a></span>
+		                	<span class="user-follow-l"><a href="<c:url value="/mypage/follower" />">팔로우</a></span>
 		                	&nbsp;|&nbsp;
-		                	<span class="user-follow-l"><a href="<c:url value="/mypage/following" />">팔로잉</a></span>
+		                	<span class="user-follow-l"><a href="<c:url value="/mypage/following" />">팔로워</a></span>
 		              	</li>
 	              	</ul>
               	</div>
@@ -51,40 +51,22 @@
 			</div>
 		</section>
 		
-		<nav class="mnb">
-			<ul>
-					<li>
-						<a href="<c:url value="/mypage/myreview" />" class="mreview">기록</a>
-					</li>
-					<li>
-					    <a href="<c:url value="/mypage/wishlist" />">찜목록</a>
-					</li>
-					<li>
-					    <a href="<c:url value="/mypage/watched" />">봤어요</a>
-					</li>
-					<li>
-					  	<a href="<c:url value="/mypage/alarm" />">알림함</a>
-					</li>
-					<li>
-					  	<a href="<c:url value="/mypage/message" />">쪽지함</a>
-					</li>
-				</ul>
-		</nav>
-		
+		<%@ include file="../../fix/mnb.jsp" %>
+				
 		<section class="sec02">
 			<div class="mymenu">
 				<div class="mycontent">
 					<ul>
 						<li class="mydiary">
 							<img class="mimg" src="${path}/resources/images/img/free-icon-diary-6393039.png" alt="다이어리">
-							<a href="<c:url value="/mypage/mydiary" />">나만의 다이어리</a>
+							<a href="<c:url value="/mypage/mydiary?user=${userDTO.user_nicknm}" />">나만의 다이어리</a>
 						</li>
 			            <li class="myrivew">
 			            	<img class="mimg" src="${path}/resources/images/img/free-icon-review-3501894.png" alt="리뷰">
 			                <a href="<c:url value="/mypage/myreview" />">나의 리뷰</a>
 			            </li>
 			            <li class="#">
-			                <img class="mimg" src="${path}/resources/images/img/free-icon-heart-6063477 2.png" alt="다이어리">
+			                <img class="mimg" src="${path}/resources/images/img/heart_on.png" alt="다이어리">
 			                <a href="#">좋아요 누른 리뷰</a>
 			            </li>
 			            <li class="#">
@@ -101,7 +83,7 @@
 		                	<a href="<c:url value="/mycommynity/postcommu" />">내가 쓴 게시글</a>
 		                </li>
 		              	<li class="mylike">
-		                	<img class="mimg" src="${path}/resources/images/img/free-icon-heart-6063477 2.png" alt="좋아요">
+		                	<img class="mimg" src="${path}/resources/images/img/heart_on.png" alt="좋아요">
 		                	<a href="<c:url value="/mycommynity/likecommunity" />">좋아요 누른 게시글</a>
 		              	</li>
 		              	<li class="mycomment">

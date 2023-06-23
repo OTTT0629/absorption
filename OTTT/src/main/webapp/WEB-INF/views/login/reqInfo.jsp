@@ -66,7 +66,7 @@
 			<form method="post" action="<c:url value='/signin/addInfo' />" id="membership">
 				<h1 style="font-size: 21px; display: inline-block;">필수 정보 입력</h1>
 				<div class="name">
-					<input type="email" id="name" title="NM" maxlength="20" placeholder="이름" >
+					<input type="email" id="name" title="name" maxlength="20" placeholder="이름" >
 						<span>
 							<select name="성별">
 								<option value="">선택</option>
@@ -77,7 +77,7 @@
 						</span>
 					
 					<div class="nname">
-						<input type="text" id="nname" title="NNM" maxlength="10"  placeholder="닉네임" >
+						<input type="text" id="nname" title="nickname" maxlength="10"  placeholder="닉네임" >
 					</div>
 				</div>
 				

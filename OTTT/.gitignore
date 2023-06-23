@@ -1,3 +1,11 @@
-/.metadata/
+/.metadata
+
+
+
+
 
 application.properties
+
+
+
+/webapp/WEB-INF/spring/root-context.xml

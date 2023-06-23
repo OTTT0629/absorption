@@ -75,6 +75,7 @@ public class MessageServiceImpl implements MessageService{
 
 	@Override
 	public int removeByReceiver(MessageDTO messageDTO) throws Exception {
+		messageDTO.setDelete_by_receiver(true);
 		return messageDao.deleteByReceiver(messageDTO);
 	}
 	

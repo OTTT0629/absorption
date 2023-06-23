@@ -80,4 +80,47 @@ public class UserDaoImpl implements UserDao {
 		return session.update(namespace +"up_profile" , userDTO);
 	}
 
+	@Override
+	public UserDTO select(Integer user_no) throws Exception {
+		return session.selectOne(namespace + "selectNo", user_no);
+	}
+
+	@Override
+	public int selectNoId(String user_nicknm) throws Exception {
+		return session.selectOne(namespace+ "selectNoId", user_nicknm);
+	}
+
+	@Override
+	public int insertUserOTT(Map map) throws Exception {
+		return session.insert(namespace+"userOTT", map);
+	}
+
+	@Override
+	public int insertUserGenre(Map map) throws Exception {
+		return session.insert(namespace+"userGenre", map);
+	}
+
+	//아이디찾기
+	@Override
+	public UserDTO selectEmail(String user_email) throws Exception {
+		return session.selectOne(namespace+"selectUserEmail", user_email);
+	}
+
+	//비밀번호찾기
+	@Override
+	public UserDTO selectPwd(String user_email, String user_id) throws Exception {
+		Map map = new HashMap();
+		map.put("user_email", user_email);
+		map.put("user_id", user_id);
+		return session.selectOne(namespace+"findPwd", map);
+	}
+
+	@Override
+	public int resetPwd(String user_id, String user_pwd) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("user_id", user_id);
+		map.put("user_pwd", user_pwd);
+		return session.update(namespace+"resetPwd", map);
+	}
+
 }
