@@ -59,7 +59,7 @@
 		<section class="sec00">
 			<form method="get" action="<c:url value="/login" />" id="membership">
 				<h1 style="font-size: 21px; display: inline-block;">아이디 확인</h1>
-				<div class="Idcheck" >회원님의 아이디는 test입니다.</div>
+				<div class="Idcheck" >회원님의 아이디는 ${userDTO.user_id}입니다.</div>
 					<div class="back" style="display: inline-block; pointer-events: none;">
 						<a href="<c:url value='/login/findPwd' />" style="pointer-events: none;">
 							<input type="button" value="비밀번호 찾기" style="pointer-events: auto;">
@@ -67,7 +67,7 @@
 					</div>
 					
 					<div class="complate">
-						<input type="submit" value="완료">
+						<input type="submit" value="완료" >
 					</div>
 			 </form>
 		 </section>

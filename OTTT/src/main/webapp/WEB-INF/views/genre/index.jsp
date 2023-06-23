@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>  
 <!DOCTYPE html>
 <html>
@@ -24,7 +25,46 @@
   <body>
     <form action="#" method="post">
     <div class="wrap">
-		<%@ include file="../fix/header.jsp" %>
+      <header >
+        <div class="logo">
+          <a href="<c:url value="/" />">
+            <img src="${path}/resources/images/logo/OTTT.png" alt="logo">
+          </a>
+        </div>
+        <nav class="gnb">
+          <ul>
+            <li>
+              <a href="<c:url value="/genre/movie" />">영화</a>
+            </li>
+            <li>
+              <a href="<c:url value="/genre/drama" />">드라마</a>
+            </li>
+            <li>
+              <a href="<c:url value="/genre/interest" />">예능</a>
+            </li>
+            <li>
+              <a href="<c:url value="/genre/animation" />">애니</a>
+            </li>
+            <li>
+              <a href="<c:url value="/community/freecommunity" />">게시판</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="h-icon">
+          <ul>
+            <li>
+              <a href="<c:url value='/search' />">
+                <!-- <img src="./images/icon/search02.png" alt="검색"> -->
+              </a>
+            </li>
+            <li>
+              <a href="<c:url value='/mypage' />">
+                <!-- <img src="./images/icon/user01.png" alt="내 정보"> -->
+              </a>
+            </li>
+          </ul>
+        </div>
+      </header>
       <br/>
 
     <script type="text/javascript">
@@ -33,19 +73,18 @@
         	    event.preventDefault();
         	    // 버튼을 클릭했을 때 실행되는 코드
         	    let content_no = $(this).closest(".work-info").find("#noInput").val()
-    			let user_no = '${sessionScope.no}'
+    			let user_no = '${sessionScope.user_no}'
         	    $.ajax({
         	      type: 'DELETE',
         	      url: '/ottt/searchjjim?content_no=' + content_no + '&user_no=' + user_no,
         	      headers: {"content-type":"application/json"},
         	      data: JSON.stringify({content_no:content_no, user_no:user_no}),
         	      success: function(result){
-        	    	  document.location.reload(true)
         	        $(".body").html("찜 해제 되었습니다.")
         	        $('#Modal').modal('show')
-        	        /* $('#checkBtn').on('click', function() {
+        	        $('#checkBtn').on('click', function() {
         	        	document.location.reload(true)
-					})*/ 	        
+					}) 	        
         	      },
         	      error: function() {
         	        $(".body").html("찜해제에 실패했습니다. 다시 시도해주세요.")
@@ -58,19 +97,18 @@
         	    event.preventDefault();
         	    // 버튼을 클릭했을 때 실행되는 코드
         	    let content_no = $(this).closest(".work-info").find("#noInput").val()
-    			let user_no = '${sessionScope.no}'
+    			let user_no = '${sessionScope.user_no}'
         	    $.ajax({
         	      type: 'PATCH',
         	      url: '/ottt/searchjjim?content_no=' + content_no + '&user_no=' + user_no,
         	      headers: {"content-type":"application/json"},
         	      data: JSON.stringify({content_no:content_no, user_no:user_no}),
         	      success: function(result){
-        	    	  document.location.reload(true)
         	        $(".body").html("찜 등록 되었습니다.")
         	        $('#Modal').modal('show') 
-        	        /* $('#checkBtn').on('click', function() {
+        	        $('#checkBtn').on('click', function() {
         	        	document.location.reload(true)
-					}) */ 
+					})
         	      },
         	      error: function() {
         	        $(".body").html("찜등록에 실패했습니다. 다시 시도해주세요.")
@@ -81,25 +119,38 @@
 
         	  $(document).on("click", "#nojjim", function(event) {
         		event.preventDefault()
-        	    $(".body2").html("로그인이 필요합니다.")
-        	    $('#Modal2').modal('show')
+        	    $(".body").html("로그인이 필요합니다.")
+        	    $('#Modal').modal('show')
         	  })
-        })       
+        	  
+        	
+        })  
+        
+        
         </script>
         
-        
-    <section class="sec00-1">
-        <div class="dropdown-filter">
-          <li>
-            <select name="button" id="button">
-             <option value="date" class="dropdown-itemtemp" ${pr.sc.option=='date' || pr.sc.option=='' ? "selected" : ""}>최신순</option>
-             <option value="rate" class="dropdown-itemtemp" ${pr.sc.option=='rate' ? "selected" : ""}>별점순</option>
-            </select>
-          </li>
-      </div>
-    </section>
-    
-      <section class="sec01" style="margin: 30px auto;">
+ 
+ 
+	  <c:if test="${empty searchList}">
+    		<div style="font-size: 25px;  padding-top: 40px; text-align: center; border-top: 2px solid #fff; width: 1200px; margin: 30px auto;">검색된 작품이 없습니다.</div>
+      </c:if>  
+      
+      <c:if test="${not empty searchList}">
+	    <section class="sec00-1">
+	    <%-- <form action='<c:url value="/searchList" />' method="get"> --%>
+	    	<div class="dropdown-filter">
+			    <li>
+			      <select name="option" id="searchSelect" onchange="this.form.submit()">
+			        <option value="date" class="dropdown-itemtemp" ${pr.sc.option=='date' || pr.sc.option=='' ? "selected" : ""}><a href="'<c:url value="/searchList" />'">최신순</a></option>
+			        <option value="rate" class="dropdown-itemtemp" ${pr.sc.option=='rate' ? "selected" : ""}><a href="'<c:url value="/searchList" />'">별점순</a></option>
+			      </select>	          	          
+			    </li>
+			  </div>
+	    <!-- </form> -->		  
+	    </section>
+      </c:if>     
+
+      <section class="sec01" style="margin: 30px auto;">     
       <c:forEach var="contentDTO" items="${searchList}">
 	      <div class="work-info">
 	          <a href="<c:url value="/detailPage${pr.sc.queryString}?content_no=${contentDTO.content_no }" />">
@@ -123,7 +174,7 @@
 							        <c:when test="${sessionScope.id != null}">
 						            <c:set var="isInWishlist" value="false" />
 							            <c:forEach var="wishlistDTO" items="${wishList}">
-							                <c:if test="${wishlistDTO.content_no == Integer.parseInt(contentDTO.content_no) && sessionScope.no == wishlistDTO.user_no}">
+							                <c:if test="${wishlistDTO.content_no == Integer.parseInt(contentDTO.content_no) && sessionScope.user_no == wishlistDTO.user_no}">
 							                    <c:set var="isInWishlist" value="true" />
 							                </c:if>
 							            </c:forEach>
@@ -148,23 +199,25 @@
       </c:forEach>				
     </section>
     
+    </form>
+    
     <!-- 페이지 번호 배너-->
 		        <div class="page-num" style="margin-top: 20px;">
 		          <nav aria-label="Page navigation example" class="d-flex flex-row justify-content-center">
 		            <ul class="pagination">
 		            <c:if test="${pr.showPrev}">
 			            <li class="page-item">
-			                <a class="page-link" href='<c:url value="/genre/movie${pr.sc.getQueryString(pr.beginPage-1)}" />' aria-label="Previous">
+			                <a class="page-link" href='<c:url value="/searchList${pr.sc.getQueryString(pr.beginPage-1)}" />' aria-label="Previous">
 			                  <span aria-hidden="true">&laquo;</span>
 			                </a>
 			              </li>
 		            </c:if>
 		            <c:forEach var="i" begin="${pr.beginPage }" end="${pr.endPage }">
-		            	<li class="page-item"><a class="page-link" href='<c:url value="/genre/movie${pr.sc.getQueryString(i)}" />'>${i}</a></li>
+		            	<li class="page-item"><a class="page-link" href='<c:url value="/searchList${pr.sc.getQueryString(i)}" />'>${i}</a></li>
 		            </c:forEach>
 		              <c:if test="${pr.showNext}">
 			              <li class="page-item">
-			                <a class="page-link" href='<c:url value="/genre/movie${pr.sc.getQueryString(pr.endPage-1)}" />' aria-label="Next">
+			                <a class="page-link" href='<c:url value="/searchList${pr.sc.getQueryString(pr.endPage-1)}" />' aria-label="Next">
 			                  <span aria-hidden="true">&raquo;</span>
 			                </a>
 			              </li>
@@ -186,24 +239,7 @@
 	              </div>
 	              <div class="modal-body body">
 	              </div>
-	              <div class="modal-footer" id="modal-footer" style="height: 60px;">
-	                <!-- <button type="button" id="checkBtn" class="btn btn-secondary" data-bs-dismiss="modal">확인</button> -->
-	              </div>
-	            </div>
-	          </div>
-	        </div>
-	        
-	        <!-- Modal -->
-	        <div class="modal fade" id="Modal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	          <div class="modal-dialog modal-dialog-centered">
-	            <div class="modal-content">
-	              <div class="modal-header">
-	                <h1 class="modal-title fs-5" id="exampleModalLabel">알림</h1>
-	                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	              </div>
-	              <div class="modal-body body2">
-	              </div>
-	              <div class="modal-footer" id="modal-footer2">
+	              <div class="modal-footer" id="modal-footer">
 	                <button type="button" id="checkBtn" class="btn btn-secondary" data-bs-dismiss="modal">확인</button>
 	              </div>
 	            </div>
@@ -215,7 +251,7 @@
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
       crossorigin="anonymous"
     ></script>
-  </form>
+  
   <script>
     const logos = document.querySelectorAll('.ott-logo-img');
     logos.forEach(function(logo) {

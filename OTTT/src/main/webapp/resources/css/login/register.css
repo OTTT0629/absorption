@@ -368,5 +368,18 @@ header{
 		display : none;
 		font-size: small;
 	}
+	
+	
+	.email_input_re_1{
+		color : green;
+		display : none;
+		font-size: small;
+	}
+	
+	.email_input_re_2{
+		color : red;
+		display : none;
+		font-size: small;
+	}
     
   

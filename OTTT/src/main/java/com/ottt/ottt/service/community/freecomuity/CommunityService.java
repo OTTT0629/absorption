@@ -5,10 +5,16 @@ import java.util.List;
 import com.ottt.ottt.dto.ArticleDTO;
 import com.ottt.ottt.dto.ArticleLikeDTO;
 import com.ottt.ottt.dto.ArticleSearchDTO;
+import com.ottt.ottt.dto.ReportDTO;
 
 public interface CommunityService {
 	
 	//service는 메서드의 이름을 dao와 dto와는 다른느낌
+	
+	/**
+	 * 페이징용 목록
+	 */
+	List<ArticleDTO> getArticleList(ArticleSearchDTO dto) throws Exception;
 	
 	/**
 	 * 상세조회
@@ -30,11 +36,7 @@ public interface CommunityService {
 	 */
 	int modify(ArticleDTO articleDTO) throws Exception;
 	
-	/**
-	 * 페이징용 목록
-	 */
-	List<ArticleDTO> getArticleList(ArticleSearchDTO dto) throws Exception;
-	
+
 	/**
 	 * 총 건수
 	 */
@@ -55,5 +57,11 @@ public interface CommunityService {
 	 * 좋아요를 삭제
 	 */
 	int deleteLike(ArticleLikeDTO dto) throws Exception;
+	
+	/**
+	 * 신고하기 저장
+	 */
+	int insertReport(ReportDTO dto) throws Exception;
+
 }
 

@@ -18,12 +18,12 @@ public class ContentDTO {
 	private String content_nm;
 	private String content_info;
 	private Integer content_runtime;
-	private String previewUrl;
 	private String thumbnail;
 	private Integer age;
 	private String country;
 	private String category_nm;
 	private float  rating;
+	private String main_img;
 
 	public ContentDTO() {}
 	
@@ -32,32 +32,30 @@ public class ContentDTO {
 	public Integer getContent_no() {
 		return content_no;
 	}
+	
+	public String getMain_img() {
+		return main_img;
+	}
 
-
+	public void setMain_img(String main_img) {
+		this.main_img = main_img;
+	}
 
 	public void setContent_no(Integer content_no) {
 		this.content_no = content_no;
 	}
 
-
-
 	public String getContent_nm() {
 		return content_nm;
 	}
-
-
 
 	public void setContent_nm(String content_nm) {
 		this.content_nm = content_nm;
 	}
 
-
-
 	public String getContent_info() {
 		return content_info;
 	}
-
-
 
 	public void setContent_info(String content_info) {
 		this.content_info = content_info;
@@ -71,75 +69,45 @@ public class ContentDTO {
 		this.content_runtime = content_runtime;
 	}
 
-	public String getPreviewUrl() {
-		return previewUrl;
-	}
-
-	public void setPreviewUrl(String previewUrl) {
-		this.previewUrl = previewUrl;
-	}
-
-
-
 	public String getThumbnail() {
 		return thumbnail;
 	}
-
-
 
 	public void setThumbnail(String thumbnail) {
 		this.thumbnail = thumbnail;
 	}
 
-
-
 	public Integer getAge() {
 		return age;
 	}
-
-
 
 	public void setAge(Integer age) {
 		this.age = age;
 	}
 
-
-
 	public String getCountry() {
 		return country;
 	}
-
-
 
 	public void setCountry(String country) {
 		this.country = country;
 	}
 
-
-
 	public String getCategory_nm() {
 		return category_nm;
 	}
-
-
 
 	public void setCategory_nm(String category_nm) {
 		this.category_nm = category_nm;
 	}
 
-
-
 	public float getRating() {
 		return rating;
 	}
-
-
-
+	
 	public void setRating(float rating) {
 		this.rating = rating;
 	}
-
-
 
 	@Override
 	public int hashCode() {
@@ -163,10 +131,8 @@ public class ContentDTO {
 	@Override
 	public String toString() {
 		return "ContentDTO [content_no=" + content_no + ", content_nm=" + content_nm + ", content_info=" + content_info
-				+ ", content_runtime=" + content_runtime + ", previewUrl=" + previewUrl + ", thumbnail=" + thumbnail
-				+ ", age=" + age + ", country=" + country + "]";
+				+ ", content_runtime=" + content_runtime + ", thumbnail=" + thumbnail + ", age=" + age + ", country="
+				+ country + ", category_nm=" + category_nm + ", rating=" + rating + ", main_img=" + main_img + "]";
 	}
-
-	
-	
+		
 }

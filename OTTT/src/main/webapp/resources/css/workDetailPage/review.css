@@ -13,6 +13,29 @@ button{
     all: unset;
 }
 
+.net-logo{
+	
+    width:  300px;
+    height: 200px; 
+    padding: 10px;
+    display: flex;
+    border: 1px solid red;
+    box-sizing: border-box;
+    overflow: hidden;
+    flex-wrap: wrap;
+    
+
+}
+
+
+
+
+.net-logo img{
+	margin: 10px 13px;
+	
+}
+
+
 .date-insert{
 	position: absolute;
 	right: 140px;
@@ -209,7 +232,7 @@ header{
  
 }
 
-.info-title > h1 {
+.info-title > a > h1 {
     color: #33ff33;
 }
 
@@ -284,12 +307,32 @@ header{
 .left-box{
     width: 300px;
     height: 500px;
-	margin-left: 0px;
+
     position: absolute;
   
   
 }
 
+.left-box button:nth-child(4) img{
+	width: 70px;
+	height: 70px;
+	margin-right: 0;
+	transform: translateX(-20%);
+
+}
+.left-box button:nth-child(3) img{
+	width: 63px;
+	height: 100px;
+}
+.left-box button:nth-child(2) img{
+	width: 63px;
+	height: 100px;
+}
+.left-box button:nth-child(1) img{
+	width: 70px;
+	height: 70px;
+	margin-left: 0;
+}
 
 
 .star1{
@@ -414,7 +457,7 @@ header{
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 9995;
+    z-index: 1000;
   }
 
 
@@ -425,7 +468,7 @@ header{
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    z-index: 9999;
+    z-index: 2000;
     width: 795px;
     height: 600px;
     overflow: hidden;
@@ -439,7 +482,7 @@ header{
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    z-index: 9999;
+    z-index: 2000;
     width: 795px;
     height: 600px;
     overflow: hidden;
@@ -751,18 +794,14 @@ form label{
 }
 
 .user-icon img{
-    width: 45px; 
+    width: 45px;
+    height: 45px; 
 }
 
 .user-name {
     margin-top: 10px;
     margin-left: 15px;
 }
-
-
-
-
-
 
  .point > img{
     position: absolute;
@@ -787,7 +826,7 @@ form label{
 
 .starpoint_box{
     position:relative;
-    background:url(https://ido-archive.github.io/svc/etc/element/img/sp_star.png) 0 0 no-repeat;
+    background:url(https://hsecode.github.io/images_codepen/codepen_sp_star.png) 0 0 no-repeat;
     font-size:0;
     width: 100px;
     height: 20px;
@@ -796,13 +835,14 @@ form label{
     bottom: 4px;
 }
 
+
 .starpoint_box .starpoint_bg{
     display:block;
     position:absolute;
     top:0;
     left:0;
     height:18px;
-    background:url(https://ido-archive.github.io/svc/etc/element/img/sp_star.png) 0 -20px no-repeat;
+    background:url(https://hsecode.github.io/images_codepen/codepen_sp_star.png) 0 -20px no-repeat;
     pointer-events:none;
 }
 
@@ -882,17 +922,18 @@ form label{
     position: absolute;
     right: 150px;
     top: 15px;
+    z-index:9999;
 }
 
 
 
 .starpoint_box2{
     position:relative;
-    background:url(https://ido-archive.github.io/svc/etc/element/img/sp_star.png) 0 0 no-repeat;
+    background:url(https://hsecode.github.io/images_codepen/codepen_sp_star.png) 0 0 no-repeat;
     font-size:0;
     width: 100px;
     height: 20px;
-
+	z-index:9999;
     right: 410px;
     bottom: 4px;
 }
@@ -903,7 +944,7 @@ form label{
     top:0;
     left:0;
     height:18px;
-    background:url(https://ido-archive.github.io/svc/etc/element/img/sp_star.png) 0 -20px no-repeat;
+    background:url(https://hsecode.github.io/images_codepen/codepen_sp_star.png) 0 -20px no-repeat;
     pointer-events:none;
 }
 
@@ -1102,11 +1143,7 @@ form label{
     bottom: 13px;
 }
 
-.report button:last-child {
-    position: absolute;
-    right: 20px;
-    bottom: 9px;
-}
+
 
 
 
@@ -1182,4 +1219,121 @@ form label{
 	background-color: gray;
 	height: 35px;
 	width: 245px;
+}
+
+/* 모달 */
+
+.modal-content{
+    background-color: #202020;
+}
+
+.modal-body{
+    font-size: 26px;
+    text-align: center;
+    border: 1px solid #fff;
+}
+
+.modal-header{
+    border: 1px solid #fff;
+}
+
+.modal-footer{
+    border: 1px solid #fff;
+    display: flex;
+    justify-content: flex-end;
+}
+ 
+.modi-del{
+   display: flex;
+    justify-content: flex-end;
+}
+
+
+.qa-main p{
+    display: flex;
+    justify-content: flex-end;
+    font-weight: bold;
+}
+
+.btn{
+    color: #fff;
+    background-color: transparent;
+    border-style: none;
+    border-color: #fff; 
+    font-size: 23px; 
+    text-decoration: none;
+}
+
+
+.btn:hover{
+    border-color: #33FF33;
+    background-color: transparent;
+    border-style: solid;
+    color: #33FF33; 
+}
+.report {
+    position: absolute;
+    right: 10px;
+    bottom: 8px;
+}
+
+.report-text{
+	position: absolute;
+    right: 10px;
+    bottom: 0px;
+	width: 30px;
+}
+
+.report .dropdown-menu {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  padding: 12px 16px;
+  right: 70px;
+  bottom: 3px;
+}
+
+.report img.reportBtn {
+	position: absolute;
+    right: 45px;
+    bottom: 4px;
+  	cursor: pointer;
+}
+
+.report .dropdown-menu.active {
+  display: block;
+}
+
+
+.report img.reportBtn:focus + .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  width: 150px;
+}
+
+.spoiler{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 800px;    
+    height: 190px;
+    background-color: rgba(112, 112, 112, 0.99);
+    border-radius: 10px;
+    z-index: 5;
+    line-height: 200px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.spoiler span{
+	color: red;
 }

@@ -47,11 +47,8 @@ public class MessageDaoImpl implements MessageDao {
 
 	//메세지 지우기(해당된 메세지)
 	@Override
-	public int delete(Integer message_no, String user_no) throws Exception {
-		Map map = new HashMap();
-		map.put("message_no", message_no);
-		map.put("user_no", user_no);
-		return session.delete(namespace + "delete", map);
+	public int delete(Integer message_no) throws Exception {
+		return session.delete(namespace + "delete", message_no);
 	}
 	
 //	//메세지 지우기(전체)
@@ -90,6 +87,26 @@ public class MessageDaoImpl implements MessageDao {
 	@Override
 	public List<MessageDTO> selectPage(MessageSearchItem msc) throws Exception {
 		return session.selectList(namespace + "selectPage", msc);
+	}
+	
+	@Override
+	public MessageDTO selectOneRecv(Integer message_no) throws Exception {
+		return session.selectOne(namespace + "selectOneRecv", message_no);
+	}
+	
+	@Override
+	public MessageDTO selectOneSend(Integer message_no) throws Exception {
+		return session.selectOne(namespace + "selectOneSend", message_no);
+	}
+	
+	@Override
+	public int deleteByReceiver(MessageDTO messageDTO) throws Exception {
+		return session.update(namespace + "deleteByReceiver", messageDTO);
+	}
+	
+	@Override
+	public int deleteBySender(MessageDTO messageDTO) throws Exception {
+		return session.update(namespace + "deleteBySender", messageDTO);
 	}
 
 

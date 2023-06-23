@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.ottt.ottt.domain.SearchItem;
 import com.ottt.ottt.dto.ContentDTO;
 import com.ottt.ottt.dto.ContentOTTDTO;
+import com.ottt.ottt.dto.GenreDTO;
 
 @Repository
 public class ContentDaoImpl implements ContentDao {
@@ -25,19 +26,16 @@ public class ContentDaoImpl implements ContentDao {
 
 	@Override
 	public List<ContentOTTDTO> ottNameSelect(Integer content_no) throws Exception {
-		// TODO Auto-generated method stub
 		return session.selectList(namespace+"ottNameSelect", content_no);
 	}
 
 	@Override
 	public List<ContentDTO> movieSelect(SearchItem sc) throws Exception {
-		// TODO Auto-generated method stub
 		return session.selectList(namespace+"movieSelect", sc);
 	}
 
 	@Override
 	public int movieCount(SearchItem sc) throws Exception {
-		// TODO Auto-generated method stub
 		return session.selectOne(namespace+"movieCount", sc);
 	}
 
@@ -48,8 +46,47 @@ public class ContentDaoImpl implements ContentDao {
 
 	@Override
 	public int searchCount(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
 		return session.selectOne(namespace+"searchCount", map);
+	}
+
+	@Override
+	public List<ContentDTO> selectSearchWord(String content_nm) throws Exception {
+		return session.selectList(namespace+"selectSearchWord", content_nm);
+	}
+
+	@Override
+	public ContentDTO select(Integer content_no) throws Exception {
+		return session.selectOne(namespace + "select", content_no);
+	}
+
+	@Override
+	public ContentDTO selectContent(Integer content_no) throws Exception {
+		return session.selectOne(namespace+"selectContent", content_no);
+	}
+
+	@Override
+	public List<GenreDTO> selectGenrenm(Integer content_no) throws Exception {
+		return session.selectList(namespace+"selectGenrenm", content_no);
+	}
+
+	@Override
+	public List<ContentOTTDTO> selectOTT(Integer content_no) throws Exception {
+		return session.selectList(namespace+"selectOTT", content_no);
+	}
+
+	@Override
+	public List<ContentDTO> jjimSelect() throws Exception {
+		return session.selectList(namespace+"jjimSelect");
+	}
+
+	@Override
+	public List<ContentDTO> watchedSelect() throws Exception {
+		return session.selectList(namespace+"watchedSelect");
+	}
+
+	@Override
+	public List<ContentDTO> recomSelect(Integer user_no) throws Exception {
+		return session.selectList(namespace+"recomSelect", user_no);
 	}
 	
 }

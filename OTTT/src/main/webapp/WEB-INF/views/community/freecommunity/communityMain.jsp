@@ -26,13 +26,13 @@
  	</head>
   	<body style="background-color: #202020;">
     	<div class="wrap">
-		<a href="#" class="upBtn">&uarr;</a>
+<!-- 		<a href="#" class="upBtn" style="z-index: 999;">&uarr;</a> -->
       		<%@ include file="../../fix/header.jsp" %>
       		<!--meun bar Start-->  
         	<div id="line-1" >
           		<nav class="nav">
           			<a class="nav-link1" href="<c:url value='/community/freecommunity' />" style="color: #33ff33;">자유게시판</a>
-          			<a class="nav-link1" href="<c:url value='/community/endmovie/tving' />">종료예정작</a>
+          			<a class="nav-link1" href="<c:url value='/community/endmovie' />">종료예정작</a>
           			<a class="nav-link1" href="<c:url value='/community/priceInfoTving' />">가격정보</a>
           			<a class="nav-link1" href="<c:url value='/community/QnA' />">Q&A</a>
           			<a class="nav-link1" href="<c:url value='/community/notice' />">공지사항</a>
@@ -97,7 +97,7 @@
 		                  		<li class="btn_s">
 									<div class="form-group">
 										<input id="fileInput" name="upFile"   accept="image/*" type="file" tabindex="-1" style="position: absolute; clip: rect(0px 0px 0px 0px);" onchange="readURL(this)">
-										<input type="text" id="userfile" name="userfile">
+										<input type="hidden" id="userfile" name="userfile" >
 		                      			<label for="fileInput" for="btn_file" ><img src="${path}/resources/images/img/writeImg.png" class="img_file"></label>
 									</div>
 		                      		<img src="${path}/resources/images/img/commit.png" alt="commit" class="btn_commit"	 data-bs-toggle="modal" data-bs-target="#commitBtn">      
@@ -126,6 +126,21 @@
          		</div>
         	</div>
         	<div id="loading" class="loading"></div>
+        	
+	        	<div class="modal fade" id="postMainModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	          		<div class="modal-dialog modal-dialog-centered">
+	            		<div class="modal-content">
+		              		<div class="modal-header">
+		                		<h1 class="modal-title fs-5" id="exampleModalLabel">알림</h1>
+		                		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		              		</div>
+		              		<div class="modal-body body"></div>
+		              		<div class="modal-footer">
+		                		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">확인</button>
+		              		</div>
+		            	</div>
+		          	</div>
+	        	</div>
     	</div>
 	    <script>
 	    
@@ -139,6 +154,7 @@
 			let TOTAL_COUNT = 0;
 			let CATEGORY =  "${category}" != "" ? "${category}" : "all";
 			let schText = "${schText}";
+			let INDEX = 0;
 			console.log("path :"+PATH);
 			console.log("url  :"+URL);
 			
@@ -173,12 +189,6 @@
 					 	return;
 	      			}
 					
-	     			if(!fnValidFileNameSize(filename)){
-			     		alert("파일명이 20자를 초과합니다.");
-			     		$(this).val(null);
-			     		return;
-				 	}
-	     			
 			 		// 추출한 파일명 삽입
 					$("#userfile").val(filename);
 
@@ -188,7 +198,7 @@
 
 				/********************************************************************************/
 				/*	DOM ajaxStart 영역 ajax 호출시 로딩효과											*/
-				/********************************************************************************/
+				/*******************************************************************************/
  	      		$(document).ajaxStart(function() {
 	          		$('#loading').show();
 	        	}).ajaxStop(function() {
@@ -196,7 +206,7 @@
 		            	$('#loading').hide();
 		          	}, 1000); // 1초의 지연 효과를 줍니다.
 	        	});
-	 
+				 
 				
 				/********************************************************************************/
 				/*	스크롤 Event정의 영역															*/
@@ -311,6 +321,32 @@
 				    ,fnCreatArticleList
 				)				
 			}
+			
+			/********************************************************************************/
+			function goProfile(user_no, user_nicknm) {
+				let form = document.createElement('form');				
+				
+				let data = {
+						user_no : user_no,
+						toURL : path
+		        };
+				
+				for (let key in data) {
+			        if (data.hasOwnProperty(key)) {
+			            let obj = document.createElement('input');
+			            obj.setAttribute('type', 'hidden');
+			            obj.setAttribute('name', key);
+			            obj.setAttribute('value', data[key]);
+			            form.appendChild(obj);
+			        }
+			    }
+				
+				form.setAttribute('method','post');
+				form.setAttribute('action','/ottt/profile?user=' +user_nicknm);
+								
+				document.body.appendChild(form);
+				form.submit();				
+			}
 				
 			//목록 생성 함수, $.post 에서 success 함수로 사용
 			function fnCreatArticleList(response){
@@ -318,6 +354,7 @@
 				console.log("ajax 통신결과");
 				console.log(response);
 				
+				//목록 초기화
 				let createHtml = "";
 				
 				//목록의 건수가 있을때
@@ -333,32 +370,44 @@
 					
 					//화살표 함수형 foreach 반복문
 					list.forEach( function(v,i) {
-
+						INDEX ++;
 						//등록일 날짜형식 변경 timestamp to yyyy_MM-dd
 						let date = new Date(v.article_create_dt);
 						let formattedDate = date.toISOString().slice(0, 10);
+						
+						
 
 						createHtml += 	'<ul class="post" >';
 						createHtml += 		'<div class="post_info">';
-						createHtml +=			'<div style="display: flex;">';
-						createHtml +=				'<a href="#"><img class="usur_img" src="'+ v.image +'" alt="profile"></a>';
-						createHtml +=				'<a href="#"><span class="nickname">'+ v.user_nicknm +'</span></a>';
-						createHtml +=				'<span id="current_date" >'+ formattedDate +'</span>';
-						createHtml +=			'</div>';
-						createHtml +=			'<div>';
-						createHtml +=				'<div>';	
-						createHtml +=					'<button type="button" class="btn_warning" data-bs-toggle="dropdown" >신고</button>';
-						createHtml +=					'<ul class="dropdown-menu" >';
-						createHtml +=						'<li><a class="dropdown-item" href="#">욕설/비방</a></li>';
-						createHtml +=						'<li><a class="dropdown-item" href="#">광고/도배</a></li>';
-						createHtml +=						'<li><a class="dropdown-item" href="#">악의적인 스포</a></li>';
-						createHtml +=						'<li><a class="dropdown-item" href="#">선정성</a></li>';
-						createHtml +=					'</ul>';                   
-						createHtml +=				'</div>';
-						createHtml +=			'</div>';
-						createHtml +=		'</div>'                
+						if(v.writer_chk == "Y"){
+							createHtml +=			'<div style="display: flex;">';
+							createHtml +=				'<a href="javascript:goProfile('+v.user_no +',\''+v.user_nicknm+'\')"><img class="usur_img" src="'+ v.image +'" alt="profile"></a>';
+							createHtml +=				'<a href="javascript:goProfile('+v.user_no +',\''+v.user_nicknm+'\')"><span class="nickname">'+ v.user_nicknm +'</span></a>';
+							createHtml +=				'<span id="current_date" >'+ formattedDate +'</span>';
+							createHtml +=			'</div>';
+							createHtml +=		'</div>'										
+						}else {
+							createHtml +=			'<div style="display: flex;">';
+							createHtml +=				'<a href="javascript:goProfile('+v.user_no +',\''+v.user_nicknm+'\')"><img class="usur_img" src="'+ v.image +'" alt="profile"></a>';
+							createHtml +=				'<a href="javascript:goProfile('+v.user_no +',\''+v.user_nicknm+'\')"><span class="nickname">'+ v.user_nicknm +'</span></a>';
+							createHtml +=				'<span id="current_date" >'+ formattedDate +'</span>';
+							createHtml +=			'</div>';
+							createHtml +=			'<div>';
+							createHtml +=				'<div>';	
+							createHtml +=					'<button type="button" class="btn_warning" data-bs-toggle="dropdown" >신고</button>';
+							createHtml +=					'<ul class="dropdown-menu" >';
+							createHtml +=						'<li><a class="dropdown-item"  onclick="fnInsertReport('+v.article_no+','+v.user_no+',1)"  >욕설/비방</a></li>';
+							createHtml +=						'<li><a class="dropdown-item"  onclick="fnInsertReport('+v.article_no+','+v.user_no+',2)"  >광고/도배</a></li>';
+							createHtml +=						'<li><a class="dropdown-item"  onclick="fnInsertReport('+v.article_no+','+v.user_no+',3)"  >악의적인 스포</a></li>';
+							createHtml +=						'<li><a class="dropdown-item"  onclick="fnInsertReport('+v.article_no+','+v.user_no+',4)"  >선정성</a></li>';
+							createHtml +=					'</ul>';                   
+							createHtml +=				'</div>';
+							createHtml +=			'</div>';
+							createHtml +=		'</div>'							
+						}
 						createHtml +=		'<div style="width: 900px;">';
-						createHtml +=			'<a href="'+ URL + v.article_no +'" class="main_article" >'+ v.article_content +'</a>';
+						let formattedContent = v.article_content.replace(/\n/gi, "<br/>"); 
+						createHtml +=			'<a href="'+ URL + v.article_no +'" class="main_article" >'+ formattedContent +'</a><br>';
 						//이미지의 데이터가 있으면 태그를 생성
 						if(v.article_image+"" != "" && v.article_image != null){
 							createHtml +=		'<a href="'+ URL + v.article_no +'" class="main_article"><img style="width:400px; height:400px; border-radius: 5px; margin-bottom: 25px; object-fit: cover;" src="data:image/png;base64, '+v.article_image+'" alt="이미지"></a>';
@@ -370,10 +419,10 @@
 						//로그인 여부 및 내가 누른하트표시 on off
 						let heartOnOffImg = (v.check_like_count == 1 ? "on" : "off");
 						
-						createHtml +=				'<input onclick="javascript:fnPushHeart('+ v.article_no +','+i+');" class="heart_img" type="image" id="pushHeart_'+i+'" src="'+ PATH +'/resources/images/img/heart_'+heartOnOffImg+'.png" alt="heart">';
-						createHtml +=				'<span id="likeCount_'+i+'"	>'+ v.like_count +'</span>'; 
+						createHtml +=				'<input onclick="javascript:fnPushHeart('+ v.article_no +','+INDEX+');" class="heart_img" type="image" id="pushHeart_'+INDEX+'" src="'+ PATH +'/resources/images/img/heart_'+heartOnOffImg+'.png" alt="heart">';
+						createHtml +=				'<span style="margin-left: 4px;" id="likeCount_'+INDEX+'"	>'+ v.like_count +'</span>'; 
 						createHtml +=				'<input class="re_comment_img" type="image" src="'+ PATH +'/resources/images/img/comment.png" alt="comment">';
-						createHtml +=				'<span>'+ v.comment_count +'</span>';                  
+						createHtml +=				'<span style="margin-left: 4px;">'+ v.comment_count +'</span>';                  
 						createHtml +=			'</div>';
 						createHtml +=		'</div>';
 						createHtml +=	'</ul>';
@@ -410,7 +459,6 @@
 					});
 					return;					
 				}
-				
 				OFFSET = 0;
 				TOTAL_COUNT = 0;
 				CATEGORY = category;
@@ -419,6 +467,7 @@
 				//ajax 함수 호출
 				fnCallAjaxSelectArticleList({ "offset": OFFSET, "category": CATEGORY});
 			}
+			
 
 			//파일 사이즈 체크
 			function fnValidFileSize(file){
@@ -428,17 +477,7 @@
 					return true;
 			    }
 			}
-
-			//파일명 길이체크
-			function fnValidFileNameSize(filename){
-		    	
-				if(filename.length > 20){ //20자
-					return false;
-			    }else{
-					return true;
-		    	}
-			}
-
+			
 			//이미지 미리보기
 			function fnReadImage(input) {
 
@@ -458,6 +497,7 @@
 		   		}
        		}
 
+			
 			//좋아요 누르기 클릭 이벤트
 			function fnPushHeart(article_no, index){
 				
@@ -500,7 +540,7 @@
 	
 				    	}else {
 	
-				    		//삭제하는 post ajax
+		    				//삭제하는 post ajax
 				    		//1. 비동기 post ajax로 저장하는 컨트롤러 호출 , 필수값 보내야함
 				    		//2. 필수값 : 아티클번호, 회원번호
 				    		//3. 주소는 이거  /ottt/community//ajax/deleteLike
@@ -509,18 +549,57 @@
 								"/ottt/community/ajax/deleteLike"
 				    			, {"user_no": "${sessionScope.user_no}" , "article_no" : article_no }
 							    , function(data){
-
 							    	$("#pushHeart_"+index).attr("src", PATH+"/resources/images/img/heart_off.png");
 									$("#likeCount_"+index).text(Number($("#likeCount_"+index).text())-1);
-
 							    }
-						    );
+					    	);
 				    		
 				    	}
 				    	
 				    }
 				)	
 			}
+
+	   		/**
+	   		*	신고하기
+	   		*	@param article_no 
+	   		*	@param target_user_no
+	   		*	@param report_type 
+	   		*/
+	   		function fnInsertReport(article_no,  target_user_no, report_type){
+
+				if(LOGIN_YN == null || LOGIN_YN == ""){
+					swal("로그인 후 이용가능합니다.","로그인을 해주세요.", "warning")
+					.then(function(){
+						location.href="/ottt/login";                   
+					});
+					return;					
+				}
+	   			
+	   			let data = {
+	   				"article_no" : article_no
+	   				, "target_user_no" : target_user_no
+	   				, "report_type" : report_type
+	   			}
+	   			
+	   			$.post(
+	   				//PATH는? /otttt 임
+   					PATH+"/community/ajax/insertReport"
+	   				, data 
+	   				, function(response){
+						console.log("신고저장 ajax 통신결과");
+	   					console.log(response);		
+	   					if(response.result > 0){
+	   						$(".body").html(response.message);
+	   			   	    	$("#postMainModal").modal("show");
+	   					}else {
+	   						$(".body").html(response.message)
+	   		   	    		$("#postMainModal").modal("show");					
+	   					}								
+   					}
+   				);		
+	   			
+	   		}
 			
 		</script>
 	</body>

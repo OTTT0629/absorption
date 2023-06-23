@@ -15,4 +15,15 @@ public interface UserService {
 	int selectNicknmCnt(String user_nicknm) throws Exception;
 	int mod_pwd(UserDTO userDTO) throws Exception;
 	int mod_img(UserDTO userDTO) throws Exception;
+	UserDTO getUser(Integer user_no) throws Exception;
+	int getUserNoId(String user_nicknm) throws Exception;
+
+	int putUserOTT(Map map) throws Exception; 
+	int putUserGenre(Map map) throws Exception; 
+	//아이디 찾기
+	UserDTO getUserEmail(String user_email) throws Exception;
+	//비밀번호찾기
+	UserDTO getFindPwd(String user_email, String user_id) throws Exception;
+	//비밀번호 재설정
+	int resetPwd(String user_id, String user_pwd) throws Exception;
 }

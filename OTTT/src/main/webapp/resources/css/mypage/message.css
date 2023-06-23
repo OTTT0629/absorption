@@ -121,42 +121,6 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
     padding-left: 2rem;
 }
 
-.h-icon > ul > li:first-child > a{
-    background:url("../../images/icon/search02.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 32px;
-    width: 32px;
-    height: 32px;
-}
-
-.h-icon > ul > li:last-child > a{
-    background:url("../../images/img/profile.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 32px;
-    width: 32px;
-    height: 32px;
-}
-
-.h-icon > ul > li:first-child > a:hover{
-    background: url("../../images/icon/search-h.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 32px;
-    width: 32px;
-    height: 32px;
-}
-
-/* .h-icon > ul > li:last-child > a:hover{
-    background: url("../images/icon/user-h.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 32px;
-    width: 32px;
-    height: 32px;
-} */
-
 #line-1 {
     width: 1200px;
     background-color: transparent;
@@ -286,11 +250,17 @@ table {
 th, td {
     width: 310px;
     text-align: center;
-    padding: 12px 10px;
+    padding: 7px 10px;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
     max-width: 200px;
+}
+
+.user-image {
+	width: 43px;
+	height: 43px;
+	border-radius: 10px;
 }
 
 .msg-img {width: 90px;}

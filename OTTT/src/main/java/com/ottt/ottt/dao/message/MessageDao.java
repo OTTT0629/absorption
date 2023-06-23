@@ -21,7 +21,7 @@ public interface MessageDao {
 	int insert(MessageDTO messageDTO) throws Exception;
 	
 	//작성자 일치 시, 선택한 메세지 삭제하기
-	int delete(Integer message_no, String user_no) throws Exception;
+	int delete(Integer message_no) throws Exception;
 	
 	//메시지 전체 삭제
 //	int deleteAll() throws Exception;
@@ -43,5 +43,15 @@ public interface MessageDao {
 	
 	//조건에 해당하는 페이지별 게시글 목록 불러오기
 	List<MessageDTO> selectPage(MessageSearchItem msc) throws Exception;
+	
+	//받은 메시지 중 삭제할 메시지 하나 고르기
+	MessageDTO selectOneRecv(Integer message_no) throws Exception;
+	
+	MessageDTO selectOneSend(Integer message_no) throws Exception;
+	
+	int deleteByReceiver(MessageDTO messageDTO) throws Exception;
+	
+	int deleteBySender(MessageDTO messageDTO) throws Exception;
+	
 	
 }

@@ -66,9 +66,9 @@
         	<img src = "${path}/resources/images/logo/OTTT.png" width="420" height="120">
         	<h1 style="font-size: 30px; display: inline-block;">환영합니다!</h1>
         	
-        	<form method="post" action="<c:url value='/' />" id="login-form">
-        		<input type="text" style="border:0 solid black" name="id" placeholder="아이디">
-            	<input type="password" style="border:0 solid black" name="pwd" style="border:0 solid black" placeholder="비밀번호">
+        	<form method="post" action="<c:url value='/signin/complete' />" id="login-form">
+        		<input type="text" style="border:0 solid black; color: #fff;" name="user_id" placeholder="아이디">
+            	<input type="password" style="border:0 solid black;" name="user_pwd" style="border:0 solid black" placeholder="비밀번호">
             	<input type="submit" value="로그인">
            	</form>
        	</div>

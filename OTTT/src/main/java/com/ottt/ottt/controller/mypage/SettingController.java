@@ -112,6 +112,7 @@ public class SettingController {
 					throw new Exception("mod_nick failed");
 			}
 			
+			session.setAttribute("user_nicknm", userDTO.getUser_nicknm());		
 			rattr.addFlashAttribute("msg","MOD_OK");
 			return "redirect:/mypage/setting/myprofile";
 			

@@ -22,7 +22,7 @@
 }
 
 .h-icon > ul > li > .logout{
-	background: url("../../images/icon/user01.png");
+    background: url("../../images/icon/user01.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 32px;
@@ -45,4 +45,9 @@
     background-size: 32px;
     width: 32px;
     height: 32px;
+}
+
+.selpage {
+	border-color: #33ff33;
+	color: #33ff33;
 }

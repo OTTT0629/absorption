@@ -24,7 +24,7 @@ import com.ottt.ottt.dto.ContentDTO;
 import com.ottt.ottt.dto.ContentOTTDTO;
 import com.ottt.ottt.dto.WishlistDTO;
 import com.ottt.ottt.service.content.ContentService;
-import com.ottt.ottt.service.content.WishlistService;
+import com.ottt.ottt.service.mypage.WishlistService;
 
 @Controller
 @RequestMapping("/genre")
