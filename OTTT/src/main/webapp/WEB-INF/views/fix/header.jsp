@@ -28,7 +28,7 @@
 			location.href = "/ottt/mypage?toURL=" + toURL;
 		}
 	</script>
-   <header>
+	<header>
       <div class="logo">
          <a href="<c:url value="/" />">
             <img src="${path}/resources/images/logo/OTTT.png" alt="로고">
@@ -53,7 +53,7 @@
                </li>
             </ul>
         </nav>
-           <div class="h-icon">
+      <div class="h-icon">
               <ul>
                  <li>
                     <a href="<c:url value='/search' />" class="searchnav"></a>
@@ -67,8 +67,8 @@
                   </a>
                </li>
             </ul>
-         </div>
-      </header>
+      </div>
+	</header>
       
 	<script type="text/javascript">
 		var socket = null;
@@ -83,7 +83,7 @@
 				console.log('Info: connection opened.');
 			};
 			ws.onmessage = function (event) {
-				console.log(event.data+'\n');
+				console.log("받은 메시지: " + event.data + '\n');
 			};
 	
 			ws.onclose = function (event) {
@@ -91,7 +91,7 @@
 				//setTimeout( function(){ connect(); }, 1000); // retry connection!!
 			};
 			
-			ws.onerror = function (event) { console.log('Info: connection closed.'); };		
+			ws.onerror = function (err) { console.log('Info: connection error.', err); };		
 		}
 	</script>
 </body>

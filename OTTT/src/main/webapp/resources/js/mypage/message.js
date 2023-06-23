@@ -46,7 +46,7 @@ $(document).ready(function() {
 	        $(".left-bottom table").empty()
 	        
 	        if(!Array.isArray(data) || data.length === 0) {
-	        	$(".left-bottom table").append('<div style="display: flex; margin-top: 20px; justify-content: center; color: #8f8f8f;">보관된 쪽지가 없습니다.</div>')
+	        	$(".left-bottom table").append('<div></div>')
 	        } else {
 	        	let rows = ''
 	        	
@@ -81,7 +81,7 @@ $(document).ready(function() {
             $(".left-bottom table").empty()
 
             if(!Array.isArray(data) || data.length === 0) {
-	        	$(".left-bottom table").append('<div style="display: flex; margin-top: 20px; justify-content: center; color: #8f8f8f;">보관된 쪽지가 없습니다.</div>')
+	        	$(".left-bottom table").append('<div></div>')
 	        } else {
                 let rows = ''
                 

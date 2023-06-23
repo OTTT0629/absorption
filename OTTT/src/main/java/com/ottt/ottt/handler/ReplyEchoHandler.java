@@ -26,7 +26,7 @@ public class ReplyEchoHandler extends TextWebSocketHandler {
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		System.out.println("afterConnectionEstablished: " + session);
 		
-		String sendUserId = getId(session);				//접속한 유저의 http 세션을 조회하여 id를 얻음 오호~
+		String sendUserId = getId(session);			//접속한 유저의 http 세션을 조회하여 id를 얻음 오호~
 		if(sendUserId != null) {					//로그인 값이 있는 경우만
 			consoleLog(sendUserId + "연결 성공");
 			userSessions.put(sendUserId, session);	//로그인 중 개별유저 저장
@@ -41,6 +41,7 @@ public class ReplyEchoHandler extends TextWebSocketHandler {
 		System.out.println("handleTextMessage: " + session + " :: " + message);
 		
 		String sendUserId = message.getPayload();	//특정 유저에게 보낼 메시지 내용 추출
+		
 		
 		
 		

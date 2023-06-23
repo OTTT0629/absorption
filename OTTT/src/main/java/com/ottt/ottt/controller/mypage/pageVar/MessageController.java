@@ -55,8 +55,6 @@ public class MessageController {
 				}
 			}
 			
-			System.out.println("=============================== msc.getOffset : " + msc.getOffset());
-			
 			m.addAttribute("list", msgList);
 			m.addAttribute("mpr", msgPageResolver);
 
@@ -86,8 +84,7 @@ public class MessageController {
 				if(!messageDTO.isDelete_by_sender()) {
 					msgList.add(messageDTO);
 				}
-			}			
-			System.out.println("=============================== msc.getOffset : " + msc.getOffset());
+			}
 			
 			m.addAttribute("list", msgList);
 			m.addAttribute("mpr", msgPageResolver);
@@ -100,7 +97,7 @@ public class MessageController {
 	
 	
 	//원래 가진 값이 거짓이었으니 참으로 바꾸면 목록에서 삭제됨
-	//쪽지 삭제(해당 쪽지)
+	//받은 쪽지 삭제(해당 쪽지)
 	@PostMapping("/message/remove")
 	public String removeMsgRecv(HttpSession session, Integer message_no) {		
 		//현재 내 유저번호
@@ -138,7 +135,7 @@ public class MessageController {
 	
 	
 	
-	//쪽지 삭제(해당 쪽지)
+	//보낸 쪽지 삭제(해당 쪽지)
 	@PostMapping("/message/send/remove")
 	public String removeMsgSend(HttpSession session, Integer message_no) {
 		//현재 내 유저번호
@@ -174,8 +171,6 @@ public class MessageController {
 		
 		return "redirect:/mypage/message/send";
 	}
-	
-	//유저 프로필 선택 시 그 사람 마이페이지로 넘어가게 하는 ?? 기능??
 
 	//쪽지함 환경설정
 	@GetMapping(value = "/messagesetting")
