@@ -46,3 +46,8 @@
     width: 32px;
     height: 32px;
 }
+
+.selpage {
+	border-color: #33ff33;
+	color: #33ff33;
+}

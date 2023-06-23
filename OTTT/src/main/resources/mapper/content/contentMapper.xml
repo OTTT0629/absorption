@@ -26,7 +26,7 @@
 		SELECT a.content_no, b.ott_img 
 		FROM tb_content_ott a
 		JOIN tb_ott b ON a.ott_no = b.ott_no
-		where a.content_no = #{content_no}	
+		where a.content_no = #{content_no}
 	</select>
 	
 	<select id="movieSelect" parameterType="SearchItem" resultType="ContentDTO">

@@ -7,8 +7,7 @@
   	  
 	  <select id="watchedListSelect" parameterType="SearchItem" resultType="WatchedDTO">
 		SELECT distinct a.user_no, a.content_no, b.category_no
-			, c.content_nm, c.thumbnail, a.watched_date
-			, coalesce((select round(avg(d.rating))/2 FROM tb_review d where d.content_no = c.content_no),0) as rating
+			, c.content_nm, c.thumbnail, a.watched_date, d.rating
 		FROM tb_watched a
 		join tb_content_category b
 		on a.content_no = b.content_no

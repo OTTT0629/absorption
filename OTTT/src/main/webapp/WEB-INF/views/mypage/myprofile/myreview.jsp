@@ -18,25 +18,7 @@
 		<%@ include file="../../fix/header.jsp" %>
 
 		<section class="sec01">
-			<nav class="mnb">
-				<ul>
-					<li>
-						<a href="<c:url value="/mypage/myreview" />" class="mreview">기록</a>
-					</li>
-					<li>
-					    <a href="<c:url value="/mypage/wishlist" />">찜목록</a>
-					</li>
-					<li>
-					    <a href="<c:url value="/mypage/watched" />">봤어요</a>
-					</li>
-					<li>
-					  	<a href="<c:url value="/mypage/alarm" />">알림함</a>
-					</li>
-					<li>
-					  	<a href="<c:url value="/mypage/message" />">쪽지함</a>
-					</li>
-				</ul>
-			</nav>
+		<%@ include file="../../fix/mnb.jsp" %>
 		</section>
 
 		<section class="sec02">
@@ -56,7 +38,7 @@
 		                	<a href="<c:url value="/mycommynity/postcommu" />">내가 쓴 게시글</a>
 		              	</li>
 		              	<li id="Llike">
-			                <img class="mimg" src="${path}/resources/images/img/free-icon-heart-6063477 2.png" alt="좋아요">
+			                <img class="mimg" src="${path}/resources/images/img/heart_on.png" alt="좋아요">
 			                <a href="<c:url value="/mycommynity/likecommunity" />">좋아요 누른 게시글</a>
 			            </li>
 		    	        <li id="Lcomments">
@@ -79,8 +61,8 @@
 						    	<div class="rv-head">
 						    		<span class="title">${ReviewDTO.content_nm}</span>
 						    		<div class="starating">
-						    			<img class="star" src="./images/icon/point.png">
-						        		<span>${ReviewDTO.rating}</span>						    		
+						    			<img class="star" src="${path}/resources/images/img/starone.png">
+						        		<span class="point">${ReviewDTO.rating}</span>						    		
 						    		</div>
 						      	</div>
 						

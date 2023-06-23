@@ -21,40 +21,11 @@
 		<%@ include file="../../fix/header.jsp" %>
 	
 		<section class="sec01">
-			<nav class="mnb">
-				<ul>
-					<li><a href="<c:url value="/mypage/myreview" />" class="mreview">기록</a></li>
-					<li><a href="<c:url value="/mypage/wishlist" />" style="color: #33ff33">찜목록</a></li>
-					<li><a href="<c:url value="/mypage/watched" />">봤어요</a></li>
-					<li><a href="<c:url value="/mypage/alarm" />">알림함</a></li>
-					<li><a href="<c:url value="/mypage/message" />">쪽지함</a>
-				</ul>
-			</nav>
+			<%@ include file="../../fix/mnb.jsp" %>
 		</section>
 		
 		<section class="sec02">
-			<div class="Lcontent">
-				<div class="Lmenu">
-					<ul>
-						<li>
-							<img class="mimg" src="${path}/resources/images/img/movie.png" alt="영화">
-							<a onclick="javascript:fnCategory(1)">영화</a>
-						</li>
-						<li>
-							<img class="mimg" src="${path}/resources/images/img/drama.png" alt="드라마">
-							<a onclick="javascript:fnCategory(2)">드라마</a>
-	                	</li>
-	                	<li>
-	                  		<img class="mimg" src="${path}/resources/images/img/vrt.png" alt="예능">
-	                  		<a onclick="javascript:fnCategory(3)">예능</a>
-	               		</li>
-		                <li>
-		                	<img class="mimg" src="${path}/resources/images/img/free-icon-anime-2314736.png" alt="애니">
-	                		<a onclick="javascript:fnCategory(4)">애니</a>
-	               		</li>
-	           		</ul>
-	      		</div>
-	   		</div>
+			<%@ include file="../../fix/Lmnb.jsp" %>
 	
 	        <div class="main">
 	        	<section class="sec_2">
@@ -145,7 +116,7 @@
 			let createPage = "";
 			
 			 if (response.wishListCnt == null || response.wishListCnt === 0) {
-			        createPage += '<div class="title-line" style="text-align: center;">내가 쓴 다이어리가 없습니다.</div>';
+			        createPage += '<div class="title-line" style="text-align: center;">찜목록이 없습니다</div>';
 			    } else {
 			        createPage += '<div class="page-num" style="margin-top: 10px;">';
 			        createPage += '<nav aria-label="Page navigation example" class="d-flex flex-row justify-content-center">';
@@ -155,9 +126,14 @@
 			            createPage += '<a class="page-link" onclick="javascript:fnPage('+ (response.pr.beginPage-1) +','+response.pr.sc.category_no+ ')">&lt;</a></li>';
 			        }
 			        for (let i = response.pr.beginPage; i <= response.pr.endPage; i++) {
-			            createPage += '<li class="page-item">';
-			            createPage += '<a class="page-link" onclick="javascript:fnPage('+i+','+response.pr.sc.category_no+ ')">' + i + '</a></li>';
-			        }
+			        	  createPage += '<li class="page-item">';
+			        	  if (i === response.pr.sc.page) {
+			        	    createPage += '<a class="page-link selpage" onclick="javascript:fnPage('+i+','+response.pr.sc.category_no+ ')">' + i + '</a>';
+			        	  } else {
+			        	    createPage += '<a class="page-link" onclick="javascript:fnPage('+i+','+response.pr.sc.category_no+ ')">' + i + '</a>';
+			        	  }
+			        	  createPage += '</li>';
+			        	}
 			        if (response.pr.showNext) {
 			            createPage += '<li class="page-item">';
 			            createPage += '<a class="page-link" onclick="javascript:fnPage('+(response.pr.endPage+1)+','+response.pr.sc.category_no+ ')">&gt;</a></li>';
@@ -173,6 +149,11 @@
 		function fnCategory(category) {
 			$(".main-work").html("");
 			$('.paging').html("");
+			
+			$('.Lmenu a').css("color", "")
+			let clickedElement = event.target;
+		    $(clickedElement).css("color", "#33ff33");
+		    
 			fnGetWishList({
 				"user" : USER
 				, "category_no" : category
@@ -185,6 +166,7 @@
 		function fnPage(page, category) {
 			$(".main-work").html("");
 			$('.paging').html("");
+			
 			fnGetWishList({
 				"user" : USER
 				, "category_no" : category

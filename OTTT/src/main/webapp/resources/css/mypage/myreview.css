@@ -93,34 +93,6 @@ header{
     margin: 0 auto 0 auto;
 }
 
-.mnb {
-    width: 1200px;
-    border-top: 3px solid #33ff33;
-    border-bottom: 3px solid #33ff33;
-}
-
-.mnb > ul{
-    display: flex;
-    margin-bottom: 0 !important;
-}
-
-.mnb > ul > li{
-    width: 200px;
-    height: 20px;
-    text-align: center;
-    line-height: 0px;
-    margin-top: 20px;
-    margin-right: 40px;
-}
-
-.mnb a{
-    font-size: 25px;
-}
-
-.mnb > ul > li:hover{
-    color: #33ff33;
-}
-
 .info-main{
     display: flex;
     flex-direction: column;
@@ -275,4 +247,14 @@ header{
     color: #33ff33;
     background-color: #202020; 
     border-color: #33ff33;
+}
+
+.star {
+	width: 20px;
+	height: 20px;
+}
+
+.point {
+	position: relative;
+    top: 3px;
 }

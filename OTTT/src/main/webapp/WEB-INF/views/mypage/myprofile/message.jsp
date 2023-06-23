@@ -87,15 +87,7 @@ $(document).ready(function() {
     <div class="warp">
 	<%@ include file="../../fix/header.jsp" %>
 
-      <nav class="mnb">
-        <ul>
-          <li><a href="<c:url value="/mypage/myreview" />" class="mreview">기록</a></li>
-          <li><a href="<c:url value="/mypage/wishlist" />">찜목록</a></li>
-          <li><a href="<c:url value="/mypage/watched" />">봤어요</a></li>
-          <li><a href="<c:url value="/mypage/alarm" />">알림함</a></li>
-          <li><a href="<c:url value="/mypage/message" />" style="color: #33ff33">쪽지함</a></li>
-        </ul>
-      </nav>
+	<%@ include file="../../fix/mnb.jsp" %>
         
       <div class="sec00">
 

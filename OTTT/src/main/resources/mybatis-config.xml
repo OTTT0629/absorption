@@ -23,6 +23,11 @@
 		<typeAlias type="com.ottt.ottt.dto.ReviewLikeDTO" alias="ReviewLikeDTO"/>
 		<typeAlias type="com.ottt.ottt.dto.GenreDTO" alias="GenreDTO"/>
 		<typeAlias type="com.ottt.ottt.dto.WatchedDTO" alias="WatchedDTO"/>
+		<typeAlias type="com.ottt.ottt.dto.ReportDTO" alias="ReportDTO"/>
+		<typeAlias type="com.ottt.ottt.dto.EndServiceDTO" alias="EndServiceDTO"/>
+		<typeAlias type="com.ottt.ottt.dto.CategoryDTO" alias="CategoryDTO"/>
+  		<typeAlias type="com.ottt.ottt.dto.ContentGenreDTO" alias="ContentGenreDTO"/>
+  		<typeAlias type="com.ottt.ottt.dto.ContentCategoryDTO" alias="ContentCategoryDTO"/>
   	</typeAliases>
   </configuration>
   

@@ -45,8 +45,10 @@ public class DiaryController {
 
 		
 		// 로그인 했는지 확인하면서 본인 다이어리 눌렀는지 확인 
-		if(session.getAttribute("user_nicknm") != null
-				&& session.getAttribute("user_nicknm").equals(user)) {
+		if((session.getAttribute("user_nicknm") != null
+				&& session.getAttribute("user_nicknm").equals(user))
+					|| (session.getAttribute("user_nicknm") != null 
+							&& user == null)) {
 			
 			Integer my_no = (Integer) session.getAttribute("user_no");
 

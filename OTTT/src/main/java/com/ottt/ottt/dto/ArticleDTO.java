@@ -16,12 +16,23 @@ public class ArticleDTO {
 	private Date	article_mod_dt;
 	private Integer	like_count;
 	private Integer	comment_count;
+	private Integer	report_cnt;
 	private String  user_nicknm;
 	private Integer	check_like_count;
 	private MultipartFile upFile;
 	private String article_image_name;
 	private String image;
+	private String	writer_chk;
+	private String fileDeleteYn;
 	
+	public String getWriter_chk() {
+		return writer_chk;
+	}
+
+	public void setWriter_chk(String writer_chk) {
+		this.writer_chk = writer_chk;
+	}
+
 	public String getUser_nicknm() {
 		return user_nicknm;
 	}
@@ -127,6 +138,14 @@ public class ArticleDTO {
 		this.comment_count = comment_count;
 	}
 
+	public Integer getReport_cnt() {
+		return report_cnt;
+	}
+
+	public void setReport_cnt(Integer report_cnt) {
+		this.report_cnt = report_cnt;
+	}
+
 	public Integer getCheck_like_count() {
 		return check_like_count;
 	}
@@ -155,18 +174,29 @@ public class ArticleDTO {
 		return image;
 	}
 
+	public String getFileDeleteYn() {
+		return fileDeleteYn;
+	}
+
+	public void setFileDeleteYn(String fileDeleteYn) {
+		this.fileDeleteYn = fileDeleteYn;
+	}
+
 	public void setImage(String image) {
 		this.image = image;
 	}
+
+
 
 	@Override
 	public String toString() {
 		return "ArticleDTO [article_no=" + article_no + ", user_no=" + user_no + ", article_index_no="
 				+ article_index_no + ", article_content=" + article_content + ", article_image=" + article_image
 				+ ", article_title=" + article_title + ", article_create_dt=" + article_create_dt + ", article_mod_dt="
-				+ article_mod_dt + ", like_count=" + like_count + ", comment_count=" + comment_count + ", user_nicknm="
-				+ user_nicknm + ", check_like_count=" + check_like_count + ", upFile=" + upFile
-				+ ", article_image_name=" + article_image_name + ", image=" + image + ", userDTO=" + userDTO + "]";
+				+ article_mod_dt + ", like_count=" + like_count + ", comment_count=" + comment_count + ", report_cnt="
+				+ report_cnt + ", user_nicknm=" + user_nicknm + ", check_like_count=" + check_like_count + ", upFile="
+				+ upFile + ", article_image_name=" + article_image_name + ", image=" + image + ", writer_chk="
+				+ writer_chk + ", userDTO=" + userDTO + "]";
 	}
 
 	@Override

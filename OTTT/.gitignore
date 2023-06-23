@@ -1,3 +1,7 @@
-/.metadata/
+/.metadata
+
+
 
 application.properties
+
+OTTT\src\main\webapp\WEB-INF\spring\root-context.xml

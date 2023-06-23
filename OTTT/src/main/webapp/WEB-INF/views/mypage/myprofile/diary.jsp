@@ -18,25 +18,7 @@
 		<%@ include file="../../fix/header.jsp" %>
 
 		<section class="sec01">
-			<nav class="mnb">
-				<ul>
-					<li>
-						<a href="<c:url value="/mypage/myreview" />" class="mreview">기록</a>
-					</li>
-					<li>
-					    <a href="<c:url value="/mypage/wishlist" />">찜목록</a>
-					</li>
-					<li>
-					    <a href="<c:url value="/mypage/watched" />">봤어요</a>
-					</li>
-					<li>
-					  	<a href="<c:url value="/mypage/alarm" />">알림함</a>
-					</li>
-					<li>
-					  	<a href="<c:url value="/mypage/message" />">쪽지함</a>
-					</li>
-				</ul>
-            </nav>
+		<%@ include file="../../fix/mnb.jsp" %>
 		</section>
 
 		<section class="sec02">

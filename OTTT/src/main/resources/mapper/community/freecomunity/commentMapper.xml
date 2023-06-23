@@ -5,7 +5,7 @@
   
 <mapper namespace="com.ottt.ottt.dao.CommentMapper">
 
-	<!-- 댓글목록 조회 -->
+	<!-- 댓그목록 조회 -->
 	<select id="getCommentList" parameterType="CommentDTO" resultType="CommentDTO">
 		/*com.ottt.ottt.dao.CommentMapper.getCommentList 호출*/
 		SELECT
