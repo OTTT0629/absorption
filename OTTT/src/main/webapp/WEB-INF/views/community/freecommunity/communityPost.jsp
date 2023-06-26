@@ -97,8 +97,7 @@
              					<div>
 					         		<input type="hidden" name="article_no" value="${articleDTO.article_no}"/>
 					         		<input type="hidden" name="user_no" value="${articleDTO.user_no}"/>
-									<!--  ${mode == "view" ? "readonly='readonly" : ""}  -->
-									<!-- 보기모드일때 textarea에  readonly="readonly"를 넣고 수정모드일때는 지운다. -->
+
              						<c:choose>
 										<c:when test="${mode == 'view' }">		
 											<a onclick="return false;" style="white-space: pre-wrap;" id="textP">${articleDTO.article_content }</a>
@@ -511,6 +510,32 @@
    			$("#preview").attr("src","");	//이미지 없애기
    			$(".container").hide();
    		}
+	   		
+   		/********************************************************************************/
+		function goProfile(user_no, user_nicknm) {
+			let form = document.createElement('form');				
+			
+			let data = {
+					user_no : user_no,
+					toURL : path
+	        };
+			
+			for (let key in data) {
+		        if (data.hasOwnProperty(key)) {
+		            let obj = document.createElement('input');
+		            obj.setAttribute('type', 'hidden');
+		            obj.setAttribute('name', key);
+		            obj.setAttribute('value', data[key]);
+		            form.appendChild(obj);
+		        }
+		    }
+			
+			form.setAttribute('method','post');
+			form.setAttribute('action','/ottt/profile?user=' +user_nicknm);
+							
+			document.body.appendChild(form);
+			form.submit();				
+		}
    		
 			
 			
@@ -551,8 +576,8 @@
 						createHtml +=	'<li class="comment_show">';
 						createHtml +=		'<div class="pro-dan">';
 						createHtml +=			'<div style="display: flex;">';
-						createHtml +=				'<a href="#"><img class="profile" src="'+v.image+'" alt="profile" ></a>';
-						createHtml +=				'<a class="nickname" href="../ottt박소율/mypageshow.html">'+v.cmt_writer+'</a>';
+						createHtml +=				'<a href="javascript:goProfile('+v.user_no +',\''+v.user_nicknm+'\')"><img class="profile" src="'+v.image+'" alt="profile" ></a>';
+						createHtml +=				'<a a href="javascript:goProfile('+v.user_no +',\''+v.user_nicknm+'\')" class="nickname">'+v.cmt_writer+'</a>';
 						createHtml +=				'<p id="current_date"  style="position: relative; left: 35px; bottom: 25px;" >'+fnTimeForToday(v.cmt_dt)+'</p>';
 						createHtml +=			'</div>';
 
@@ -806,7 +831,11 @@
 	   		   	    		$("#commentModal").modal("show");					
 	   					}								
    					}
-   				);		
+   				).fail(function () {
+	   			    // Ajax 요청이 실패한 경우 모달 표시
+	   			    $(".body").html("이미 신고 되었습니다.");
+	   			    $("#commentModal").modal("show");
+	   			});		
 	   		}
 	   		
 

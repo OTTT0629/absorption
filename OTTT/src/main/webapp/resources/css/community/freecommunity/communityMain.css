@@ -170,7 +170,6 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
     border: none;
     background-color: #0B0C0B;;
     width: 800px;
-    min-height: 5rem;
     max-height: max-content;
     overflow-y: hidden;
     resize: none;

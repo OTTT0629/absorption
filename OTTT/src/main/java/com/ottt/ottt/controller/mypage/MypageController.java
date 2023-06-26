@@ -1,5 +1,7 @@
 package com.ottt.ottt.controller.mypage;
 
+import java.net.URLEncoder;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -22,13 +24,19 @@ public class MypageController {
 
 	//마이페이지 메인
 	@GetMapping(value = "/mypage")
-	public String mypage(Model m, HttpServletRequest request, String toURL) {
+	public String mypage(Model m, String toURL, String user
+						, HttpServletRequest request, HttpSession session) throws Exception {
 		System.out.println("==========GET=============== toURL : " + toURL);
 		
 		if(!loginCheck(request))
 			return "redirect:/login?toURL="+toURL;
 		
-		HttpSession session = request.getSession();
+		// 본인인지 확인
+		if(!user.equals(session.getAttribute("user_nicknm"))) {
+			user = URLEncoder.encode(user, "UTF-8");
+			return "redirect:/profile?user="+user;
+		}			
+
 		String user_id = (String) session.getAttribute("id");
 		
 		try {
@@ -89,11 +97,10 @@ public class MypageController {
 		// 내 프로필인지 아닌지 확인
 		if((my_no != null)) {
 			if((my_no.equals(user_no))) {
-				UserDTO userDTO;
 				try {
-					userDTO = us.getUser(my_no);
-					m.addAttribute(userDTO);
-					return "redirect:/mypage";
+					UserDTO userDTO = us.getUser(my_no);
+					String user = URLEncoder.encode(userDTO.getUser_nicknm(), "UTF-8");
+					return "redirect:/mypage?user="+user;
 					
 				} catch (Exception e) { e.printStackTrace(); }
 			}

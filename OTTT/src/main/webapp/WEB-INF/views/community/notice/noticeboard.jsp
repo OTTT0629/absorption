@@ -124,14 +124,7 @@
     	<%@ include file="../../fix/header.jsp" %>
 
         <div id="line-1" >
-          <nav class="nav">
-          <a class="nav-link1" href="<c:url value='/community/freecommunity' />">자유게시판</a>
-          <a class="nav-link1" href="<c:url value='/community/endmovie/tving' />">종료예정작</a>
-          <a class="nav-link1" href="<c:url value='/community/priceInfoTving' />">가격정보</a>
-          <a class="nav-link1" href="<c:url value='/community/QnA' />">Q&A</a>
-          <a class="nav-link1" href="<c:url value='/community/notice' />" style="color: #33ff33;">공지사항</a>
-
-        </nav>
+          <%@ include file="../../fix/nav.jsp" %>
         </div>
 
 

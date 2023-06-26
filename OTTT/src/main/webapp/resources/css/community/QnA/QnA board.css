@@ -395,6 +395,13 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
     justify-content: space-between;
 }
 
+ .nav a:nth-child(4) {
+ 	color: #33ff33;
+}
+
+ .gnb li:nth-child(5) a {
+ 	color: #33ff33;
+}
 /* div{
     border: plum solid 1px;
 } */

@@ -122,39 +122,12 @@ header{
     flex-direction: row;    
 }
 
-.Lcontent {
-    width: 250px;
-    height: 100%;
-    position: relative;
-}
-
 .main {
     width: 950px;
     height: 100%;
     padding-top: 3px;
     display: flex;
     flex-direction: column;
-}
-
-.Lmenu {
-    width: 230px;
-    height: 400px;
-    margin-top: 47px;
-    background-color: #0B0C0B;
-    position: absolute ;
-    border-radius: 10px;
-}
-.Lmenu > ul {
-    margin-top: 60px;
-    padding-left: 0 !important;;
-}
-
-.Lmenu > ul > li {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin: 30px 0 0px 10px;
-    font-size: 20px;
 }
 
 .mimg {
@@ -260,4 +233,12 @@ header{
     color: #33ff33;
     background-color: #202020; 
     border-color: #33ff33;
+}
+
+.mnb ul li:nth-child(1) a {
+		color: #33ff33;
+}
+
+.mnb2 ul li:nth-child(1) a {
+		color: #33ff33;
 }

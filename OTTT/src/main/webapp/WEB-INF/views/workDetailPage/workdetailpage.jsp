@@ -327,16 +327,16 @@
                         <label for="starpoint_8" class="label_star" title="4"><span class="blind">4점</span></label>
                         <label for="starpoint_9" class="label_star" title="4.5"><span class="blind">4.5점</span></label>
                         <label for="starpoint_10" class="label_star" title="5"><span class="blind">5점</span></label>
-                        <input type="radio" name="rating" id="starpoint_1" class="star_radio" value="0.5">
-                        <input type="radio" name="rating" id="starpoint_2" class="star_radio" value="1">
-                        <input type="radio" name="rating" id="starpoint_3" class="star_radio" value="1.5">
-                        <input type="radio" name="rating" id="starpoint_4" class="star_radio" value="2">
-                        <input type="radio" name="rating" id="starpoint_5" class="star_radio" value="2.5">
-                        <input type="radio" name="rating" id="starpoint_6" class="star_radio" value="3">
-                        <input type="radio" name="rating" id="starpoint_7" class="star_radio" value="3.5">
-                        <input type="radio" name="rating" id="starpoint_8" class="star_radio" value="4">
-                        <input type="radio" name="rating" id="starpoint_9" class="star_radio" value="4.5">
-                        <input type="radio" name="rating" id="starpoint_10" class="star_radio" value="5">
+                        <input type="radio" name="rating" id="starpoint_1" class="star_radio" value="1">
+                        <input type="radio" name="rating" id="starpoint_2" class="star_radio" value="2">
+                        <input type="radio" name="rating" id="starpoint_3" class="star_radio" value="3">
+                        <input type="radio" name="rating" id="starpoint_4" class="star_radio" value="4">
+                        <input type="radio" name="rating" id="starpoint_5" class="star_radio" value="5">
+                        <input type="radio" name="rating" id="starpoint_6" class="star_radio" value="6">
+                        <input type="radio" name="rating" id="starpoint_7" class="star_radio" value="7">
+                        <input type="radio" name="rating" id="starpoint_8" class="star_radio" value="8">
+                        <input type="radio" name="rating" id="starpoint_9" class="star_radio" value="9">
+                        <input type="radio" name="rating" id="starpoint_10" class="star_radio" value="10">
                         <span class="starpoint_bg"></span>
                       </div>
                     </div>
@@ -372,7 +372,7 @@
   		<%double ratingAvg = (double) request.getAttribute("rating");  // Mapper에서 전달받은 평균 별점 값		
 		// 별점의 평균을 0.5 단위로 반올림
 
-		double roundedRating = (double) (Math.round(ratingAvg * 2)) / 2;%>
+		double roundedRating = (double) (ratingAvg / 2);%>
     <% for (double i = 0.5; i <= 5; i += 0.5) {
         String label = String.valueOf(i);
         String radioId = "starpoint_" + (int) (i * 2);
@@ -435,7 +435,7 @@
               <img class="aaa" src="${myReview.image}" >
             </div>
             <div class="user-name1">
-              <a href="../ottt박소율/mypageshow.html">
+              <a href="javascript:goProfile('${ReviewDTO.user_no }', '${ReviewDTO.user_nicknm}')">
                 <p class="user_nicknm"> ${myReview.user_nicknm} </p></a>
                 <p class="date-insert1" name="review_create_dt"><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${myReview.review_create_dt}"/></p>
               
@@ -444,7 +444,7 @@
               <li class="rating1">
               <div class="bbb">
               	<img src="${path}/resources/images/img/starone.png" alt="별점">
-                ${myReview.rating}
+                ${myReview.rating / 2 }
                 </div>
               </li>
               <li>
@@ -528,16 +528,16 @@
                       <label for="starpoint_18" class="label_star2" title="4"><span class="blind">4점</span></label>
                       <label for="starpoint_19" class="label_star2" title="4.5"><span class="blind">4.5점</span></label>
                       <label for="starpoint_20" class="label_star2" title="5"><span class="blind">5점</span></label>
-                      <input type="radio" name="rating" id="starpoint_11" class="star_radio2" value="0.5" >
-                      <input type="radio" name="rating" id="starpoint_12" class="star_radio2" value="1">
-                      <input type="radio" name="rating" id="starpoint_13" class="star_radio2" value="1.5">
-                      <input type="radio" name="rating" id="starpoint_14" class="star_radio2" value="2">
-                      <input type="radio" name="rating" id="starpoint_15" class="star_radio2" value="2.5">
-                      <input type="radio" name="rating" id="starpoint_16" class="star_radio2" value="3">
-                      <input type="radio" name="rating" id="starpoint_17" class="star_radio2" value="3.5">
-                      <input type="radio" name="rating" id="starpoint_18" class="star_radio2" value="4">
-                      <input type="radio" name="rating" id="starpoint_19" class="star_radio2" value="4.5">
-                      <input type="radio" name="rating" id="starpoint_20" class="star_radio2" value="5">
+                      <input type="radio" name="rating" id="starpoint_11" class="star_radio2" value="1" >
+                      <input type="radio" name="rating" id="starpoint_12" class="star_radio2" value="2">
+                      <input type="radio" name="rating" id="starpoint_13" class="star_radio2" value="3">
+                      <input type="radio" name="rating" id="starpoint_14" class="star_radio2" value="4">
+                      <input type="radio" name="rating" id="starpoint_15" class="star_radio2" value="5">
+                      <input type="radio" name="rating" id="starpoint_16" class="star_radio2" value="6">
+                      <input type="radio" name="rating" id="starpoint_17" class="star_radio2" value="7">
+                      <input type="radio" name="rating" id="starpoint_18" class="star_radio2" value="8">
+                      <input type="radio" name="rating" id="starpoint_19" class="star_radio2" value="9">
+                      <input type="radio" name="rating" id="starpoint_20" class="star_radio2" value="10">
                       <span class="starpoint_bg2"></span>
                     </div>
                   </div>
@@ -600,10 +600,11 @@
         <div class="review-box">      
           <div class="review-box-header">
             <div class="user-icon">
-              <img src="${ReviewDTO.image }" >
+            	<a href="javascript:goProfile('${ReviewDTO.user_no }', '${ReviewDTO.user_nicknm}')">
+              	<img src="${ReviewDTO.image }" ></a>
             </div>
             <div class="user-name">
-              <a href="../ottt박소율/mypageshow.html">
+              <a href="javascript:goProfile('${ReviewDTO.user_no }', '${ReviewDTO.user_nicknm}')">
                 <p class="user_nicknm"> ${ReviewDTO.user_nicknm} </p></a>
                 <p class="date-insert" name="review_create_dt"><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${ReviewDTO.review_create_dt}"/></p>
               
@@ -611,7 +612,7 @@
             <ul>
               <li class="rating">
               	<img src="${path}/resources/images/img/starone.png" alt="별점">
-                ${ReviewDTO.rating}
+                ${ReviewDTO.rating / 2}
               </li>
               <li>
                 <div class="heart">        

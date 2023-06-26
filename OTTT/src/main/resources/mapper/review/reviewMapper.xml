@@ -38,7 +38,7 @@
 	</select>
   
    <select id="ratingAvg" parameterType="int" resultType="double">
-		SELECT ROUND(AVG(rating), 1), tb_review.content_no
+		SELECT ROUND(AVG(rating)), tb_review.content_no
 		FROM tb_review
 		WHERE tb_review.content_no = #{content_no}
 		GROUP BY tb_review.content_no  

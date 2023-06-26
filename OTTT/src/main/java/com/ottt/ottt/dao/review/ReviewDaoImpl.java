@@ -63,8 +63,7 @@ public class ReviewDaoImpl implements ReviewDao {
 	}
 	@Override
 	public double ratingAvg(Integer content_no) throws Exception {
-		Double average = session.selectOne(namespace + "ratingAvg", content_no);
-		return (average != null) ? average : 0.0;
+		return session.selectOne(namespace + "ratingAvg", content_no);
 	}
 	
 	@Override

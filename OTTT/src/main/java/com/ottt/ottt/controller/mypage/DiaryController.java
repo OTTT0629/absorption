@@ -50,6 +50,8 @@ public class DiaryController {
 					|| (session.getAttribute("user_nicknm") != null 
 							&& user == null)) {
 			
+			m.addAttribute("userChk", true);
+			
 			Integer my_no = (Integer) session.getAttribute("user_no");
 
 			try {
@@ -77,6 +79,7 @@ public class DiaryController {
 				List<MyDiaryDTO> list = ds.getMyDiary(sc);
 				m.addAttribute("list", list);
 				m.addAttribute("pr", pageResolver);
+				m.addAttribute(userDTO);
 			
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -125,7 +128,7 @@ public class DiaryController {
 			m.addAttribute("myDiaryCnt", myDiaryCnt);
 			m.addAttribute("list", list);
 			m.addAttribute("pr", pageResolver);
-			
+			m.addAttribute(userDTO);			
 			
 		} catch (Exception e) {
 
@@ -146,16 +149,22 @@ public class DiaryController {
 		System.out.println("=============get write=============== ");
 		
 		System.out.println("=========================== content_no : " + content);
-				
 		
-		if (!loginCheck(request))
-			return "redirect:/login";
-
+		Integer my_no = (Integer) session.getAttribute("user_no");
 		
 		try {
+			// 나중에 수정
+			if(ds.diaryCnt(content, my_no)==1) {
+				
+				
+				return "redirect:/mypage/mydiary";
+			}
+			
+			UserDTO userDTO = us.getUser(my_no);
 			ContentDTO contentDTO = cs.getContent(content);
 			
 			m.addAttribute(contentDTO);
+			m.addAttribute(userDTO);
 			m.addAttribute("mode", "new");
 			
 			return "/mypage/myprofile/diary";
@@ -232,10 +241,12 @@ public class DiaryController {
 		
 		try {
 			Integer user_no = us.getUserNoId(sc.getUser());
+			UserDTO userDTO = us.getUser(user_no);
 			MyDiaryDTO myDiaryDTO = ds.getDiary(sc.getContent_no(),user_no);
 			System.out.println("============================ myDiaryDTO : " + myDiaryDTO.toString());
 			
 			m.addAttribute(myDiaryDTO);
+			m.addAttribute(userDTO);
 			char pub_stat = myDiaryDTO.getPublic_yn_cd();
 			
 			System.out.println("============================ pub_stat != '1' : " + (pub_stat != '1'));

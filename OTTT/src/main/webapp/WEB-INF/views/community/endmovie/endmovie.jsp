@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>endmovie</title>
+    <title>종료예정작</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     <script type="text/javascript" src="${path}/resources/js/community/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
@@ -19,63 +19,18 @@
   <body style="background-color: #202020;">
 	
      <div class="wrap">
-      <header >
-        <div class="logo">
-          <a href="<c:url value="/" />">
-            <img src="${path}/resources/images/logo/OTTT.png" alt="logo">
-          </a>
-        </div>
-        <nav class="gnb">
-          <ul>
-            <li>
-              <a href="<c:url value="/genre/movie" />">영화</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/drama" />">드라마</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/interest" />">예능</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/animation" />">애니</a>
-            </li>
-            <li>
-              <a href="<c:url value="/community" />" style="color: #33ff33;">게시판</a>
-            </li>
-          </ul>
-        </nav>
-        <div class="h-icon">
-          <ul>
-            <li>
-              <a href="<c:url value='/search' />">
-                <!-- <img src="./images/icon/search02.png" alt="검색"> -->
-              </a>
-            </li>
-            <li>
-              <a href="<c:url value='/mypage' />">
-                <!-- <img src="./images/icon/user01.png" alt="내 정보"> -->
-              </a>
-            </li>
-          </ul>
-        </div>
-      </header>
+     	<%@ include file="../../fix/header.jsp" %>
       <div id="line-1" >
-        <nav class="nav">
-          <a class="nav-link1" href="<c:url value='/community' />">자유게시판</a>
-          <a class="nav-link1" href="<c:url value='/community/endmovie' />" style="color: #33ff33;">종료예정작</a>
-          <a class="nav-link1" href="<c:url value='/community/priceInfoTving' />">가격정보</a>
-          <a class="nav-link1" href="<c:url value='/community/QnA' />">Q&A</a>
-          <a class="nav-link1" href="<c:url value='/community/notice' />">공지사항</a>
-        </nav>
+        <%@ include file="../../fix/nav.jsp" %>
       </div>
       <div id="line-2" >
         <nav class="nav2">
-          <button id="ott_1" class="nav-link2"><img class="ott_icon" src="${path}/resources/images/icon/티빙.png" alt="tving"></button>
-          <button id="ott_2" class="nav-link2"><img class="ott_icon" src="${path}/resources/images/icon/netplix.png" alt="netflix"></button>
-          <button id="ott_3" class="nav-link2"><img class="ott_icon" src="${path}/resources/images/icon/웨이브.png" alt="wavve"></button>
-          <button id="ott_4" class="nav-link2"><img class="ott_icon" src="${path}/resources/images/icon/쿠팡플레이.png" alt="coupang"></button>
-          <button id="ott_5" class="nav-link2"><img class="ott_icon" src="${path}/resources/images/icon/왓챠.png" alt="watcha"></button>
-          <button id="ott_6" class="nav-link2"><img class="ott_icon" src="${path}/resources/images/icon/디즈니플러스.png" alt="disney"></button>
+          <button id="ott_1" class="nav-link2"><img class="ott_icon" src="https://myottt.s3.ap-northeast-2.amazonaws.com/ott/tving.png" alt="tving"></button>
+          <button id="ott_2" class="nav-link2"><img class="ott_icon" src="https://myottt.s3.ap-northeast-2.amazonaws.com/ott/netplix.png" alt="netflix"></button>
+          <button id="ott_3" class="nav-link2"><img class="ott_icon" src="https://myottt.s3.ap-northeast-2.amazonaws.com/ott/wave.png" alt="wavve"></button>
+          <button id="ott_4" class="nav-link2"><img class="ott_icon" src="https://myottt.s3.ap-northeast-2.amazonaws.com/ott/couple.png" alt="coupang"></button>
+          <button id="ott_5" class="nav-link2"><img class="ott_icon" src="https://myottt.s3.ap-northeast-2.amazonaws.com/ott/watcha.png" alt="watcha"></button>
+          <button id="ott_6" class="nav-link2"><img class="ott_icon" src="https://myottt.s3.ap-northeast-2.amazonaws.com/ott/disney.png" alt="disney"></button>
         </nav>
       </div>
 	<div class="voucher-inner-wrap">

@@ -34,24 +34,16 @@ public class WishController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(WishController.class);
 
-		//wishlist 메인 
+		//MyWishlist 메인 
 		@GetMapping(value = "/wishlist")
-		public String wishlist(String user, SearchItem sc, HttpSession session, Model m) {
+		public String myWishlist(String user, SearchItem sc, HttpSession session, Model m) {
+			
+			// 본인인지 확인			
+			if(user.equals(session.getAttribute("user_nicknm")))
+				m.addAttribute("userChk", true);
 			
 			logger.info("================================== wishlist 진입");			
-			
-			logger.info("================================== user : " + user);
-			
-			logger.info("================================== sc.getUser : " + sc.getUser());
-			
-			logger.info("================================== sc.getUser_no : " + sc.getUser_no());
-			
-			logger.info("================================== sc.getPage : " + sc.getPage());
-			
-			logger.info("================================== sc.getPageSize : " + sc.getPageSize());
-			
-			logger.info("================================== sc.getOffset : " + sc.getOffset());		
-			
+
 			
 			try {
 				Integer user_no = us.getUserNoId(user);
@@ -93,7 +85,7 @@ public class WishController {
 		
 		@PostMapping("/getwishlist")
 		@ResponseBody
-		public Map<String, Object> getWishList(SearchItem sc, Model m) {
+		public Map<String, Object> getMyWishList(SearchItem sc, Model m) {
 			
 			
 			logger.info("================================== getwishlist 진입");
@@ -132,5 +124,4 @@ public class WishController {
 			return result;
 		}
 		
-
 }

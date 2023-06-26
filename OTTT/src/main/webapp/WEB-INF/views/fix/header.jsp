@@ -30,7 +30,7 @@
 		        location.href = "/ottt/mypage?toURL=" + toURL;
 		    } else {
 		        console.log(toURL);
-		        location.href = "/ottt/mypage";
+		        location.href = "/ottt/mypage?user=" + '${sessionScope.user_nicknm}';
 		    }
 		}
 			
@@ -43,23 +43,23 @@
       </div>
       <nav class="gnb">
          <ul>
-               <li>
-                  <a class="movie" href="<c:url value="/genre/movie" />">영화</a>
-               </li>
-               <li>
-                    <a class="drama" href="<c:url value="/genre/drama" />">드라마</a>
-               </li>
-               <li>
-                    <a class="inter" href="<c:url value="/genre/interest" />">예능</a>
-               </li>
-               <li>
-                    <a class="ani" href="<c:url value="/genre/animation" />">애니</a>
-               </li>
-               <li>
-                    <a class="community" href="<c:url value="/community/freecommunity" />">게시판</a>
-               </li>
-            </ul>
-        </nav>
+         	<li>
+				<a class="movie" href="<c:url value="/genre/movie" />">영화</a>
+             </li>
+             <li>
+                 <a class="drama" href="<c:url value="/genre/drama" />">드라마</a>
+             </li>
+             <li>
+                 <a class="inter" href="<c:url value="/genre/interest" />">예능</a>
+             </li>
+             <li>
+                 <a class="ani" href="<c:url value="/genre/animation" />">애니</a>
+             </li>
+             <li>
+                 <a class="community" href="<c:url value="/community/freecommunity" />">게시판</a>
+             </li>
+          </ul>
+		</nav>
            <div class="h-icon">
               <ul>
                  <li>

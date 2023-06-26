@@ -15,6 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>OTTT</title>     
     <script src="${path}/resources/js/workDetailPage/script/jquery-3.6.1.min.js"></script>
+    <script src="${path}/resources/js/workDetailPage/script/reply.js"></script>
     <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
     rel="stylesheet"
@@ -185,7 +186,7 @@
   		<%double ratingAvg = (double) request.getAttribute("rating");  // Mapper에서 전달받은 평균 별점 값		
 		// 별점의 평균을 0.5 단위로 반올림
 
-		double roundedRating = (double) (Math.round(ratingAvg * 2)) / 2;%>
+		double roundedRating = (double) (ratingAvg / 2);%>
     <% for (double i = 0.5; i <= 5; i += 0.5) {
         String label = String.valueOf(i);
         String radioId = "starpoint_" + (int) (i * 2);
@@ -218,11 +219,12 @@
         </div>
                <div class="review-box1">      
           <div class="review-box-header">
-            <div class="user-icon"> 
-              <img src="${Review.image}" >
+            <div class="user-icon">
+            	<a href="javascript:goProfile('${Review.user_no }', '${Review.user_nicknm}')">
+              	<img src="${Review.image}" ></a>
             </div>
             <div class="user-name">
-              <a href="../ottt박소율/mypageshow.html">
+              <a href="javascript:goProfile('${Review.user_no }', '${Review.user_nicknm}')">
                 <p class="user_nicknm"> ${Review.user_nicknm} </p>
               </a>
               <p class="date-insert" name="review_create_dt"><fmt:formatDate pattern="yy-MM-dd hh:mm" value="${Review.review_create_dt}"/></p>
@@ -232,7 +234,7 @@
             <ul>
               <li class="rating">
                  <img src="${path}/resources/images/img/starone.png" alt="별점">
-                ${Review.rating}
+                ${Review.rating / 2}
               </li>
               <li>
                 <div class="heart">        
@@ -370,11 +372,12 @@
         <c:forEach var="CommentDTO" items="${list}">
          <div class="reply-box">      
           <div class="reply-box-header">
-            <div class="user-icon"> 
-              <img src="${CommentDTO.image }">
+            <div class="user-icon">
+            	<a href="javascript:goProfile('${CommentDTO.user_no }', '${CommentDTO.user_nicknm}')">
+              	<img src="${CommentDTO.image }"></a>
             </div>
             <div class="user-name">
-              <a href="../ottt박소율/mypageshow.html">
+              <a href="javascript:goProfile('${CommentDTO.user_no }', '${CommentDTO.user_nicknm}')">
                 <p class="user_nicknm"> ${CommentDTO.user_nicknm} </p>
               </a>
               <p class="reply-date-insert" name="cmt_dt"><fmt:formatDate pattern="yy-MM-dd hh:mm" value="${CommentDTO.cmt_dt}"/></p>

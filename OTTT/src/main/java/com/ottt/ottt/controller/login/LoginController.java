@@ -62,7 +62,7 @@ public class LoginController {
 		
 		System.out.println("==========login post=============== toURL : " + toURL);
 
-		toURL = (toURL == null || toURL.equals("")) ? "/" : toURL;
+		toURL = (toURL == null || toURL.equals("") || toURL.equals("null")) ? "/" : toURL;
 				
 		String encodedURL = URLEncoder.encode(toURL, "UTF-8")
 				.replace("%2F", "/")

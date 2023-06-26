@@ -15,7 +15,7 @@
 	<head>
     	<meta charset="utf-8">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
-    	<title>communityMain</title>
+    	<title>자유게시판</title>
     	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     	<link rel="stylesheet" href="${path}/resources/css/community/freecommunity/communityMain.css" >
     	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -155,6 +155,7 @@
 			let CATEGORY =  "${category}" != "" ? "${category}" : "all";
 			let schText = "${schText}";
 			let INDEX = 0;
+			let USER = "${user}" != "" ? "${user}" : "";
 			console.log("path :"+PATH);
 			console.log("url  :"+URL);
 			
@@ -199,14 +200,14 @@
 				/********************************************************************************/
 				/*	DOM ajaxStart 영역 ajax 호출시 로딩효과											*/
 				/*******************************************************************************/
- 	      		$(document).ajaxStart(function() {
+ 	      		 $(document).ajaxStart(function() {
 	          		$('#loading').show();
 	        	}).ajaxStop(function() {
 	          		setTimeout(function() {
 		            	$('#loading').hide();
 		          	}, 1000); // 1초의 지연 효과를 줍니다.
 	        	});
-				 
+				  
 				
 				/********************************************************************************/
 				/*	스크롤 Event정의 영역															*/
@@ -241,6 +242,7 @@
 						fnCallAjaxSelectArticleList({
 							"offset": OFFSET
 							, "category": CATEGORY
+							, "user" : USER
 							, "schText" : $("#schText").val()
 						});
 
@@ -277,9 +279,10 @@
 				    $("#post_list").html("");
 				    // 아티클 목록을 불러오는 ajax 함수 호출
 				    fnCallAjaxSelectArticleList({
-				      "offset": OFFSET,
-				      "category": "all",
-				      "schText": $("#schText").val()
+				      "offset": OFFSET
+				      , "category": "all"
+				      , "user" : USER
+				      , "schText": $("#schText").val()
 				    });
 				  }
 				});
@@ -292,6 +295,7 @@
 					fnCallAjaxSelectArticleList({
 						"offset": OFFSET
 						, "category": "all"
+						, "user" : USER
 						, "schText" : $("#schText").val()
 					});
 
@@ -301,6 +305,7 @@
 				fnCallAjaxSelectArticleList({
 					"offset": OFFSET
 					, "category": CATEGORY
+					, "user" : USER
 					, "schText": $("#schText").val()
 				});
 				
@@ -421,7 +426,7 @@
 						
 						createHtml +=				'<input onclick="javascript:fnPushHeart('+ v.article_no +','+INDEX+');" class="heart_img" type="image" id="pushHeart_'+INDEX+'" src="'+ PATH +'/resources/images/img/heart_'+heartOnOffImg+'.png" alt="heart">';
 						createHtml +=				'<span style="margin-left: 4px;" id="likeCount_'+INDEX+'"	>'+ v.like_count +'</span>'; 
-						createHtml +=				'<input class="re_comment_img" type="image" src="'+ PATH +'/resources/images/img/comment.png" alt="comment">';
+						createHtml +=				'<input class="re_comment_img" type="image" src="'+ PATH +'/resources/images/img/comment.png" alt="comment" onclick="goToPost('+v.article_no+');">';
 						createHtml +=				'<span style="margin-left: 4px;">'+ v.comment_count +'</span>';                  
 						createHtml +=			'</div>';
 						createHtml +=		'</div>';
@@ -465,7 +470,11 @@
 				//목록 영역 클리어
 				$("#post_list").html("");
 				//ajax 함수 호출
-				fnCallAjaxSelectArticleList({ "offset": OFFSET, "category": CATEGORY});
+				fnCallAjaxSelectArticleList({
+					"offset": OFFSET
+					, "category": CATEGORY
+					, "user" : USER
+				});
 			}
 			
 
@@ -597,9 +606,20 @@
 	   		   	    		$("#postMainModal").modal("show");					
 	   					}								
    					}
-   				);		
+   				).fail(function () {
+	   			    // Ajax 요청이 실패한 경우 모달 표시
+	   			    $(".body").html("이미 신고 되었습니다.");
+	   			    $("#postMainModal").modal("show");
+	   			});		
 	   			
 	   		}
+
+			/* 댓글 이미지 클릭 시 */
+			 function goToPost(postNumber) {
+	   	    // 게시글 번호를 가지고 이동하는 로직을 작성합니다.
+	   	    var postLink = '/ottt/community/post?article_no=' + postNumber; // 게시글 번호를 이용한 링크 생성
+	   	    window.location.href = postLink; // 생성된 링크로 이동
+	   	  }
 			
 		</script>
 	</body>

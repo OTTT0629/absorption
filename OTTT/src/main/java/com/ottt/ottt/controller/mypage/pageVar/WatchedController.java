@@ -33,9 +33,15 @@ public class WatchedController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(WishController.class);
 
-	//watched 메인 
+	//Watched 메인 
 	@GetMapping(value = "/watched")
-	public String watched(String user, SearchItem sc, HttpSession session, Model m) {
+	public String myWatched(String user, SearchItem sc, HttpSession session, Model m) {
+		
+		// 본인인지 확인
+		if(user.equals(session.getAttribute("user_nicknm")))
+			m.addAttribute("userChk", true);
+		
+		logger.info("================================== watched 진입");	
 		
 		try {
 			Integer user_no = us.getUserNoId(user);
@@ -55,8 +61,7 @@ public class WatchedController {
 			
 			logger.info("================================== sc.getPageSize : " + sc.getPageSize());
 			
-			logger.info("================================== sc.getOffset : " + sc.getOffset());
-			
+			logger.info("================================== sc.getOffset : " + sc.getOffset());			
 			
 			int watchedCnt = ws.watchedCnt(sc);
 			m.addAttribute("watchedCnt", watchedCnt);
@@ -112,6 +117,5 @@ public class WatchedController {
 		
 		return result;
 	}
-		
 	
 }

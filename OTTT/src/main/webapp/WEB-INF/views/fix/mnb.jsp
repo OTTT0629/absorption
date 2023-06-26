@@ -13,7 +13,7 @@
 <body>
 	<nav class="mnb">		
 		<ul>
-			<li><a href="<c:url value="/mypage/mydiary" />" class="mreview">기록</a></li>
+			<li><a href="<c:url value="/mypage/mydiary?user=${sessionScope.user_nicknm }" />">기록</a></li>
 			<li><a href="<c:url value="/mypage/wishlist?user=${sessionScope.user_nicknm}" />">찜목록</a></li>
 			<li><a href="<c:url value="/mypage/watched?user=${sessionScope.user_nicknm}" />">봤어요</a></li>
 			<li><a href="<c:url value="/mypage/alarm" />">알림함</a></li>

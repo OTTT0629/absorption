@@ -54,4 +54,12 @@ public class MyDiaryDaoImpl implements MyDiaryDao {
 		return session.insert(namespace + "insert", mydiaryDTO);
 	}
 
+	@Override
+	public int diaryCnt(Integer content_no, Integer user_no) throws Exception {
+		Map map = new HashMap();
+		map.put("content_no", content_no);
+		map.put("user_no", user_no);
+		return session.selectOne(namespace + "diaryCnt", map);
+	}
+
 }

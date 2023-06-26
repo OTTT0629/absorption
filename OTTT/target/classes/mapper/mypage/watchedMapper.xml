@@ -13,8 +13,9 @@
 		on a.content_no = b.content_no
 		join tb_content c
 		on b.content_no = c.content_no
-		full outer join tb_review d
-		on d.content_no = c.content_no
+		left join tb_review d
+		on a.content_no = d.content_no
+		and a.user_no = d.user_no
 		where a.user_no = #{user_no}
 		<include refid="selectCategory" />
 		order by a.watched_date desc

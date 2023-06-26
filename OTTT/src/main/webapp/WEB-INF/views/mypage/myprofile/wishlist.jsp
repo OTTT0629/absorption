@@ -21,7 +21,10 @@
 		<%@ include file="../../fix/header.jsp" %>
 	
 		<section class="sec01">
-			<%@ include file="../../fix/mnb.jsp" %>
+			<c:choose>
+				<c:when test="${userChk eq true }"><%@ include file="../../fix/mnb.jsp" %></c:when>
+				<c:otherwise><%@ include file="../../fix/mnb2.jsp" %></c:otherwise>
+			</c:choose>
 		</section>
 		
 		<section class="sec02">

@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>나의 다이어리</title>
+    <title>나만의 다이어리</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     <link rel="stylesheet" href="${path}/resources/css/mypage/mydiary.css" >
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
@@ -18,36 +18,15 @@
 		<%@ include file="../../fix/header.jsp" %>
 
 		<section class="sec01">
-		<%@ include file="../../fix/mnb.jsp" %>
+			<c:choose>
+				<c:when test="${userChk eq true }"><%@ include file="../../fix/mnb.jsp" %></c:when>
+				<c:otherwise><%@ include file="../../fix/mnb2.jsp" %></c:otherwise>
+			</c:choose>
 		</section>
 
       	<section class="sec02">
-      		<div class="Lcontent">
-      			<div class="Lmenu">
-      				<ul>
-      					<li id="Ldiary">
-      						<img class="mimg" src="${path}/resources/images/img/free-icon-diary-6393039.png" alt="다이어리">
-      						<a href="<c:url value="/mypage/mydiary" />">나만의 다이어리</a>
-   						</li>
-   						<li id="Lrivew">
-		                	<img class="mimg" src="${path}/resources/images/img/free-icon-review-3501894.png" alt="리뷰">
-		                	<a href="<c:url value="/mypage/myreview" />">나의 리뷰</a>
-		              	</li>
-		              	<li id="Lwrite">
-		                	<img class="mimg" src="${path}/resources/images/img/KakaoTalk_20230411_161709664.png" alt="게시글">
-		                	<a href="<c:url value="/mycommynity/postcommu" />">내가 쓴 게시글</a>
-		              	</li>
-		              	<li id="Llike">
-			                <img class="mimg" src="${path}/resources/images/img/heart_on.png" alt="좋아요">
-			                <a href="<c:url value="/mycommynity/likecommunity" />">좋아요 누른 게시글</a>
-			            </li>
-		    	        <li id="Lcomments">
-		                	<img class="mimg" src="${path}/resources/images/img/comment.png" alt="댓글">
-		                	<a href="<c:url value="/mycommynity/comment" />">나의 댓글</a>
-		              	</li>
-	              	</ul>
-              	</div>
-           	</div>     
+      		<%@ include file="../../fix/Lmenu.jsp" %>
+   
 
 	        <div class="main">
 	        	<div class="main-head">
