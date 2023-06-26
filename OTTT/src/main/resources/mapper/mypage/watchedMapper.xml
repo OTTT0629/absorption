@@ -7,7 +7,7 @@
   	  
 	  <select id="watchedListSelect" parameterType="SearchItem" resultType="WatchedDTO">
 		SELECT distinct a.user_no, a.content_no, b.category_no
-			, c.content_nm, c.thumbnail, a.watched_date, d.rating
+			, c.content_nm, c.thumbnail, a.watched_date, (d.rating/2) as rating
 		FROM tb_watched a
 		join tb_content_category b
 		on a.content_no = b.content_no

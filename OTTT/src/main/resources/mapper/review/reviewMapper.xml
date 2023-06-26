@@ -38,10 +38,10 @@
 	</select>
   
    <select id="ratingAvg" parameterType="int" resultType="double">
-		SELECT ROUND(AVG(rating)), tb_review.content_no
+		SELECT coalesce(ROUND(AVG(rating)), 0) as rating, tb_review.content_no
 		FROM tb_review
 		WHERE tb_review.content_no = #{content_no}
-		GROUP BY tb_review.content_no  
+		GROUP BY tb_review.content_no
    </select>
   
    <select id="selectReview" parameterType="map" resultType="ReviewDTO">
@@ -165,6 +165,54 @@
 		on a.user_no = c.user_no
 		where c.user_no = #{user_no}
 	</select>
+	
+	<!-- 댓글 쓴 리뷰 -->
+	<select id="cmtReviewAlL" parameterType="SearchItem" resultType="ReviewDTO">
+		SELECT distinct b.review_no, b.rating, b.content_no, c.content_nm, c.thumbnail
+		FROM tb_comment a
+		join tb_review b
+		on a.review_no = b.review_no
+		join tb_content c
+		on b.content_no = c.content_no
+		where a.user_no = #{user_no}
+		order by a.review_no desc
+	  	limit #{pageSize} offset #{offset}	
+	</select>
+	
+	<select id="cmtReviewCnt" parameterType="SearchItem" resultType="int">
+		SELECT count(*)
+		FROM tb_comment a
+		join tb_review b
+		on a.review_no = b.review_no
+		join tb_content c
+		on b.content_no = c.content_no
+		where a.user_no = #{user_no}	
+	</select>
+	
+	<!-- 댓글 쓴 리뷰 -->
+	<select id="cmtReviewAlL" parameterType="SearchItem" resultType="ReviewDTO">
+		select b.review_no, b.rating, b.content_no, c.content_nm, c.thumbnail
+		from tb_review_like a
+		join tb_review b
+		on a.review_no = b.review_no
+		join tb_content c
+		on b.content_no = c.content_no
+		where a.user_no = #{user_no}
+		order by a.review_no desc
+	  	limit #{pageSize} offset #{offset}	
+	</select>
+	
+	<select id="cmtReviewCnt" parameterType="SearchItem" resultType="int">
+		SELECT count(*)
+		from tb_review_like a
+		join tb_review b
+		on a.review_no = b.review_no
+		join tb_content c
+		on b.content_no = c.content_no
+		where a.user_no = #{user_no}	
+	</select>
+	
+	
 
 	<insert id="replyReport" parameterType="ReportDTO">
 		insert into tb_report (user_no, target_user_no , cmt_no, report_type)
