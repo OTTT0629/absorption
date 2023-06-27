@@ -189,8 +189,8 @@
 		where a.user_no = #{user_no}	
 	</select>
 	
-	<!-- 댓글 쓴 리뷰 -->
-	<select id="cmtReviewAlL" parameterType="SearchItem" resultType="ReviewDTO">
+	<!-- 좋아요 한 리뷰 -->
+	<select id="likeReviewAlL" parameterType="SearchItem" resultType="ReviewDTO">
 		select b.review_no, b.rating, b.content_no, c.content_nm, c.thumbnail
 		from tb_review_like a
 		join tb_review b
@@ -202,7 +202,7 @@
 	  	limit #{pageSize} offset #{offset}	
 	</select>
 	
-	<select id="cmtReviewCnt" parameterType="SearchItem" resultType="int">
+	<select id="likeReviewCnt" parameterType="SearchItem" resultType="int">
 		SELECT count(*)
 		from tb_review_like a
 		join tb_review b
