@@ -11,8 +11,8 @@ import java.util.Objects;
 public class FollowDTO {
 
 	private Integer follow_no;
-	private int followers_no;
-	private int following_no;
+	private Integer followers_no;
+	private Integer following_no;
 	private char status;
 	
 	public FollowDTO() {}
@@ -29,7 +29,7 @@ public class FollowDTO {
 		return followers_no;
 	}
 
-	public void setFollowers_no(int followers_no) {
+	public void setFollowers_no(Integer followers_no) {
 		this.followers_no = followers_no;
 	}
 
@@ -37,7 +37,7 @@ public class FollowDTO {
 		return following_no;
 	}
 
-	public void setFollowing_no(int following_no) {
+	public void setFollowing_no(Integer following_no) {
 		this.following_no = following_no;
 	}
 

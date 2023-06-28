@@ -176,16 +176,16 @@
                       <label for="starpoint_8" class="label_star" title="4"><span class="blind">4점</span></label>
                       <label for="starpoint_9" class="label_star" title="4.5"><span class="blind">4.5점</span></label>
                       <label for="starpoint_10" class="label_star" title="5"><span class="blind">5점</span></label>
-                      <input type="radio" name="rating" id="starpoint_1" class="star_radio" value="0.5" >
-                      <input type="radio" name="rating" id="starpoint_2" class="star_radio" value="1">
-                      <input type="radio" name="rating" id="starpoint_3" class="star_radio" value="1.5">
-                      <input type="radio" name="rating" id="starpoint_4" class="star_radio" value="2">
-                      <input type="radio" name="rating" id="starpoint_5" class="star_radio" value="2.5">
-                      <input type="radio" name="rating" id="starpoint_6" class="star_radio" value="3">
-                      <input type="radio" name="rating" id="starpoint_7" class="star_radio" value="3.5">
-                      <input type="radio" name="rating" id="starpoint_8" class="star_radio" value="4">
-                      <input type="radio" name="rating" id="starpoint_9" class="star_radio" value="4.5">
-                      <input type="radio" name="rating" id="starpoint_10" class="star_radio" value="5">
+                      <input type="radio" name="rating" id="starpoint_1" class="star_radio" value="1" >
+                      <input type="radio" name="rating" id="starpoint_2" class="star_radio" value="2">
+                      <input type="radio" name="rating" id="starpoint_3" class="star_radio" value="3">
+                      <input type="radio" name="rating" id="starpoint_4" class="star_radio" value="4">
+                      <input type="radio" name="rating" id="starpoint_5" class="star_radio" value="5">
+                      <input type="radio" name="rating" id="starpoint_6" class="star_radio" value="6">
+                      <input type="radio" name="rating" id="starpoint_7" class="star_radio" value="7">
+                      <input type="radio" name="rating" id="starpoint_8" class="star_radio" value="8">
+                      <input type="radio" name="rating" id="starpoint_9" class="star_radio" value="9">
+                      <input type="radio" name="rating" id="starpoint_10" class="star_radio" value="10">
                       <span class="starpoint_bg"></span>
                     </div>
                   </div>

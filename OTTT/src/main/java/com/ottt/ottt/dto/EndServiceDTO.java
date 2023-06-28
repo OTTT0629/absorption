@@ -12,8 +12,8 @@ import java.util.Objects;
 public class EndServiceDTO {
 
 	private Integer end_service_no;
-	private int ott_no;
-	private int content_no;
+	private Integer ott_no;
+	private Integer content_no;
 	private Date end_date;
 	private String content_nm;
 	private String ott_nm;
@@ -46,7 +46,7 @@ public class EndServiceDTO {
 		this.ott_nm = ott_nm;
 	}
 
-	public EndServiceDTO(int day, String content_nm) {
+	public EndServiceDTO(Integer day, String content_nm) {
         this.day = day;
         this.content_nm = content_nm;
     }
@@ -63,7 +63,7 @@ public class EndServiceDTO {
 		return ott_no;
 	}
 
-	public void setOtt_no(int ott_no) {
+	public void setOtt_no(Integer ott_no) {
 		this.ott_no = ott_no;
 	}
 
@@ -71,7 +71,7 @@ public class EndServiceDTO {
 		return content_no;
 	}
 
-	public void setContent_no(int content_no) {
+	public void setContent_no(Integer content_no) {
 		this.content_no = content_no;
 	}
 

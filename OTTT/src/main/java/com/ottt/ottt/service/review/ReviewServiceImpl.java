@@ -159,6 +159,26 @@ public class ReviewServiceImpl implements ReviewService {
 	public int replyReport(ReportDTO reportDTO) throws Exception {
 		// TODO Auto-generated method stub
 		return reviewDao.replyReport(reportDTO);
+	}
+
+	@Override
+	public List<ReviewDTO> getLikeReview(SearchItem sc) throws Exception {
+		return reviewDao.likeReviewAll(sc);
+	}
+
+	@Override
+	public int likeReviewCnt(SearchItem sc) throws Exception {
+		return reviewDao.likeReviewCnt(sc);
+	}
+
+	@Override
+	public List<ReviewDTO> getCmtReview(SearchItem sc) throws Exception {
+		return reviewDao.cmtReviewAll(sc);
+	}
+
+	@Override
+	public int cmtReviewCnt(SearchItem sc) throws Exception {
+		return reviewDao.cmtReviewCnt(sc);
 	} 
 
 }

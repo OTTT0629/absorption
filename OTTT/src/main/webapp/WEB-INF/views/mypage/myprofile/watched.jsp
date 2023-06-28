@@ -122,15 +122,15 @@
 			        for (let i = response.pr.beginPage; i <= response.pr.endPage; i++) {
 			        	  createPage += '<li class="page-item">';
 			        	  if (i === response.pr.sc.page) {
-			        	    createPage += '<a class="page-link selpage" onclick="javascript:fnPage('+i+','+response.pr.sc.category_no+ ')">' + i + '</a>';
+			        	    createPage += '<a class="page-link selpage" onclick="javascript:fnPage('+i+','+response.pr.sc.categoryNo+ ')">' + i + '</a>';
 			        	  } else {
-			        	    createPage += '<a class="page-link" onclick="javascript:fnPage('+i+','+response.pr.sc.category_no+ ')">' + i + '</a>';
+			        	    createPage += '<a class="page-link" onclick="javascript:fnPage('+i+','+response.pr.sc.categoryNo+ ')">' + i + '</a>';
 			        	  }
 			        	  createPage += '</li>';
 			        	}
 			        if (response.pr.showNext) {
 			            createPage += '<li class="page-item">';
-			            createPage += '<a class="page-link" onclick="javascript:fnPage('+(response.pr.endPage+1)+','+response.pr.sc.category_no+ ')">&gt;</a></li>';
+			            createPage += '<a class="page-link" onclick="javascript:fnPage('+(response.pr.endPage+1)+','+response.pr.sc.categoryNo+ ')">&gt;</a></li>';
 			        }
 			        createPage += '</ul></nav></div>';
 			    }

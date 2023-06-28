@@ -11,44 +11,28 @@ import java.util.Objects;
 public class UserOTTDTO {
 	
 	private Integer user_no;
-	private int     ott_no;
+	private Integer ott_no;
 	
-	
-	
-	public UserOTTDTO() {}
-
-
-
 	public Integer getUser_no() {
 		return user_no;
 	}
-
-
 
 	public void setUser_no(Integer user_no) {
 		this.user_no = user_no;
 	}
 
-
-
 	public int getOtt_no() {
 		return ott_no;
 	}
 
-
-
-	public void setOtt_no(int ott_no) {
+	public void setOtt_no(Integer ott_no) {
 		this.ott_no = ott_no;
 	}
-
-
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(user_no);
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -61,8 +45,6 @@ public class UserOTTDTO {
 		UserOTTDTO other = (UserOTTDTO) obj;
 		return Objects.equals(user_no, other.user_no);
 	}
-
-
 
 	@Override
 	public String toString() {

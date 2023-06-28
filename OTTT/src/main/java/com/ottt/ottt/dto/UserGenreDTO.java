@@ -10,37 +10,29 @@ import java.util.Objects;
 public class UserGenreDTO {
 	
 	private Integer user_no;
-	private int 	genre_no;
-	
-	
-	public UserGenreDTO() {}
+	private Integer	genre_no;
 
 
 	public Integer getUser_no() {
 		return user_no;
 	}
 
-
 	public void setUser_no(Integer user_no) {
 		this.user_no = user_no;
 	}
-
 
 	public int getGenre_no() {
 		return genre_no;
 	}
 
-
-	public void setGenre_no(int genre_no) {
+	public void setGenre_no(Integer genre_no) {
 		this.genre_no = genre_no;
 	}
-
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(user_no);
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -54,12 +46,9 @@ public class UserGenreDTO {
 		return Objects.equals(user_no, other.user_no);
 	}
 
-
 	@Override
 	public String toString() {
 		return "UserGenreDTO [user_no=" + user_no + ", genre_no=" + genre_no + "]";
 	}
-	
-
 
 }

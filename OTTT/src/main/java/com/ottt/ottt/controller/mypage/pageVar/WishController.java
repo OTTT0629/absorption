@@ -42,7 +42,7 @@ public class WishController {
 			if(user.equals(session.getAttribute("user_nicknm")))
 				m.addAttribute("userChk", true);
 			
-			logger.info("================================== wishlist 진입");			
+			logger.info("================================== wishlist 진입");
 
 			
 			try {
@@ -100,7 +100,7 @@ public class WishController {
 			
 			logger.info("================================== sc.getOffset : " + sc.getOffset());
 			
-			logger.info("================================== sc.getCategoryNo : " + sc.getCategoryNo());			
+			logger.info("================================== sc.getCategoryNo : " + sc.getCategoryNo());
 			
 			Map<String, Object> result = new HashMap<String, Object>();
 			
@@ -115,7 +115,6 @@ public class WishController {
 				result.put("list", ws.getMyWishlist(sc));
 				result.put("wishListCnt", wishListCnt);
 				result.put("pr", pageResolver);
-
 
 			} catch (Exception e) {
 				e.printStackTrace();

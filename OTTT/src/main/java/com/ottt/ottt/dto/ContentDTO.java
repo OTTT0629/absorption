@@ -1,5 +1,6 @@
 package com.ottt.ottt.dto;
 
+import java.util.List;
 import java.util.Objects;
 
 /*
@@ -22,11 +23,8 @@ public class ContentDTO {
 	private Integer age;
 	private String country;
 	private String category_nm;
-	private float  rating;
+	private Float  rating;
 	private String main_img;
-
-	public ContentDTO() {}
-	
 	
 
 	public Integer getContent_no() {
@@ -101,11 +99,11 @@ public class ContentDTO {
 		this.category_nm = category_nm;
 	}
 
-	public float getRating() {
+	public Float getRating() {
 		return rating;
 	}
 	
-	public void setRating(float rating) {
+	public void setRating(Float rating) {
 		this.rating = rating;
 	}
 

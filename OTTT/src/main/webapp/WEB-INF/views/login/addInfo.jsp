@@ -268,9 +268,18 @@
 		  		</section>
 		  	
 			  	<div class="back" style="display: inline-block; pointer-events: none;">
-					<a href="<c:url value="/" />" style="pointer-events: none;">
-						<input type="button" value="건너뛰기" style="pointer-events: auto;">
-		  			</a>
+			  		<c:choose>
+			  			<c:when test="${mode eq 'modify' }">
+							<a href="<c:url value ='/mypage/setting' />" style="pointer-events: none;">
+								<input type="button" value="뒤로" style="pointer-events: auto;">
+			  				</a>
+		  				</c:when>
+		  				<c:otherwise>
+		  					<a href="<c:url value="/" />" style="pointer-events: none;">
+								<input type="button" value="건너뛰기" style="pointer-events: auto;">
+			  				</a>
+		  				</c:otherwise>
+	  				</c:choose>
 				</div>
 				
 				<div class="complate">

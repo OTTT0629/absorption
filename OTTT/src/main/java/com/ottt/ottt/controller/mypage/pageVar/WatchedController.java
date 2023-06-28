@@ -31,7 +31,7 @@ public class WatchedController {
 	@Autowired
 	WatchedService ws;
 	
-	private static final Logger logger = LoggerFactory.getLogger(WishController.class);
+	private static final Logger logger = LoggerFactory.getLogger(WatchedController.class);
 
 	//Watched 메인 
 	@GetMapping(value = "/watched")

@@ -50,4 +50,9 @@ public class MyDiaryServiceImpl implements MyDiaryService {
 		return myDiaryDao.diaryCnt(content_no, user_no);
 	}
 
+	@Override
+	public List<MyDiaryDTO> getDiaryList(Integer user_no) throws Exception {
+		return myDiaryDao.diaryAll(user_no);
+	}
+
 }

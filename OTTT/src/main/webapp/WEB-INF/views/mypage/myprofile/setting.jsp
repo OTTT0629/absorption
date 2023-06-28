@@ -43,10 +43,16 @@
 				    <a href="<c:url value='/mypage/setting/myprofile' />">프로필 변경</a>
 				</div>
 				<div>
-				    <a href="<c:url value='/mypage/setting/myinfo' />">내 정보 변경</a>
+				    <a href="<c:url value='/mypage/setting/myinfo' />">비밀번호 변경</a>
+				</div>
+				<div>
+				    <a href="<c:url value='/mypage/setting/addInfo' />">내 정보 변경</a>
 				</div>
 				<div>
 				    <button class="byebye">회원탈퇴</button>
+				</div>
+				<div class="backBtn">
+				    <a href="<c:url value='/mypage?user=${sessionScope.user_nicknm }' />">뒤로</a>
 				</div>
 			</div>
 		</form>

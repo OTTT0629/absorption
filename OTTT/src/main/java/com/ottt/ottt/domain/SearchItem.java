@@ -48,6 +48,7 @@ public class SearchItem {
 		this.user_no = user_no;
 	}
 
+
 	public Integer getPage() {
 		return page;
 	}
@@ -117,6 +118,17 @@ public class SearchItem {
 		return UriComponentsBuilder.newInstance()
 				.queryParam("user", user)
 				.queryParam("page", page)
+				.build().toString();
+	}
+	
+	public String getContentList() {
+		return getList(page);
+	}
+	
+	public String getContentList(Integer page) {
+		return UriComponentsBuilder.newInstance()
+				.queryParam("page", page)
+				.queryParam("option", option)
 				.build().toString();
 	}
 	
@@ -215,5 +227,13 @@ public class SearchItem {
 	public Integer getCategoryNo() {
 		return categoryNo;
 	}
+
+	@Override
+	public String toString() {
+		return "SearchItem [page=" + page + ", pageSize=" + pageSize + ", user=" + user + ", user_no=" + user_no
+				+ ", content_no=" + content_no + ", content_nm=" + content_nm + ", ott_no=" + ott_no + ", genre_no="
+				+ genre_no + ", category_no=" + category_no + ", categoryNo=" + categoryNo + "]";
+	}
+	
 	
 }

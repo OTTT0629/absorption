@@ -142,17 +142,14 @@ public class ReviewDaoImpl implements ReviewDao {
 	}
 	@Override
 	public int selectLikeCount(ReviewLikeDTO dto) throws Exception {
-		// TODO Auto-generated method stub
 		return session.selectOne(namespace+"selectLikeCount", dto);
 	}
 	@Override
 	public int insertLike(ReviewLikeDTO dto) throws Exception {
-		// TODO Auto-generated method stub
 		return session.insert(namespace+"insertLike", dto);
 	}
 	@Override
 	public int deleteLike(ReviewLikeDTO dto) throws Exception {
-		// TODO Auto-generated method stub
 		return session.delete(namespace+"deleteLike", dto);
 	}
 	@Override
@@ -164,18 +161,31 @@ public class ReviewDaoImpl implements ReviewDao {
 	}
 	@Override
 	public int updateReplyReview(ReviewDTO reviewDTO) throws Exception {
-		// TODO Auto-generated method stub
 		return session.update(namespace + "updateReplyReview", reviewDTO);
 	}
 	@Override
 	public int updateReply(CommentDTO CommentDTO) throws Exception {
-		// TODO Auto-generated method stub
 		return session.update(namespace + "updateReply", CommentDTO);
 	}
 	@Override
 	public int replyReport(ReportDTO reportDTO) throws Exception {
-		// TODO Auto-generated method stub
 		return session.insert(namespace + "replyReport", reportDTO);
+	}
+	@Override
+	public List<ReviewDTO> likeReviewAll(SearchItem sc) throws Exception {
+		return session.selectList(namespace + "likeReviewAll" , sc);
+	}
+	@Override
+	public int likeReviewCnt(SearchItem sc) throws Exception {
+		return session.selectOne(namespace + "likeReviewCnt", sc);
+	}
+	@Override
+	public List<ReviewDTO> cmtReviewAll(SearchItem sc) throws Exception {
+		return session.selectList(namespace + "cmtReviewAll" , sc);
+	}
+	@Override
+	public int cmtReviewCnt(SearchItem sc) throws Exception {
+		return session.selectOne(namespace + "cmtReviewCnt", sc);
 	}
 
 }

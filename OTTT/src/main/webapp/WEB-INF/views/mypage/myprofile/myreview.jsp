@@ -10,8 +10,9 @@
     <title>나의 리뷰</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     <link rel="stylesheet" href="${path}/resources/css/mypage/myreview.css" >
+    <script src="${path}/resources/js/mypage/review.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 <body>
 	<div class="wrap">
@@ -27,70 +28,142 @@
 		<section class="sec02">
 			<%@ include file="../../fix/Lmenu.jsp" %>
 		
-			<div class="main">				
-				<c:forEach var="ReviewDTO" items="${list }" >
-				
-					<a href="<c:url value='/detailPage/reply?content_no=${ReviewDTO.content_no}&review_no=${ReviewDTO.review_no}' />" class="review">
-						<div class="post">					  	
-						    <div class="Lside">
-						      	<img class="poster" src="${ReviewDTO.thumbnail}">
-						    </div>
-						    <div class="Rside">
-						    	<div class="rv-head">
-						    		<span class="title">${ReviewDTO.content_nm}</span>
-						    		<div class="starating">
-						    			<img class="star" src="${path}/resources/images/img/starone.png">
-						        		<span class="point">${ReviewDTO.rating}</span>						    		
-						    		</div>
-						      	</div>
-						
-								<div class="rv-main">
-								  <span>${ReviewDTO.review_content}</span>
-								</div>
-						    </div>
-					  	</div>
-				  	</a>			  	
-			  	</c:forEach>
-			  	
+			<div class="main">
+				<div class="show"></div>
+						  	
 			  	<div class=paging-container>
-		    		<div class="paging">
-		    			<c:if test="${myReviewCnt == null || myReviewCnt == 0 }">		    			
-		    				<div class="title-line" style="text-align: center;">
-		    					내가 쓴 리뷰가 없습니다.
-		    				</div>
-		    			</c:if>
-		    			
-		    			<c:if test="${myReviewCnt != null || myReviewCnt != 0 }">
-		    			<!-- 페이지 번호 배너-->
-				        <div class="page-num" style="margin-top: 10px;">
-				        	<nav aria-label="Page navigation example" class="d-flex flex-row justify-content-center">
-				          	<ul class="pagination">				          		
-					            <c:if test="${pr.showPrev}">
-						            <li class="page-item">
-						            	<a class="page-link" href="<c:url value="/mypage/myreview${pr.sc.getList(pr.beginPage-1) }" />">&lt;</a>
-					            	</li>
-					            </c:if>
-					            <c:forEach var="i" begin="${pr.beginPage }" end="${pr.endPage }">
-					            	<li class="page-item">
-					            		<a class="page-link" href="<c:url value="/mypage/myreview${pr.sc.getList(i) }" />">${i }</a>
-				            		</li>
-				            	</c:forEach>
-			            		<c:if test="${pr.showNext}">
-			            			<li class="page-item">
-			            				<a class="page-link" href="<c:url value="/mypage/myreview${pr.sc.getList(pr.endPage+1) }" />" >&gt;</a>
-		            				</li>
-            					</c:if>
-       						</ul>
-   							</nav>
-						</div>
-						</c:if>  			
-		    			
-		    		</div>	    	
-	    		</div>	    	
-			
+		    		<div class="paging"></div>	    	
+	    		</div>			
 			</div>
 		</section>
 	</div>
+	
+	<script type="text/javascript">
+		let CATEGORY =  "${category}" != "" ? "${category}" : 0;
+		let CATENM =  "";
+		let USER = '${userDTO.user_nicknm}'
+		let PAGE = '${pr.sc.page}'
+		let PAGESIZE = '${pr.sc.pageSize}'
+		
+		let reviewCnt = ${reviewCnt}
+		
+		$(document).ready(function() {
+					
+			fnGetReviewList({
+				"user" : USER
+				, "categoryNo" : CATEGORY
+				, "page" : PAGE
+				, "pageSize" : PAGESIZE
+			})
+			
+			fnLmenuColor(CATEGORY)
+			
+		})
+		
+		function fnLmenuColor(category) {
+			if (category == 1) {
+				$('.Lmenu a').css("color", "#fff")
+			    $('.Lmenu ul li:nth-child(3) a').css("color", "#33ff33");
+				CATENM = "좋아요 한"
+			}
+			
+			if (category == 2) {
+				$('.Lmenu a').css("color", "#fff")
+			    $('.Lmenu ul li:nth-child(4) a').css("color", "#33ff33");
+				CATENM = "댓글 작성"
+			}			
+		}
+		
+		function fnGetReviewList(param) {
+	
+			$.post(
+					"/ottt/mypage/getreviewlist"
+				    ,param
+				    ,fnCreatReviewList
+				)
+				
+				console.log("param")
+				console.log(param)
+			
+		}
+				
+		function fnCreatReviewList(response) {
+			
+			console.log("ajax 통신결과");
+			console.log(response);
+			
+			let createHtml = "";
+			
+			let list = response.list;
+			let reviewCnt = response.reviewCnt
+			let pr = response.pr
+			
+			list.forEach(function(v) {
+				createHtml += '<a href="<c:url value="/detailPage/reply?content_no='+v.content_no+'&review_no='+v.review_no+'" />" class="review">'
+				createHtml += '<div class="post">'
+				createHtml += '<div class="Lside">'
+				createHtml += '<img class="poster" src="'+v.thumbnail+'"></div>'
+				createHtml += '<div class="Rside">'
+				createHtml += '<div class="rv-head">'
+				createHtml += '<span class="title">'+v.content_nm+'</span>'
+				createHtml += '<div class="starating">'
+				createHtml += '<img class="star" src="${path}/resources/images/img/starone.png">'
+				createHtml += '<span class="point">'+v.rating+'</span>'
+				createHtml += '</div></div>'
+				createHtml += '<div class="rv-main">'
+				createHtml += '<span>'+v.review_content+'</span>'
+				createHtml += '</div>'
+				createHtml += '</div></div></a>'
+			})
+
+			
+			$('.show').append(createHtml)
+			
+			let createPage = "";
+			
+			 if (response.reviewCnt == null || response.reviewCnt === 0) {
+			        createPage += '<div class="title-line" style="text-align: center;">'+CATENM+' 리뷰가 없습니다</div>';
+			    } else {
+			        createPage += '<div class="page-num" style="margin-top: 10px;">';
+			        createPage += '<nav aria-label="Page navigation example" class="d-flex flex-row justify-content-center">';
+			        createPage += '<ul class="pagination">';
+			        if (response.pr.showPrev) {
+			            createPage += '<li class="page-item">';
+			            createPage += '<a class="page-link" onclick="javascript:fnPage('+ (response.pr.beginPage-1) +','+response.pr.sc.categoryNo+ ')">&lt;</a></li>';
+			        }
+			        for (let i = response.pr.beginPage; i <= response.pr.endPage; i++) {
+			        	  createPage += '<li class="page-item">';
+			        	  if (i === response.pr.sc.page) {
+			        	    createPage += '<a class="page-link selpage" onclick="javascript:fnPage('+i+','+response.pr.sc.categoryNo+ ')">' + i + '</a>';
+			        	  } else {
+			        	    createPage += '<a class="page-link" onclick="javascript:fnPage('+i+','+response.pr.sc.categoryNo+ ')">' + i + '</a>';
+			        	  }
+			        	  createPage += '</li>';
+			        	}
+			        if (response.pr.showNext) {
+			            createPage += '<li class="page-item">';
+			            createPage += '<a class="page-link" onclick="javascript:fnPage('+(response.pr.endPage+1)+','+response.pr.sc.categoryNo+ ')">&gt;</a></li>';
+			        }
+			        createPage += '</ul></nav></div>';
+			    }
+				
+			$('.paging').append(createPage)
+		}
+				
+		function fnPage(page, category) {
+			$(".show").html("");
+			$('.paging').html("");
+			
+			fnGetReviewList({
+				"user" : USER
+				, "categoryNo" : category
+				, "page" : page
+				, "pageSize" : PAGESIZE
+			});
+			
+		}		
+				
+	</script>
 
 </body>
 </html>

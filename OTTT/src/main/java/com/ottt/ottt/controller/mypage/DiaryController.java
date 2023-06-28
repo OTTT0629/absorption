@@ -46,9 +46,7 @@ public class DiaryController {
 		
 		// 로그인 했는지 확인하면서 본인 다이어리 눌렀는지 확인 
 		if((session.getAttribute("user_nicknm") != null
-				&& session.getAttribute("user_nicknm").equals(user))
-					|| (session.getAttribute("user_nicknm") != null 
-							&& user == null)) {
+				&& session.getAttribute("user_nicknm").equals(user))) {
 			
 			m.addAttribute("userChk", true);
 			
@@ -108,7 +106,7 @@ public class DiaryController {
 
 			PageResolver pageResolver = new PageResolver(myDiaryCnt, sc);
 
-			List<MyDiaryDTO> listAll = ds.getMyDiary(sc);
+			List<MyDiaryDTO> listAll = ds.getDiaryList(user_no);
 			List<MyDiaryDTO> list = new ArrayList<>();
 			
 			for(MyDiaryDTO myDiaryDTO : listAll) {
@@ -116,6 +114,13 @@ public class DiaryController {
 					list.add(myDiaryDTO);
 				}
 			}
+			
+			int startIndex = (sc.getPage() - 1) * sc.getPageSize();
+			int endIndex = Math.min(startIndex + sc.getPageSize(), list.size());
+			List<MyDiaryDTO> diaryList = list.subList(startIndex, endIndex);
+			
+			System.out.println("============================ startIndex : " + startIndex);
+			System.out.println("============================ endIndex : " + endIndex);
 			
 			System.out.println("============================ list.size() : " + list.size());
 			
@@ -126,7 +131,7 @@ public class DiaryController {
 			System.out.println("============================ pageResolver.getTotalCnt() : " + pageResolver.getTotalCnt());
 			
 			m.addAttribute("myDiaryCnt", myDiaryCnt);
-			m.addAttribute("list", list);
+			m.addAttribute("list", diaryList);
 			m.addAttribute("pr", pageResolver);
 			m.addAttribute(userDTO);			
 			

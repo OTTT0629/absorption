@@ -62,4 +62,9 @@ public class MyDiaryDaoImpl implements MyDiaryDao {
 		return session.selectOne(namespace + "diaryCnt", map);
 	}
 
+	@Override
+	public List<MyDiaryDTO> diaryAll(Integer user_no) throws Exception {
+		return session.selectList(namespace + "diaryAll", user_no);
+	}
+
 }

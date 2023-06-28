@@ -42,4 +42,12 @@ public interface ReviewService {
     //나의 리뷰
     List<ReviewDTO> getMyReview(SearchItem sc) throws Exception;
     int myReviewCnt(SearchItem sc) throws Exception;
+    
+  	//좋아요 한 리뷰
+    List<ReviewDTO> getLikeReview(SearchItem sc) throws Exception;
+    int likeReviewCnt(SearchItem sc) throws Exception;
+    
+  	//댓글 작성 리뷰
+    List<ReviewDTO> getCmtReview(SearchItem sc) throws Exception;
+    int cmtReviewCnt(SearchItem sc) throws Exception;
 }

@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="${path}/resources/css/mypage/mydiary.css" >
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+    <script src="${path}/resources/js/mypage/review.js"></script>
 </head>
 <body>
 	<div class="wrap">
@@ -29,9 +30,6 @@
    
 
 	        <div class="main">
-	        	<div class="main-head">
-	        		<a href="<c:url value="/mypage/mydiary/write?content=6" />" class="write">글쓰기</a>
-	          	</div>
 	          	
 	          	<c:forEach var="MydiaryDTO" items="${list }" >
 				
@@ -73,7 +71,14 @@
 					            </c:if>
 					            <c:forEach var="i" begin="${pr.beginPage }" end="${pr.endPage }">
 					            	<li class="page-item">
-					            		<a class="page-link" href="<c:url value="/mypage/mydiary${pr.sc.getList(i) }" />">${i }</a>
+					            		<c:choose>
+					            			<c:when test="${pr.sc.page == i }">
+					            				<a class="page-link selpage" href="<c:url value="/mypage/mydiary${pr.sc.getList(i) }" />">${i }</a>
+					            			</c:when>
+					            			<c:otherwise>
+					            				<a class="page-link" href="<c:url value="/mypage/mydiary${pr.sc.getList(i) }" />">${i }</a>
+					            			</c:otherwise>
+					            		</c:choose>
 				            		</li>
 				            	</c:forEach>
 			            		<c:if test="${pr.showNext}">

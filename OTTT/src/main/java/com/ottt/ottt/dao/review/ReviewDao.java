@@ -47,5 +47,12 @@ public interface ReviewDao {
 	List<ReviewDTO> myReviewAll(SearchItem sc) throws Exception;
 	int myReviewCnt(SearchItem sc) throws Exception;
 	
+	//좋아요 누른 리뷰
+	List<ReviewDTO> likeReviewAll(SearchItem sc) throws Exception;
+	int likeReviewCnt(SearchItem sc) throws Exception;
+	
+	//댓글 작성 리뷰
+	List<ReviewDTO> cmtReviewAll(SearchItem sc) throws Exception;
+	int cmtReviewCnt(SearchItem sc) throws Exception;
 	
 }

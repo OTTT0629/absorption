@@ -9,25 +9,25 @@ import java.util.Date;
  */
 public class WatchedDTO {
 
-	private int user_no;
-	private int content_no;
+	private Integer user_no;
+	private Integer content_no;
 	private Date watched_date;
 	private String content_nm;
-	private float  rating;
+	private Float  rating;
 	private String thumbnail;
 	private Integer	category_no;
 	
 	
-	public int getUser_no() {
+	public Integer getUser_no() {
 		return user_no;
 	}
-	public void setUser_no(int user_no) {
+	public void setUser_no(Integer user_no) {
 		this.user_no = user_no;
 	}
-	public int getContent_no() {
+	public Integer getContent_no() {
 		return content_no;
 	}
-	public void setContent_no(int content_no) {
+	public void setContent_no(Integer content_no) {
 		this.content_no = content_no;
 	}
 	public Date getWatched_date() {
@@ -42,10 +42,10 @@ public class WatchedDTO {
 	public void setContent_nm(String content_nm) {
 		this.content_nm = content_nm;
 	}
-	public float getRating() {
+	public Float getRating() {
 		return rating;
 	}
-	public void setRating(float rating) {
+	public void setRating(Float rating) {
 		this.rating = rating;
 	}
 	public String getThumbnail() {

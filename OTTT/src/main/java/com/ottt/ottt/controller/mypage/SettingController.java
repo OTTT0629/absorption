@@ -192,5 +192,12 @@ public class SettingController {
 		}
 
 	}
+	
+	//추가정보 입력
+	@GetMapping("/setting/addInfo")
+	public String addInfo(Model m) {
+		m.addAttribute("mode", "modify");
+		return "/login/addInfo";		
+	}
 
 }

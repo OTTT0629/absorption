@@ -63,8 +63,9 @@ public class MypageController {
 			
 			if(my_no.equals(user_no)) {
 				UserDTO userDTO = us.getUser(my_no);
+				String my_nicknm = URLEncoder.encode(userDTO.getUser_nicknm(), "UTF-8");
 				m.addAttribute(userDTO);
-				return "redirect:/mypage";			
+				return "redirect:/mypage?user="+my_nicknm;
 			}
 			
 			UserDTO userDTO = us.getUser(user_no);

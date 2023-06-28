@@ -6,6 +6,18 @@
   <mapper namespace="com.ottt.ottt.dao.mypage.MyDiaryMapper">
   	
   	<!-- 나의 다이어리  -->
+	<select id="diaryAll" parameterType="int" resultType="MyDiaryDTO">
+		SELECT a.public_yn_cd, a.content_no, a.mydiary_content, a.user_no
+		, a.mydiary_create_dt, a.mydiary_mod_dt, b.content_nm, b.thumbnail
+		FROM tb_my_diary a
+		join tb_content b
+		on a.content_no = b.content_no
+		join tb_user c
+		on a.user_no = c.user_no
+		where c.user_no = #{user_no}
+		order by a.mydiary_create_dt desc
+	</select>
+	
 	<select id="myDiaryAll" parameterType="SearchItem" resultType="MyDiaryDTO">
 		SELECT a.public_yn_cd, a.content_no, a.mydiary_content, a.user_no
 		, a.mydiary_create_dt, a.mydiary_mod_dt, b.content_nm, b.thumbnail

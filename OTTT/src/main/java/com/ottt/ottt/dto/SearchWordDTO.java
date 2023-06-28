@@ -10,7 +10,7 @@ import java.util.Objects;
 public class SearchWordDTO {
 
 	private Integer search_word_no;
-	private int user_no;
+	private Integer user_no;
 	private String search_content;
 	
 	public SearchWordDTO() {}
@@ -27,7 +27,7 @@ public class SearchWordDTO {
 		return user_no;
 	}
 
-	public void setUser_no(int user_no) {
+	public void setUser_no(Integer user_no) {
 		this.user_no = user_no;
 	}
 

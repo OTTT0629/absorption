@@ -131,7 +131,7 @@ header{
 .main {
     width: 950px;
     height: 100%;
-    padding-top: 38px;
+    padding-top: 28px;
     display: flex;
     flex-direction: column;
 }
@@ -144,7 +144,7 @@ header{
 .post {
     width: auto;
     height: 230px;
-    margin: 10px 0;
+    margin: 20px 0;
     background-color: #3F3B3B;
     display: flex;
     flex-direction: row;
@@ -189,10 +189,6 @@ header{
     font-size: 25px;
 }
 
-#Lreview {
-    color: #33ff33;
-}
-
 .mreview {
     color: #33ff33;
 }
@@ -214,6 +210,7 @@ header{
     color: #ffffff; 
     background-color: #202020;
     border-color: #ffffff;
+    cursor: pointer;
   }
     
 .page-link:focus, .page-link:hover {
@@ -230,6 +227,10 @@ header{
 .point {
 	position: relative;
     top: 3px;
+}
+
+.Lmenu ul li:nth-child(2) a {
+	color: #33ff33;
 }
 
 .mnb ul li:nth-child(1) a {

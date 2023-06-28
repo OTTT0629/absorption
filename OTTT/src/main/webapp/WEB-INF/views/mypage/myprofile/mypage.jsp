@@ -58,20 +58,20 @@
 				<div class="mycontent">
 					<ul>
 						<li class="mydiary">
-							<img class="mimg" src="${path}/resources/images/img/free-icon-diary-6393039.png" alt="다이어리">
+							<img class="mimg" src="${path}/resources/images/img/free-icon-diary-6393039.png" >
 							<a href="<c:url value="/mypage/mydiary?user=${userDTO.user_nicknm }" />">나만의 다이어리</a>
 						</li>
 			            <li class="myrivew">
-			            	<img class="mimg" src="${path}/resources/images/img/free-icon-review-3501894.png" alt="리뷰">
+			            	<img class="mimg" src="${path}/resources/images/img/free-icon-review-3501894.png" >
 			                <a href="<c:url value="/mypage/myreview?user=${userDTO.user_nicknm }" />">나의 리뷰</a>
 			            </li>
 			            <li class="#">
-			                <img class="mimg" src="${path}/resources/images/img/heart_on.png" alt="다이어리">
-			                <a href="#">좋아요 누른 리뷰</a>
+			                <img class="mimg" src="${path}/resources/images/img/heart_on.png" >
+			                <a href="<c:url value="/mypage/myreview?user=${userDTO.user_nicknm }&category=1" />">좋아요 누른 리뷰</a>
 			            </li>
 			            <li class="#">
-			                <img class="mimg" src="${path}/resources/images/img/comment.png" alt="리뷰">
-			                <a href="#">댓글 작성 리뷰</a>
+			                <img class="mimg" src="${path}/resources/images/img/comment.png" >
+			                <a href="<c:url value="/mypage/myreview?user=${userDTO.user_nicknm }&category=2" />">댓글 작성 리뷰</a>
 			            </li>
 		            </ul>
 	            </div>

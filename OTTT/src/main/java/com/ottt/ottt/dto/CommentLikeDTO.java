@@ -10,7 +10,7 @@ import java.util.Objects;
 public class CommentLikeDTO {
 	
 	private Integer cmt_like_no;
-	private int 	cmt_no;
+	private Integer	cmt_no;
 	
 	
 	public CommentLikeDTO() {}
@@ -31,7 +31,7 @@ public class CommentLikeDTO {
 	}
 
 
-	public void setCmt_no(int cmt_no) {
+	public void setCmt_no(Integer cmt_no) {
 		this.cmt_no = cmt_no;
 	}
 
