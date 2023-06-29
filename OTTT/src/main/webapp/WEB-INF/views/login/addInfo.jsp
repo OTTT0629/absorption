@@ -270,6 +270,7 @@
 			  	<div class="back" style="display: inline-block; pointer-events: none;">
 			  		<c:choose>
 			  			<c:when test="${mode eq 'modify' }">
+			  				<input type="hidden" name="mode" value="modify"/>
 							<a href="<c:url value ='/mypage/setting' />" style="pointer-events: none;">
 								<input type="button" value="뒤로" style="pointer-events: auto;">
 			  				</a>

@@ -63,7 +63,6 @@ public class MessageSearchItem {
 		//쿼리스트링 정보 생성해서 넘기기
 		return UriComponentsBuilder.newInstance()
 				.queryParam("page", page)
-				.queryParam("pageSize", pageSize)
 				.build().toString();
 	}
 	

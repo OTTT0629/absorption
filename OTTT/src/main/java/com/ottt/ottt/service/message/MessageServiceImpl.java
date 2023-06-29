@@ -19,17 +19,7 @@ public class MessageServiceImpl implements MessageService{
 	public MessageDTO read(Integer message_no) throws Exception {
 		return messageDao.selectMsg(message_no);
 	}
-
-	@Override
-	public List<MessageDTO> loadRecvList(MessageSearchItem msc) throws Exception {
-		return messageDao.selectRecv(msc);
-	}
-
-	@Override
-	public List<MessageDTO> loadSendList(MessageSearchItem msc) throws Exception {
-		return messageDao.selectSend(msc);
-	}
-
+	
 	//쪽지 생성할때 데이터 베이스에 추가하지는 않는데 DTO에 변수값을 false로 줫음
 	//sysout하면 보임
 	//보낸 메시지 지울 때 값을 트루로 바꿔주고 받은 메시지 지울 때도 나머지 하나 트루로 바꾸면 데이터베이스 삭제(메서드만들기)
@@ -42,11 +32,6 @@ public class MessageServiceImpl implements MessageService{
 	public int removeMsg(Integer message_no) throws Exception {
 		return messageDao.delete(message_no);
 	}
-
-//	@Override
-//	public int removeMsgAll(String user_no) throws Exception {
-//		return 0;
-//	}
 
 	@Override
 	public int getSendResultCnt(MessageSearchItem msc) throws Exception {
@@ -82,6 +67,16 @@ public class MessageServiceImpl implements MessageService{
 	@Override
 	public int removeBySender(MessageDTO messageDTO) throws Exception {
 		return messageDao.deleteBySender(messageDTO);
+	}
+
+	@Override
+	public List<MessageDTO> loadRecvListAll(MessageSearchItem msc) throws Exception {
+		return messageDao.selectRecvAll(msc);
+	}
+
+	@Override
+	public List<MessageDTO> loadSendListAll(MessageSearchItem msc) throws Exception {
+		return messageDao.selectSendAll(msc);
 	}
 
 }

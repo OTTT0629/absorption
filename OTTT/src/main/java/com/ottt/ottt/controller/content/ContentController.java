@@ -1,4 +1,4 @@
-package com.ottt.ottt.controller.genre;
+package com.ottt.ottt.controller.content;
 
 import java.util.HashMap;
 import java.util.List;
@@ -32,7 +32,7 @@ import com.ottt.ottt.service.mypage.WishlistService;
 
 @Controller
 @RequestMapping("/genre")
-public class GenreController {
+public class ContentController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ReviewController.class);
 	
@@ -41,47 +41,32 @@ public class GenreController {
 	@Autowired
 	WishlistService wishlistService;
 
-	@GetMapping("/animation")
-	public String animation() {
-		return "/genre/animation";
-	}
 	
-	@GetMapping("/drama")
-	public String drama() {
-		return "/genre/drama";
-	}
-	
-	@GetMapping("/interest")
-	public String interest() {
-		return "/genre/interest";
-	}
-	
-	@GetMapping("/movie")
+	@GetMapping("/content")
 	public String movie(Model m, @RequestParam(value = "ott", required = false) List<Integer> ott
 							 , @RequestParam(value = "genre", required = false) List<Integer> genre
+							 , String category
 							 , HttpServletRequest request, HttpSession session, SearchItem sc) {
 		
 		logger.info("================================== movie 진입");
 		
 		sc.setPageSize(20);
-		
+		sc.setCategory(category);
 		sc.setOtt_no(ott);
 		sc.setGenre_no(genre);
 		
+		logger.info("================================== sc.setCategory(category) : " + sc.getCategory());
+		
 		try {
-			Integer totalCnt = contentService.getMovieTotalCount(sc);
+			Integer totalCnt = contentService.getContentTotalCount(sc);
 			
 			PageResolver pageResolver = new PageResolver(totalCnt, sc);
 			
-			List<ContentDTO> movieList = contentService.getMovieList(sc);
-			
-			for(ContentDTO con : movieList) {
-				System.out.println("=========== con ========= : " + con.toString());
-			}
-			
+			List<ContentDTO> contentList = contentService.getContentList(sc);
+						
 			
 			Map<Integer, List<ContentOTTDTO>> ottmap = new HashMap<Integer, List<ContentOTTDTO>>();
-			for(ContentDTO contentDTO : movieList) {				
+			for(ContentDTO contentDTO : contentList) {				
 				List<ContentOTTDTO> ottList = contentService.getOttImg(contentDTO.getContent_no());
 				ottmap.put(contentDTO.getContent_no(), ottList);
 			}
@@ -95,9 +80,11 @@ public class GenreController {
 			
 			m.addAttribute("totalCnt", totalCnt);
 			m.addAttribute("pr", pageResolver);
-			m.addAttribute("movieList", movieList);
+			m.addAttribute("category", category);
+			m.addAttribute("contentList", contentList);
+
 			
-			return "/genre/movie";
+			return "/content/content";
 			
 		} catch (Exception e) {
 			e.printStackTrace();

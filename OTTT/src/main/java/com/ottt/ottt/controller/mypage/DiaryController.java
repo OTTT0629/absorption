@@ -1,5 +1,6 @@
 package com.ottt.ottt.controller.mypage;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -146,7 +147,7 @@ public class DiaryController {
 
 	@GetMapping("/mydiary/write")
 	public String writeDiary(Integer content, HttpSession session, Model m
-								, HttpServletRequest request) {
+								, HttpServletRequest request) throws Exception {
 		
 		if (!loginCheck(request))
 			return "redirect:/login";
@@ -156,13 +157,13 @@ public class DiaryController {
 		System.out.println("=========================== content_no : " + content);
 		
 		Integer my_no = (Integer) session.getAttribute("user_no");
-		
+		String user = URLEncoder.encode((String)session.getAttribute("user_nicknm"), "UTF-8");
 		try {
 			// 나중에 수정
 			if(ds.diaryCnt(content, my_no)==1) {
 				
 				
-				return "redirect:/mypage/mydiary";
+				return "redirect:/mypage/mydiary?user="+user;
 			}
 			
 			UserDTO userDTO = us.getUser(my_no);
@@ -199,13 +200,14 @@ public class DiaryController {
 		
 		System.out.println("=========================== myDiaryDTO.getThumbnail() : " + myDiaryDTO.getThumbnail());
 
-		
+		;
 		try {
 			if(ds.write(myDiaryDTO) != 1)
 				throw new Exception("Write failed");
 			
 			rattr.addFlashAttribute("msg","WRT_OK");
-			return "redirect:/mypage/mydiary";
+			String user = URLEncoder.encode(us.getUser(myDiaryDTO.getUser_no()).getUser_nicknm(), "UTF-8");
+			return "redirect:/mypage/mydiary?user="+user;
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -319,7 +321,7 @@ public class DiaryController {
 	
 	@PostMapping("/mydiary/remove")
 	public String rmvDiary (MyDiaryDTO myDiaryDTO, SearchItem sc, HttpServletRequest request
-			, RedirectAttributes rattr, Model m, HttpSession session) {
+			, RedirectAttributes rattr, Model m, HttpSession session) throws Exception {
 		
 		if (!loginCheck(request))
 			return "redirect:/login";
@@ -347,7 +349,9 @@ public class DiaryController {
 			rattr.addFlashAttribute("msg", "DEL_OK");
 		}
 		
-		return "redirect:/mypage/mydiary";
+		String user = URLEncoder.encode((String)session.getAttribute("user_nicknm"), "UTF-8");
+		
+		return "redirect:/mypage/mydiary?user="+user;
 	}
 	
 	

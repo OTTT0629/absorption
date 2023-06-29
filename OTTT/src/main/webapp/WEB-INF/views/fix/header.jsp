@@ -44,16 +44,16 @@
       <nav class="gnb">
          <ul>
          	<li>
-				<a class="movie" href="<c:url value="/genre/movie" />">영화</a>
+				<a class="movie" href="<c:url value="/genre/content?category=movie" />">영화</a>
              </li>
              <li>
-                 <a class="drama" href="<c:url value="/genre/drama" />">드라마</a>
+                 <a class="drama" href="<c:url value="/genre/content?category=drama" />">드라마</a>
              </li>
              <li>
-                 <a class="inter" href="<c:url value="/genre/interest" />">예능</a>
+                 <a class="interest" href="<c:url value="/genre/content?category=interest" />">예능</a>
              </li>
              <li>
-                 <a class="ani" href="<c:url value="/genre/animation" />">애니</a>
+                 <a class="animation" href="<c:url value="/genre/content?category=animation" />">애니</a>
              </li>
              <li>
                  <a class="community" href="<c:url value="/community/freecommunity" />">게시판</a>
@@ -74,22 +74,30 @@
                </li>
             </ul>
          </div>
+        <div id="socketAlert" style="border: 3px solid red; padding: 5px 5px; display: none;"></div>
       </header>
       
       <script type="text/javascript">
-		var socket = null;
-		connect();
-		
-		function connect() {
-			console.log("*************")
+      	var socket = null;
+      	connectWS();
+
+		function connectWS() {
 			var ws = new WebSocket("ws://localhost:/ottt/replyEcho");	//포트 번호 확인
 			socket = ws;
 			
 			ws.onopen = function () {
 				console.log('Info: connection opened.');
 			};
+			
 			ws.onmessage = function (event) {
 				console.log("받은 메시지: " + event.data + '\n');
+				let $socketAlert = $('div#socketAlert');
+				$socketAlert.html(event.data);
+				$socketAlert.css('display', 'block');
+				
+				setTimeout(function() {
+					$socketAlert.css('diaplay', 'none');
+				}, 5000);
 			};
 	
 			ws.onclose = function (event) {

@@ -22,13 +22,17 @@
     </insert>
    
    <select id="selectAll" resultType="ReviewDTO" parameterType="int">
-		select user_nicknm, a.rating, review_content, a.review_no, a.user_no, review_no, a.spoiler
-		, review_create_dt, a.content_no, comment_cnt, b.image
+		select user_nicknm, a.rating, review_content, a.review_no, a.user_no, a.review_no, a.spoiler
+		, review_create_dt, a.content_no, a.comment_cnt, b.image
 		,(select count(*) from tb_review_like c1 where c1.review_no = a.review_no) as like_count
 		,(select count(*) from tb_review_like c2 where c2.review_no = a.review_no and c2.user_no = #{user_no}) as check_like_count
-		from tb_review a, tb_user b, tb_content
-		where a.user_no = b.user_no and a.content_no = tb_content.content_no and a.content_no = #{content_no}
-		order by review_no desc
+		from tb_review a
+		join tb_user b
+		on a.user_no = b.user_no 
+		join tb_content c
+		on a.content_no = c.content_no
+		where a.content_no = #{content_no}
+		order by like_count desc, a.comment_cnt desc
    </select>
        
 	<select id="count" resultType="int">

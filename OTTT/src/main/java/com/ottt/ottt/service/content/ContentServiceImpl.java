@@ -29,13 +29,13 @@ public class ContentServiceImpl implements ContentService {
 	}
 
 	@Override
-	public List<ContentDTO> getMovieList(SearchItem sc) throws Exception {
-		return contentDao.movieSelect(sc);
+	public List<ContentDTO> getContentList(SearchItem sc) throws Exception {
+		return contentDao.contentSelect(sc);
 	}
 
 	@Override
-	public int getMovieTotalCount(SearchItem sc) throws Exception {
-		return contentDao.movieCount(sc);
+	public int getContentTotalCount(SearchItem sc) throws Exception {
+		return contentDao.contentCount(sc);
 	}
 
 	@Override

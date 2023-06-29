@@ -22,6 +22,11 @@ public interface UserDao {
 	int insertUserOTT(Map map) throws Exception; 
 	int insertUserGenre(Map map) throws Exception; 
 	
+	//유저 OTT 추가정보 DELETE
+	int deleteUserOTT(Integer user_no) throws Exception;
+	//유저 genre 추가정보 DELETE
+	int deleteUserGenre(Integer user_no) throws Exception;
+	
 	// 아이디찾기
 	UserDTO selectEmail(String user_email) throws Exception;
 	//비밀번호찾기

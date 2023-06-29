@@ -100,7 +100,7 @@ public class HomeController {
 	}
 	
 	@GetMapping("/inserInfo")
-	public String toHome(@RequestParam(value="ott_no", required = false) List<Integer> ott_no,
+	public String toHome(@RequestParam(value="ott_no", required = false) List<Integer> ott_no, String mode,
 			 @RequestParam(value="genre_no", required = false) List<Integer> genre_no, HttpSession session) {
 		Map<String, Object> ottMap = new HashMap<String, Object>();
 		ottMap.put("ott_no", ott_no);
@@ -108,15 +108,25 @@ public class HomeController {
 		Map<String, Object> genreMap = new HashMap<String, Object>();
 		genreMap.put("genre_no", genre_no);
 		genreMap.put("user_no", session.getAttribute("user_no"));
+		
+		Integer user_no = (Integer) session.getAttribute("user_no");
 
 		try {
+			userService.removeUserGenre(user_no);
+			userService.removeUserOTT(user_no);
 			userService.putUserOTT(ottMap);
 			userService.putUserGenre(genreMap);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	return "redirect:/";		
+		
+		mode = (mode != null) ? mode : "";
+		
+		if(mode.equals("modify"))
+			return "redirect:/mypage/setting";
+		
+		return "redirect:/";		
 	}
 	
 	@PatchMapping("/jjim")

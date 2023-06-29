@@ -12,7 +12,7 @@
     <script type="text/javascript" src="${path}/resources/js/community/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>  
-    <link rel="stylesheet" href="${path}/resources/css/community/endmovie/endmovie.css" >
+    <link rel="stylesheet" href="${path}/resources/css/community/endcontents/endcontents.css" >
   </head>
 
 <!--  body  --------------------->
@@ -161,16 +161,22 @@
            
 	          // content 를 각 월에 추가
 			  for (let i = 0; i < list.length; i++) {
-			    if (list[i].day === day) {
-			      contents.push(list[i].content);
-			    }
-		  	  }
+				  if (list[i].day === day) {
+				    const contentUrl = "/ottt/detailPage?content_no=" + list[i].content_no;
+				    const anchorTag = document.createElement('a');
+				    anchorTag.href = contentUrl;
+				    anchorTag.textContent = list[i].content;
+				    contents.push(anchorTag);
+				  }
+				}
 			 
+			  
+	          
 
 			  if (contents.length > 0) {
 			    for (let j = 0; j < contents.length; j++) {
-			      const textNode = document.createTextNode(contents[j]);
-			      movieContent.appendChild(textNode);
+			     // const textNode = document.createTextNode();
+			      movieContent.appendChild(contents[j]);
 			    }
 			  }
 			

@@ -11,7 +11,7 @@
 <body>
 	<nav class="nav">
 		<a class="nav-link1" href="<c:url value='/community/freecommunity' />" >자유게시판</a>
-		<a class="nav-link1" href="<c:url value='/community/endmovie' />">종료예정작</a>
+		<a class="nav-link1" href="<c:url value='/community/endcontent' />">종료예정작</a>
 		<a class="nav-link1" href="<c:url value='/community/priceInfoTving' />">가격정보</a>
 		<a class="nav-link1" href="<c:url value='/community/QnA' />">Q&A</a>
 		<a class="nav-link1" href="<c:url value='/community/notice' />">공지사항</a>

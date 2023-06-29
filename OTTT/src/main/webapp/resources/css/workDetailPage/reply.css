@@ -218,15 +218,6 @@ header{
     margin-left: 30px;
 }
 
-.main-img {
-    margin-top: 15px;
-    margin-left:100px;
-    scale: 1.1;
-    
-   
-
-}
-
 .a1 > a{
     display: inline;
     color: #33ff33;
@@ -1608,4 +1599,15 @@ form label{
   outline: none;
   cursor: pointer;
   width: 150px;
+}
+
+.main-img {
+	padding: 10px 0;
+    margin-left:70px;
+    scale: 1.1;
+}
+
+.main-img > img{
+	width: 400px;
+	margin-bottom: 20px;
 }

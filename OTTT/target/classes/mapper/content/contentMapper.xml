@@ -67,7 +67,7 @@
 		where a.content_no = #{content_no}
 	</select>
 	
-	<select id="movieSelect" parameterType="SearchItem" resultType="ContentDTO">
+	<select id="contentSelect" parameterType="SearchItem" resultType="ContentDTO">
 		SELECT distinct a.content_no, a.content_nm, a.thumbnail
 		,coalesce((select round(avg(d.rating))/2 
 					FROM tb_review d
@@ -79,9 +79,28 @@
 		on a.content_no = c.content_no
 		join tb_content_ott d
 		on a.content_no = d.content_no
-		join tb_content_genre e
-		on a.content_no = e.content_no 
-		where b.category_no = 1
+		<if test="category != null and category != 'interest' ">		
+			join tb_content_genre e
+			on a.content_no = e.content_no
+		</if>
+		 
+		where b.category_no =
+		<if test="category != null and category == 'movie' ">
+		1
+		</if>
+		
+		<if test="category != null and category == 'drama' ">
+		2
+		</if>
+		
+		<if test="category != null and category == 'interest' ">
+		3
+		</if>
+				
+		<if test="category != null and category == 'animation' ">
+		4
+		</if>		
+		 
 		<if test="ott_no != null">
 			and d.ott_no in <foreach item="ott_no" collection="ott_no" open="(" close=")" separator="," >
 								#{ott_no}
@@ -96,7 +115,7 @@
 		limit #{pageSize} offset #{offset}
   	</select>
   	
-  	<select id="movieCount" parameterType="SearchItem" resultType="int">
+  	<select id="contentCount" parameterType="SearchItem" resultType="int">
   		SELECT count(distinct a.content_no)
 		FROM tb_content a
 		JOIN tb_content_category b 
@@ -105,9 +124,27 @@
 		on a.content_no = c.content_no
 		join tb_content_ott d
 		on a.content_no = d.content_no
-		join tb_content_genre e
-		on a.content_no = e.content_no 
-		where b.category_no = 1
+		<if test="category != null and category != 'interest' ">		
+			join tb_content_genre e
+			on a.content_no = e.content_no
+		</if>
+		where b.category_no = 
+		<if test="category != null and category == 'movie' ">
+		1
+		</if>
+		
+		<if test="category != null and category == 'drama' ">
+		2
+		</if>
+		
+		<if test="category != null and category == 'interest' ">
+		3
+		</if>
+		
+		<if test="category != null and category == 'animation' ">
+		4
+		</if>
+		
 		<if test="ott_no != null">
 			and d.ott_no in <foreach item="ott_no" collection="ott_no" open="(" close=")" separator="," >
 								#{ott_no}

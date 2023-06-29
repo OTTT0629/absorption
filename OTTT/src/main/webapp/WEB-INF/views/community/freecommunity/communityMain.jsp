@@ -30,13 +30,7 @@
       		<%@ include file="../../fix/header.jsp" %>
       		<!--meun bar Start-->  
         	<div id="line-1" >
-          		<nav class="nav">
-          			<a class="nav-link1" href="<c:url value='/community/freecommunity' />" style="color: #33ff33;">자유게시판</a>
-          			<a class="nav-link1" href="<c:url value='/community/endmovie' />">종료예정작</a>
-          			<a class="nav-link1" href="<c:url value='/community/priceInfoTving' />">가격정보</a>
-          			<a class="nav-link1" href="<c:url value='/community/QnA' />">Q&A</a>
-          			<a class="nav-link1" href="<c:url value='/community/notice' />">공지사항</a>
-        		</nav>
+          		<%@ include file="../../fix/nav.jsp" %>
         	</div>
         	<div id="line-2">
           		<div class="Lcontent">

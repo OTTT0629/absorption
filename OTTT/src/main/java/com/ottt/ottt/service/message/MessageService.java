@@ -11,22 +11,19 @@ import com.ottt.ottt.dto.MessageDTO;
 	loadSendList		보낸 메세지 목록 불러오기
 	writeMsg			메세지 작성
 	removeMsg			메세지 삭제
-	removeMsgAll		메세지 전체 삭제
  */
 
 public interface MessageService {
 
 	MessageDTO read(Integer message_no) throws Exception;
 	
-	List<MessageDTO> loadRecvList(MessageSearchItem msc) throws Exception;
+	List<MessageDTO> loadRecvListAll(MessageSearchItem msc) throws Exception;
 	
-	List<MessageDTO> loadSendList(MessageSearchItem msc) throws Exception;
-	
+	List<MessageDTO> loadSendListAll(MessageSearchItem msc) throws Exception;	
+
 	int writeMsg(MessageDTO messageDTO) throws Exception;
 	
 	int removeMsg(Integer message_no) throws Exception;
-	
-//	int removeMsgAll(String user_no) throws Exception;
 	
 	int getSendResultCnt(MessageSearchItem msc) throws Exception;
 	

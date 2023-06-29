@@ -52,8 +52,8 @@
                 <img src="${path}/resources/images/img/more.png" style="width: 40px;" alt="more">
             </button>
             <ul class="dropdown-menu">
-              <li class="dropdown-item" id="item-msg">쪽지 보내기</li>
-              <li class="dropdown-item">신고하기</li>
+              <li class="dropdown-item" id="item-msg" style="cursor: pointer;">쪽지 보내기</li>
+              <li class="dropdown-item disabled" style="color: black;">신고하기</li>
                 <ul>
                   <li class="report"><button class="report">욕설/비방</button></li>
                   <li class="report"><button class="report">광고/도배</button></li>

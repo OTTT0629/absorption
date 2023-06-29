@@ -84,13 +84,21 @@
 		    //폼태그 생성하기
 		    let form = document.createElement('form');
 		    //인풋태그 생성하기
-		    let input = document.createElement('input');
-		    //인풋 속성
-		    input.setAttribute('type', 'hidden');
-		    input.setAttribute('name', 'message_no');
-		    input.setAttribute('value', messageNo);
-		    form.appendChild(input);
-		    
+			let data = {
+				message_no: messageNo,
+				page: ${mpr.msc.page}
+			};
+			 
+			 for (let key in data) {
+			     if (data.hasOwnProperty(key)) {
+			         let input = document.createElement('input');
+			         input.setAttribute('type', 'hidden');
+			         input.setAttribute('name', key);
+			         input.setAttribute('value', data[key]);
+			         form.appendChild(input);
+			     }
+			 }			
+			
 		    if($('button[name="deleteBtn"]').attr("class") == 'delrecvBtn')
 		    	form.setAttribute("action", '/ottt/mypage/message/remove');
 		    if($('button[name="deleteBtn"]').attr("class") == 'delsendBtn')
@@ -207,7 +215,14 @@
 								<a class="page" href="<c:url value="${mpr.msc.getQueryString(mpr.beginPage-1) }" />">&lt;</a>
 							</c:if>
 							<c:forEach var="i" begin="${mpr.beginPage }" end="${mpr.endPage }">
-								<a class="page" href="<c:url value="${mpr.msc.getQueryString(i) }" />">${i }</a>
+								<c:choose>
+									<c:when test="${mpr.msc.page == i }">
+										<a class="page selpage" href="<c:url value="${mpr.msc.getQueryString(i) }" />">${i }</a>
+									</c:when>
+									<c:otherwise>
+										<a class="page" href="<c:url value="${mpr.msc.getQueryString(i) }" />">${i }</a>
+									</c:otherwise>
+								</c:choose>
 							</c:forEach>
 							<c:if test="${mpr.showNext }">
 								<a class="page" href="<c:url value="${mpr.msc.getQueryString(mpr.endPage+1) }" />">&gt;</a>

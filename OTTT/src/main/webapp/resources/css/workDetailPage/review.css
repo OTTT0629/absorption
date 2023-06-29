@@ -208,14 +208,7 @@ header{
     margin-left: 30px;
 }
 
-.main-img {
-    margin-top: 15px;
-    margin-left:100px;
-    scale: 1.1;
-    
-   
 
-}
 
 .a1 > a{
     display: inline;
@@ -1336,4 +1329,15 @@ form label{
 
 .spoiler span{
 	color: red;
+}
+
+.main-img {
+	padding: 10px 0;
+    margin-left: 70px;
+    scale: 1.1;
+}
+
+.main-img > img{
+	width: 400px;
+	margin-bottom: 20px;
 }

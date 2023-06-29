@@ -28,10 +28,10 @@ public class EndmovieController {
 	@Autowired
 	EndMovieService endMovieService;
 	
-	@GetMapping(value = "/endmovie")
+	@GetMapping(value = "/endcontent")
 	public String endmovie() {
 		
-		    return "/community/endmovie/endmovie";
+		    return "/community/endcontents/endcontents";
 		}
 	
 	@PostMapping(value = "/endmovie/calendar", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -80,6 +80,7 @@ public class EndmovieController {
 	            Map<String, Object> resultItem = new HashMap<>();
 	            resultItem.put("day", originalItem.getDay());
 	            resultItem.put("content", originalItem.getContent_nm());
+	            resultItem.put("content_no", originalItem.getContent_no());
 	            resultList.add(resultItem);
 	        }
 
@@ -95,14 +96,4 @@ public class EndmovieController {
 	    return ResponseEntity.ok(response);
 	}
 	
-	@GetMapping(value = "/endmovie/{ott_no}")
-	public String endmovieCoupang(Integer ott_no) {
-		try {
-			System.out.println("요청");
-			endMovieService.endOttSelect(ott_no);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "/community/endmovie/coupang";
-	}
 }

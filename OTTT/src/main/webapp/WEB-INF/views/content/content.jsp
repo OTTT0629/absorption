@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>movie</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
-    <link rel="stylesheet" href="${path}/resources/css/genre/main.css" >
+    <link rel="stylesheet" href="${path}/resources/css/content/main.css" >
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
 </head>
@@ -35,7 +35,7 @@
 			</section>
 			
 			<section class="sec01">
-				<c:forEach var="contentDTO" items="${movieList}">
+				<c:forEach var="contentDTO" items="${contentList}">
 					<div class="work-info">
 						<a href="<c:url value="/detailPage?content_no=${contentDTO.content_no }" />">
 						<input id="noInput" type="hidden" value="${contentDTO.content_no }" />
@@ -59,7 +59,7 @@
 											<c:when test="${sessionScope.id != null}">
 												<c:set var="isInWishlist" value="false" />
 												<c:forEach var="wishlistDTO" items="${wishList}">
-													<c:if test="${wishlistDTO.content_no == Integer.parseInt(contentDTO.content_no) && sessionScope.no == wishlistDTO.user_no}">
+													<c:if test="${wishlistDTO.content_no == Integer.parseInt(contentDTO.content_no) && sessionScope.user_no == wishlistDTO.user_no}">
 														<c:set var="isInWishlist" value="true" />
 													</c:if>
 												</c:forEach>
@@ -93,18 +93,18 @@
 					<ul class="pagination">
 					<c:if test="${pr.showPrev}">
 						<li class="page-item">
-							<a class="page-link" href='<c:url value="/genre/movie${pr.sc.getContentList(pr.beginPage-1)}" />' aria-label="Previous">
+							<a class="page-link" href='<c:url value="/genre/content${pr.sc.getContentList(pr.beginPage-1)}" />' aria-label="Previous">
 							<span aria-hidden="true">&laquo;</span></a>
 						</li>
 					</c:if>
 					
 					<c:forEach var="i" begin="${pr.beginPage }" end="${pr.endPage }">
-						<li class="page-item"><a class="page-link" href='<c:url value="/genre/movie${pr.sc.getContentList(i)}" />'>${i}</a></li>
+						<li class="page-item"><a class="page-link" href='<c:url value="/genre/content${pr.sc.getContentList(i)}" />'>${i}</a></li>
 					</c:forEach>
 					
 					<c:if test="${pr.showNext}">
 						<li class="page-item">
-							<a class="page-link" href='<c:url value="/genre/movie${pr.sc.getContentList(pr.endPage-1)}" />' aria-label="Next">
+							<a class="page-link" href='<c:url value="/genre/content${pr.sc.getContentList(pr.endPage+1)}" />' aria-label="Next">
 							<span aria-hidden="true">&raquo;</span></a>
 						</li>
 					</c:if>
@@ -123,24 +123,7 @@
               </div>
               <div class="modal-body body">
               </div>
-              <div class="modal-footer" id="modal-footer" style="height: 60px;">
-                <!-- <button type="button" id="checkBtn" class="btn btn-secondary" data-bs-dismiss="modal">확인</button> -->
-              </div>
-            </div>
-          </div>
-        </div>
-	        
-        <!-- Modal -->
-        <div class="modal fade" id="Modal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">알림</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body body2">
-              </div>
-              <div class="modal-footer" id="modal-footer2">
+              <div class="modal-footer" id="modal-footer">
                 <button type="button" id="checkBtn" class="btn btn-secondary" data-bs-dismiss="modal">확인</button>
               </div>
             </div>
@@ -160,7 +143,7 @@
 				event.preventDefault();
 				// 버튼을 클릭했을 때 실행되는 코드
 	    	    let content_no = $(this).closest(".work-info").find("#noInput").val()
-				let user_no = '${sessionScope.no}'
+				let user_no = '${sessionScope.user_no}'
 	    	    $.ajax({
 	    	    	type: 'DELETE',
 					url: '/ottt/genre/genrejjim?content_no=' + content_no + '&user_no=' + user_no,
@@ -185,7 +168,7 @@
 	        	event.preventDefault();
 	        	// 버튼을 클릭했을 때 실행되는 코드
 	        	let content_no = $(this).closest(".work-info").find("#noInput").val()
-	    		let user_no = '${sessionScope.no}'
+	    		let user_no = '${sessionScope.user_no}'
 	        	
 	    		$.ajax({
 	    			type: 'PATCH',
@@ -208,9 +191,12 @@
 	
 			$(document).on("click", "#nojjim", function(event) {
 				event.preventDefault()
-	     	    $(".body2").html("로그인이 필요합니다.")
-	     	    $('#Modal2').modal('show')
+	     	    $(".body").html("로그인이 필요합니다.")
+	     	    $('#Modal').modal('show')
 			})
+			
+			
+			$(`.${category}`).css('color', '#33ff33');
 			
 
 		});	
@@ -281,10 +267,7 @@
     background-color: #202020; 
     border-color: #33ff33;
   }
-  
-  .movie {
-  	color: #33ff33;
-  }
+
     </style>
     
 

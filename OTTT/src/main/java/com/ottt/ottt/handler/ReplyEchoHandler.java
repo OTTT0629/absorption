@@ -34,24 +34,42 @@ public class ReplyEchoHandler extends TextWebSocketHandler {
 		//sessions.add(session);
 		//userSessions.put(sendUserId, session);
 	}
+	
+	
 
 	//소켓에 어떤 메세지를 보냈을 때
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		System.out.println("handleTextMessage: " + session + " :: " + message);
 		
-		String sendUserId = message.getPayload();	//특정 유저에게 보낼 메시지 내용 추출
-		
-		
-		
-		
+		// protocol: cmd(기능), 쪽지 보낸 이, 쪽지 받은 이, 쪽지 번호
+		String msg = message.getPayload();	//특정 유저에게 보낼 메시지 내용 추출
+		if(msg != null) {
+			String[] strs = msg.split(",");
+			if(strs != null && strs.length == 4) {
+				String cmd = strs[0];		
+				String sendUser = strs[1];	// 보내는 이 (sendUserId 저장)
+				String recvUser = strs[2];	// 받는 이
+				String msgNo = strs[3];
+				
+				// 그런데 이제!! 받는 이가 온라인일 때만 보내기
+				WebSocketSession recvUserSesssion = userSessions.get(recvUser);	// 메시지 받을 세션 조회
+				System.out.println("==================================recvUserSesssion : " + recvUserSesssion);
+				
+				if("sendmsg".equals(cmd) && recvUserSesssion != null) {	// "message"라는 명령을 받았고, 메시지 받은 세션이 온라인일 때만 알림 보냄
+					TextMessage tmpMsg = new TextMessage("<a href='/mypage/message' style=\"color: #33ff33;\">" + sendUser + " 님이 쪽지를 보냈습니다." + "</a>");
+					recvUserSesssion.sendMessage(tmpMsg);
+				}			
+			}
+		}
 	}
+	
+	
 	
 	//연결이 닫혔을 때
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception{
 		System.out.println("afterConnectionClosed: " + session + " :: " + status);
-		
 		String sendUserId = getId(session);
 		if(sendUserId != null) {					//로그인 값이 있는 경우만 실행
 			consoleLog(sendUserId + "연결 종료");
@@ -59,6 +77,8 @@ public class ReplyEchoHandler extends TextWebSocketHandler {
 			userSessions.remove(session);
 		}
 	}
+	
+	
 	
 	//로그 메시지
 	private void consoleLog(String logMsg) {

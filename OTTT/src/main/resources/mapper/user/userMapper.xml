@@ -98,6 +98,12 @@
 		</foreach>		
   	</insert>
   	
+  	<!-- 회원 추가 정보(OTT) DELETE -->
+  	<delete id="userOTTDelete" parameterType="int">
+	  	DELETE FROM tb_user_ott
+		WHERE user_no=#{user_no}
+  	</delete>
+  	
   	<!-- 회원 추가 정보(genre) INSERT -->
   	<insert id="userGenre" parameterType="map">
   		INSERT INTO tb_user_genre
@@ -107,6 +113,12 @@
 		(#{user_no}, #{genre})
 		</foreach>
   	</insert>
+  	
+  	<!-- 회원 추가 정보(genre) DELETE -->
+  	<delete id="userGenreDelete" parameterType="int">
+		DELETE FROM tb_user_genre 
+		WHERE user_no=#{user_no}  	
+  	</delete>
   	
   	<!-- 아이디 찾기 -->
   	<select id="selectUserEmail" parameterType="String" resultType="UserDTO">

@@ -340,6 +340,10 @@ th, td {
   color: #33ff33;
 }
 
+.selpage {
+	color:#33ff33; 
+}
+
 .mnb ul li:nth-child(5) a {
-		color: #33ff33;
+	color: #33ff33;
 }

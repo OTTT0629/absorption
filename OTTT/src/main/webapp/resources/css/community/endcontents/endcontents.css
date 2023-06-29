@@ -245,3 +245,7 @@ select#month{
  .nav a:nth-child(2) {
  	color: #33ff33;
 }
+
+.calendar-cell a:hover {
+	color: #33ff33;
+}

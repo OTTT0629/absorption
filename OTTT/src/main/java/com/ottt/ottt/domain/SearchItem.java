@@ -26,6 +26,7 @@ public class SearchItem {
 	private List<Integer> genre_no;
 	private List<Integer> category_no;
 	private Integer categoryNo;
+	private String category;
 
 	public SearchItem() {};
 	
@@ -47,7 +48,14 @@ public class SearchItem {
 		this.content_no = content_no;
 		this.user_no = user_no;
 	}
+		
+	public String getCategory() {
+		return category;
+	}
 
+	public void setCategory(String category) {
+		this.category = category;
+	}
 
 	public Integer getPage() {
 		return page;
@@ -127,6 +135,7 @@ public class SearchItem {
 	
 	public String getContentList(Integer page) {
 		return UriComponentsBuilder.newInstance()
+				.queryParam("category", category)
 				.queryParam("page", page)
 				.queryParam("option", option)
 				.build().toString();

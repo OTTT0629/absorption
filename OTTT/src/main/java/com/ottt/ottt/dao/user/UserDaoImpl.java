@@ -123,4 +123,14 @@ public class UserDaoImpl implements UserDao {
 		return session.update(namespace+"resetPwd", map);
 	}
 
+	@Override
+	public int deleteUserOTT(Integer user_no) throws Exception {
+		return session.delete(namespace+"userOTTDelete", user_no);
+	}
+
+	@Override
+	public int deleteUserGenre(Integer user_no) throws Exception {
+		return session.delete(namespace+"userGenreDelete", user_no);
+	}
+
 }

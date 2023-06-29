@@ -83,7 +83,7 @@
       </div>      
       
       <div class="main-img">
-        <img src="${path}/resources/images/서부 전선 이상 없다.png" alt="서부 전선 이상 없다 이미지">
+        <img src="${contentDTO.main_img }" >
       </div>
 
       <div class="info">
@@ -148,7 +148,7 @@
 		  <button id="wishlist-button">
 			  <img id="wishlist-image" class="mark" src="${path}/resources/images/img/mark.png" alt="찜하기">
 		  </button>
-		  <button id="diary-button">
+		  <button id="diary-button" onclick="location.href='/ottt/mypage/mydiary/write?content=${contentDTO.content_no }'">
 			  <img id="diary-image" class="mark" src="${path}/resources/images/img/diary1.png" alt="찜하기">
 		  </button>
           <button id="reply-button"><img class="review-icon" src="${path}/resources/images/img/addcomment.png" alt="봣어요"></button>

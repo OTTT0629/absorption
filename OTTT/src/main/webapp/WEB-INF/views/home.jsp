@@ -95,10 +95,10 @@
             </span>
 
             <span class="main-cat">
-                <a href="<c:url value="/genre/movie" />"><div>영화</div></a>
-                <a href="<c:url value="/genre/drama" />"><div>드라마</div></a>
-                <a href="<c:url value="/genre/interest" />"><div>예능</div></a>
-                <a href="<c:url value="/genre/animation" />"><div>애니</div></a>
+                <a class="movie" href="<c:url value="/genre/content?category=movie" />"><div>영화</div></a>
+                <a class="drama" href="<c:url value="/genre/content?category=drama" />"><div>드라마</div></a>
+                <a class="inter" href="<c:url value="/genre/content?category=interest" />"><div>예능</div></a>
+                <a class="ani" href="<c:url value="/genre/content?category=animation" />"><div>애니</div></a>
             </span>
  
 
