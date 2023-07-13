@@ -17,7 +17,7 @@
 </head>
 <body>
 	<div class="wrap">
-			<%@ include file="../../fix/header.jsp" %>
+		<%@ include file="../../fix/header.jsp" %>
 		
 		<section class="sec01">
 			<c:choose>
@@ -30,17 +30,6 @@
       		<%@ include file="../../fix/Lmnb.jsp" %>
 
 	        <div class="main">
-	        	<section class="sec_2">
-	        		<div class="btn_more_div" style="text-align: right; margin-top: 20px; ">
-	        			<button type="button" class="btn_more" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: black; color: #fff; width: 50px;">
-	        			정렬 
-	              		</button>
-	              		<ul class="dropdown-menu dropdown-menu-dark">
-	              			<li><a class="dropdown-item" href="#">최신순</a></li>
-		                	<li><a class="dropdown-item" href="#">별점순</a></li>
-		              	</ul>
-	              	</div>
-	           	</section>
 	           	
 				<div class="main-work"></div>
 				
@@ -53,12 +42,12 @@
 	</div>
 	
 	<script type="text/javascript">
-		let CATEGORY = '' 
+		let CATEGORY = ''
 		let USER = '${userDTO.user_nicknm}'
 		let PAGE = ${pr.sc.page}
 		let PAGESIZE = ${pr.sc.pageSize}
 				
-		$(document).ready(function() {			
+		$(document).ready(function() {
 			
 			fnGetWatchedList({
 				"user" : USER
@@ -68,6 +57,20 @@
 			})
 			
 		})
+		
+		function fnSorting() {
+			$(".main-work").html("");
+			$('.paging').html("");			
+			
+			fnGetWatchedList({
+				"user" : USER
+				, "categoryNo" : CATEGORY
+				, "page" : PAGE
+				, "pageSize" : PAGESIZE
+				, "option" : $('#sorting option:selected').val()
+			});
+			
+		}
 	
 		function fnGetWatchedList(param) {
 			
@@ -117,20 +120,20 @@
 			        createPage += '<ul class="pagination">';
 			        if (response.pr.showPrev) {
 			            createPage += '<li class="page-item">';
-			            createPage += '<a class="page-link" onclick="javascript:fnPage('+ (response.pr.beginPage-1) +','+response.pr.sc.category_no+ ')">&lt;</a></li>';
+			            createPage += '<a class="page-link" onclick="javascript:fnPage('+ (response.pr.beginPage-1) +','+response.pr.sc.category_no+',\''+response.pr.sc.option+ '\')">&lt;</a></li>';
 			        }
 			        for (let i = response.pr.beginPage; i <= response.pr.endPage; i++) {
 			        	  createPage += '<li class="page-item">';
 			        	  if (i === response.pr.sc.page) {
-			        	    createPage += '<a class="page-link selpage" onclick="javascript:fnPage('+i+','+response.pr.sc.categoryNo+ ')">' + i + '</a>';
+			        	    createPage += '<a class="page-link selpage" onclick="javascript:fnPage('+i+','+response.pr.sc.categoryNo+',\''+response.pr.sc.option+ '\' )">' + i + '</a>';
 			        	  } else {
-			        	    createPage += '<a class="page-link" onclick="javascript:fnPage('+i+','+response.pr.sc.categoryNo+ ')">' + i + '</a>';
+			        	    createPage += '<a class="page-link" onclick="javascript:fnPage('+i+','+response.pr.sc.categoryNo+',\''+response.pr.sc.option+ '\')">' + i + '</a>';
 			        	  }
 			        	  createPage += '</li>';
 			        	}
 			        if (response.pr.showNext) {
 			            createPage += '<li class="page-item">';
-			            createPage += '<a class="page-link" onclick="javascript:fnPage('+(response.pr.endPage+1)+','+response.pr.sc.categoryNo+ ')">&gt;</a></li>';
+			            createPage += '<a class="page-link" onclick="javascript:fnPage('+(response.pr.endPage+1)+','+response.pr.sc.categoryNo+',\''+response.pr.sc.option+ '\' )">&gt;</a></li>';
 			        }
 			        createPage += '</ul></nav></div>';
 			    }
@@ -157,7 +160,7 @@
 			
 		}
 		
-		function fnPage(page, category) {
+		function fnPage(page, category, option) {
 			$(".main-work").html("");
 			$('.paging').html("");
 			
@@ -166,6 +169,7 @@
 				, "categoryNo" : category
 				, "page" : page
 				, "pageSize" : PAGESIZE
+				, "option" : option
 			});
 			
 		}

@@ -41,7 +41,7 @@ public class WatchedController {
 		if(user.equals(session.getAttribute("user_nicknm")))
 			m.addAttribute("userChk", true);
 		
-		logger.info("================================== watched 진입");	
+		logger.info("================================== watched 진입");
 		
 		try {
 			Integer user_no = us.getUserNoId(user);
@@ -84,6 +84,8 @@ public class WatchedController {
 		
 		
 		logger.info("================================== getwatchedlist 진입");
+		
+		logger.info("================================== sc.getOption() : " + sc.getOption());
 		
 		logger.info("================================== sc.getUser : " + sc.getUser());
 		

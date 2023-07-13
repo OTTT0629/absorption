@@ -29,9 +29,9 @@
 	          				<span>${userDTO.user_nicknm }</span>
           				</li>
 		              	<li class="user-follow">
-		                	<span class="user-follow-l"><a href="<c:url value="/mypage/follower" />">팔로우</a></span>
+		                	<span class="user-follow-l"><a href="<c:url value="/mypage/follower?user=${userDTO.user_nicknm }" />">팔로워 ${followerCnt}</a></span>
 		                	&nbsp;|&nbsp;
-		                	<span class="user-follow-l"><a href="<c:url value="/mypage/following" />">팔로워</a></span>
+		                	<span class="user-follow-l"><a href="<c:url value="/mypage/following?user=${userDTO.user_nicknm }" />">팔로잉 ${followingCnt}</a></span>
 		              	</li>
 	              	</ul>
               	</div>
@@ -40,8 +40,7 @@
               		<ul>
               			<li>
               				<a href="<c:url value="/mypage/setting" />">
-              				<img class="set-img" src="${path}/resources/images/img/톱니.png" alt="설정이미지">
-            				</a>
+              				<img class="set-img" src="${path}/resources/images/img/톱니.png" alt="설정이미지"></a>
            				</li>
            				<li>
            					<a href='<c:url value="/logout" />' class="logout">로그 아웃</a>

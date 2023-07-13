@@ -350,6 +350,7 @@ header{
 /* Search Page*/
 .sec_3{
     /* border: 1px solid red; */
+    position: relative;
     width: 1200px;
     margin: 0 auto;
 }
@@ -450,8 +451,9 @@ input[type="text"] {
     font-size: 25px;
     display: flex; 
     margin: 10px auto; 
-    position: relative;
+    position: absolute;
     left: 200px;
+    z-index: 700;
 }
 
 .search-style{
@@ -509,7 +511,7 @@ input[type="checkbox"]:checked{
     margin-top: 2vb;    
 }
  */
-.search span:last-child{
+.search span:nth-child(2){
     width: 120px;
     height: 58px;
     position: relative;
@@ -518,13 +520,13 @@ input[type="checkbox"]:checked{
     transform: translateY(-50%);
 }
 
-.search span:last-child{
+.search span:nth-child(2){
     width: 50px;
 }
 
 
 
-.search span:last-child{
+.search span:nth-child(2){
     background:url("../../images/icon/search02.png");
     background-repeat: no-repeat;
     background-position: center;
@@ -533,7 +535,7 @@ input[type="checkbox"]:checked{
     height: 50px;
 }
 
-.search span:last-child:hover{
+.search span:nth-child(2):hover{
     background: url("../../images/icon/search-h.png");
     background-repeat: no-repeat;
     background-position: center;
@@ -593,10 +595,11 @@ input[type="checkbox"]:checked{
 }
 
 .autocomplete{
-	position: relative;
-	left: 560px;
-	position: fixed;
+	margin: auto;
+	position: absolute;
 	border-radius: 10px;
 	z-index: 999;
-	width: 800px;	
+	width: 800px;
+	left: 197px;
+	top: 173px;
 }

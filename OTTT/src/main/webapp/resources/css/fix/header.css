@@ -48,6 +48,6 @@
 }
 
 .selpage {
-	border-color: #33ff33;
-	color: #33ff33;
+	border-color: #33ff33 !important;
+	color: #33ff33 !important;
 }

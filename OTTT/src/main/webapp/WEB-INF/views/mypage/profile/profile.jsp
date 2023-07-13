@@ -8,7 +8,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>프로필</title>
-    <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     <link rel="stylesheet" href="${path}/resources/css/mypage/profile.css" >
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
@@ -27,50 +26,12 @@
   </script>
      
     <div class="wrap">
+    	
     	<%@ include file="../../fix/header.jsp" %>
-
-      <section class="sec01">      
-        <div class="mypage-info">
-        <input name="userno" type="hidden" value="${userDTO.user_no }" />
-          <div class="porfile">
-            <img  src="${userDTO.image }" >
-          </div>
-        <div class="user">
-            <ul>
-              <li class="user-name">
-                <span>${userDTO.user_nicknm }</span>
-              </li>
-              <li class="user-follow">
-                <span onclick="location.href='<c:url value="/mypage/follower" />'">팔로워</span>
-                <span>|</span>
-                <span onclick="location.href='<c:url value="/mypage/following" />'">팔로잉</span>
-              </li>
-            </ul>
-        </div>
-        <div class="btn_more_div" >
-            <button type="button" style="background-color:transparent;" class="btn_more" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="${path}/resources/images/img/more.png" style="width: 40px;" alt="more">
-            </button>
-            <ul class="dropdown-menu">
-              <li class="dropdown-item" id="item-msg" style="cursor: pointer;">쪽지 보내기</li>
-              <li class="dropdown-item disabled" style="color: black;">신고하기</li>
-                <ul>
-                  <li class="report"><button class="report">욕설/비방</button></li>
-                  <li class="report"><button class="report">광고/도배</button></li>
-                  <li class="report"><button class="report">악의적인 스포</button></li>
-                  <li class="report"><button class="report">선정성</button></li>
-                </ul>
-              <li><a class="dropdown-item" href="#">차단</a></li>
-            </ul>
-        </div>
-        <div class="btn_check_div" style="margin-top: 20px;">
-          <input type="checkbox" class="btn-check" id="btn-check-outlined" autocomplete="off" checked>
-          <label class="btn btn-outline-primary" for="btn-check-outlined">팔로우 취소</label><br>
-        </div>
-        </div>
-      </section>
+    	
+    	<%@ include file="../../fix/sec02.jsp" %>
           
-      <%@ include file="../../fix/mnb2.jsp" %>
+	    <%@ include file="../../fix/mnb2.jsp" %>
 
       <section class="sec02">
         <div class="mymenu">
@@ -105,7 +66,7 @@
           </div>
         </div>    
       </section>
-
 	</div>
+	
   </body>
 </html>

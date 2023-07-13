@@ -28,6 +28,7 @@
 		<typeAlias type="com.ottt.ottt.dto.CategoryDTO" alias="CategoryDTO"/>
   		<typeAlias type="com.ottt.ottt.dto.ContentGenreDTO" alias="ContentGenreDTO"/>
   		<typeAlias type="com.ottt.ottt.dto.ContentCategoryDTO" alias="ContentCategoryDTO"/>
+  		<typeAlias type="com.ottt.ottt.dto.FollowDTO" alias="FollowDTO"/>
   	</typeAliases>
   </configuration>
   

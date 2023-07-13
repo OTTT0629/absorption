@@ -102,24 +102,7 @@
 		 	    	input.checked = true
 		 	    	document.querySelector('label[for="' + input.id + '"]').style.color = '#33ff33';
 		 	   	}
-	 		});
-	 		
-	 		/* let publicYnCd = '${myDiaryDTO.public_yn_cd.toString()}';
-
-		 	// 라디오 버튼 요소들을 선택합니다.
-		 	let radioButtons = document.querySelectorAll('input[name="public_yn_cd"]');
-
-		 	// 라디오 버튼을 순회하며 필터링합니다.
-		 	radioButtons.forEach(function(radioButton) {
-		 		if (radioButton.value === publicYnCd) {
-		 			radioButton.checked = true; // 선택 상태로 설정
-		 			
-	 			} else {
-	 				radioButton.style.display = 'none'; // 숨기도록 설정
-	 				
- 				}
-		 	}); */
-
+	 		});	 		
 	 		
  			let isMode = function() {
  				let mode = '${mode}'

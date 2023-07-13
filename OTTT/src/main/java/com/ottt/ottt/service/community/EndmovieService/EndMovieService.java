@@ -3,7 +3,6 @@ package com.ottt.ottt.service.community.EndmovieService;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import com.ottt.ottt.dto.EndServiceDTO;

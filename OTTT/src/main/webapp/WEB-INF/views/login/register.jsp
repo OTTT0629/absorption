@@ -388,7 +388,7 @@
 		    <h1 style="font-size: 21px; display: inline-block;">회원가입</h1>
 		    	<div>
 					<div class="Id">
-							<input type="text" name="user_id" class="id_input" id="id" title="id" maxlength="15"  placeholder="아이디 입력" pattern="^[a-zA-Z0-9]{6,}$" required>
+							<input type="text" name="user_id" class="id_input" id="id" title="id" maxlength="20"  placeholder="아이디 입력" pattern="^[a-zA-Z0-9]{6,}$" required>
 					    <span class="errorMsg" id="idErrorMsg" style="position: absolute; left: 910px;"></span> 
 					    <div class="idChk">
 					    	<span class="id_input_re_1">사용 가능한 아이디입니다.</span>
@@ -430,7 +430,7 @@
 					</div>
 		
 		          	<div class="email">
-		           		<input type="email" name="user_email" class="email_input" id="email" title="email" maxlength="20"  placeholder="이메일"  pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$" required >
+		           		<input type="email" name="user_email" class="email_input" id="email" title="email" placeholder="이메일"  pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$" required >
 		           		<span>
 		            		<select id="domain" name="직접입력">
 								<option value="select">직접입력</option>
@@ -449,7 +449,7 @@
            			
            			
 		          	<div class="Certification">
-		          		<input type="text" id="Certification" title="인증번호" maxlength="20"  placeholder="인증번호" pattern="\d{6}" required>
+		          		<input type="text" id="Certification" title="인증번호" maxlength="6"  placeholder="인증번호" pattern="\d{6}" required>
 			          	<button id="completion" type="button">인증확인</button>
 		          	</div>
 		          	

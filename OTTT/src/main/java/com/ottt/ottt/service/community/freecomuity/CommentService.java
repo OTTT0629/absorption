@@ -2,9 +2,6 @@ package com.ottt.ottt.service.community.freecomuity;
 
 import java.util.List;
 
-import com.ottt.ottt.dto.ArticleDTO;
-import com.ottt.ottt.dto.ArticleLikeDTO;
-import com.ottt.ottt.dto.ArticleSearchDTO;
 import com.ottt.ottt.dto.CommentDTO;
 
 public interface CommentService {

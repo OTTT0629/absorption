@@ -114,7 +114,7 @@
 			<form method="get" action="<c:url value='/login/checkPwd' />" id="membership" onsubmit="return check_findPwd()">
 				<h1 style="font-size: 21px; display: inline-block;">비밀번호 찾기</h1>
 				<div class="Id">
-					<input type="text" name="user_id" class="id_input" id="id" title="ID" maxlength="15"  placeholder="아이디 입력" pattern="^[a-zA-Z0-9]{6,}$" required>
+					<input type="text" name="user_id" class="id_input" id="id" title="ID" maxlength="20"  placeholder="아이디 입력" pattern="^[a-zA-Z0-9]{6,}$" required>
 					    <div class="idChk">
 					    	<span class="id_input_re_1">등록되어 있지 않은 아이디입니다.</span>
 							<span class="id_input_re_2">등록되어 있는 아이디 입니다.</span>
@@ -136,7 +136,7 @@
 							<span class="email_input_re_2">등록되어 있는 이메일입니다.</span>
 					    </div>
 					<div class="Certification">
-	                	<input type="text" id="Certification" title="인증번호" maxlength="20" placeholder="인증번호" pattern="\d{6}" required>
+	                	<input type="text" id="Certification" title="인증번호" maxlength="6" placeholder="인증번호" pattern="\d{6}" required>
 	                	<button id="completion" type="button">인증확인</button>
                		</div>
                	</div>

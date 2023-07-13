@@ -200,7 +200,7 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
 }
 
 .m-txt{
-    width: 500px;
+    width: 800px;
     height: 100px;
     position: absolute;
     left: 20px;
@@ -475,7 +475,15 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
 }
 
 .right-text > span{
-    font-family: 'Inter', sans-serif;
+    font-weight: 700px;
+    font-size: 20px;
+}
+
+.star-text{
+	font-size: 20px;
+	position: absolute;
+	left: 35px;
+	margin-top: 12px;
 }
 
 .a1{
@@ -506,6 +514,11 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
     
 }
 
+.m-txt{
+	bottom: 40px;
+	width: 1000px;
+}
+
 .avgStar {
 	position: absolute;
 	left: 4px;
@@ -514,20 +527,20 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
 }
 
 .ratingAvg{
-	margin-left: 150px;
+	margin-left: 120px;
 	bottom: 21px;
 	position: relative;
 }
 
 .avgStar_wrap {
-	position: relative;
-	left: 30px;
-	margin-top: 190px;
+
+	left: 120px;
+	margin-top: 120px;
 	border: 1px solid gray;
 	border-radius: 5px;
 	background-color: gray;
 	height: 35px;
-	width: 245px;
+	width: 200px;
 }
 
 

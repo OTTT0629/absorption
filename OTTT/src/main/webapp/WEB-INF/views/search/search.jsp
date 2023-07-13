@@ -87,9 +87,10 @@
             <span><button style="width: 70px; height: 70px; cursor: pointer; background-color: rgb(0,0,0,0); border: none"></button>
               <!-- <img src="./image/icon/search02.png" /> -->
             </span>
+            <div class="autocomplete" style="border: 2px solie red;"></div>
+            
         </div>
-        <div class="autocomplete" style="border: 2px solie red;">     	
-        </div>
+
         <div class="search01">
 	        <div style="width: 400px;">
 	        	<div style="width: 350px;">최근검색어</div>	

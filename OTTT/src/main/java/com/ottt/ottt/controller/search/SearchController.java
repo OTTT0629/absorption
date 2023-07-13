@@ -116,7 +116,7 @@ public class SearchController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "/genre/index";
+		return "/content/index";
 	}
 	
 	

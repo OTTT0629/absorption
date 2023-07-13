@@ -366,7 +366,7 @@
           
         </div>
         <div class="qwer" style="border: 2px solid #33ff33; margin-top:20px; margin-left: 30px; margin-right: 30px; "></div>
-        <h2 style="margin-right: 30px; margin-top: 20px;">이 영화의 평균 별점</h2>
+        <span class="star-text">평균 별점</span>
                                    <div class="starpoint_wrap avgStar_wrap">
   <div class="starpoint_box avgStar">
   		<%double ratingAvg = (double) request.getAttribute("rating");  // Mapper에서 전달받은 평균 별점 값		
@@ -408,14 +408,14 @@
             	<span class="a1"><a href="#">${GenreDTO.genre_nm}</a></span>
             	<c:if test="${!loop.last}">&nbsp;·</c:if>
             </c:forEach>
-            <span>· ${contentDTO.content_runtime }분 ·</span>
-            <span>${contentDTO.age }세</span>
+            <span class="runtime">· ${contentDTO.content_runtime }분 ·</span>
+            <span class="age">${contentDTO.age }세</span>
               <br/>
-            <span>감독 : 에드워드 버거</span>
+            <span class="director">감독 : 에드워드 버거</span>
               <br/>
-            <span>주연 : 펠릭스 카머러, 알브레히트 슈흐, 아론 힐머, 에딘 하사노비치</span>
+            <span class="mainact">주연 : 펠릭스 카머러, 알브레히트 슈흐, 아론 힐머, 에딘 하사노비치</span>
               <br/>
-            <span>조연 : 데비트 슈트리조, 아드리안 그뤼네발트, 안드레아스 돌러</span>
+            <span  class="subact">조연 : 데비트 슈트리조, 아드리안 그뤼네발트, 안드레아스 돌러</span>
       <section class="myReview" style="font-size: 15px;">
         	<div class="asdasd" style="border-top: 3px solid #33ff33;">
         <p class="mytextReview" style="font-style: oblique; font-size: 20px;">내가 작성한 리뷰</p>

@@ -111,7 +111,15 @@
 									#{genre_no}
 								</foreach>
 		</if>
-		order by a.content_no desc
+		
+		<choose>
+			<when test="option == 'rating'">
+				order by rating desc
+			</when>
+			<otherwise>
+				order by a.content_no desc
+			</otherwise>
+		</choose>
 		limit #{pageSize} offset #{offset}
   	</select>
   	

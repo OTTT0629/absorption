@@ -20,8 +20,7 @@ button{
     height: 200px; 
     padding: 10px;
     display: flex;
-    border: 1px solid red;
-    box-sizing: border-box;
+
     overflow: hidden;
     flex-wrap: wrap;
     
@@ -51,7 +50,7 @@ button{
 
 .reply-date-insert{
 	position: absolute;
-	right: 70px;
+	right: 10px;
 	top: 6.7px;
 	border: 1px solid gray;
 	border-radius: 5px;
@@ -369,11 +368,11 @@ header{
 }
 
 
-.left-score h2{
+.star-text{
 	position: absolute;
-    font-size: 30px;
+    font-size: 20px;
     top:120px;
-    border-top: 4px solid #33ff33;
+    left: 10px;
     width: 300px;
     padding-top: 15px;
 }
@@ -1489,14 +1488,14 @@ form label{
 }
 
 .avgStar_wrap {
-	position: relative;
-	left: 0px;
-	top: 30px;
+	position: absolute;
+	left: 110px;
+	margin-top: 120px;
 	border: 1px solid gray;
 	border-radius: 5px;
 	background-color: gray;
 	height: 35px;
-	width: 245px;
+	width: 180px;
 }
 
 /* 모달 */

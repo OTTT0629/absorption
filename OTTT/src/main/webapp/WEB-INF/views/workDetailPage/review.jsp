@@ -134,9 +134,11 @@
     </section>
    <section class="myReview" id="myReview">
    
+           
            <div class="left-score">
-          <h2>이 영화의 평균 별점</h2>
-                             
+           
+          <span class="star-text">평균 별점</span>
+           
         <p class="mytextReview" style="font-style: oblique; font-size: 20px;">내가 작성한 리뷰</p>
         <div class="asdasd" style="border-top: 3px solid #33ff33;">
         </div>
@@ -153,6 +155,7 @@
           <button id="review-button">
             <img class="review-icon" src="${path }/resources/images/img/review.png" alt="봣어요">
           </button>
+          <div style="border-top: 4px solid #33ff33; margin-top: 20px;"></div>
         <div class="smr">
 
           <div class="review-back">1</div>

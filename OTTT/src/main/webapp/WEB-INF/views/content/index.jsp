@@ -25,46 +25,7 @@
   <body>
     <form action="#" method="post">
     <div class="wrap">
-      <header >
-        <div class="logo">
-          <a href="<c:url value="/" />">
-            <img src="${path}/resources/images/logo/OTTT.png" alt="logo">
-          </a>
-        </div>
-        <nav class="gnb">
-          <ul>
-            <li>
-              <a href="<c:url value="/genre/movie" />">영화</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/drama" />">드라마</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/interest" />">예능</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/animation" />">애니</a>
-            </li>
-            <li>
-              <a href="<c:url value="/community/freecommunity" />">게시판</a>
-            </li>
-          </ul>
-        </nav>
-        <div class="h-icon">
-          <ul>
-            <li>
-              <a href="<c:url value='/search' />">
-                <!-- <img src="./images/icon/search02.png" alt="검색"> -->
-              </a>
-            </li>
-            <li>
-              <a href="<c:url value='/mypage' />">
-                <!-- <img src="./images/icon/user01.png" alt="내 정보"> -->
-              </a>
-            </li>
-          </ul>
-        </div>
-      </header>
+		<%@ include file="../fix/header.jsp" %>
       <br/>
 
     <script type="text/javascript">
@@ -153,7 +114,7 @@
       <section class="sec01" style="margin: 30px auto;">     
       <c:forEach var="contentDTO" items="${searchList}">
 	      <div class="work-info">
-	          <a href="<c:url value="/detailPage${pr.sc.queryString}?content_no=${contentDTO.content_no }" />">
+	          <a href="<c:url value="/detailPage${pr.sc.queryString}&content_no=${contentDTO.content_no }" />">
 	          	  <input id="noInput" type="hidden" value="${contentDTO.content_no }" />
 	              <img src="${contentDTO.thumbnail.toString() }" class="poster"/>
 	              <div class="work-review">

@@ -26,15 +26,9 @@
 	<!--  body  --------------------->
  	<body style="background-color: #202020;">
    		<div class="wrap">
-			<%@ include file="../../fix/header.jsp" %>
+				<%@ include file="../../fix/header.jsp" %>
 			<div id="line-1" >
-         			<nav class="nav">
-         				<a class="nav-link1" href="<c:url value='/community/freecommunity' />" style="color: #33ff33;">자유게시판</a>
-	          		<a class="nav-link1" href="<c:url value='/community/endmovie/tving' />">종료예정작</a>
-		          	<a class="nav-link1" href="<c:url value='/community/priceInfoTving' />">가격정보</a>
-	        	  	<a class="nav-link1" href="<c:url value='/community/QnA' />">Q&A</a>
-		          	<a class="nav-link1" href="<c:url value='/community/notice' />">공지사항</a>
-       			</nav>
+         		<%@ include file="../../fix/nav.jsp" %>
    			</div>
        		<div id="line-2">
    				<div class="Lcontent">
@@ -79,17 +73,24 @@
                					<a href="#"><img class="profile" src="${articleDTO.image }" alt="profile" ></a>
                  				<a class="nickname" href="../ottt박소율/mypageshow.html">${articleDTO.user_nicknm }</a>
                				</div>
-               				<div class="btn_warning_div">
-				                    <button type="button" class="btn_warning2" data-bs-toggle="dropdown" aria-expanded="false">
-				                     신고
-				                    </button>
-				                    <ul class="dropdown-menu">
-				                      <li><a class="dropdown-item" href="#" onclick="fnInsertReport2('${articleDTO.article_no}','${articleDTO.user_no}',1)"  >비방/욕설</a></li>
-				                      <li><a class="dropdown-item" href="#" onclick="fnInsertReport2('${articleDTO.article_no}','${articleDTO.user_no}',2)"  >광고/도배</a></li>
-				                      <li><a class="dropdown-item" href="#" onclick="fnInsertReport2('${articleDTO.article_no}','${articleDTO.user_no}',3)"  >악의적인 스포</a></li>
-				                      <li><a class="dropdown-item" href="#" onclick="fnInsertReport2('${articleDTO.article_no}','${articleDTO.user_no}',4)"  >선정성</a></li>
-				                    </ul>
-				                </div>
+               				<c:choose>
+								<c:when test="${articleDTO.user_no == sessionScope.user_no}">		
+
+								</c:when>
+								<c:otherwise>
+	       							<div class="btn_warning_div">
+					                    <button type="button" class="btn_warning2" data-bs-toggle="dropdown" aria-expanded="false">
+					                     신고
+					                    </button>
+					                    <ul class="dropdown-menu">
+					                      <li><a class="dropdown-item" href="#" onclick="fnInsertReport2('${articleDTO.article_no}','${articleDTO.user_no}',1)"  >비방/욕설</a></li>
+					                      <li><a class="dropdown-item" href="#" onclick="fnInsertReport2('${articleDTO.article_no}','${articleDTO.user_no}',2)"  >광고/도배</a></li>
+					                      <li><a class="dropdown-item" href="#" onclick="fnInsertReport2('${articleDTO.article_no}','${articleDTO.user_no}',3)"  >악의적인 스포</a></li>
+					                      <li><a class="dropdown-item" href="#" onclick="fnInsertReport2('${articleDTO.article_no}','${articleDTO.user_no}',4)"  >선정성</a></li>
+					                    </ul>
+					                </div>
+								</c:otherwise>
+							</c:choose>
                			</div>
            				<div class="wirted">
          					<!-- 입력 폼 -->
@@ -130,7 +131,7 @@
 			                  				</c:otherwise>
 										</c:choose>
 										<div>
-											<button type="button" onclick="javascript:fnFileDelete('Y');">이미지 삭제</button>
+											<button class="fileDelete" type="button" onclick="javascript:fnFileDelete('Y');">이미지 삭제</button>
 										</div>
 										<div>
 											<div class="inImg">

@@ -154,7 +154,7 @@ header{
 }
 
 .main-work{
-	padding-top: 50px;
+	padding-top: 98px;
 	display: grid;
 	grid-template-columns: repeat(4, 160px);
 	justify-content: space-between;
@@ -213,4 +213,12 @@ header{
 
 .mnb2 ul li:nth-child(3) a {
 	color: #33ff33;
+}
+
+#sorting {
+	color: #fff;
+	background-color: black;
+	border-style: none;
+	border-radius: 5px;
+	
 }

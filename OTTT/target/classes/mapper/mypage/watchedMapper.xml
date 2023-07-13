@@ -19,7 +19,15 @@
 		and a.user_no = d.user_no
 		where a.user_no = #{user_no}
 		<include refid="selectCategory" />
-		order by a.watched_date desc
+		
+		<choose>
+			<when test="option == 'rating'">
+				order by rating desc
+			</when>
+			<otherwise>
+				order by a.watched_date desc
+			</otherwise>
+		</choose>
 		limit #{pageSize} offset #{offset}
 	  </select>
 	  

@@ -159,7 +159,7 @@ header{
 }
 
 .main-work{
-	padding-top: 50px;
+	padding-top: 98px;
 	display: grid;
 	grid-template-columns: repeat(4, 160px);
 	justify-content: space-between;

@@ -136,7 +136,7 @@
    <section class="myReview" id="myReview">
    
            <div class="left-score">
-          <h2>이 영화의 평균 별점</h2>
+          <span class="star-text">평균 별점</span>
                              
         <p class="mytextReview" style="font-style: oblique; font-size: 20px;">리뷰</p>
         <div class="asdasd" style="border-top: 3px solid #33ff33;">
@@ -152,6 +152,7 @@
 			  <img id="diary-image" class="mark" src="${path}/resources/images/img/diary1.png" alt="찜하기">
 		  </button>
           <button id="reply-button"><img class="review-icon" src="${path}/resources/images/img/addcomment.png" alt="봣어요"></button>
+         <div style="border-top: 4px solid #33ff33; margin-top: 20px;"></div>
         <div class="smr">
 
           <div class="reply-back">1</div>
@@ -383,33 +384,13 @@
               <p class="reply-date-insert" name="cmt_dt"><fmt:formatDate pattern="yy-MM-dd hh:mm" value="${CommentDTO.cmt_dt}"/></p>
              <input type="hidden" name="review_no" value="${CommentDTO.review_no }"> 
              <input type="hidden" name="cmt_no" value ="${CommentDTO.cmt_no }">
-            </div>           
-                <div class="heart">        
-                    <div>
-                 <button onclick="changeImage()">
-                         <img id="myImage" src="${path}/resources/images/img/heart_off.png" width="35" height="80%">
-                      </button>               
-                    </div>             
-                </div>                       
+            </div>                               
           </div>          
           <div class="reply-box-body">            
             <p class="reply-box-text review_content">${CommentDTO.cmt_content }</p>
           </div>
           <div class="reply-box-footer">
-            <div>
-              <ul>
-                <li>
-                  <div class="like">
-                    <img src="${path}/resources/images/img/좋아요.png" alt="좋아요아이콘">
-                  </div>
-                  <div class="like-count">
-                    <p>
-                      9999개
-                    </p>
-                  </div>
-                </li>
-              </ul>
-            </div>
+
 				<div class="report">
 				  <img src="${path}/resources/images/img/신고하기.png" alt="신고" class="reportBtn">
 				  <button class="report-text" >신고</button>

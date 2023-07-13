@@ -31,17 +31,6 @@
 			<%@ include file="../../fix/Lmnb.jsp" %>
 	
 	        <div class="main">
-	        	<section class="sec_2">
-	        		<div class="btn_more_div" style="text-align: right; margin-top: 20px; ">
-	        			<button type="button" class="btn_more" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: black; color: #fff; width: 50px;">
-	        			정렬
-	        			</button>
-		       			<ul class="dropdown-menu dropdown-menu-dark">
-		       				<li><a class="dropdown-item" href="#">최신순</a></li>
-		       				<li><a class="dropdown-item" href="#">별점순</a></li>
-		   				</ul>
-	 				</div>
-				</section>
 				
 				<div class="main-work">					
 
@@ -67,7 +56,7 @@
 		let wishListCnt = ${wishListCnt}
 		
 				
-		$(document).ready(function() {			
+		$(document).ready(function() {
 			
 			fnGetWishList({
 				"user" : USER
@@ -77,6 +66,10 @@
 			})
 			
 		})
+		
+		function name() {
+			
+		}
 	
 		function fnGetWishList(param) {
 			

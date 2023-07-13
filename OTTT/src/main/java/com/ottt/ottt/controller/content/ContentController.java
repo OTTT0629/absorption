@@ -45,11 +45,15 @@ public class ContentController {
 	@GetMapping("/content")
 	public String movie(Model m, @RequestParam(value = "ott", required = false) List<Integer> ott
 							 , @RequestParam(value = "genre", required = false) List<Integer> genre
-							 , String category
+							 , String category, String option
 							 , HttpServletRequest request, HttpSession session, SearchItem sc) {
 		
 		logger.info("================================== movie 진입");
 		
+		logger.info("================================== option : " + option);
+		
+		if(option != null)
+			sc.setOption(option);
 		sc.setPageSize(20);
 		sc.setCategory(category);
 		sc.setOtt_no(ott);
