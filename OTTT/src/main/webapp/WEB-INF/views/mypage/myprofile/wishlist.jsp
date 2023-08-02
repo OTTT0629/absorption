@@ -74,7 +74,7 @@
 		function fnGetWishList(param) {
 			
 			$.post(
-					"/ottt/mypage/getwishlist"
+					"/mypage/getwishlist"
 				    ,param
 				    ,fnCreatWishList
 				)

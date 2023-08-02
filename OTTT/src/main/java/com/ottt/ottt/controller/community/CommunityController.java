@@ -23,9 +23,11 @@ import com.ottt.ottt.dao.login.LoginUserDao;
 import com.ottt.ottt.dto.ArticleDTO;
 import com.ottt.ottt.dto.ArticleLikeDTO;
 import com.ottt.ottt.dto.ArticleSearchDTO;
+import com.ottt.ottt.dto.NotificationDTO;
 import com.ottt.ottt.dto.ReportDTO;
 import com.ottt.ottt.dto.UserDTO;
 import com.ottt.ottt.service.community.freecomuity.CommunityService;
+import com.ottt.ottt.service.mypage.NotificationService;
 import com.ottt.ottt.service.user.UserService;
 
 
@@ -39,6 +41,8 @@ public class CommunityController {
 	LoginUserDao loginUserDao;
 	@Autowired
 	UserService us;
+	@Autowired
+	NotificationService notificationService;
 
 	private static final Logger logger = LoggerFactory.getLogger(CommunityController.class);
 	
@@ -288,7 +292,7 @@ public class CommunityController {
 	//좋아요 저장 *************************************************************************************************
 	@PostMapping("/ajax/insertLike")
 	@ResponseBody
-	public Map<String,Object> insertLike(ArticleLikeDTO dto, HttpSession session) throws Exception {
+	public Map<String,Object> insertLike(ArticleLikeDTO dto, HttpSession session, Integer user_no) throws Exception {
 		
 		logger.info(">>>>>>>>>>>>>>>>>>>>> @PostMapping /ajax/insertLike insertLike 진입 ");
 		logger.info(">>>>>>>>>>>>>>>>>>>>> ArticleLikeDTO >>>> "+dto.toString());
@@ -302,7 +306,23 @@ public class CommunityController {
         }
 		dto.setUser_no(userDTO.getUser_no());
 
-		
+		//알림함에 알림 집어넣기
+		ArticleDTO articleDTO = new ArticleDTO();
+		articleDTO.setArticle_no(dto.getArticle_no());
+
+		ArticleDTO articleUserNo = communityService.select(articleDTO);
+		if(!user_no.equals(session.getAttribute("user_no"))){
+			if(articleDTO != null) {
+				NotificationDTO notificationDTO = new NotificationDTO();
+				notificationDTO.setUser_no(dto.getUser_no());
+				notificationDTO.setArticle_no(articleDTO.getArticle_no());
+				notificationDTO.setTarget_user_no(articleUserNo.getUser_no());
+			    String currentURL = "/community/post?article_no=" + dto.getArticle_no();
+			    notificationDTO.setNoti_url(currentURL);
+				
+				notificationService.putArticleLike(notificationDTO);
+			}
+		}
 		result.put("message", "success");
 		result.put("success", communityService.insertLike(dto) );
 		

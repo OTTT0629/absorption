@@ -46,6 +46,12 @@ public class UserDTO {
 	private String 	image;
 	private Integer following;
 	private Integer followers;
+	private String 	kakao_no;
+	private Integer review_count;
+	private Integer comment_count;
+	private Integer article_count;
+	private Integer report_count;
+	private Boolean block_yn;
 	
 	public UserDTO() {}
 	
@@ -165,6 +171,64 @@ public class UserDTO {
 		this.followers = followers;
 	}
 
+	public String getKakao_no() {
+		return kakao_no;
+	}
+
+
+	public void setKakao_no(String kakao_no) {
+		this.kakao_no = kakao_no;
+	}
+	public Integer getReview_count() {
+		return review_count;
+	}
+
+
+	public void setReview_count(Integer review_count) {
+		this.review_count = review_count;
+	}
+
+
+	public Integer getComment_count() {
+		return comment_count;
+	}
+
+
+	public void setComment_count(Integer comment_count) {
+		this.comment_count = comment_count;
+	}
+
+
+	public Integer getArticle_count() {
+		return article_count;
+	}
+
+
+	public void setArticle_count(Integer article_count) {
+		this.article_count = article_count;
+	}
+
+
+	public Integer getReport_count() {
+		return report_count;
+	}
+
+
+	public void setReport_count(Integer report_count) {
+		this.report_count = report_count;
+	}
+	
+
+	public Boolean getBlock_yn() {
+		return block_yn;
+	}
+
+
+	public void setBlock_yn(Boolean block_yn) {
+		this.block_yn = block_yn;
+	}
+
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(user_email, user_gen, user_id, user_nicknm, user_nm, user_no, user_pwd);
@@ -190,7 +254,9 @@ public class UserDTO {
 		return "UserDTO [user_no=" + user_no + ", gr_no=" + gr_no + ", user_id=" + user_id + ", user_pwd=" + user_pwd
 				+ ", user_nm=" + user_nm + ", user_nicknm=" + user_nicknm + ", user_gen=" + user_gen + ", user_email="
 				+ user_email + ", reg_date=" + reg_date + ", admin=" + admin + ", image=" + image + ", following="
-				+ following + ", followers=" + followers + "]";
+				+ following + ", followers=" + followers + ", kakao_no=" + kakao_no + ", review_count=" + review_count + ", comment_count="
+				+ comment_count + ", article_count=" + article_count + ", report_count=" + report_count + ", block_yn="
+				+ block_yn + "]";
 	}
 	
 	

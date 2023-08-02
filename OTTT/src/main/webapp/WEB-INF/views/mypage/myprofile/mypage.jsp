@@ -40,8 +40,18 @@
               		<ul>
               			<li>
               				<a href="<c:url value="/mypage/setting" />">
-              				<img class="set-img" src="${path}/resources/images/img/톱니.png" alt="설정이미지"></a>
+              				<img class="set-img" src="https://myottt.s3.ap-northeast-2.amazonaws.com/img/%ED%86%B1%EB%8B%88.png" alt="설정이미지"></a>
            				</li>
+           				<c:choose>
+						  <c:when test="${userDTO.admin.toString()=='Y'}">
+						    <li>
+						      <a href="<c:url value='/admin' />" class="admin">관리자 페이지</a>
+						    </li>
+						  </c:when>
+						  <c:otherwise>
+						    <!-- 아무것도 표시하지 않음 -->
+						  </c:otherwise>
+						</c:choose>
            				<li>
            					<a href='<c:url value="/logout" />' class="logout">로그 아웃</a>
        					</li>

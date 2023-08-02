@@ -45,7 +45,7 @@
 			    if (content_nm !== "") {
 			      $.ajax({
 			        type: "GET",
-			        url: "/ottt/search/auto?content_nm=" + encodeURIComponent(content_nm),
+			        url: "/search/auto?content_nm=" + encodeURIComponent(content_nm),
 			        success: function(result) {
 			          $(".autocomplete").html(toHtml(result));
 			        },
@@ -160,11 +160,11 @@
               <div class="search-style">
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="checkbox" id="inlineCheckbox11" name="genre_no" value="1">
-                  <label class="form-check-label" for="inlineCheckbox11">액션</label>
+                  <label class="form-check-label" for="inlineCheckbox11" style="width: 40px;">액션</label>
                 </div>
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="checkbox" id="inlineCheckbox12" name="genre_no" value="2">
-                  <label class="form-check-label" for="inlineCheckbox12">어드벤처</label>
+                  <label class="form-check-label" for="inlineCheckbox12" style="width: 80px;">어드벤처</label>
                 </div>
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="checkbox" id="inlineCheckbox13" name="genre_no" value="3">
@@ -172,26 +172,26 @@
                 </div>
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="checkbox" id="inlineCheckbox14" name="genre_no" value="4">
-                  <label class="form-check-label" for="inlineCheckbox14">판타지</label>
+                  <label class="form-check-label" for="inlineCheckbox14" style="width: 60px;">판타지</label>
                 </div> 
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="checkbox" id="inlineCheckbox15" name="genre_no" value="5">
-                  <label class="form-check-label" for="inlineCheckbox15">드라마</label>
+                  <label class="form-check-label" for="inlineCheckbox15" style="width: 60px;">드라마</label>
                 </div>
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="checkbox" id="inlineCheckbox16" name="genre_no" value="6">
-                  <label class="form-check-label" for="inlineCheckbox16">코미디</label>
+                  <label class="form-check-label" for="inlineCheckbox16" style="width: 60px;">코미디</label>
                 </div>
               </div>
     
                 <div class="search-style">
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="checkbox" id="inlineCheckbox17" name="genre_no" value="7">
-                  <label class="form-check-label" for="inlineCheckbox17">시대극</label>
+                  <label class="form-check-label" for="inlineCheckbox17" style="width: 60px;">시대극</label>
                 </div>
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="checkbox" id="inlineCheckbox18" name="genre_no" value="8">
-                  <label class="form-check-label" for="inlineCheckbox18">로맨스/멜로</label>
+                  <label class="form-check-label" for="inlineCheckbox18" style="width: 100px;">로맨스/멜로</label>
                 </div>
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="checkbox" id="inlineCheckbox19" name="genre_no" value="9">

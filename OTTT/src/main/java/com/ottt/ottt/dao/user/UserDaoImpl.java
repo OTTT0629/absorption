@@ -133,4 +133,24 @@ public class UserDaoImpl implements UserDao {
 		return session.delete(namespace+"userGenreDelete", user_no);
 	}
 
+	@Override
+	public int increaseFollower(Integer user_no) throws Exception {
+		return session.update(namespace + "increaseFollower", user_no);
+	}
+
+	@Override
+	public int decreaseFollower(Integer user_no) throws Exception {
+		return session.update(namespace + "decreaseFollower", user_no);
+	}
+
+	@Override
+	public int increaseFollowing(Integer user_no) throws Exception {
+		return session.update(namespace + "increaseFollowing", user_no);
+	}
+
+	@Override
+	public int decreaseFollowing(Integer user_no) throws Exception {
+		return session.update(namespace + "decreaseFollowing", user_no);
+	}
+
 }

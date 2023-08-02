@@ -70,46 +70,7 @@
 </head>
 <body style="background-color: #202020;">
 	<div class="wrap">
-		<header>
-			<div class="logo">
-				 <a href="<c:url value="/" />">
-            <img src="${path}/resources/images/logo/OTTT.png" alt="로고">
-          </a>
-        </div>
-        <nav class="gnb">
-          <ul>
-            <li>
-              <a href="<c:url value="/genre/movie" />">영화</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/drama" />">드라마</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/interest" />">예능</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/animation" />">애니</a>
-            </li>
-            <li>
-              <a href="<c:url value="/community/freecommunity" />">게시판</a>
-            </li>
-          </ul>
-        </nav>
-        <div class="h-icon">
-          <ul>
-            <li>
-              <a href="<c:url value='/search' />">
-                <!-- <img src="./images/icon/search02.png" alt="검색"> -->
-              </a>
-            </li>
-            <li>
-              <a href="<c:url value='/mypage' />">
-                <!-- <img src="./images/icon/user01.png" alt="내 정보"> -->
-              </a>
-            </li>
-          </ul>
-        	</div>
-		</header>
+		<%@ include file="../fix/header.jsp" %>
 			
 		<form action="<c:url value='/login' />" method="post" onsubmit="return frmCheck(this)">
 			<div class = "Login">
@@ -123,7 +84,7 @@
 				
 				<input type="text" name="user_id" placeholder="ID를 입력해주세요" value="${cookie.id.value}" autofocus="autofocus" style="border:0 solid black" />
 				<input type="password" name="user_pwd" style="border:0 solid black" placeholder="비밀번호를 입력해주세요" />
-				<input type="hidden" name="toURL" value= "${param.toURL }" />
+				<input type="hidden" name="toURL" value= "${param.toURL }" class="toURL" />
 				
 				<button>로그인</button>
 				         
@@ -135,57 +96,116 @@
 					<input type="button" value="아이디 찾기" onClick="location.href='<c:url value="/login/findID" />'" class="join">
 					<input type="button" value="비밀번호 찾기" onClick="location.href='<c:url value="/login/findPwd" />'" class="join">
 				</a>
-				<a href= "#">
-					<img src="${path}/resources/images/img/ㄴㅂ.png" width="290" height="40" class="naver">
+				<a href="<c:url value='/naver/login' />">
+					<img src="https://myottt.s3.ap-northeast-2.amazonaws.com/img/%EB%84%A4%EC%9D%B4%EB%B2%84.png" width="290" height="40" class="naver">
 				</a>
-				<a href= "#">
-					<img src = "${path}/resources/images/img/카톡.png" width="290" height="40" class="kakao">
+				<a href="javascript:loginWithKakao();" >
+					<img src = "https://myottt.s3.ap-northeast-2.amazonaws.com/img/%EC%B9%B4%ED%86%A1.png" width="290" height="40" class="kakao">
 				</a>
-				<a href= "#">
-					<img src = "${path}/resources/images/img/구글로그인.png" width="290" height="40" class="google">
-            	</a>
+				<%-- <a href= "#">
+					<img src = "https://myottt.s3.ap-northeast-2.amazonaws.com/img/%EA%B5%AC%EA%B8%80%EB%A1%9C%EA%B7%B8%EC%9D%B8.png" width="290" height="40" class="google">
+            	</a> --%>
+            	
            	</div>
 		</form>
 	</div>
 	
+	<!-- 카카오 로그인 -->
+	<script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.min.js" charset="utf-8"></script>
+	<!-- 네이버 로그인 -->
+	<!-- Naver implicit script코드로 해당 script를 등록해야 Naver객체를 생성 할 수 있음 -->
+	<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+
 	<script type="text/javascript">
 	$(document).ready(function() {
-        let pwdMsg = "<%= request.getParameter("pwdMsg") %>";
-        if (pwdMsg == "MOD_PWD") {
+
+		let pwdMsg = "<%= request.getParameter("pwdMsg") %>";
+        
+		if (pwdMsg == "MOD_PWD") {
             $(".body").html("비밀번호가 변경되었습니다.<br>다시 로그인해주세요.");
             $('#Modal').modal('show');
         }
+		
         if (pwdMsg == "ERR_PWD") {
             $(".body").html("비밀번호 변경에 실패했습니다.<br>다시 시도해주세요.");
             $('#Modal').modal('show');
         }
-    });
+        
+        kakaoInit();
 
-		function frmCheck(frm) {
+	});
 	
-			let msg = ''
+	// 1.
+	//카카오 로그인연동 자바스크립트 초기화
+	function kakaoInit(){
+        console.log("카카오 연동 초기화");
+    	Kakao.init('9b07668ed6aed0016537d9c1ca21435f');	//본인의 JavaScript 키 입력
+        Kakao.isInitialized();
+	}
+
+	// 2.
+	//카카오 로그인화면 요청
+    function loginWithKakao() {
+    	Kakao.Auth.authorize({ 
+        	redirectUri: 'http://ottt.ap-northeast-2.elasticbeanstalk.com/kakao_callback' // 등록한 리다이렉트uri 입력
+        	, prompts : 'login'	//기존 로그인 여부와 상관없이 로그인하기
+        });
+    }
+	
+/* 	
+ 	// 네이버 연동 자바스크립트 초기화
+	const naverLogin = new naver.LoginWithNaverId(
+	 {
+		clientId: "CKTTRjv5JVTHXf5p5zy9",
+		callbackUrl: "http://localhost:8080/ottt/auth/naver/callback"
+	 }
+	);
+	
+	// 네이버 연동 정보제공 미동의 시 가입 안되게
+	naverLogin.init();
+	naverLogin.getLoginStatus(function(status){
+		if(status){
+			const naverId = naverLogin.user.getId();
+			const email = naverLogin.user.getEmail();
+			const nickName = naverLogin.user.getNickName();
 			
-			if (frm.user_id.value.length == 0){
-				setMessage("id를 입력해주세요", frm.id)
-				return false;
+			if(naverId==null || email == null || nickName==null){
+				alert("회원가입 시 필요한 정보입니다. 정보 제공에 동의해주세요.");
+				naverLogin.reprompt();
+				return;
 			}
+		}
+	
+	})
+	 */
+	
+
+	function frmCheck(frm) {
+	
+		let msg = ''
 			
-			if (frm.user_pwd.value.length == 0){
-				setMessage("비밀번호를 입력해주세요", frm.pwd)
-				return false;
-			}
-			
-			return true;
-			
+		if (frm.user_id.value.length == 0){
+			setMessage("id를 입력해주세요", frm.id)
+			return false;
 		}
 			
-		function setMessage(msg, element) {
-			document.getElementById("msg").innerHTML
-					= `<i class="fa fa-exclamation-circle"> ${'${msg}'}</i>`
-			if(element) {
-				element.select()	//값이 잘못 입력되었을 때 다시 입력 
-			}
+		if (frm.user_pwd.value.length == 0){
+			setMessage("비밀번호를 입력해주세요", frm.pwd)
+			return false;
 		}
+			
+		return true;
+			
+	}
+			
+	function setMessage(msg, element) {
+		document.getElementById("msg").innerHTML
+				= `<i class="fa fa-exclamation-circle"> ${'${msg}'}</i>`
+		if(element) {
+			element.select()	//값이 잘못 입력되었을 때 다시 입력 
+		}
+	}
+
 		
 	</script>
 	

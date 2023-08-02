@@ -9,7 +9,7 @@
 			SELECT count(*)
 			FROM tb_follow
 			where follower_no = #{my_no}
-			and following_no = #{user_no}		
+			and following_no = #{user_no}
 		</select>
 		
 		<!-- 팔로워 리스트 -->

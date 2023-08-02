@@ -18,7 +18,7 @@
   	$(document).ready(function() {
 		$("#item-msg").click(function() {			
 			var userno = $("input[name='userno']").val()
-		    var url = "/ottt/messagewindow/open?user_no=" + encodeURIComponent(userno)
+		    var url = "/messagewindow/open?user_no=" + encodeURIComponent(userno)
 		    window.open(url, 'SEND-MSG', 'width=520, height=750, scrollbars=no')
 		})
 	})
@@ -59,7 +59,7 @@
                 <a href="<c:url value="/community/freecommunity?user=${userDTO.user_nicknm }&category=myLike" />">좋아요 누른 게시글</a>  
               </li>
               <li class="mycomment">
-                <img class="mimg" src="${path}/resources/images/img/댓글.png" alt="댓글">
+                <img class="mimg" src="https://myottt.s3.ap-northeast-2.amazonaws.com/img/%EB%8C%93%EA%B8%80.png" alt="댓글">
                 <a href="<c:url value="/community/freecommunity?user=${userDTO.user_nicknm }&category=myComment" />">나의 댓글</a>
               </li>
             </ul>

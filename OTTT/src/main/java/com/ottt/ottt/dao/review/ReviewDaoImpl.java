@@ -10,6 +10,11 @@ import org.springframework.stereotype.Repository;
 
 import com.ottt.ottt.domain.SearchItem;
 import com.ottt.ottt.dto.CommentDTO;
+import com.ottt.ottt.dto.ContentDirectorDTO;
+import com.ottt.ottt.dto.ContentPosterDTO;
+import com.ottt.ottt.dto.ContentTrailerDTO;
+import com.ottt.ottt.dto.DirectorDTO;
+import com.ottt.ottt.dto.EntertainerDTO;
 import com.ottt.ottt.dto.ReportDTO;
 import com.ottt.ottt.dto.ReviewDTO;
 import com.ottt.ottt.dto.ReviewLikeDTO;
@@ -186,6 +191,26 @@ public class ReviewDaoImpl implements ReviewDao {
 	@Override
 	public int cmtReviewCnt(SearchItem sc) throws Exception {
 		return session.selectOne(namespace + "cmtReviewCnt", sc);
+	}
+	@Override
+	public List<ContentPosterDTO> selectPoster(int content_no) throws Exception {
+		
+		return session.selectList(namespace + "getPostersByContentNo", content_no);
+	}
+	@Override
+	public List<ContentTrailerDTO> selectTrailer(int content_no) throws Exception {
+		
+		return session.selectList(namespace + "getTrailerByContentNo", content_no);
+	}
+	@Override
+	public DirectorDTO selectDirector(int content_no) throws Exception {
+		
+		return session.selectOne(namespace + "getDirectorNM", content_no);
+	}
+	@Override
+	public List<EntertainerDTO> selectEntertainer(int content_no) throws Exception {
+		
+		return session.selectList(namespace + "getEntertainerNM", content_no);
 	}
 
 }

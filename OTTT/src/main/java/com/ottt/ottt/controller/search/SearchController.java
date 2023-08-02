@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -64,7 +65,7 @@ public class SearchController {
 		return "/search/search";
 	}
 	
-	@GetMapping("/searchList")
+	@RequestMapping("/searchList")
 	public String searchList(@RequestParam(value="content_nm", required = false) String content_nm,
 							 @RequestParam(value="ott_no", required = false) List<Integer> ott_no,
 							 @RequestParam(value="genre_no", required = false) List<Integer> genre_no,

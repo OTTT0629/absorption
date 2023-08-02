@@ -81,10 +81,10 @@
 <body style="background-color: #202020; color: #fff;">
     <div class="wrap"> 
         <div style="background-color: black; text-align: center; height: 850px;">
-            <img src="${path}/resources/images/logo/메인이미지.png" style="width: 1200px; background-position: center; margin-top: 150px;"/>
+            <img src="https://myottt.s3.ap-northeast-2.amazonaws.com/img/%EB%A9%94%EC%9D%B8%EC%9D%B4%EB%AF%B8%EC%A7%80.png" style="width: 1200px; background-position: center; margin-top: 150px;"/>
             
             <div>
-                <img src="${path}/resources/images/logo/메인 OTTT.png" style="position: relative; top: -600px; width: 700px;"/>
+                <img src="https://myottt.s3.ap-northeast-2.amazonaws.com/img/%EB%A9%94%EC%9D%B8+OTTT.png" style="position: relative; top: -600px; width: 700px;"/>
             </div>
             <br/>
             <span class="main-search">
@@ -120,7 +120,7 @@
     			let user_no = '${sessionScope.user_no}'
         	    $.ajax({
         	      type: 'DELETE',
-        	      url: '/ottt/jjim?content_no=' + content_no + '&user_no=' + user_no,
+        	      url: '/jjim?content_no=' + content_no + '&user_no=' + user_no,
         	      headers: {"content-type":"application/json"},
         	      data: JSON.stringify({content_no:content_no, user_no:user_no}),
         	      success: function(result){
@@ -143,7 +143,7 @@
     			let user_no = '${sessionScope.user_no}'
         	    $.ajax({
         	      type: 'PATCH',
-        	      url: '/ottt/jjim?content_no=' + content_no + '&user_no=' + user_no,
+        	      url: '/jjim?content_no=' + content_no + '&user_no=' + user_no,
         	      headers: {"content-type":"application/json"},
         	      data: JSON.stringify({content_no:content_no, user_no:user_no}),
         	      success: function(result){
@@ -171,7 +171,7 @@
         <section class="sec_2">
             <div style="font-size: 23px; margin-left: 20px; margin-top: 20px;">별점 높은 작품들</div>
             <div class="main-work">
-                <button class="left-button1"><img src="${path}/resources/images/img/왼쪽 화살표.png" /></button>
+                <button class="left-button1"><img src="https://myottt.s3.ap-northeast-2.amazonaws.com/img/%EC%99%BC%EC%AA%BD+%ED%99%94%EC%82%B4%ED%91%9C.png" /></button>
                 <div class="cont01">
                     <div class="posterzip1">
                     <c:forEach var="contentDTO" items="${ratingContentList}">
@@ -241,12 +241,12 @@
                     </c:forEach>                       
                     </div>
                 </div>               
-                <button class="right-button1"><img src="resources/images/img/오른쪽화살표.png"/></button>
+                <button class="right-button1"><img src="https://myottt.s3.ap-northeast-2.amazonaws.com/img/%EC%98%A4%EB%A5%B8%EC%AA%BD%ED%99%94%EC%82%B4%ED%91%9C.png"/></button>
             </div>
             <br />
             <div style="font-size: 23px; margin-left: 20px;">관심 많은 작품들</div>
             <div class="main-work">
-                <button class="left-button2"><img src="${path}/resources/images/img/왼쪽 화살표.png" /></button>
+                <button class="left-button2"><img src="https://myottt.s3.ap-northeast-2.amazonaws.com/img/%EC%99%BC%EC%AA%BD+%ED%99%94%EC%82%B4%ED%91%9C.png" /></button>
                 <div class="cont01">
                     <div class="posterzip2">
                     <c:forEach var="contentDTO" items="${jjimContentList}">
@@ -297,13 +297,13 @@
                     </c:forEach>                       
                     </div>
                 </div>               
-                <button class="right-button2"><img src="resources/images/img/오른쪽화살표.png"/></button>
+                <button class="right-button2"><img src="https://myottt.s3.ap-northeast-2.amazonaws.com/img/%EC%98%A4%EB%A5%B8%EC%AA%BD%ED%99%94%EC%82%B4%ED%91%9C.png"/></button>
             </div>
             <br/>
             <div style="font-size: 23px; margin-left: 20px;">추천 작품들</div>
             <c:if test="${sessionScope.id == null}">
               <div class="main-work">
-                <button class="left-button3"><img src="${path}/resources/images/img/왼쪽 화살표.png" /></button>
+                <button class="left-button3"><img src="https://myottt.s3.ap-northeast-2.amazonaws.com/img/%EC%99%BC%EC%AA%BD+%ED%99%94%EC%82%B4%ED%91%9C.png" /></button>
                 <div class="cont01">
                     <div class="posterzip3">
                     <c:forEach var="contentDTO" items="${watchedContentList}">
@@ -354,7 +354,7 @@
                     </c:forEach>                       
                     </div>
                 </div>               
-                <button class="right-button3"><img src="resources/images/img/오른쪽화살표.png"/></button>
+                <button class="right-button3"><img src="https://myottt.s3.ap-northeast-2.amazonaws.com/img/%EC%98%A4%EB%A5%B8%EC%AA%BD%ED%99%94%EC%82%B4%ED%91%9C.png"/></button>
             </div>            
             
             </c:if>
@@ -365,7 +365,7 @@
 					<div style="margin: 20px; font-size: 20px; font-weight: normal;">☆★추가 정보를 입력하고 추천작을 받아보세요!!★☆</div>
 				</c:when>
 				<c:otherwise>
-					<button class="left-button3"><img src="${path}/resources/images/img/왼쪽 화살표.png" /></button>
+					<button class="left-button3"><img src="https://myottt.s3.ap-northeast-2.amazonaws.com/img/%EC%99%BC%EC%AA%BD+%ED%99%94%EC%82%B4%ED%91%9C.png" /></button>
 	                <div class="cont01">
 	                    <div class="posterzip3">
 	                    <c:forEach var="contentDTO" items="${recomContentList}">
@@ -416,7 +416,7 @@
 	                    </c:forEach>                       
 	                    </div>
 	                </div>               
-	                <button class="right-button3"><img src="resources/images/img/오른쪽화살표.png"/></button>				
+	                <button class="right-button3"><img src="https://myottt.s3.ap-northeast-2.amazonaws.com/img/%EC%98%A4%EB%A5%B8%EC%AA%BD%ED%99%94%EC%82%B4%ED%91%9C.png"/></button>				
 				</c:otherwise>
 			</c:choose>               
             </div>            

@@ -57,8 +57,19 @@
 			})
 			
 			fnLmenuColor(CATEGORY)
-			
+						
 		})
+		
+		function strChk() {
+   			let length = 230;
+   			let str = $(this).html()
+   			
+   			if (str.length > length) {
+	        	str = str.substr(0, length - 5) + ' ...';
+	        	$(this).html(str);        	
+    		}
+			
+		}
 		
 		function fnLmenuColor(category) {
 			if (category == 1) {
@@ -77,7 +88,7 @@
 		function fnGetReviewList(param) {
 	
 			$.post(
-					"/ottt/mypage/getreviewlist"
+					"/mypage/getreviewlist"
 				    ,param
 				    ,fnCreatReviewList
 				)
@@ -98,6 +109,10 @@
 			let reviewCnt = response.reviewCnt
 			let pr = response.pr
 			
+			function truncateString(str, maxLength) {
+				return str.length > maxLength ? str.substr(0, maxLength - 5) + " ..." : str;
+			}
+			
 			list.forEach(function(v) {
 				createHtml += '<a href="<c:url value="/detailPage/reply?content_no='+v.content_no+'&review_no='+v.review_no+'" />" class="review">'
 				createHtml += '<div class="post">'
@@ -111,7 +126,7 @@
 				createHtml += '<span class="point">'+v.rating+'</span>'
 				createHtml += '</div></div>'
 				createHtml += '<div class="rv-main">'
-				createHtml += '<span>'+v.review_content+'</span>'
+				createHtml += truncateString(v.review_content, 207)
 				createHtml += '</div>'
 				createHtml += '</div></div></a>'
 			})
@@ -124,7 +139,7 @@
 			 if (response.reviewCnt == null || response.reviewCnt === 0) {
 			        createPage += '<div class="title-line" style="text-align: center;">'+CATENM+' 리뷰가 없습니다</div>';
 			    } else {
-			        createPage += '<div class="page-num" style="margin-top: 10px;">';
+			        createPage += '<div class="page-num">';
 			        createPage += '<nav aria-label="Page navigation example" class="d-flex flex-row justify-content-center">';
 			        createPage += '<ul class="pagination">';
 			        if (response.pr.showPrev) {

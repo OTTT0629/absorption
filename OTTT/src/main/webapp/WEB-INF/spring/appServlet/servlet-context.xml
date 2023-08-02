@@ -56,5 +56,8 @@
 	          class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
 	 </websocket:handshake-interceptors>
 	</websocket:handlers>
+	
+	<!-- NaverLoginBO Class에 대한 Bean 설정 추가 -->
+	<beans:bean id="naverLoginBO" class="com.ottt.ottt.domain.NaverLoginBO" />
 
 </beans:beans>

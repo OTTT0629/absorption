@@ -9,4 +9,6 @@ public interface LoginUserDao {
 	public UserDTO selectNickname(String user_nicknm);
 	public UserDTO selectNo(Integer user_no);
 	
+	//카카오가입여부
+	UserDTO selectKakao(String kakao_no) throws Exception;
 }

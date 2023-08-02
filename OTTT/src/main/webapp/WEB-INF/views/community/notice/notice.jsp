@@ -55,7 +55,12 @@
     color: #33FF33; 
 }
 
-
+  .page-item.active .page-link {
+	z-index: 1;
+	color: #33ff33;
+    background-color: #202020; 
+    border-color: #33ff33;
+}
 
 </style>
 </head>
@@ -102,7 +107,7 @@
 	        <div class="search-var">
 	          <span>제목+내용</span>
 	          <input  type="text" class="search-input" name="keyword" value="${param.keyword }"/>
-	          <button type="button" class="btn btn-outline-success" id="btn">검색</button>
+	          <button type="submit" class="btn btn-outline-success" id="btn">검색</button>
 	        </div>
         </form>    
         <c:if test="${userDTO.admin.toString() == 'Y' }">
@@ -143,11 +148,13 @@
 			              </li>
 		            </c:if>
 		            <c:forEach var="i" begin="${pr.beginPage }" end="${pr.endPage }">
-		            	<li class="page-item"><a class="page-link" href='<c:url value="/community/notice${pr.sc.getQueryString(i)}" />'>${i}</a></li>
+		            	<li class="page-item ${i == pr.sc.page ? 'active' : ''}">
+		            		<a class="page-link" href='<c:url value="/community/notice${pr.sc.getQueryString(i)}" />'>${i}</a>
+		            	</li>
 		            </c:forEach>
 		              <c:if test="${pr.showNext}">
 			              <li class="page-item">
-			                <a class="page-link" href='<c:url value="/community/notice${pr.sc.getQueryString(pr.endPage-1)}" />' aria-label="Next">
+			                <a class="page-link" href='<c:url value="/community/notice${pr.sc.getQueryString(pr.endPage+1)}" />' aria-label="Next">
 			                  <span aria-hidden="true">&raquo;</span>
 			                </a>
 			              </li>

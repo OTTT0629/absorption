@@ -20,7 +20,12 @@ public interface UserDao {
 	UserDTO select(Integer user_no) throws Exception;
 	int selectNoId(String user_nicknm) throws Exception;
 	int insertUserOTT(Map map) throws Exception; 
-	int insertUserGenre(Map map) throws Exception; 
+	int insertUserGenre(Map map) throws Exception;
+	
+	int increaseFollower (Integer user_no) throws Exception;
+	int decreaseFollower (Integer user_no) throws Exception;
+	int increaseFollowing (Integer user_no) throws Exception;
+	int decreaseFollowing (Integer user_no) throws Exception;
 	
 	//유저 OTT 추가정보 DELETE
 	int deleteUserOTT(Integer user_no) throws Exception;

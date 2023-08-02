@@ -83,7 +83,10 @@ public class SigninController {
 	
 	//추가정보 입력
 	@GetMapping(value = "/addInfo")
-	public String addInfo() {
+	public String addInfo(HttpSession session) {
+		
+		System.out.println("=============================session"+session.getAttribute("user_no"));
+		
 		return "/login/addInfo";		
 	}
 	

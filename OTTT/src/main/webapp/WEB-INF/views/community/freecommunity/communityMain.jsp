@@ -54,7 +54,7 @@
 	              		<li style="display: flex;">
 	                  		<div class="list-group">
 	                     		<a href="#" class="list-group-item list-group-item-action" onclick="javascript:fnCategory('myComment');">
-	                       			<img class="side_img" src="${path}/resources/images/img/comment.png" >댓글 작성 게시물
+	                       			<img class="side_img" src="${path}/resources/images/img/comment.png" >댓글 작성 게시글
 		                      	</a>
 	                 		</div>
 	             		</li>
@@ -252,7 +252,7 @@
 					if(LOGIN_YN == null || LOGIN_YN == ""){
 						swal("로그인 후 이용가능합니다.","로그인을 해주세요.", "warning")
 						.then(function(){
-							location.href="/ottt/login";                   
+							location.href="/login";                   
 						});
 						return;					
 					}
@@ -316,7 +316,7 @@
 			function fnCallAjaxSelectArticleList(param){
 				//ajax-post방식 축약버전 호출방식
 				$.post(
-					"/ottt/community/ajax/getArticleList"
+					"/community/ajax/getArticleList"
 				    ,param
 				    ,fnCreatArticleList
 				)				
@@ -342,7 +342,7 @@
 			    }
 				
 				form.setAttribute('method','post');
-				form.setAttribute('action','/ottt/profile?user=' +user_nicknm);
+				form.setAttribute('action','/profile?user=' +user_nicknm);
 								
 				document.body.appendChild(form);
 				form.submit();				
@@ -455,7 +455,7 @@
 				if(LOGIN_YN == null || LOGIN_YN == ""){
 					swal("로그인 후 이용가능합니다.","로그인을 해주세요.", "warning")
 					.then(function(){
-						location.href="/ottt/login";                   
+						location.href="/login";                   
 					});
 					return;					
 				}
@@ -508,14 +508,14 @@
 				if(LOGIN_YN == null || LOGIN_YN == ""){
 					swal("로그인 후 이용가능합니다.","로그인을 해주세요.", "warning")
 					.then(function(){
-						location.href="/ottt/login";                   
+						location.href="/login";                   
 					});
 					return;					
 				}
 				
 				// $.post  > post 방식의 ajax 
 				$.post(
-					"/ottt/community/ajax/selectLikeCount"
+					"/community/ajax/selectLikeCount"
 				    , {"user_no": "${sessionScope.user_no}" , "article_no" : article_no }
 				    , function(data){
 				    	
@@ -532,7 +532,7 @@
 				    		//3. 주소는 이거  /ottt/community/ajax/selectLikeCount
 				    		//4. 제이쿼리의 attr을 사용하여 이미지를 on으로 변경하기
 								$.post(
-								"/ottt/community/ajax/insertLike"
+								"/community/ajax/insertLike"
 				    			, {"user_no": "${sessionScope.user_no}" , "article_no" : article_no }
 							    , function(data){
 
@@ -550,7 +550,7 @@
 				    		//3. 주소는 이거  /ottt/community//ajax/deleteLike
 				    		//4. 제이쿼리의 attr을 사용하여 이미지를 off으로 변경하기
 								$.post(
-								"/ottt/community/ajax/deleteLike"
+								"/community/ajax/deleteLike"
 				    			, {"user_no": "${sessionScope.user_no}" , "article_no" : article_no }
 							    , function(data){
 							    	$("#pushHeart_"+index).attr("src", PATH+"/resources/images/img/heart_off.png");
@@ -575,7 +575,7 @@
 				if(LOGIN_YN == null || LOGIN_YN == ""){
 					swal("로그인 후 이용가능합니다.","로그인을 해주세요.", "warning")
 					.then(function(){
-						location.href="/ottt/login";                   
+						location.href="/login";                   
 					});
 					return;					
 				}
@@ -612,7 +612,7 @@
 			/* 댓글 이미지 클릭 시 */
 			 function goToPost(postNumber) {
 	   	    // 게시글 번호를 가지고 이동하는 로직을 작성합니다.
-	   	    var postLink = '/ottt/community/post?article_no=' + postNumber; // 게시글 번호를 이용한 링크 생성
+	   	    var postLink = '/community/post?article_no=' + postNumber; // 게시글 번호를 이용한 링크 생성
 	   	    window.location.href = postLink; // 생성된 링크로 이동
 	   	  }
 			

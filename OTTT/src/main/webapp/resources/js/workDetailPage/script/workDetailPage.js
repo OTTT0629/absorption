@@ -17,7 +17,7 @@ function goProfile(user_no, user_nicknm) {
     }
 	
 	form.setAttribute('method','post');
-	form.setAttribute('action','/ottt/profile?user=' +user_nicknm);
+	form.setAttribute('action','/profile?user=' +user_nicknm);
 					
 	document.body.appendChild(form);
 	form.submit();				
@@ -146,22 +146,22 @@ $(document).ready(function(){
  
    //next
    $(".button2").click(function() {
-     if (p >= 24) {
+     if (p >= 3) {
        p = 0;
      } else {
        p++;
      }
-     $(".phozip").stop().animate({left: -401 * p}, 500);
+     $(".phozip").stop().animate({left: -490 * p}, 500);
    });
  
    //previous
    $(".button3").click(function() {
      if (p <= 0) {
-       p = 24;
+       p = 3;
      } else {
        p--;
      }
-     $(".phozip").stop().animate({left: -400.7 * p}, 500);
+     $(".phozip").stop().animate({left: -490.7 * p}, 500);
    });
  };
  
@@ -215,7 +215,7 @@ $(document).ready(function(){
   $(".popupback1").hide();
   $(".popup-photo").hide();
   $(".popup-photo li").hide();
-  $(".phozip div").click(function(){
+  $(".poster-image").click(function(){
 
     var i = $(this).index();
 

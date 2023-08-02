@@ -148,7 +148,7 @@
 		let OPTION = '${pr.sc.option}'
  		
 		function fnSorting() {
-			location.href = "/ottt/genre/content?category="+CATEGORY+"&option="+$("#sorting option:selected").val()
+			location.href = "/genre/content?category="+CATEGORY+"&option="+$("#sorting option:selected").val()
 		}
 		
 		function fnSelectBtn() {
@@ -170,7 +170,7 @@
 				let user_no = '${sessionScope.user_no}'
 	    	    $.ajax({
 	    	    	type: 'DELETE',
-					url: '/ottt/genre/genrejjim?content_no=' + content_no + '&user_no=' + user_no,
+					url: '/genre/genrejjim?content_no=' + content_no + '&user_no=' + user_no,
 					headers: {"content-type":"application/json"},
 					data: JSON.stringify({content_no:content_no, user_no:user_no}),
 					success: function(result){
@@ -196,7 +196,7 @@
 	        	
 	    		$.ajax({
 	    			type: 'PATCH',
-	        	    url: '/ottt/genre/genrejjim?content_no=' + content_no + '&user_no=' + user_no,
+	        	    url: '/genre/genrejjim?content_no=' + content_no + '&user_no=' + user_no,
 	        	    headers: {"content-type":"application/json"},
 	        	    data: JSON.stringify({content_no:content_no, user_no:user_no}),
 	        	    success: function(result){

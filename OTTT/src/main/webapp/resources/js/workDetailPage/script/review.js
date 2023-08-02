@@ -17,7 +17,7 @@ function goProfile(user_no, user_nicknm) {
     }
 	
 	form.setAttribute('method','post');
-	form.setAttribute('action','/ottt/profile?user=' +user_nicknm);
+	form.setAttribute('action','/profile?user=' +user_nicknm);
 					
 	document.body.appendChild(form);
 	form.submit();				

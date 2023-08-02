@@ -75,7 +75,7 @@
 		function fnGetWatchedList(param) {
 			
 			$.post(
-					"/ottt/mypage/getwatchedlist"
+					"/mypage/getwatchedlist"
 				    ,param
 				    ,fnCreatWatchedList
 				)

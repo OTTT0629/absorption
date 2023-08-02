@@ -36,4 +36,10 @@ public class LoginUserDaoImpl implements LoginUserDao {
       // TODO Auto-generated method stub
       return session.selectOne(namespace + "selectNo", user_no);
    }
+   
+	//카카오가입여부
+	@Override
+	public UserDTO selectKakao(String kakao_no) throws Exception {
+		return session.selectOne(namespace+"selectKakao", kakao_no);		
+	}
 }

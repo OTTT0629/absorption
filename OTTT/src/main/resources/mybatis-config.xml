@@ -29,6 +29,11 @@
   		<typeAlias type="com.ottt.ottt.dto.ContentGenreDTO" alias="ContentGenreDTO"/>
   		<typeAlias type="com.ottt.ottt.dto.ContentCategoryDTO" alias="ContentCategoryDTO"/>
   		<typeAlias type="com.ottt.ottt.dto.FollowDTO" alias="FollowDTO"/>
+		<typeAlias type="com.ottt.ottt.dto.ContentPosterDTO" alias="ContentPosterDTO"/>
+  		<typeAlias type="com.ottt.ottt.dto.ContentTrailerDTO" alias="ContentTrailerDTO"/>
+  		<typeAlias type="com.ottt.ottt.dto.DirectorDTO" alias="DirectorDTO"/>
+  		<typeAlias type="com.ottt.ottt.dto.EntertainerDTO" alias="EntertainerDTO"/>
+  		<typeAlias type="com.ottt.ottt.dto.NotificationDTO" alias="NotificationDTO"/>
   	</typeAliases>
   </configuration>
   

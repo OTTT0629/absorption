@@ -37,7 +37,7 @@
     			let user_no = '${sessionScope.user_no}'
         	    $.ajax({
         	      type: 'DELETE',
-        	      url: '/ottt/searchjjim?content_no=' + content_no + '&user_no=' + user_no,
+        	      url: '/searchjjim?content_no=' + content_no + '&user_no=' + user_no,
         	      headers: {"content-type":"application/json"},
         	      data: JSON.stringify({content_no:content_no, user_no:user_no}),
         	      success: function(result){
@@ -61,7 +61,7 @@
     			let user_no = '${sessionScope.user_no}'
         	    $.ajax({
         	      type: 'PATCH',
-        	      url: '/ottt/searchjjim?content_no=' + content_no + '&user_no=' + user_no,
+        	      url: '/searchjjim?content_no=' + content_no + '&user_no=' + user_no,
         	      headers: {"content-type":"application/json"},
         	      data: JSON.stringify({content_no:content_no, user_no:user_no}),
         	      success: function(result){
@@ -174,11 +174,13 @@
 			              </li>
 		            </c:if>
 		            <c:forEach var="i" begin="${pr.beginPage }" end="${pr.endPage }">
-		            	<li class="page-item"><a class="page-link" href='<c:url value="/searchList${pr.sc.getQueryString(i)}" />'>${i}</a></li>
+		            	<li class="page-item ${i == pr.sc.page ? 'active' : ''}">
+		            		<a class="page-link" href='<c:url value="/community/notice${pr.sc.getQueryString(i)}" />'>${i}</a>
+		            	</li>
 		            </c:forEach>
 		              <c:if test="${pr.showNext}">
 			              <li class="page-item">
-			                <a class="page-link" href='<c:url value="/searchList${pr.sc.getQueryString(pr.endPage-1)}" />' aria-label="Next">
+			                <a class="page-link" href='<c:url value="/searchList${pr.sc.getQueryString(pr.endPage+1)}" />' aria-label="Next">
 			                  <span aria-hidden="true">&raquo;</span>
 			                </a>
 			              </li>
@@ -289,6 +291,13 @@
     background-color: #202020; 
     border-color: #33ff33;
   }
+  
+ .page-item.active .page-link {
+	z-index: 1;
+	color: #33ff33;
+    background-color: #202020; 
+    border-color: #33ff33;
+}
     </style>
     
 

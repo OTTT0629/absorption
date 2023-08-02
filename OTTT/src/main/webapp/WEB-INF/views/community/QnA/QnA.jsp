@@ -53,6 +53,13 @@
     border-style: solid;
     color: #33FF33; 
 }
+
+  .page-item.active .page-link {
+	z-index: 1;
+	color: #33ff33;
+    background-color: #202020; 
+    border-color: #33ff33;
+}
 </style>
 
   </head>
@@ -141,11 +148,13 @@
 			              </li>
 		            </c:if>
 		            <c:forEach var="i" begin="${pr.beginPage }" end="${pr.endPage }">
-		            	<li class="page-item"><a class="page-link" href='<c:url value="/community/QnA${pr.sc.getQueryString(i)}" />'>${i}</a></li>
+		            	<li class="page-item ${i == pr.sc.page ? 'active' : ''}">
+		            		<a class="page-link" href='<c:url value="/community/QnA${pr.sc.getQueryString(i)}" />'>${i}</a>
+		            	</li>
 		            </c:forEach>
 		              <c:if test="${pr.showNext}">
 			              <li class="page-item">
-			                <a class="page-link" href='<c:url value="/community/QnA${pr.sc.getQueryString(pr.endPage-1)}" />' aria-label="Next">
+			                <a class="page-link" href='<c:url value="/community/QnA${pr.sc.getQueryString(pr.endPage+1)}" />' aria-label="Next">
 			                  <span aria-hidden="true">&raquo;</span>
 			                </a>
 			              </li>

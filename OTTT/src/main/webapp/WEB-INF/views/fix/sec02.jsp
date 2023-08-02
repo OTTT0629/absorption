@@ -67,7 +67,7 @@
 			// 팔로잉
 			$(document).on('click', '#btnFollow', function() {
 				$.post(
-					"/ottt/startFollow"
+					"/startFollow"
 					, {
 						my_no : MY
 						, user_no : USER
@@ -85,7 +85,7 @@
 			// 팔로우 해제
 			$(document).on('click', '#btnCxlFollow', function() {
 				$.post(
-					"/ottt/stopFollow"
+					"/stopFollow"
 					, {
 						my_no : MY
 						, user_no : USER
@@ -106,7 +106,7 @@
 				console.log(param)
 				
 				$.post(
-						"/ottt/getFollowStatus"
+						"/getFollowStatus"
 						, param
 						, function(response) {
 							if(response) {

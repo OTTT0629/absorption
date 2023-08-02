@@ -38,7 +38,7 @@ $(document).ready(function() {
 	// 쪽지 리스트 불러오기(받은 / 보낸)
 	  $("#btn-recv").click(function() {
 	    $.ajax({
-	      url: '/ottt/mypage/message',
+	      url: '/mypage/message',
 	      type: 'GET',
 	      success: function(data) {
 	        console.log("받은 쪽지 목록을 가져옴")
@@ -62,7 +62,7 @@ $(document).ready(function() {
 	        	})
 	        	$(".left-bottom table").append(rows)
 	        }
-	        location.href="/ottt/mypage/message"
+	        location.href="/mypage/message"
 	      },
 	      error: function() {
 	        alert("error")
@@ -73,7 +73,7 @@ $(document).ready(function() {
 	  
     $("#btn-send").click(function() {
         $.ajax({
-          url: '/ottt/mypage/message/send',
+          url: '/mypage/message/send',
           type: 'GET',
           success: function(data) {
             console.log("보낸 쪽지 목록을 가져옴")
@@ -97,7 +97,7 @@ $(document).ready(function() {
                 })
                 $(".left-bottom table").append(rows)
             }
-            location.href="/ottt/mypage/message/send"
+            location.href="/mypage/message/send"
 		    },
           error: function() {
             alert("error")
@@ -124,7 +124,7 @@ $(document).ready(function() {
 	    $('input[name=msgno]').val(msgNo)
 	    $('input[name=sendno]').val(sendUserNo)
 	    
-	    var url = "/ottt/messagewindow/open?send_user_no=" + encodeURIComponent(sendUserNo) + "&message_no=" + encodeURIComponent(msgNo)
+	    var url = "/messagewindow/open?send_user_no=" + encodeURIComponent(sendUserNo) + "&message_no=" + encodeURIComponent(msgNo)
 	    $("#msg-write").attr("data-url", url) // 답장 버튼에 URL을 저장
 	
 	    var sendUserNk = $(this).siblings(".msg-nicknm").text()
@@ -140,10 +140,10 @@ $(document).ready(function() {
 	
 	// 경로마다 해당되는 버튼에 active 클래스 주기
 	const currentPath = window.location.pathname;
-	if (currentPath === '/ottt/mypage/message') {
+	if (currentPath === '/mypage/message') {
 	  recvButton.addClass('active');
 	  sendButton.removeClass('active');
-	} else if (currentPath === '/ottt/mypage/message/send') {
+	} else if (currentPath === '/mypage/message/send') {
 	  recvButton.removeClass('active');
 	  sendButton.addClass('active');
 	}

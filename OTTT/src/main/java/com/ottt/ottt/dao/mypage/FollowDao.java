@@ -11,5 +11,5 @@ public interface FollowDao {
 	List<UserDTO> selectFollower (Integer my_no) throws Exception;
 	List<UserDTO> selectFollowing (Integer my_no) throws Exception;
 	int selectAllFollower (Integer my_no) throws Exception;
-	int selectAllFollowing (Integer my_no) throws Exception;
+	int selectAllFollowing (Integer my_no) throws Exception;	
 }

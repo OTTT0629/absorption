@@ -13,7 +13,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     <link rel="stylesheet" href="${path}/resources/css/login/register.css" >
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <style>
     	.ott-logo-img:hover,
 		.ott-logo-img.active {
@@ -74,48 +74,9 @@
 </head>
 <body style="background-color: #202020;">
 	<div class="wrap">
-		<header>
-			<div class="logo">
-				 <a href="<c:url value="/" />">
-            <img src="${path}/resources/images/logo/OTTT.png" alt="로고">
-          </a>
-        </div>
-        <nav class="gnb">
-          <ul>
-            <li>
-              <a href="<c:url value="/genre/movie" />">영화</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/drama" />">드라마</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/interest" />">예능</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/animation" />">애니</a>
-            </li>
-            <li>
-              <a href="<c:url value="/community" />">게시판</a>
-            </li>
-          </ul>
-        </nav>
-        <div class="h-icon">
-          <ul>
-            <li>
-              <a href="<c:url value='/search' />">
-                <!-- <img src="./images/icon/search02.png" alt="검색"> -->
-              </a>
-            </li>
-            <li>
-              <a href="<c:url value='/mypage' />">
-                <!-- <img src="./images/icon/user01.png" alt="내 정보"> -->
-              </a>
-            </li>
-          </ul>
-        	</div>
-		</header>
+		<%@ include file="../fix/header.jsp" %>
 
-				<script>
+				<script type="text/javascript">
 				
 				var code = "";		// 이메일 전송 인증번호 저장위한 코드
 				
@@ -134,7 +95,7 @@
 					  
 					  	$.ajax({
 					  		type : "post",
-						    url : "/ottt/signin/memberIdChk",
+						    url : "/signin/memberIdChk",
 						    data : data,
 						    success : function(result){
 						    	
@@ -228,7 +189,7 @@
 					  
 					  	$.ajax({
 					  		type : "post",
-						    url : "/ottt/signin/nnameIdChk",
+						    url : "/signin/nnameIdChk",
 						    data : data,
 						    success : function(result){
 						    	
@@ -289,7 +250,7 @@
 				  
 				  	$.ajax({
 				  		type : "post",
-					    url : "/ottt/signin/emailChk",
+					    url : "/signin/emailChk",
 					    data : data,
 					    success : function(result){
 					    	
@@ -324,7 +285,7 @@
 				   	    $('#Modal').modal('show');
 						$.ajax({
 							type: "GET",
-							url: "/ottt/signin/mailCheck?email="+email,
+							url: "/signin/mailCheck?email="+email,
 							success:function(data){
 								code=data
 							}							
@@ -377,11 +338,15 @@
 						  $(".body").html("이미 사용중인 닉네임입니다.");
 					   	  $('#Modal').modal('show');
 					   	  return false;
+					  }else if(!$('.agreeBox').prop('checked')){
+						  $(".body").html("약관에 동의해주세요.");
+					   	  $('#Modal').modal('show');
+					   	  return false;
 					  }
 					  return true;
 				}
 		    	
-		        </script>		
+		        </script>
         
 		<section class="sec00">
 		    <form action='<c:url value="/signin/register" />' method="post" id="form" onsubmit="return check_register()">
@@ -452,6 +417,13 @@
 		          		<input type="text" id="Certification" title="인증번호" maxlength="6"  placeholder="인증번호" pattern="\d{6}" required>
 			          	<button id="completion" type="button">인증확인</button>
 		          	</div>
+		          	
+		          	<div style="margin: 15px 0">
+					  <label for="agreeCheckbox" style="cursor: pointer;">
+					    <input type="checkbox" id="agreeCheckbox" class="agreeBox">
+					    회원가입 정보제공에 동의합니다.
+					  </label>
+					</div>
 		          	
 		          	<div class="back">
 		          		<input type="button" value="이전" onClick="location.href='<c:url value="/login" />'">

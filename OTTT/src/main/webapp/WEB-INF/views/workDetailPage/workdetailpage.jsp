@@ -36,16 +36,13 @@
       <div class="popup-video">
         <ul>
           <li>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/qFqgmaO15x4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            ${trailerlist[0].trailer}
           </li>
           <li>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/qFqgmaO15x4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            ${trailerlist[1].trailer}
           </li>
           <li>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/qFqgmaO15x4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-          </li>
-          <li>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/qFqgmaO15x4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            ${trailerlist[2].trailer}
           </li>
         </ul>
       </div>
@@ -53,23 +50,19 @@
       <div class="popup-photo">
         <ul>
           <li>
-            <img src="${path }/resources/images/서부전선 포토/1.png" alt="포토1">
+            <img src="${posterlist[0].poster}" alt="포토1">
           </li>
           <li>
-            <img src="${path }/resources/images/서부전선 포토/2.png" alt="포토1">
+            <img src="${posterlist[1].poster}" alt="포토1">
           </li>
           <li>
-            <img src="${path }/resources/images/서부전선 포토/3.png" alt="포토1">
+            <img src="${posterlist[2].poster}" alt="포토1">
           </li>
           <li>
-            <img src="${path }/resources/images/서부전선 포토/4.png" alt="포토1">
+            <img src="${posterlist[3].poster}" alt="포토1">
           </li>
           <li>
-            <img src="${path }/resources/images/서부전선 포토/5.png" alt="포토1">
-          </li>
-          <li>
-            <img src="${path }/resources/images/서부전선 포토/6.png" alt="포토1">
-
+            <img src="${posterlist[4].poster}" alt="포토1">
           </li>
 
         </ul>
@@ -100,131 +93,46 @@
         <img src="${path}/resources/images/img/filmside02.png" alt="필름테두리">
         <div class="fs_video">
           <div class="fs_p1">
-            <img src="${path}/resources/images/서부전선 예고1.png" alt="예고1">
+            <img src="${trailerlist[0].thumbnail}" alt="예고1">
             <div class="p-btn">
               <img src="${path}/resources/images/img/button01.png" alt="재생버튼">
             </div>
           </div>
           <div class="fs_p2">
-            <img src="${path}/resources/images/서부전선 예고2.png" alt="예고2">
+            <img src="${trailerlist[1].thumbnail}" alt="예고2">
             <div class="p-btn">
               <img src="${path}/resources/images/img/button01.png" alt="재생버튼">
             </div>
           </div>
 
           <div class="fs_p3">
-            <img src="${path}/resources/images/서부전선 예고1.png" alt="예고2">
+            <img src="${trailerlist[2].thumbnail}" alt="예고2">
             <div class="p-btn">
               <img src="${path}/resources/images/img/button01.png" alt="재생버튼">
             </div>
           </div>
 
-          <div class="fs_p4">
-            <img src="${path}/resources/images/서부전선 예고2.png" alt="예고2">
-            <div class="p-btn">
-              <img src="${path}/resources/images/img/button01.png" alt="재생버튼">
-            </div>
-          </div>
+
         </div>
       </div>
-      <div class="button1">
-        <img src="${path }/resources/images/img/버튼.png" alt="버튼">
-      </div>
+
       </div>
       <div class="main-p">
         <div class="t-text1">
           <div>포토</div>
-          
         </div>
         <div class="phozip">
-          <div class="photo">
-              <img src="${path }/resources/images/서부전선 포토/1.png" alt="포토1">
-          </div>
-          <div class="photo">
-              <img src="${path }/resources/images/서부전선 포토/2.png" alt="포토2">
-          </div>
-          <div class="photo">
-              <img src="${path }/resources/images/서부전선 포토/3.png" alt="포토3">
-          </div>
-          <div class="photo">
-              <img src="${path }/resources/images/서부전선 포토/4.png" alt="포토3">
-          </div>
-          <div class="photo">
-              <img src="${path }/resources/images/서부전선 포토/5.png" alt="포토3">
-          </div>
-          <div class="photo">
-              <img src="${path }/resources/images/서부전선 포토/6.png" alt="포토3">
-          </div>
-          <div class="photo">
-              <img src="${path }/resources/images/서부전선 포토/7.png" alt="포토3">
-          </div>
-          <div class="photo">
-              <img src="${path }/resources/images/서부전선 포토/8.png" alt="포토3">
-          </div>
-          <div class="photo">
-              <img src="${path }/resources/images/서부전선 포토/9.png" alt="포토3">
-          </div>
-          <div class="photo">
-              <img src="${path }/resources/images/서부전선 포토/10.png" alt="포토3">
-          </div>
-          <div class="photo">
-              <img src="${path }/resources/images/서부전선 포토/11.png" alt="포토3">
-          </div>
-          <div class="photo">
-              <img src="${path }/resources/images/서부전선 포토/12.png" alt="포토3">
-          </div>
-          <div class="photo">
-              <img src="${path }/resources/images/서부전선 포토/13.png" alt="포토3">
-          </div>
-          <div class="photo">
-              <img src="${path }/resources/images/서부전선 포토/14.png" alt="포토3">
-          </div>
-          <div class="photo">
-	            <img src="${path }/resources/images/서부전선 포토/15.png" alt="포토1">
-	        </div>
-	        <div class="photo">
-	            <img src="${path }/resources/images/서부전선 포토/16.png" alt="포토2">
-	        </div>
-	        <div class="photo">
-	            <img src="${path }/resources/images/서부전선 포토/17.png" alt="포토3">
-	        </div>
-	        <div class="photo">
-	            <img src="${path }/resources/images/서부전선 포토/18.png" alt="포토3">
-	        </div>
-	        <div class="photo">
-	            <img src="${path }/resources/images/서부전선 포토/19.png" alt="포토3">
-	        </div>
-	        <div class="photo">
-	            <img src="${path }/resources/images/서부전선 포토/20.png" alt="포토3">
-	        </div>
-	        <div class="photo">
-	            <img src="${path }/resources/images/서부전선 포토/21.png" alt="포토3">
-	        </div>
-	        <div class="photo">
-	            <img src="${path }/resources/images/서부전선 포토/22.png" alt="포토3">
-	        </div>
-	        <div class="photo">
-	            <img src="${path }/resources/images/서부전선 포토/23.png" alt="포토3">
-	        </div>
-	        <div class="photo">
-	            <img src="${path }/resources/images/서부전선 포토/25.png" alt="포토3">
-	        </div>
-	        <div class="photo">
-	            <img src="${path }/resources/images/서부전선 포토/26.png" alt="포토3">
-	        </div>
-	        <div class="photo">
-	            <img src="${path }/resources/images/서부전선 포토/27.png" alt="포토3">
-	        </div>
-
-
-
+           
+            <c:forEach items="${posterlist}" var="ContentPosterDTO">
+ 				 <img src="${ContentPosterDTO.poster}" alt="Poster Image" class="poster-image" style="margin-right: 10px; width: 400px; height: 226px;">
+			</c:forEach>
 
         </div>
         <div class="button3">
-          <img src="${path }/resources/images/img/왼쪽 화살표.png" alt="버튼">
+          <img src="https://myottt.s3.ap-northeast-2.amazonaws.com/img/%EC%99%BC%EC%AA%BD+%ED%99%94%EC%82%B4%ED%91%9C.png" alt="버튼">
         </div>
         <div class="button2">
-          <img src="${path }/resources/images/img/오른쪽화살표.png" alt="버튼">
+          <img src="https://myottt.s3.ap-northeast-2.amazonaws.com/img/%EC%98%A4%EB%A5%B8%EC%AA%BD%ED%99%94%EC%82%B4%ED%91%9C.png" alt="버튼">
         </div>
       </div>
       </div>
@@ -294,7 +202,7 @@
 			<button id="wishlist-button">
 			  <img id="wishlist-image" class="mark" src="${path}/resources/images/img/mark.png" alt="찜하기">
 			</button>
-          <button id="diary-button" onclick="location.href='/ottt/mypage/mydiary/write?content=${contentDTO.content_no }'">
+          <button id="diary-button" onclick="location.href='/mypage/mydiary/write?content=${contentDTO.content_no }'">
 			  <img id="diary-image" class="mark" src="${path}/resources/images/img/diary1.png" alt="찜하기">			  
 			</button>
           <button id="review-button">
@@ -411,11 +319,16 @@
             <span class="runtime">· ${contentDTO.content_runtime }분 ·</span>
             <span class="age">${contentDTO.age }세</span>
               <br/>
-            <span class="director">감독 : 에드워드 버거</span>
+            <span class="director">감독 : ${directorDTO.director_nm}</span>
               <br/>
-            <span class="mainact">주연 : 펠릭스 카머러, 알브레히트 슈흐, 아론 힐머, 에딘 하사노비치</span>
+            <span class="mainact">출연 : 
+            <c:forEach items="${entertainerlist}" var="EntertainerDTO">
+ 				  ${delimiter}${EntertainerDTO.entertainer_nm}
+ 				      <c:set var="delimiter" value=", " />
+			</c:forEach>
+			</span>
               <br/>
-            <span  class="subact">조연 : 데비트 슈트리조, 아드리안 그뤼네발트, 안드레아스 돌러</span>
+            <br/>
       <section class="myReview" style="font-size: 15px;">
         	<div class="asdasd" style="border-top: 3px solid #33ff33;">
         <p class="mytextReview" style="font-style: oblique; font-size: 20px;">내가 작성한 리뷰</p>
@@ -428,6 +341,7 @@
 			<c:if test="${myReview != null || myReview.user_nicknm != null}">
         	<input type="hidden" name="user_no" value="${myReview.user_no }">
     		<input type="hidden" name="review_no" value="${myReview.review_no }"  />
+        <input type="hidden" name="review_user_no" value="${Review.user_no}" >
     		
         <div class="review-box">      
           <div class="review-box-header">
@@ -437,7 +351,7 @@
             <div class="user-name1">
               <a href="javascript:goProfile('${ReviewDTO.user_no }', '${ReviewDTO.user_nicknm}')">
                 <p class="user_nicknm"> ${myReview.user_nicknm} </p></a>
-                <p class="date-insert1" name="review_create_dt"><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${myReview.review_create_dt}"/></p>
+                <p class="date-insert1" name="review_create_dt"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${myReview.review_create_dt}"/></p>
               
             </div>
             <ul>
@@ -450,14 +364,16 @@
               <li>
                 <div class="heart1">        
                     <div>
-                    <c:choose>
-						<c:when test="${myReview.check_like_count == 1}">
-	                      	<input class="LikeBtn" id="heart-on" type="image" src="${path}/resources/images/img/heart_on.png" width="35" height="80%"  data-review-no="${myReview.review_no}" >
-	                    </c:when>
-					<c:otherwise>
-						<input class="LikeBtn" id="heart-off" type="image" src="${path}/resources/images/img/heart_off.png" width="35" height="80%"  data-review-no="${myReview.review_no}" >
-					</c:otherwise>
-					</c:choose>		
+                      <c:choose>
+                        <c:when test="${myReview.check_like_count == 1}">
+                                      <input class="LikeBtn" id="heart-on" type="image" src="${path}/resources/images/img/heart_on.png" width="35" height="80%"
+                                      data-review-no="${myReview.review_no}" data-review-user-no="${myReview.user_no }" data-content-no=${myReview.content_no } >
+                                  </c:when>
+                      <c:otherwise>
+                        <input class="LikeBtn" id="heart-off" type="image" src="${path}/resources/images/img/heart_off.png" width="35" height="80%"
+                        data-review-no="${myReview.review_no}" data-review-user-no="${myReview.user_no }" data-content-no=${myReview.content_no } >
+                      </c:otherwise>
+                      </c:choose>		
                     </div>             
                 </div>
               </li>
@@ -473,7 +389,7 @@
               <ul>
                 <li>
                   <div class="like">
-                    <img src="${path}/resources/images/img/좋아요.png" alt="좋아요아이콘">
+                    <img src="https://myottt.s3.ap-northeast-2.amazonaws.com/img/%EC%A2%8B%EC%95%84%EC%9A%94.png" alt="좋아요아이콘">
                   </div>
 				<div class="like-count">
                     <p id="likeCount">
@@ -485,7 +401,7 @@
                 </li>
                 <li>
                   <div class="footer-comment">
-                    <img src="${path}/resources/images/img/댓글.png" alt="댓글아이콘">
+                    <img src="https://myottt.s3.ap-northeast-2.amazonaws.com/img/%EB%8C%93%EA%B8%80.png" alt="댓글아이콘">
                   </div>
                   <div class="comment-count">
                     <p>
@@ -606,7 +522,7 @@
             <div class="user-name">
               <a href="javascript:goProfile('${ReviewDTO.user_no }', '${ReviewDTO.user_nicknm}')">
                 <p class="user_nicknm"> ${ReviewDTO.user_nicknm} </p></a>
-                <p class="date-insert" name="review_create_dt"><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${ReviewDTO.review_create_dt}"/></p>
+                <p class="date-insert" name="review_create_dt"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${ReviewDTO.review_create_dt}"/></p>
               
             </div>
             <ul>
@@ -617,14 +533,16 @@
               <li>
                 <div class="heart">        
                     <div>
-                    <c:choose>
-						<c:when test="${ReviewDTO.check_like_count == 1}">
-	                      	<input class="LikeBtn" id="heart-on" type="image" src="${path}/resources/images/img/heart_on.png" width="35" height="80%"  data-review-no="${ReviewDTO.review_no}" >
-	                    </c:when>
-					<c:otherwise>
-						<input class="LikeBtn" id="heart-off" type="image" src="${path}/resources/images/img/heart_off.png" width="35" height="80%"  data-review-no="${ReviewDTO.review_no}" >
-					</c:otherwise>
-					</c:choose>		
+                      <c:choose>
+                        <c:when test="${ReviewDTO.check_like_count == 1}">
+                                      <input class="LikeBtn" id="heart-on" type="image" src="${path}/resources/images/img/heart_on.png" width="35" height="80%"
+                                      data-review-no="${ReviewDTO.review_no}" data-review-user-no="${ReviewDTO.user_no }" data-content-no=${ReviewDTO.content_no } >
+                                  </c:when>
+                      <c:otherwise>
+                        <input class="LikeBtn" id="heart-off" type="image" src="${path}/resources/images/img/heart_off.png" width="35" height="80%"
+                        data-review-no="${ReviewDTO.review_no}" data-review-user-no="${ReviewDTO.user_no }" data-content-no=${ReviewDTO.content_no } >
+                      </c:otherwise>
+                      </c:choose>		
                     </div>             
                 </div>
               </li>
@@ -645,7 +563,7 @@
               <ul>
                 <li>
                   <div class="like">
-                    <img src="${path}/resources/images/img/좋아요.png" alt="좋아요아이콘">
+                    <img src="https://myottt.s3.ap-northeast-2.amazonaws.com/img/%EC%A2%8B%EC%95%84%EC%9A%94.png" alt="좋아요아이콘">
                   </div>
                   <div class="like-count">
                     <p id="likeCount">
@@ -657,7 +575,7 @@
                 </li>
                 <li>
                   <div class="footer-comment">
-                    <img src="${path}/resources/images/img/댓글.png" alt="댓글아이콘">
+                    <img src="https://myottt.s3.ap-northeast-2.amazonaws.com/img/%EB%8C%93%EA%B8%80.png" alt="댓글아이콘">
                   </div>
                   <div class="comment-count">
                     <p>
@@ -668,7 +586,7 @@
               </ul>
             </div>
 			<div class="report">
-			  <img src="${path}/resources/images/img/신고하기.png" alt="신고" class="reportBtn">
+			  <img src="https://myottt.s3.ap-northeast-2.amazonaws.com/img/%EC%8B%A0%EA%B3%A0%ED%95%98%EA%B8%B0.png" alt="신고" class="reportBtn">
 			  <button class="report-text" >신고</button>
 			  <div class="dropdown-menu">
 			    <button class="dropdown-item" type="button" value="1" name="report_type">욕설/비방</button>
@@ -683,54 +601,12 @@
       
         </c:forEach>
   </div>
-            <div class="b-text">
-              <div>동일한 장르의 작품</div>
-              <div><a href="#">더보기</a></div>
-            </div>
-            <div class="same-movie">
-              <button class="left-button"><img src="${path }/resources/images/img/왼쪽 화살표.png" /></button>
-              <div class="cont01">
-                  <div class="posterzip">
-                      
-                      <a href="#"><img src="${path }/resources/images/서부전선 동일장르/고지전.jpg" class="poster"/></a>
-                      <a href="#"><img src="${path }/resources/images/서부전선 동일장르/덩케르크.jpg" class="poster"/></a>
-                      <a href="#"><img src="${path }/resources/images/서부전선 동일장르/인천상륙작전.jpg" class="poster"/></a>
-                      <a href="#"><img src="${path }/resources/images/서부전선 동일장르/태극기.jpg" class="poster"/></a>
-                      <a href="#"><img src="${path }/resources/images/서부전선 동일장르/헥소고지.jpg" class="poster"/></a>
-                      <a href="#"><img src="${path }/resources/images/서부전선 동일장르/고지전.jpg" class="poster"/></a>
-                      <a href="#"><img src="${path }/resources/images/서부전선 동일장르/덩케르크.jpg" class="poster"/></a>
-                      <a href="#"><img src="${path }/resources/images/서부전선 동일장르/인천상륙작전.jpg" class="poster"/></a>
-                      <a href="#"><img src="${path }/resources/images/서부전선 동일장르/태극기.jpg" class="poster"/></a>
-                      <a href="#"><img src="${path }/resources/images/서부전선 동일장르/헥소고지.jpg" class="poster"/></a>
-                      <a href="#"><img src="${path }/resources/images/서부전선 동일장르/고지전.jpg" class="poster"/></a>
-                      <a href="#"><img src="${path }/resources/images/서부전선 동일장르/덩케르크.jpg" class="poster"/></a>
-                      <a href="#"><img src="${path }/resources/images/서부전선 동일장르/인천상륙작전.jpg" class="poster"/></a>
-                      <a href="#"><img src="${path }/resources/images/서부전선 동일장르/태극기.jpg" class="poster"/></a>
-                  </div>
-                  
-              </div>
-              <button class="right-button"><img src="${path }/resources/images/img/오른쪽화살표.png"/></button>
-              
-          </div>
-          </div>
-          </section>
-      </div>
-                          <!-- Modal -->
-           <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index: 9999;">
-             <div class="modal-dialog modal-dialog-centered">
-               <div class="modal-content">
-                 <div class="modal-header">
-                   <h1 class="modal-title fs-5" id="exampleModalLabel">알림</h1>
-                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                 </div>
-                 <div class="modal-body body">
-                 </div>
-                 <div class="modal-footer">
-                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">확인</button>
-                 </div>
-               </div>
-             </div>
-           </div>  
+    
+  
+  
+  
+  
+  
   </div>
   
   
@@ -938,7 +814,7 @@
 	        var likeCount = btn.closest('.review-box').find('.review-box-footer #likeCount');
 
 	        $.post(
-	            '/ottt/selectLikeCount',
+	            '/selectLikeCount',
 	            { 'user_no': '${user_no}', 'review_no': review_no },
 	            function(data) {
 	                let result = data.result;
@@ -955,21 +831,25 @@
 	    });
 
 	    $(".LikeBtn").click(function() {
-	        let btn = $(this);
+          let btn = $(this);
 	        const review_no = $(this).data('review-no');
 	        $('input[name="review_no"]').val(review_no);
+	        
+	        const review_user_no = $(this).data('review-user-no');
+	        const content_no = $(this).data('content-no');
+	        
 	        var likeCount = btn.closest('.review-box').find(".review-box-footer #likeCount");
 	        var likeCount1 = btn.closest('.review-box1').find(".review-box-footer #likeCount");
 	        if (LOGIN_YN == null || LOGIN_YN == "") {
 	            $(".body").html("로그인이 필요합니다. 로그인 페이지로 이동합니다.");
 		        $('#Modal').modal('show').on('hidden.bs.modal', function() {
-		            window.location.href = "/ottt/login";
+		            window.location.href = "/login";
 		          });
 	            return;
 	        }
 
 	        $.post(
-	            "/ottt/selectLikeCount",
+	            "/selectLikeCount",
 	            { "user_no": "${user_no}", "review_no": review_no },
 	            function(data) {
 	                let result = data.result;
@@ -977,8 +857,11 @@
 	                if (result == 0) {
 	                    // 저장하는 post ajax
 	                    $.post(
-	                        "/ottt/insertLike",
-	                        { "user_no": "${user_no}", "review_no": review_no },
+	                        "/insertLike",
+                          { "user_no": "${user_no}",
+	                        	"review_no": review_no,
+	                        	"review_user_no": review_user_no,
+	                        	"content_no": content_no },
 	                        function(data) {
 	                            btn.attr("src", PATH + "/resources/images/img/heart_on.png");
 	                            likeCount.text(parseInt(likeCount.text()) + 1 + '개');
@@ -989,7 +872,7 @@
 	                } else {
 	                    // 삭제하는 post ajax
 	                    $.post(
-	                        "/ottt/deleteLike",
+	                        "/deleteLike",
 	                        { "user_no": "${user_no}", "review_no": review_no },
 	                        function(data) {
 	                            btn.attr("src", PATH + "/resources/images/img/heart_off.png");
@@ -1027,7 +910,7 @@
 	  
 	        $(".body").html("로그인이 필요합니다. 로그인 페이지로 이동합니다.");
 	        $('#Modal').modal('show').on('hidden.bs.modal', function() {
-	            window.location.href = "/ottt/login";
+	            window.location.href = "/login";
 	          });
 	      } else {
 	    	  
@@ -1040,7 +923,7 @@
   function getWishlistStatus(user_no, content_no) {
 	  // AJAX 요청을 통해 서버에서 찜 상태 가져오기
 	  $.ajax({
-	    url: '/ottt/getWishStatus', // 적절한 URL로 변경해야 합니다.
+	    url: '/getWishStatus', // 적절한 URL로 변경해야 합니다.
 	    type: 'POST',
 	    data: {
 	      user_no: user_no,
@@ -1068,7 +951,7 @@
   function addToWishlist(user_no, content_no) {
     
     $.ajax({
-      url: '/ottt/addWish',
+      url: '/addWish',
       type: 'POST',
       data: {
         user_no: user_no,
@@ -1091,7 +974,7 @@
   function removeFromWishlist(user_no, content_no) {
   
     $.ajax({
-      url: '/ottt/removeWish',
+      url: '/removeWish',
       type: 'POST',
       data: {
         user_no: user_no,
@@ -1154,7 +1037,7 @@
 	  
 	        $(".body").html("로그인이 필요합니다. 로그인 페이지로 이동합니다.");
 	        $('#Modal').modal('show').on('hidden.bs.modal', function() {
-	            window.location.href = "/ottt/login";
+	            window.location.href = "/login";
 	          });
 	      } else {
 	    	  
@@ -1167,7 +1050,7 @@
   function getWatchedStatus(user_no, content_no) {
 	  // AJAX 요청을 통해 서버에서 찜 상태 가져오기
 	  $.ajax({
-	    url: '/ottt/getWatchedStatus', // 적절한 URL로 변경해야 합니다.
+	    url: '/getWatchedStatus', // 적절한 URL로 변경해야 합니다.
 	    type: 'POST',
 	    data: {
 	      user_no: user_no,
@@ -1195,7 +1078,7 @@
   function addToWatched(user_no, content_no) {
     
     $.ajax({
-      url: '/ottt/addWatched',
+      url: '/addWatched',
       type: 'POST',
       data: {
         user_no: user_no,
@@ -1218,7 +1101,7 @@
   function removeFromWatched(user_no, content_no) {
   
     $.ajax({
-      url: '/ottt/removeWatched',
+      url: '/removeWatched',
       type: 'POST',
       data: {
         user_no: user_no,

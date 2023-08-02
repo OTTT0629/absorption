@@ -7,6 +7,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -18,23 +20,27 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.ottt.ottt.controller.community.CommunityController;
 import com.ottt.ottt.dao.login.LoginUserDao;
 import com.ottt.ottt.dto.ContentDTO;
 import com.ottt.ottt.dto.ContentOTTDTO;
+import com.ottt.ottt.dto.DirectorDTO;
+import com.ottt.ottt.dto.EntertainerDTO;
 import com.ottt.ottt.dto.GenreDTO;
+import com.ottt.ottt.dto.NotificationDTO;
 import com.ottt.ottt.dto.ReportDTO;
 import com.ottt.ottt.dto.ReviewDTO;
 import com.ottt.ottt.dto.ReviewLikeDTO;
 import com.ottt.ottt.dto.UserDTO;
 import com.ottt.ottt.service.content.ContentService;
-
+import com.ottt.ottt.service.mypage.NotificationService;
 import com.ottt.ottt.service.mypage.WatchedService;
 import com.ottt.ottt.service.mypage.WishlistService;
 import com.ottt.ottt.service.review.ReviewService;
 
 @Controller
 public class DetailReviewController {
-
+	private static final Logger logger = LoggerFactory.getLogger(DetailReviewController.class);
    @Autowired
    ReviewService reviewService;
    
@@ -49,6 +55,9 @@ public class DetailReviewController {
 	
 	@Autowired
 	WishlistService wishlistService;
+
+	@Autowired
+	NotificationService notificationService;
 	
    @GetMapping(value = "/detailPage/review")
    public String workReview(Model m, HttpServletRequest request, HttpSession session, @RequestParam("content_no") int content_no) {
@@ -68,14 +77,17 @@ public class DetailReviewController {
 			ContentDTO contentDTO = contentService.getContent(content_no);
 			List<GenreDTO> genreDTO = contentService.getGenrenm(content_no);
 			List<ContentOTTDTO> contentOTTlist = contentService.getOTT(content_no);
+			DirectorDTO directorDTO = reviewService.getDirector(content_no);
+			List<EntertainerDTO> entertainerlist = reviewService.getEntertainer(content_no);
 			m.addAttribute("contentOTTlist", contentOTTlist);
 			m.addAttribute("genrenmlist", genreDTO);
 			m.addAttribute("contentDTO", contentDTO);
          m.addAttribute("list", list);
          m.addAttribute("count", count);
          m.addAttribute("rating", rating);
-       
-      
+         m.addAttribute("directorDTO", directorDTO);
+         m.addAttribute("entertainerlist", entertainerlist);
+         
          ReviewDTO myReview = reviewService.getReviewNo(content_no, user_no);
 
          m.addAttribute("myReview", myReview);
@@ -169,8 +181,10 @@ public class DetailReviewController {
 			Map<String, Object> result = new HashMap<String,Object>();
 			
 			UserDTO userDTO = loginUserDao.select((String)session.getAttribute("id"));
+			
 	    	if (userDTO == null) {	   
 	    		result.put("message", "로그인이 필요합니다.");
+	    		result.put("result", 0);
 	    		return result;
 	        }
 	
@@ -189,10 +203,10 @@ public class DetailReviewController {
 	
 		@PostMapping("/review/insertLike")
 		@ResponseBody
-		public Map<String,Object> insertLike(ReviewLikeDTO dto, HttpSession session) throws Exception {
-			
-			
+		public Map<String,Object> insertLike(ReviewLikeDTO dto, ReviewDTO reviewDTO
+								, HttpSession session, Integer review_user_no) throws Exception {
 
+			logger.info("================== review_user_no : " +review_user_no);
 			Map<String, Object> result = new HashMap<String,Object>();
 			
 			UserDTO userDTO = loginUserDao.select((String)session.getAttribute("id"));
@@ -205,7 +219,22 @@ public class DetailReviewController {
 			result.put("message", "success");
 			result.put("success", reviewService.insertLike(dto));
 			
-			
+			//알림함에 알림 집어넣기
+ 			if(!review_user_no.equals(session.getAttribute("user_no"))) {
+	 			NotificationDTO notificationDTO = new NotificationDTO();
+	 			notificationDTO.setUser_no(dto.getUser_no());
+	 			notificationDTO.setReview_no(dto.getReview_no());
+	 			
+	 			notificationDTO.setTarget_user_no(review_user_no);
+	 			System.out.println("================== review_user_no : " +review_user_no);
+	 			//jsp단에서 <div id="reply-popup" class="popup11"> 이 부분에 인풋 태그 추가 후 불러옴
+	 			
+	 			String currentURL = "/detailPage/reply?content_no=" + reviewDTO.getContent_no() + "&review_no=" + reviewDTO.getReview_no();
+				notificationDTO.setNoti_url(currentURL);
+	 			
+	 			notificationService.putReviewLike(notificationDTO);
+ 			}
+ 			
 			return result;
 
 		}

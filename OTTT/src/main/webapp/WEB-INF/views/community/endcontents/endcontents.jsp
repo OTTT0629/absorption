@@ -61,7 +61,7 @@
 	async function requestContent(ottNumber, year, month) {
 		   const response = await $.ajax({
 		   		type: 'POST',
-		   		url: '/ottt/community/endmovie/calendar', // endpoint 를 이곳으로
+		   		url: '/community/endmovie/calendar', // endpoint 를 이곳으로
 		  		headers: {"Content-Type" : "application/json"},   
 		  		data: JSON.stringify({ott_no: ottNumber, year, month}),  
 			  })
@@ -162,7 +162,7 @@
 	          // content 를 각 월에 추가
 			  for (let i = 0; i < list.length; i++) {
 				  if (list[i].day === day) {
-				    const contentUrl = "/ottt/detailPage?content_no=" + list[i].content_no;
+				    const contentUrl = "/detailPage?content_no=" + list[i].content_no;
 				    const anchorTag = document.createElement('a');
 				    anchorTag.href = contentUrl;
 				    anchorTag.textContent = list[i].content;

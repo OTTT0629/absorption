@@ -9,15 +9,24 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ottt.ottt.dao.login.LoginUserDao;
+import com.ottt.ottt.dto.ArticleDTO;
 import com.ottt.ottt.dto.CommentDTO;
+import com.ottt.ottt.dto.NotificationDTO;
 import com.ottt.ottt.dto.UserDTO;
 import com.ottt.ottt.service.community.freecomuity.CommentService;
+import com.ottt.ottt.service.community.freecomuity.CommunityService;
+import com.ottt.ottt.service.mypage.NotificationService;
 
 
 @RestController
@@ -26,10 +35,16 @@ import com.ottt.ottt.service.community.freecomuity.CommentService;
 public class CommentController {
 	
 	@Autowired
+	CommunityService communityService;
+	
+	@Autowired
 	CommentService commentService;
 
 	@Autowired
 	LoginUserDao loginUserDao;
+	
+	@Autowired
+	NotificationService notificationService;
 
 	private static final Logger logger = LoggerFactory.getLogger(CommentController.class);
 	
@@ -47,7 +62,7 @@ public class CommentController {
 	
 	//댓글 저장
 	@PostMapping("/insertComment")
-	public Map<String,Object> insertComment(CommentDTO dto, HttpSession session) throws Exception {
+	public Map<String,Object> insertComment(CommentDTO dto, HttpSession session, Integer user_no) throws Exception {
 		
 		logger.info("/comment/insertComment >>>>>> 호출 ");
 		
@@ -70,7 +85,26 @@ public class CommentController {
 			result.put("message", "댓글등록에 실패했습니다. 다시 시도해주세요.");			
 		}
 		
+		//알림함에 알림 집어넣기
+		ArticleDTO articleDTO = new ArticleDTO();
+		articleDTO.setArticle_no(dto.getArticle_no());
 		
+		System.out.println("======================user_no: " + user_no);
+		System.out.println("======================(Integer)session.getAttribute(\"user_no\"): " + (Integer)session.getAttribute("user_no"));
+		if(!user_no.equals(session.getAttribute("user_no"))) {
+			ArticleDTO articleNo = communityService.select(articleDTO);
+			if(articleDTO != null) {
+				NotificationDTO notificationDTO = new NotificationDTO();
+				notificationDTO.setUser_no(dto.getUser_no());
+				notificationDTO.setArticle_no(articleDTO.getArticle_no());
+				notificationDTO.setTarget_user_no(articleNo.getUser_no());
+				
+			    String currentURL = "/community/post?article_no=" + dto.getArticle_no();
+			    notificationDTO.setNoti_url(currentURL);
+				
+				notificationService.putArticleCmt(notificationDTO);
+			}
+		}
 		return result;
 	}
 	

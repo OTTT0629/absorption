@@ -13,7 +13,7 @@
   	<!-- 유저 id로 유저 찾기 -->
   	<select id="select" parameterType="String" resultType="UserDTO">
   		SELECT user_no, gr_no, user_id, user_pwd, user_nm, user_nicknm, user_gen
-		, user_email, image, following, followers
+		, user_email, image, following, followers, admin
 		FROM tb_user
 		where user_id = #{user_id}
   	</select>
@@ -81,6 +81,34 @@
 		SET image = #{image}
 		where user_no = #{user_no} and user_id = #{user_id}
   	</update>
+  	
+  	<!-- 팔로워수 증가 -->
+  	<update id="increaseFollower" parameterType="int">
+  		update tb_user
+		SET followers = followers + 1
+		WHERE user_no = #{user_no}
+  	</update>
+  	
+  	<!-- 팔로워수 감소 -->
+  	<update id="decreaseFollower" parameterType="int">
+  		update tb_user
+		SET followers = followers - 1
+		WHERE user_no = #{user_no}  	
+  	</update>
+  	
+  	<!-- 팔로잉수 증가 -->
+  	<update id="increaseFollowing" parameterType="int">
+  		update tb_user
+		SET following = following + 1
+		WHERE user_no = #{user_no}  	
+  	</update>
+  	
+  	<!-- 팔로잉수 증가 -->
+  	<update id="decreaseFollowing" parameterType="int">
+  		update tb_user
+		SET following = following - 1
+		WHERE user_no = #{user_no}  	
+  	</update>  	
   	
   	<!-- 회원 탈퇴 -->
   	<delete id="delete" parameterType="map">

@@ -28,6 +28,7 @@ public class ReviewDTO {
 	private Integer comment_cnt;
 	
 	private String user_nicknm;
+	private String user_id;
 	private String content_nm;
 	private String thumbnail;
 	
@@ -36,6 +37,8 @@ public class ReviewDTO {
 	
 	private String image;
 	private boolean spoiler;
+
+	private Integer report_count;
 	
 	public Integer getReview_no() {
 		return review_no;
@@ -91,6 +94,12 @@ public class ReviewDTO {
 	public void setUser_nicknm(String user_nicknm) {
 		this.user_nicknm = user_nicknm;
 	}
+	public String getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
 	public String getContent_nm() {
 		return content_nm;
 	}
@@ -127,13 +136,20 @@ public class ReviewDTO {
 	public void setSpoiler(boolean spoiler) {
 		this.spoiler = spoiler;
 	}
+	public Integer getReport_count() {
+		return report_count;
+	}
+	public void setReport_count(Integer report_count) {
+		this.report_count = report_count;
+	}
 	@Override
 	public String toString() {
 		return "ReviewDTO [review_no=" + review_no + ", content_no=" + content_no + ", rating=" + rating + ", user_no="
 				+ user_no + ", review_content=" + review_content + ", review_create_dt=" + review_create_dt
 				+ ", review_mod_dt=" + review_mod_dt + ", comment_cnt=" + comment_cnt + ", user_nicknm=" + user_nicknm
-				+ ", content_nm=" + content_nm + ", thumbnail=" + thumbnail + ", check_like_count=" + check_like_count
-				+ ", like_count=" + like_count + ", image=" + image + ", spoiler=" + spoiler + "]";
+				+ ", user_id=" + user_id + ", content_nm=" + content_nm + ", thumbnail=" + thumbnail
+				+ ", check_like_count=" + check_like_count + ", like_count=" + like_count + ", image=" + image
+				+ ", spoiler=" + spoiler + ", report_count=" + report_count + "]";
 	}
 	@Override
 	public int hashCode() {

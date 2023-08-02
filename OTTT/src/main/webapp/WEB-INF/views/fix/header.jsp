@@ -23,14 +23,14 @@
 		let path = window.location.href;
 	
 		function goLogin() {
-		    let toURL = '';
-
+			let toURL = '';
+			
 		    if ('${sessionScope.id}' === '') {
 		        toURL = encodeURIComponent(path);
-		        location.href = "/ottt/mypage?toURL=" + toURL;
+		        location.href = "/mypage?toURL=" + toURL;
 		    } else {
 		        console.log(toURL);
-		        location.href = "/ottt/mypage?user=" + '${sessionScope.user_nicknm}';
+		        location.href = "/mypage?user=" + '${sessionScope.user_nicknm}';
 		    }
 		}
 			

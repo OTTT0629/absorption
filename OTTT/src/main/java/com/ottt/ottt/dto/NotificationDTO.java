@@ -3,165 +3,137 @@ package com.ottt.ottt.dto;
 import java.util.Objects;
 
 /*알림
- * 	not_no				bigint	generated always as identity primary key
+	noti_no				bigint	generated always as identity primary key
 	, user_no			bigint	not null
 	, target_user_no	bigint	not null
-	, message_no		bigint	not null
-	, article_no		bigint	not null
-	, cmt_no			bigint	not null
-	, review_like_no	bigint	not null
-	, article_like_no	bigint	not null
-	, comment_like_no	bigint	not null
-	, not_check			char(1)	not null
-	, not_url			text	not null
-	, not_message		varchar	not null
+	, review_no			bigint
+	, article_no		bigint
+	, cmt_no			bigint
+	, qna_no			bigint
+	, noti_check		boolean	default false
+	, noti_url			text	not null
+	, noti_message		varchar	not null	
  */
 
 public class NotificationDTO {
 	
-	private	Integer	not_no;
-	private int		user_no;
-	private int		target_user_no;
-	private int		message_no;
-	private int		article_no;
-	private int		cmt_no;
-	private int		review_like_no;
-	private int		article_like_no;
-	private int		cmt_like_no;
-	private char	not_check;
-	private String	not_url;
-	private String	not_message;
+	private	Integer	noti_no;
+	private Integer user_no;
+	private Integer	target_user_no;
+	private Integer	review_no;
+	private Integer	article_no;
+	private Integer	cmt_no;
+	private Integer qna_no;
+	private boolean	noti_check;
+	private String	noti_url;
+	private String	noti_message;
 	
+	private String user_nicknm;
+	private String image;
 	
 	public NotificationDTO() {}
 
-
-	public Integer getNot_no() {
-		return not_no;
+	public Integer getNoti_no() {
+		return noti_no;
 	}
 
-
-	public void setNot_no(Integer not_no) {
-		this.not_no = not_no;
+	public void setNoti_no(Integer noti_no) {
+		this.noti_no = noti_no;
 	}
 
-
-	public int getUser_no() {
+	public Integer getUser_no() {
 		return user_no;
 	}
 
-
-	public void setUser_no(int user_no) {
+	public void setUser_no(Integer user_no) {
 		this.user_no = user_no;
 	}
 
-
-	public int getTarget_user_no() {
+	public Integer getTarget_user_no() {
 		return target_user_no;
 	}
 
-
-	public void setTarget_user_no(int target_user_no) {
+	public void setTarget_user_no(Integer target_user_no) {
 		this.target_user_no = target_user_no;
 	}
 
-
-	public int getMessage_no() {
-		return message_no;
+	public Integer getReview_no() {
+		return review_no;
 	}
 
-
-	public void setMessage_no(int message_no) {
-		this.message_no = message_no;
+	public void setReview_no(Integer review_no) {
+		this.review_no = review_no;
 	}
 
-
-	public int getArticle_no() {
+	public Integer getArticle_no() {
 		return article_no;
 	}
 
-
-	public void setArticle_no(int article_no) {
+	public void setArticle_no(Integer article_no) {
 		this.article_no = article_no;
 	}
 
-
-	public int getCmt_no() {
+	public Integer getCmt_no() {
 		return cmt_no;
 	}
 
-
-	public void setCmt_no(int cmt_no) {
+	public void setCmt_no(Integer cmt_no) {
 		this.cmt_no = cmt_no;
 	}
 
-
-	public int getReview_like_no() {
-		return review_like_no;
+	public Integer getQna_no() {
+		return qna_no;
 	}
 
-
-	public void setReview_like_no(int review_like_no) {
-		this.review_like_no = review_like_no;
+	public void setQna_no(Integer qna_no) {
+		this.qna_no = qna_no;
 	}
 
-
-	public int getArticle_like_no() {
-		return article_like_no;
+	public boolean isNoti_check() {
+		return noti_check;
 	}
 
-
-	public void setArticle_like_no(int article_like_no) {
-		this.article_like_no = article_like_no;
+	public void setNoti_check(boolean noti_check) {
+		this.noti_check = noti_check;
 	}
 
-
-	public int getCmt_like_no() {
-		return cmt_like_no;
+	public String getNoti_url() {
+		return noti_url;
 	}
 
-
-	public void setCmt_like_no(int cmt_like_no) {
-		this.cmt_like_no = cmt_like_no;
+	public void setNoti_url(String noti_url) {
+		this.noti_url = noti_url;
 	}
 
-
-	public char getNot_check() {
-		return not_check;
+	public String getNoti_message() {
+		return noti_message;
 	}
 
-
-	public void setNot_check(char not_check) {
-		this.not_check = not_check;
+	public void setNoti_message(String noti_message) {
+		this.noti_message = noti_message;
 	}
 
-
-	public String getNot_url() {
-		return not_url;
+	public String getUser_nicknm() {
+		return user_nicknm;
 	}
 
-
-	public void setNot_url(String not_url) {
-		this.not_url = not_url;
+	public void setUser_nicknm(String user_nicknm) {
+		this.user_nicknm = user_nicknm;
 	}
 
-
-	public String getNot_message() {
-		return not_message;
+	public String getImage() {
+		return image;
 	}
 
-
-	public void setNot_message(String not_message) {
-		this.not_message = not_message;
+	public void setImage(String image) {
+		this.image = image;
 	}
-
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(article_like_no, article_no, cmt_like_no, cmt_no, message_no, not_check, not_message,
-				not_no, not_url, review_like_no, target_user_no, user_no);
+		return Objects.hash(article_no, cmt_no, image, noti_check, noti_message, noti_no, noti_url, qna_no,
+				review_no, target_user_no, user_nicknm, user_no);
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -172,26 +144,25 @@ public class NotificationDTO {
 		if (getClass() != obj.getClass())
 			return false;
 		NotificationDTO other = (NotificationDTO) obj;
-		return article_like_no == other.article_like_no && article_no == other.article_no
-				&& cmt_like_no == other.cmt_like_no && cmt_no == other.cmt_no && message_no == other.message_no
-				&& not_check == other.not_check && Objects.equals(not_message, other.not_message)
-				&& Objects.equals(not_no, other.not_no) && Objects.equals(not_url, other.not_url)
-				&& review_like_no == other.review_like_no && target_user_no == other.target_user_no
-				&& user_no == other.user_no;
+		return Objects.equals(article_no, other.article_no) && Objects.equals(cmt_no, other.cmt_no)
+				&& Objects.equals(image, other.image)
+				&& noti_check == other.noti_check && Objects.equals(noti_message, other.noti_message)
+				&& Objects.equals(noti_no, other.noti_no) && Objects.equals(noti_url, other.noti_url)
+				&& Objects.equals(qna_no, other.qna_no) && Objects.equals(review_no, other.review_no)
+				&& Objects.equals(target_user_no, other.target_user_no)
+				&& Objects.equals(user_nicknm, other.user_nicknm) && Objects.equals(user_no, other.user_no);
 	}
-
 
 	@Override
 	public String toString() {
-		return "NotificationDTO [not_no=" + not_no + ", user_no=" + user_no + ", target_user_no=" + target_user_no
-				+ ", message_no=" + message_no + ", article_no=" + article_no + ", cmt_no=" + cmt_no
-				+ ", review_like_no=" + review_like_no + ", article_like_no=" + article_like_no + ", cmt_like_no="
-				+ cmt_like_no + ", not_check=" + not_check + ", not_url=" + not_url + ", not_message=" + not_message
-				+ "]";
+		return "NotificationDTO [noti_no=" + noti_no + ", user_no=" + user_no + ", target_user_no=" + target_user_no
+				+ ", review_no=" + review_no + ", article_no=" + article_no + ", cmt_no=" + cmt_no
+				+ ", qna_no=" + qna_no + ", noti_check=" + noti_check + ", noti_url=" + noti_url
+				+ ", noti_message=" + noti_message + ", user_nicknm=" + user_nicknm + ", image=" + image + "]";
 	}
-	
-	
-	
+
+
+
 	
 	
 

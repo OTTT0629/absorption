@@ -60,11 +60,11 @@
 
 	<body>
 		<script type="text/javascript">
-			connectWS();
+			
 			var socket = null;
 			
 			function connectWS() {
-				var ws = new WebSocket("ws://localhost:/ottt/replyEcho");	//포트 번호 확인
+				var ws = new WebSocket("ws://localhost:/replyEcho");	//포트 번호 확인
 				socket = ws;
 				
 				ws.onopen = function () {
@@ -91,6 +91,7 @@
 			}
 	
 			$(document).ready(function() {
+				connectWS();
 				//쪽지 전송
 				$("#writeBtn").on("click", function(evt) {
 					//url에서 send_user_no 추출
@@ -105,7 +106,7 @@
 					if(formCheck()) {
 						$.ajax({
 							type: "POST",
-							url: (sendUserNo != null) ? "/ottt/messagewindow/send" : "/ottt/messagewindow/send2",
+							url: (sendUserNo != null) ? "/messagewindow/send" : "/messagewindow/send2",
 							data: (sendUserNo != null) ? {sendUserNo: sendUserNo, content: content }: {userNo: userNo, content: content },
 							success: function(response) {
 								$(".modal-body.body").html("쪽지가 전송되었습니다.");

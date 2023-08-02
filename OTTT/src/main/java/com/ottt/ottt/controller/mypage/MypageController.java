@@ -35,6 +35,8 @@ public class MypageController {
 	public String mypage(Model m, String toURL, String user
 						, HttpServletRequest request, HttpSession session) throws Exception {
 		System.out.println("==========GET=============== toURL : " + toURL);
+		if(toURL != null)
+			toURL = URLEncoder.encode(toURL, "UTF-8");
 		
 		if(!loginCheck(request))
 			return "redirect:/login?toURL="+toURL;
@@ -127,7 +129,13 @@ public class MypageController {
 		UserDTO userDTO;
 		try {
 			userDTO = us.getUser(user_no);
+			
+			Integer followerCnt = fs.followerCnt(user_no);
+			Integer followingCnt = fs.followingCnt(user_no);
+			
 			m.addAttribute(userDTO);
+			m.addAttribute("followerCnt", followerCnt);
+			m.addAttribute("followingCnt", followingCnt);
 			
 			return "/mypage/profile/profile";
 		} catch (Exception e) {

@@ -44,7 +44,7 @@
 						      	</div>
 						
 								<div class="rv-main">
-								  <span>${MydiaryDTO.mydiary_content}</span>
+								  ${MydiaryDTO.mydiary_content}
 								</div>
 						    </div>
 					  	</div>
@@ -114,7 +114,7 @@
    			
 	        let form = document.createElement('form');
 	        
-	        form.setAttribute("action", '/ottt/mypage/mydiary/diary${pr.sc.string}');
+	        form.setAttribute("action", '/mypage/mydiary/diary${pr.sc.string}');
 	        form.setAttribute("method", "post");
 	            
             for (let key in data) {
@@ -130,6 +130,23 @@
 	        document.body.appendChild(form);
 	        form.submit();
 	    }
+   		
+   		function strChk() {
+   			let length = 230;
+   			let str = $(this).html()
+   			
+   			if (str.length > length) {
+	        	str = str.substr(0, length - 5) + ' ...';
+	        	$(this).html(str);        	
+    		}
+			
+		}
+   		
+   		$(document).ready(function() {
+   			$('.rv-main').each(function() {
+   				strChk.call(this);
+   			})   			
+		})
 	</script>
 
 </body>

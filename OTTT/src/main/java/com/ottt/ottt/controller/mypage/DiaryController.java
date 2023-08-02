@@ -1,6 +1,5 @@
 package com.ottt.ottt.controller.mypage;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -23,6 +22,7 @@ import com.ottt.ottt.dto.ContentDTO;
 import com.ottt.ottt.dto.MyDiaryDTO;
 import com.ottt.ottt.dto.UserDTO;
 import com.ottt.ottt.service.content.ContentService;
+import com.ottt.ottt.service.mypage.FollowService;
 import com.ottt.ottt.service.mypage.MyDiaryService;
 import com.ottt.ottt.service.user.UserService;
 
@@ -38,6 +38,9 @@ public class DiaryController {
 
 	@Autowired
 	MyDiaryService ds;
+	
+	@Autowired
+	FollowService fs;
 
 	// mydiary 메인
 	@GetMapping(value = "/mydiary")
@@ -66,9 +69,7 @@ public class DiaryController {
 				
 				System.out.println("============================ sc.getUser()" + sc.getUser());
 				
-				System.out.println("============================ sc.getUser_no()" + sc.getUser_no());
-				
-				
+				System.out.println("============================ sc.getUser_no()" + sc.getUser_no());				
 
 				int myDiaryCnt = ds.myDiaryCnt(sc);
 				m.addAttribute("myDiaryCnt", myDiaryCnt);
@@ -110,11 +111,31 @@ public class DiaryController {
 			List<MyDiaryDTO> listAll = ds.getDiaryList(user_no);
 			List<MyDiaryDTO> list = new ArrayList<>();
 			
-			for(MyDiaryDTO myDiaryDTO : listAll) {
-				if(myDiaryDTO.getPublic_yn_cd() == '1') {
-					list.add(myDiaryDTO);
+			if((session.getAttribute("user_no") == null)
+					|| (fs.getFollowStatus((Integer)session.getAttribute("user_no")
+							, user_no)) == false ) {
+				
+				for(MyDiaryDTO myDiaryDTO : listAll) {
+					if(myDiaryDTO.getPublic_yn_cd() == '1') {
+						list.add(myDiaryDTO);
+					}
 				}
 			}
+			
+			if((session.getAttribute("user_no") != null)
+					&& (fs.getFollowStatus((Integer)session.getAttribute("user_no")
+							, user_no)) == true ) {
+				
+				for(MyDiaryDTO myDiaryDTO : listAll) {
+					if((myDiaryDTO.getPublic_yn_cd() == '1')
+							|| (myDiaryDTO.getPublic_yn_cd() == '2')) {
+						list.add(myDiaryDTO);
+					}
+				}
+			}
+			
+			
+			
 			
 			int startIndex = (sc.getPage() - 1) * sc.getPageSize();
 			int endIndex = Math.min(startIndex + sc.getPageSize(), list.size());
@@ -249,6 +270,11 @@ public class DiaryController {
 		try {
 			Integer user_no = us.getUserNoId(sc.getUser());
 			UserDTO userDTO = us.getUser(user_no);
+			
+			if((session.getAttribute("user_no") != null
+					&& session.getAttribute("user_no").equals(user_no)))				
+				m.addAttribute("userChk", true);
+				
 			MyDiaryDTO myDiaryDTO = ds.getDiary(sc.getContent_no(),user_no);
 			System.out.println("============================ myDiaryDTO : " + myDiaryDTO.toString());
 			

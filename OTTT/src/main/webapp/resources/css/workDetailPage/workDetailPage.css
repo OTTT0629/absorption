@@ -444,8 +444,7 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
     height: 200px; 
     padding: 10px;
     display: flex;
-    border: 1px solid red;
-    box-sizing: border-box;
+
     overflow: hidden;
     flex-wrap: wrap;
     

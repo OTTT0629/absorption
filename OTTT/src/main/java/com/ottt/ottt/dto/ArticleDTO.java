@@ -18,12 +18,14 @@ public class ArticleDTO {
 	private Integer	comment_count;
 	private Integer	report_cnt;
 	private String  user_nicknm;
+	private String  user_id;
 	private Integer	check_like_count;
 	private MultipartFile upFile;
 	private String article_image_name;
 	private String image;
 	private String	writer_chk;
 	private String fileDeleteYn;
+	private Integer report_count;
 	
 	public String getWriter_chk() {
 		return writer_chk;
@@ -45,6 +47,14 @@ public class ArticleDTO {
 	
 	public UserDTO getUserDTO() {
 		return userDTO;
+	}
+
+	public String getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
 	}
 
 	public void setUserDTO(UserDTO userDTO) {
@@ -186,7 +196,13 @@ public class ArticleDTO {
 		this.image = image;
 	}
 
+	public Integer getReport_count() {
+		return report_count;
+	}
 
+	public void setReport_count(Integer report_count) {
+		this.report_count = report_count;
+	}
 
 	@Override
 	public String toString() {
@@ -194,9 +210,10 @@ public class ArticleDTO {
 				+ article_index_no + ", article_content=" + article_content + ", article_image=" + article_image
 				+ ", article_title=" + article_title + ", article_create_dt=" + article_create_dt + ", article_mod_dt="
 				+ article_mod_dt + ", like_count=" + like_count + ", comment_count=" + comment_count + ", report_cnt="
-				+ report_cnt + ", user_nicknm=" + user_nicknm + ", check_like_count=" + check_like_count + ", upFile="
-				+ upFile + ", article_image_name=" + article_image_name + ", image=" + image + ", writer_chk="
-				+ writer_chk + ", userDTO=" + userDTO + "]";
+				+ report_cnt + ", user_nicknm=" + user_nicknm + ", user_id=" + user_id + ", check_like_count="
+				+ check_like_count + ", upFile=" + upFile + ", article_image_name=" + article_image_name + ", image="
+				+ image + ", writer_chk=" + writer_chk + ", fileDeleteYn=" + fileDeleteYn + ", report_count="
+				+ report_count + ", userDTO=" + userDTO + "]";
 	}
 
 	@Override

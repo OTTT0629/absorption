@@ -100,9 +100,9 @@
 			 }			
 			
 		    if($('button[name="deleteBtn"]').attr("class") == 'delrecvBtn')
-		    	form.setAttribute("action", '/ottt/mypage/message/remove');
+		    	form.setAttribute("action", '/mypage/message/remove');
 		    if($('button[name="deleteBtn"]').attr("class") == 'delsendBtn')
-		    	form.setAttribute("action", '/ottt/mypage/message/send/remove');
+		    	form.setAttribute("action", '/mypage/message/send/remove');
 		    
 		    form.setAttribute("method", "post");
 		    
@@ -131,7 +131,7 @@
 		    }
 			
 			form.setAttribute('method','post')
-			form.setAttribute('action','/ottt/profile?user=' +user_nicknm)
+			form.setAttribute('action','/profile?user=' +user_nicknm)
 							
 			document.body.appendChild(form)
 			form.submit()

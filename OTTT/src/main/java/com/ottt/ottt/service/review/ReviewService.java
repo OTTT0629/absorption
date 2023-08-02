@@ -4,6 +4,11 @@ import java.util.List;
 
 import com.ottt.ottt.domain.SearchItem;
 import com.ottt.ottt.dto.CommentDTO;
+import com.ottt.ottt.dto.ContentDirectorDTO;
+import com.ottt.ottt.dto.ContentPosterDTO;
+import com.ottt.ottt.dto.ContentTrailerDTO;
+import com.ottt.ottt.dto.DirectorDTO;
+import com.ottt.ottt.dto.EntertainerDTO;
 import com.ottt.ottt.dto.ReportDTO;
 import com.ottt.ottt.dto.ReviewDTO;
 import com.ottt.ottt.dto.ReviewLikeDTO;
@@ -26,6 +31,14 @@ public interface ReviewService {
     
     int deleteLike(ReviewLikeDTO dto) throws Exception;
     
+    
+    List<ContentPosterDTO> getPoster(int content_no) throws Exception;
+    
+    List<ContentTrailerDTO> getTrailer(int content_no) throws Exception;
+    
+    DirectorDTO getDirector(int content_no) throws Exception;
+    
+    List<EntertainerDTO> getEntertainer(int content_no) throws Exception;
     
     //리플 페이지
     CommentDTO getReply(Integer cmt_no) throws Exception;

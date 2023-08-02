@@ -23,7 +23,8 @@
    
    <select id="selectAll" resultType="ReviewDTO" parameterType="int">
 		select user_nicknm, a.rating, review_content, a.review_no, a.user_no, a.review_no, a.spoiler
-		, review_create_dt, a.content_no, a.comment_cnt, b.image
+		, review_create_dt, a.content_no, b.image
+		, (select count(*) from tb_comment where review_no = a.review_no) as comment_cnt
 		,(select count(*) from tb_review_like c1 where c1.review_no = a.review_no) as like_count
 		,(select count(*) from tb_review_like c2 where c2.review_no = a.review_no and c2.user_no = #{user_no}) as check_like_count
 		from tb_review a
@@ -50,7 +51,8 @@
   
    <select id="selectReview" parameterType="map" resultType="ReviewDTO">
       SELECT review_no, c.content_no, a.rating, review_content, b.image
-      , review_create_dt, b.user_nicknm, b.user_no, comment_cnt, c.main_img
+      , review_create_dt, b.user_nicknm, b.user_no, c.main_img
+      , (select count(*) from tb_comment where review_no = a.review_no) as comment_cnt
       ,(select count(*) from tb_review_like c1 where c1.review_no = a.review_no) as like_count
       ,(select count(*) from tb_review_like c2 where c2.review_no = a.review_no and c2.user_no = #{user_no}) as check_like_count
       FROM tb_review a, tb_user b, tb_content c
@@ -79,6 +81,31 @@
 		insert into tb_report (user_no, target_user_no , review_no, report_type)
 		values (#{user_no}, #{target_user_no} ,#{review_no}, #{report_type})
 	</insert>
+	
+	  <select id="getPostersByContentNo" parameterType="int" resultType="ContentPosterDTO">
+	    SELECT * FROM tb_content_poster WHERE content_no = #{content_no}
+	  </select>
+  
+  	  <select id="getTrailerByContentNo" parameterType="int" resultType="ContentTrailerDTO">
+	    SELECT * FROM tb_content_trailer WHERE content_no = #{content_no}
+	  </select>
+	  
+	  
+	  <select id="getDirectorNM" resultType="DirectorDTO" parameterType="int">
+	    SELECT a.content_no, a.director_no, b.director_nm
+	    FROM tb_content_director a
+	    JOIN tb_director b ON a.director_no = b.director_no
+	    WHERE a.content_no = #{content_no}
+	  </select>
+	  
+	  
+	  	  <select id="getEntertainerNM" resultType="EntertainerDTO" parameterType="int">
+	    SELECT a.content_no, a.entertainer_no, b.entertainer_nm
+	    FROM tb_content_entertainer a
+	    JOIN tb_entertainer b ON a.entertainer_no = b.entertainer_no
+	    WHERE a.content_no = #{content_no}
+	  </select>
+  
   
 	<!-- 리플 페이지  -->
 	<select id="selectReply" parameterType="Integer" resultType="CommentDTO">
@@ -89,7 +116,8 @@
 	
    <select id="replyReview" parameterType="map" resultType="ReviewDTO">
 		SELECT review_no, content_no, a.rating, review_content, b.image
-		, review_create_dt, b.user_nicknm, b.user_no, a.comment_cnt 
+		, review_create_dt, b.user_nicknm, b.user_no
+		,(select count(*) from tb_comment where review_no = a.review_no) as comment_cnt
 		,(select count(*) from tb_review_like c1 where c1.review_no = a.review_no) as like_count
 		,(select count(*) from tb_review_like c2 where c2.review_no = a.review_no and c2.user_no = #{user_no}) as check_like_count 
 		FROM tb_review a, tb_user b

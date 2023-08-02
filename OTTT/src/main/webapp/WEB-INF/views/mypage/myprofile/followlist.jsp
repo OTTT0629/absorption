@@ -78,7 +78,7 @@
 				$(this).html('팔로우')
 				
 				$.post(
-						"/ottt/stopFollow"
+						"/stopFollow"
 						, {
 							my_no : MY
 							, user_no : USER
@@ -100,7 +100,7 @@
 				$(this).html('팔로잉')
 				
 				$.post(
-						"/ottt/startFollow"
+						"/startFollow"
 						, {
 							my_no : MY
 							, user_no : USER
