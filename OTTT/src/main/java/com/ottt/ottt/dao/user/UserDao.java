@@ -1,6 +1,7 @@
 package com.ottt.ottt.dao.user;
 
 import java.util.List;
+import java.util.Map;
 
 import com.ottt.ottt.dto.UserDTO;
 
@@ -17,4 +18,24 @@ public interface UserDao {
 	int up_pwd(UserDTO userDTO) throws Exception;
 	int up_profile(UserDTO userDTO) throws Exception;
 	UserDTO select(Integer user_no) throws Exception;
+	int selectNoId(String user_nicknm) throws Exception;
+	int insertUserOTT(Map map) throws Exception; 
+	int insertUserGenre(Map map) throws Exception;
+	
+	int increaseFollower (Integer user_no) throws Exception;
+	int decreaseFollower (Integer user_no) throws Exception;
+	int increaseFollowing (Integer user_no) throws Exception;
+	int decreaseFollowing (Integer user_no) throws Exception;
+	
+	//유저 OTT 추가정보 DELETE
+	int deleteUserOTT(Integer user_no) throws Exception;
+	//유저 genre 추가정보 DELETE
+	int deleteUserGenre(Integer user_no) throws Exception;
+	
+	// 아이디찾기
+	UserDTO selectEmail(String user_email) throws Exception;
+	//비밀번호찾기
+	UserDTO selectPwd(String user_email, String user_id) throws Exception;
+	//비밀번호 재설정
+	int resetPwd(String user_id, String user_pwd) throws Exception;
 }

@@ -1,6 +1,5 @@
 package com.ottt.ottt.dao.message;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,19 +25,6 @@ public class MessageDaoImpl implements MessageDao {
 		return session.selectOne(namespace + "selectMsg", message_no);
 	}
 
-	
-	//받은 메세지 목록 불러오기
-	@Override
-	public List<MessageDTO> selectRecv(MessageSearchItem msc) throws Exception {
-		return session.selectList(namespace + "selectRecv", msc);
-	}
-
-	//보낸 메세지 목록 불러오기
-	@Override
-	public List<MessageDTO> selectSend(MessageSearchItem msc) throws Exception {
-		return session.selectList(namespace + "selectSend", msc);
-	}
-
 	//메세지 보내기(메세지 생성)
 	@Override
 	public int insert(MessageDTO messageDTO) throws Exception {
@@ -50,12 +36,6 @@ public class MessageDaoImpl implements MessageDao {
 	public int delete(Integer message_no) throws Exception {
 		return session.delete(namespace + "delete", message_no);
 	}
-	
-//	//메세지 지우기(전체)
-//	@Override
-//	public int deleteAll() throws Exception {
-//		return session.delete(namespace + "deleteAll");
-//	}
 
 	//sql id 맞춰서 수정 
 	@Override
@@ -107,6 +87,26 @@ public class MessageDaoImpl implements MessageDao {
 	@Override
 	public int deleteBySender(MessageDTO messageDTO) throws Exception {
 		return session.update(namespace + "deleteBySender", messageDTO);
+	}
+
+	@Override
+	public List<MessageDTO> selectRecvAll(MessageSearchItem msc) throws Exception {
+		return session.selectList(namespace + "selectRecvAll", msc);
+	}
+
+	@Override
+	public List<MessageDTO> selectSendAll(MessageSearchItem msc) throws Exception {
+		return session.selectList(namespace + "selectSendAll", msc);
+	}
+
+	@Override
+	public int readCnt() throws Exception {
+		return session.selectOne(namespace + "readCnt");
+	}
+
+	@Override
+	public int updateRead(MessageDTO messageDTO) throws Exception {
+		return session.update(namespace + "updateRead", messageDTO);
 	}
 
 

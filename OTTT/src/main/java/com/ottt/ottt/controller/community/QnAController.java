@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ottt.ottt.dto.CommentDTO;
+import com.ottt.ottt.dto.NotificationDTO;
 import com.ottt.ottt.dao.login.LoginUserDao;
 import com.ottt.ottt.domain.PageResolver;
 import com.ottt.ottt.domain.SearchItem;
@@ -29,6 +31,7 @@ import com.ottt.ottt.dto.ArticleDTO;
 import com.ottt.ottt.dto.UserDTO;
 import com.ottt.ottt.service.community.QnA.QnACommentService;
 import com.ottt.ottt.service.community.QnA.QnAServiceImpl;
+import com.ottt.ottt.service.mypage.NotificationService;
 
 @Controller
 @RequestMapping("/community")
@@ -40,6 +43,8 @@ public class QnAController {
 	LoginUserDao loginUserDao;
 	@Autowired
 	QnACommentService qnACommentService;
+	@Autowired
+	NotificationService notificationService;
 	
 	//QnA
 		@GetMapping(value = "/QnA")
@@ -189,7 +194,7 @@ public class QnAController {
 		}
 		
 		@PostMapping("/QnA/QnAcomments")
-		public ResponseEntity<String> write(@RequestBody CommentDTO commentDTO, Integer article_no, HttpSession session){
+		public ResponseEntity<String> write(@RequestBody CommentDTO commentDTO, Integer article_no, HttpSession session, HttpServletRequest request){
 			String user_id = (String) session.getAttribute("id");
 			UserDTO userDTO = loginUserDao.select(user_id);
 			
@@ -201,6 +206,25 @@ public class QnAController {
 				if(qnACommentService.write(commentDTO) != 1) {
 					throw new Exception("Comment_wrtie Failed");
 				}
+
+				//알림함에 알림 넣기
+				ArticleDTO articleDTO = new ArticleDTO();
+				articleDTO.setArticle_no(commentDTO.getArticle_no());
+
+				ArticleDTO articleNo = serviceImpl.getArticle(article_no);
+				if(articleDTO != null) {
+					NotificationDTO notificationDTO = new NotificationDTO();
+					notificationDTO.setUser_no(commentDTO.getUser_no());
+					notificationDTO.setQna_no(commentDTO.getArticle_no());
+					notificationDTO.setTarget_user_no(articleNo.getUser_no());
+					
+		 			String currentURL = "/community/QnA/read?article_no=" + notificationDTO.getQna_no();
+					notificationDTO.setNoti_url(currentURL);
+					
+					
+					notificationService.putQna(notificationDTO);
+				}
+
 				return new ResponseEntity<String>("WRT_OK", HttpStatus.OK);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -224,32 +248,3 @@ public class QnAController {
 		}
 		
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -123,42 +123,6 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
     padding-left: 2rem;
 }
 
-.h-icon > ul > li:first-child > a{
-    background:url("../../images/icon/search02.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 32px;
-    width: 32px;
-    height: 32px;
-}
-
-.h-icon > ul > li:last-child > a{
-    background:url("../../images/img/profile.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 32px;
-    width: 32px;
-    height: 32px;
-}
-
-.h-icon > ul > li:first-child > a:hover{
-    background: url("../../images/icon/search-h.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 32px;
-    width: 32px;
-    height: 32px;
-}
-
-/* .h-icon > ul > li:last-child > a:hover{
-    background: url("../images/icon/user-h.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 32px;
-    width: 32px;
-    height: 32px;
-} */
-
 #line-1 {
     width: 1200px;
     background-color: transparent;
@@ -200,11 +164,11 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
     display:block;}
 
 .search{
-        border: solid 1px black;
-        height: 40px;
-        border: 0;
-        border-radius: 15px;
-    }
+	border: solid 1px black;
+	height: 40px;
+	border: 0;
+	border-radius: 15px;
+}
 
 .searchicon{
     position: relative;
@@ -213,132 +177,48 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
 }
 .searchicon img{width: 35px;}
 
-.set-img {
-    width: 60px;
-    height: 60px;
-    position: relative;
-    left: 950px;
-}
-
-.set-img2 {
-    width: 60px;
-    height: 60px;
-    position: relative;
-}
-
-.send-img {
-    width: 30px;
-    height: 30px;
-    position: relative;
-}
-
-
-.sec01{
-    width: 1200px;
-    height: auto;
-    margin: 0 auto;
-    display: flex;
-    /* border: 1px solid red; */
-    box-sizing: border-box;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-.sec02{
+.sec01 {
     width: 800px;
-    height: auto;
+    height: 75px;
     margin: 0 auto;
     display: flex;
-    /* border: 1px solid red; */
     box-sizing: border-box;
-    margin-top: 10px;
-    margin-bottom: 20px;
     border-radius: 10px;
     background-color: #0c0808;
 }
 
-.sec03{
-    width: 800px;
-    height: auto;
-    margin: 0 auto;
-    display: flex;
-    /* border: 1px solid red; */
-    box-sizing: border-box;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    background-color: #3f3e3e;
-}
-
-.push{
+.noti-box {
     width: 800px;
     height: auto;
     margin: auto;
+    margin-bottom: 10px;
 }
 
-
-.push-alarm{
+.noti {
     width: 640px;
     height: 100%;
-    /* border: 1px solid red; */
-    font-size: 23px;
-    margin-top: 17px;
-}
-
-.push-alarm p{
-    display: flex;
-    justify-content: flex-end;
-    font-weight: bold;
-}
-
-.btn{
-    color: #fff;
-    background-color: transparent;
-    border-style: none;
-    border-color: #fff; 
-    font-size: 23px; 
-    text-decoration: none;
-}
-
-
-.alarm-1-1 {
-    color: white;
-    border-radius: 10px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    font-size: 20px;
-}
-
-.btn-delete {
-    width: 50px;
-    height: 50px;
-    display: flex;
-    margin: 25px 0px 0px 25px;
-    background-color: transparent;
-    text-align: center;
-    padding-left: 0px;
-    border: none;
+    padding-top: 20px;
+    font-size: 21px;
 }
 
 .profile{
     border-radius: 10px;
+    margin-top: 3px;
     margin-right: 15px;
     margin-left: 10px;
-}
-
-
-.btn_delete_div{
-    display: inline-block;
-    position: relative;
-    bottom: 30px;
-    left: 160px;
-}
-
-.alarm-1-1 > img {
-    width: 76px;
+    width: 67px;
     height: 67px;
-    background-color: #fff;
-    border-radius: 10px;
 }
 
+.delBtn {
+	margin-left: 25px;
+	background-color: transparent;
+	border: none;
+	color: red;
+	font-size: 23px;
+	text-align: center;
+}
 
+.mnb ul li:nth-child(4) a {
+	color: #33ff33;
+}

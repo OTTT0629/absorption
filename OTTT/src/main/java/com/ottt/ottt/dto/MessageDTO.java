@@ -9,7 +9,7 @@ import java.util.Objects;
 	,receive_user_no	bigint 		  not null
 	,content 			varchar(2000) not null
 	,send_date			timestamptz	  not null
-	,read_yn			char(1)		  default '0'		--추가
+	,read_yn			boolean		  default false		--추가
 	,delete_by_sender	boolean		  default false
 	,delete_by_receiver	boolean	  	  default false
 	,image				text		  null
@@ -21,7 +21,7 @@ public class MessageDTO {
 	private Integer receive_user_no;
 	private String content;
 	private Date send_date;
-	private char read_yn;
+	private boolean read_yn;
 	private String user_nicknm;
 	private String image;
 	
@@ -69,13 +69,15 @@ public class MessageDTO {
 	public void setSend_date(Date send_date) {
 		this.send_date = send_date;
 	}
-	public char getRead_yn() {
+
+	public boolean isRead_yn() {
 		return read_yn;
 	}
-	public void setRead_yn(char read_yn) {
+
+	public void setRead_yn(boolean read_yn) {
 		this.read_yn = read_yn;
 	}
-	
+
 	public String getUser_nicknm() {
 		return user_nicknm;
 	}

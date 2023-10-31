@@ -30,8 +30,6 @@ import java.util.Objects;
 	,following		bigint			default 0	
 	--팔로워
 	,followers 		bigint			default 0	
-	--신고개수
-	,report_cnt		int				default 0
  */
 public class UserDTO {
 
@@ -48,10 +46,14 @@ public class UserDTO {
 	private String 	image;
 	private Integer following;
 	private Integer followers;
-	private Integer report_cnt;
+	private String 	kakao_no;
+	private Integer review_count;
+	private Integer comment_count;
+	private Integer article_count;
+	private Integer report_count;
+	private Boolean block_yn;
 	
 	public UserDTO() {}
-	
 	
 
 	public UserDTO(String user_id, String user_pwd, String user_nm, String user_nicknm, int user_gen,
@@ -64,8 +66,6 @@ public class UserDTO {
 		this.user_gen = user_gen;
 		this.user_email = user_email;
 	}
-
-
 
 	public Integer getUser_no() {
 		return user_no;
@@ -131,8 +131,6 @@ public class UserDTO {
 		this.user_email = user_email;
 	}
 	
-	
-
 	public Date getReg_date() {
 		return reg_date;
 	}
@@ -173,13 +171,63 @@ public class UserDTO {
 		this.followers = followers;
 	}
 
-	public int getReport_cnt() {
-		return report_cnt;
+	public String getKakao_no() {
+		return kakao_no;
 	}
 
-	public void setReport_cnt(int report_cnt) {
-		this.report_cnt = report_cnt;
+
+	public void setKakao_no(String kakao_no) {
+		this.kakao_no = kakao_no;
 	}
+	public Integer getReview_count() {
+		return review_count;
+	}
+
+
+	public void setReview_count(Integer review_count) {
+		this.review_count = review_count;
+	}
+
+
+	public Integer getComment_count() {
+		return comment_count;
+	}
+
+
+	public void setComment_count(Integer comment_count) {
+		this.comment_count = comment_count;
+	}
+
+
+	public Integer getArticle_count() {
+		return article_count;
+	}
+
+
+	public void setArticle_count(Integer article_count) {
+		this.article_count = article_count;
+	}
+
+
+	public Integer getReport_count() {
+		return report_count;
+	}
+
+
+	public void setReport_count(Integer report_count) {
+		this.report_count = report_count;
+	}
+	
+
+	public Boolean getBlock_yn() {
+		return block_yn;
+	}
+
+
+	public void setBlock_yn(Boolean block_yn) {
+		this.block_yn = block_yn;
+	}
+
 
 	@Override
 	public int hashCode() {
@@ -205,8 +253,10 @@ public class UserDTO {
 	public String toString() {
 		return "UserDTO [user_no=" + user_no + ", gr_no=" + gr_no + ", user_id=" + user_id + ", user_pwd=" + user_pwd
 				+ ", user_nm=" + user_nm + ", user_nicknm=" + user_nicknm + ", user_gen=" + user_gen + ", user_email="
-				+ user_email + ", admin=" + admin + ", image=" + image + ", following=" + following + ", followers="
-				+ followers + ", report_cnt=" + report_cnt + "]";
+				+ user_email + ", reg_date=" + reg_date + ", admin=" + admin + ", image=" + image + ", following="
+				+ following + ", followers=" + followers + ", kakao_no=" + kakao_no + ", review_count=" + review_count + ", comment_count="
+				+ comment_count + ", article_count=" + article_count + ", report_count=" + report_count + ", block_yn="
+				+ block_yn + "]";
 	}
 	
 	

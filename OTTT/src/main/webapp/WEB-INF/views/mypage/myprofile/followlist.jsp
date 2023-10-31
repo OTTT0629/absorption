@@ -7,96 +7,119 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>followlist</title>
+    <title>팔로우</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     <link rel="stylesheet" href="${path}/resources/css/mypage/followlist.css" >
-    <script type="text/javascript" src="js/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
   </head>
   <body style="background-color: #202020;">
-     
-    <div class="wrap">
-      <header>
-        <div class="logo">
-          <a href="<c:url value="/" />">
-				  <img src="${path}/resources/images/logo/OTTT.png" alt="로고">
-				</a>
-			</div>
-			<nav class="gnb">
-				<ul>
-            <li>
-              <a href="<c:url value="/genre/movie" />">영화</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/drama" />">드라마</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/interest" />">예능</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/animation" />">애니</a>
-            </li>
-            <li>
-              <a href="<c:url value="/community/freecommunity" />">게시판</a>
-            </li>
-          </ul>
-        </nav>
-        <div class="h-icon">
-          <ul>
-            <li>
-              <a href="<c:url value='/search' />">
-              </a>
-            </li>
-            <li>
-              <a href="<c:url value='/mypage' />">
-              </a>
-            </li>
-          </ul>
-        </div>
-      </header>
+  	<div class="wrap">
+  		<%@ include file="../../fix/header.jsp" %>
+  		
+  		<c:choose>
+  			<c:when test="${stat eq 'my' }">
+  				<%@ include file="../../fix/sec01.jsp" %>
+  			</c:when>
+  			
+  			<c:otherwise>
+  				<%@ include file="../../fix/sec02.jsp" %>
+  			</c:otherwise>  		
+  		</c:choose>
+  		
+  			
+	    
+	    <section class="sec02">
+	    	<c:choose>
+	    		<c:when test="${empty follow && mode eq 'follower' }">
+	    			<div class="nofollow">팔로워가 없습니다</div>
+	    		</c:when>
+	    		<c:when test="${empty follow && mode eq 'following' }">
+	    			<div class="nofollow">팔로잉이 없습니다</div>
+	    		</c:when>
+	    	</c:choose>
+	    	
+	    	<c:forEach var="Follow" items="${follow }">
 
-      <section class="sec01">      
-        <div class="mypage-info">
-          <div class="porfile">
-            <img  src="${path}/resources/images/img/이브이.png" alt="프로필이미지">
-          </div>
-        <div class="user">
-            <ul>
-              <li class="user-name">
-                <span>뚜 벅</span>
-              </li>
-              <li class="user-follow">
-                <span onclick="location.href='#'">팔로워</span>
-                <span>|</span>
-                <span onclick="location.href='#'">팔로잉</span>
-              </li>
-            </ul>
-        </div>
-        <div class="btn_more_div" >
-              <a href="<c:url value='/mypage/setting' />">
-                <img src="${path}/resources/images/img/톱니.png" class="set-img" >
-              </a>
-        </div>
-       </div>
-      </section>
-          
-      <div class="line-green"></div>
+				<div class="follow">
+					<a href="<c:url value="/profile?user=${Follow.user_nicknm }" />">
+		            	<img class="fol-pro" src="${Follow.image }" alt="profile" /></a>
+	            	<div class="follow-nm"><a href="<c:url value="/profile?user=${Follow.user_nicknm }" />">
+	            		${Follow.user_nicknm }</a></div>
+	            		
+	            	<c:if test="${sessionScope.user_no == userDTO.user_no && mode ne 'follower' }">
+			          	<input type="checkbox" class="checkfollow" id="Follow" data-user="${Follow.user_no} " checked>
+			        	<label class="labelfollow" for="Follow">팔로잉</label><br>
+		        	</c:if>
+				</div>
+			</c:forEach>
+		</section>
+	</div>
+	
+	<script type="text/javascript">
+		let MY = '${sessionScope.user_no}'
+		let USER = '${userDTO.user_no}'
+	
+		$(document).ready(function() {
+			
+			getFollow()
+			
+			//팔로우 해제
+			$(document).on('click', '.labelfollow', function() {
+				let USER = $(this).prev().data('user');
+				
+				console.log('$(this)')
+				console.log($(this))
+				
+				console.log("USER")
+				console.log(USER)
+				
+				$(this).attr('class', 'labelCxlfollow')
+				$(this).html('팔로우')
+				
+				$.post(
+						"/stopFollow"
+						, {
+							my_no : MY
+							, user_no : USER
+						}
+					)
+			})
+			
+			//팔로잉
+			$(document).on('click', '.labelCxlfollow', function() {
+				let USER = $(this).prev().data('user');
+				
+				console.log('$(this)')
+				console.log($(this))
+				
+				console.log("USER")
+				console.log(USER)
+				
+				$(this).attr('class', 'labelfollow')
+				$(this).html('팔로잉')
+				
+				$.post(
+						"/startFollow"
+						, {
+							my_no : MY
+							, user_no : USER
+						}
+					)
+			})
+			
+			function getFollow() {
+				if('${mode}' == 'follower')
+					document.querySelector('.follower').style.color = '#33ff33';
+				
+				if('${mode}' == 'following')
+					document.querySelector('.following').style.color = '#33ff33';
+				
+				}
+			
+		})
+	
+	</script>
 
-      <div class="push">
-        <section class="sec02">
-          <span class="alarm-1-1">
-          <a href="#">
-            <img class="fol-pro" src="${path}/resources/images/img/이브이.png" alt="profile" /></span>
-            <div class="push-alarm">피카츄</div>
-          </a>
-          <input type="checkbox" class="btn-check" id="btn-check-outlined00" autocomplete="off" checked>
-        <label class="btn btn-outline-primary" for="btn-check-outlined00">팔로우 취소</label><br>
-        </section>
-        
-      </div>
-
-
-
-  </div>
   </body>
 </html>

@@ -88,7 +88,10 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
 }
 .nav-link1:hover{color: #33FF33;}
 
-.nav a:nth-child(1){margin-left: 3.5vw;}
+.nav a:nth-child(1){
+	margin-left: 3.5vw;
+	color: #33ff33;
+}
 
 /* meun bar ENd */
 
@@ -170,7 +173,6 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
     border: none;
     background-color: #0B0C0B;;
     width: 800px;
-    min-height: 5rem;
     max-height: max-content;
     overflow-y: hidden;
     resize: none;
@@ -256,8 +258,9 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
     justify-content: space-between;
 }
 
-.usur_img{
+.user_img{
     width: 40px;
+    border-radius: 5px;
    
 }
 
@@ -406,3 +409,4 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
     bottom: 50px;
     font-size: 50px;
 }
+

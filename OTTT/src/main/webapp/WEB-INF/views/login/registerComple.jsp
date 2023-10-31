@@ -21,54 +21,15 @@
 </head>
 <body style="background-color: #202020;">
 	<div class="wrap">
-		<header>
-			<div class="logo">
-				 <a href="<c:url value="/" />">
-            <img src="${path}/resources/images/logo/OTTT.png" alt="로고">
-          </a>
-        </div>
-        <nav class="gnb">
-          <ul>
-            <li>
-              <a href="<c:url value="/genre/movie" />">영화</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/drama" />">드라마</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/interest" />">예능</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/animation" />">애니</a>
-            </li>
-            <li>
-              <a href="<c:url value="/community/freecommunity" />">게시판</a>
-            </li>
-          </ul>
-        </nav>
-        <div class="h-icon">
-          <ul>
-            <li>
-              <a href="<c:url value='/search' />">
-                <!-- <img src="./images/icon/search02.png" alt="검색"> -->
-              </a>
-            </li>
-            <li>
-              <a href="<c:url value='/mypage' />">
-                <!-- <img src="./images/icon/user01.png" alt="내 정보"> -->
-              </a>
-            </li>
-          </ul>
-        	</div>
-		</header>
+		<%@ include file="../fix/header.jsp" %>
       
         <div class = "Login">
         	<img src = "${path}/resources/images/logo/OTTT.png" width="420" height="120">
         	<h1 style="font-size: 30px; display: inline-block;">환영합니다!</h1>
         	
-        	<form method="post" action="<c:url value='/' />" id="login-form">
-        		<input type="text" style="border:0 solid black" name="id" placeholder="아이디">
-            	<input type="password" style="border:0 solid black" name="pwd" style="border:0 solid black" placeholder="비밀번호">
+        	<form method="post" action="<c:url value='/signin/complete' />" id="login-form">
+        		<input type="text" style="border:0 solid black; color: #fff;" name="user_id" placeholder="아이디">
+            	<input type="password" style="border:0 solid black;" name="user_pwd" style="border:0 solid black" placeholder="비밀번호">
             	<input type="submit" value="로그인">
            	</form>
        	</div>

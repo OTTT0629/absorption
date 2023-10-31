@@ -112,6 +112,7 @@ public class SettingController {
 					throw new Exception("mod_nick failed");
 			}
 			
+			session.setAttribute("user_nicknm", userDTO.getUser_nicknm());		
 			rattr.addFlashAttribute("msg","MOD_OK");
 			return "redirect:/mypage/setting/myprofile";
 			
@@ -190,6 +191,13 @@ public class SettingController {
 			return "/mypage/myprofile/setting";
 		}
 
+	}
+	
+	//추가정보 입력
+	@GetMapping("/setting/addInfo")
+	public String addInfo(Model m) {
+		m.addAttribute("mode", "modify");
+		return "/login/addInfo";		
 	}
 
 }

@@ -84,17 +84,25 @@
 		    //폼태그 생성하기
 		    let form = document.createElement('form');
 		    //인풋태그 생성하기
-		    let input = document.createElement('input');
-		    //인풋 속성
-		    input.setAttribute('type', 'hidden');
-		    input.setAttribute('name', 'message_no');
-		    input.setAttribute('value', messageNo);
-		    form.appendChild(input);
-		    
+			let data = {
+				message_no: messageNo,
+				page: ${mpr.msc.page}
+			};
+			 
+			 for (let key in data) {
+			     if (data.hasOwnProperty(key)) {
+			         let input = document.createElement('input');
+			         input.setAttribute('type', 'hidden');
+			         input.setAttribute('name', key);
+			         input.setAttribute('value', data[key]);
+			         form.appendChild(input);
+			     }
+			 }			
+			
 		    if($('button[name="deleteBtn"]').attr("class") == 'delrecvBtn')
-		    	form.setAttribute("action", '/ottt/mypage/message/remove');
+		    	form.setAttribute("action", '/mypage/message/remove');
 		    if($('button[name="deleteBtn"]').attr("class") == 'delsendBtn')
-		    	form.setAttribute("action", '/ottt/mypage/message/send/remove');
+		    	form.setAttribute("action", '/mypage/message/send/remove');
 		    
 		    form.setAttribute("method", "post");
 		    
@@ -123,7 +131,7 @@
 		    }
 			
 			form.setAttribute('method','post')
-			form.setAttribute('action','/ottt/profile?user=' +user_nicknm)
+			form.setAttribute('action','/profile?user=' +user_nicknm)
 							
 			document.body.appendChild(form)
 			form.submit()
@@ -150,15 +158,7 @@
      </div>
    </div>
 
-      <nav class="mnb">
-        <ul>
-          <li><a href="<c:url value="/mypage/myreview" />" class="mreview">기록</a></li>
-          <li><a href="<c:url value="/mypage/wishlist" />">찜목록</a></li>
-          <li><a href="<c:url value="/mypage/watched" />">봤어요</a></li>
-          <li><a href="<c:url value="/mypage/alarm" />">알림함</a></li>
-          <li><a href="<c:url value="/mypage/message" />" style="color: #33ff33">쪽지함</a></li>
-        </ul>
-      </nav>
+      <%@ include file="../../fix/mnb.jsp" %>
         
       <div class="sec00">
 
@@ -200,7 +200,12 @@
 								</td>
 								<td class="msg-nicknm">${messageDTO.user_nicknm }</td>
 								<td class="msg-sort" style="display: none; ">${(messageDTO.send_user_no != sessionScope.user_no) ? messageDTO.send_user_no : messageDTO.receive_user_no}</td>
-								<td class="msg-content" style="cursor: pointer;"><c:out value="${messageDTO.content }"></c:out></td>
+								<c:if test="${messageDTO.read_yn == true }">
+									<td class="msg-content" style="cursor: pointer; color: rgb(138, 138, 138);"><c:out value="${messageDTO.content }"></c:out></td>
+								</c:if>
+								<c:if test="${messageDTO.read_yn == false }">
+									<td class="msg-content" style="cursor: pointer;"><c:out value="${messageDTO.content }"></c:out></td>
+								</c:if>
 								<td class="msg-time"><fmt:formatDate value="${messageDTO.send_date}" pattern="yyyy-MM-dd HH:mm" type="date" /></td>
 								<td class="msg-del"><button class="delBtn" name="deleteBtn" style="border: none; color: red;" id="del" data-bs-toggle="modal" data-bs-target="#exampleModa2"><i class="fas fa-times"></i></button></td>
 							</tr>			            
@@ -215,7 +220,14 @@
 								<a class="page" href="<c:url value="${mpr.msc.getQueryString(mpr.beginPage-1) }" />">&lt;</a>
 							</c:if>
 							<c:forEach var="i" begin="${mpr.beginPage }" end="${mpr.endPage }">
-								<a class="page" href="<c:url value="${mpr.msc.getQueryString(i) }" />">${i }</a>
+								<c:choose>
+									<c:when test="${mpr.msc.page == i }">
+										<a class="page selpage" href="<c:url value="${mpr.msc.getQueryString(i) }" />">${i }</a>
+									</c:when>
+									<c:otherwise>
+										<a class="page" href="<c:url value="${mpr.msc.getQueryString(i) }" />">${i }</a>
+									</c:otherwise>
+								</c:choose>
 							</c:forEach>
 							<c:if test="${mpr.showNext }">
 								<a class="page" href="<c:url value="${mpr.msc.getQueryString(mpr.endPage+1) }" />">&gt;</a>

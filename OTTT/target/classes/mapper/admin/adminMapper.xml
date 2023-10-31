@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="com.ottt.ottt.dao.admin.adminMapper">
+
+<!-- 유저 정보 페이지  -->
+  <select id="selectUser" resultType="UserDTO" parameterType="SearchItem">
+  	SELECT
+    u.user_no,
+    u.user_id,
+    u.user_nicknm,
+    COUNT(DISTINCT r.review_no) AS review_count,
+    COUNT(DISTINCT a.article_no) AS article_count,
+    COUNT(DISTINCT c.cmt_no) AS comment_count,
+    COALESCE(rp.report_count, 0) AS report_count,
+    u.block_yn
+	FROM
+    tb_user u
+    LEFT JOIN tb_review r ON u.user_no = r.user_no
+    LEFT JOIN tb_article a ON u.user_no = a.user_no
+    LEFT JOIN tb_comment c ON u.user_no = c.user_no
+    LEFT JOIN (
+        SELECT target_user_no, COUNT(*) AS report_count
+        FROM tb_report, tb_user u 
+        WHERE target_user_no = u.user_no 
+        GROUP BY target_user_no
+    ) rp ON u.user_no = rp.target_user_no
+	GROUP BY
+    u.user_no,
+    u.user_id,
+    u.user_nicknm,
+    rp.report_count
+    order by user_no 
+	limit #{pageSize} offset #{offset}
+  </select>
+  
+  <select id="count" parameterType="SearchItem" resultType="int">
+	select count(*) 
+	from tb_user
+  </select>
+  
+  <update id="blockUser" parameterType="Integer">
+	UPDATE tb_user
+	SET block_yn = true
+	WHERE user_no= #{user_no}
+  </update>
+  
+<!-- 리뷰 신고 페이지  -->
+  <select id="selectReview" resultType="ReviewDTO" parameterType="SearchItem">
+    SELECT DISTINCT ON (trw.review_no)
+      trw.review_no, tu.user_id, tu.user_nicknm,  trw.review_content, COALESCE(rp.report_count, 0) AS report_count
+    FROM tb_review trw
+    JOIN tb_user tu ON tu.user_no = trw.user_no
+    JOIN tb_report tr ON tr.review_no = trw.review_no
+	  LEFT JOIN (
+	     SELECT review_no, COUNT(*) AS report_count
+	     FROM tb_report
+	     WHERE review_no IS NOT NULL
+	     GROUP BY review_no
+	     HAVING COUNT(*) >= 3
+	  ) rp ON rp.review_no = trw.review_no
+    WHERE trw.review_no IS NOT NULL AND COALESCE(rp.report_count, 0) >= 3
+    ORDER BY trw.review_no
+    limit #{pageSize} offset #{offset}
+  </select>
+  
+  <select id="countReview" parameterType="SearchItem" resultType="int">
+	SELECT COUNT(*)
+	FROM (
+		SELECT COUNT(*) AS cnt
+		FROM tb_report
+		WHERE review_no IS NOT NULL
+		GROUP BY review_no
+		HAVING COUNT(*) >= 3
+	) AS subquery
+  </select>
+  
+  <delete id="deleteReview" parameterType="int">
+	delete from tb_review
+    where review_no = #{review_no}
+  </delete>
+
+<!-- 게시글 신고 페이지  -->  
+  <select id="selectArticle" resultType="ArticleDTO" parameterType="SearchItem">
+  	SELECT DISTINCT ON (ta.article_no)
+    	ta.article_no, tu.user_id, tu.user_nicknm,  ta.article_content, COALESCE(rp.report_count, 0) AS report_count
+	FROM tb_article ta
+	JOIN tb_user tu ON tu.user_no = ta.user_no
+	JOIN tb_report tr ON tr.article_no  = ta.article_no
+		LEFT JOIN (
+    		SELECT article_no, COUNT(*) AS report_count
+    		FROM tb_report
+    		WHERE article_no IS NOT NULL
+    		GROUP BY article_no
+    		HAVING COUNT(*) >= 3
+	  	) rp ON rp.article_no = ta.article_no
+	WHERE ta.article_no IS NOT NULL AND COALESCE(rp.report_count, 0) >= 3
+	ORDER BY ta.article_no
+	limit #{pageSize} offset #{offset}
+  </select>	 
+  
+  <select id="countArticle" parameterType="SearchItem" resultType="int">
+  	SELECT COUNT(*)
+	FROM (
+  		SELECT COUNT(*) AS cnt
+  		FROM tb_report
+  		WHERE article_no IS NOT NULL
+  		GROUP BY article_no
+  		HAVING COUNT(*) >= 3
+	) AS subquery
+  </select>
+  
+  <delete id="deleteArticle" parameterType="int">
+	delete from tb_article
+    where article_no = #{article_no}
+  </delete> 
+
+<!-- 댓글 신고 페이지  --> 
+  <select id="selectComment" resultType="CommentDTO" parameterType="SearchItem">
+	SELECT DISTINCT ON (tc.cmt_no)
+	    tc.cmt_no, tu.user_id, tu.user_nicknm,  tc.cmt_content, COALESCE(rp.report_count, 0) AS report_count
+	FROM tb_comment tc
+	JOIN tb_user tu ON tu.user_no = tc.user_no 
+	JOIN tb_report tr ON tr.cmt_no  = tc.cmt_no
+		LEFT JOIN (
+	    	SELECT cmt_no, COUNT(*) AS report_count
+	    	FROM tb_report
+	    	WHERE cmt_no IS NOT NULL
+	   		GROUP BY cmt_no
+	    	HAVING COUNT(*) >= 3
+		) rp ON rp.cmt_no = tc.cmt_no 
+	WHERE tc.cmt_no IS NOT NULL AND COALESCE(rp.report_count, 0) >= 3
+	ORDER BY tc.cmt_no
+	limit #{pageSize} offset #{offset}
+  </select>	 
+  
+  <select id="countComment" parameterType="SearchItem" resultType="int">
+	SELECT COUNT(*)
+	FROM (
+	  SELECT COUNT(*) AS cnt
+	  FROM tb_report
+	  WHERE cmt_no IS NOT NULL
+	  GROUP BY cmt_no
+	  HAVING COUNT(*) >= 3
+	) AS subquery
+  </select>
+  
+  <delete id="deleteComment" parameterType="int">
+	delete from tb_comment
+    where cmt_no = #{cmt_no}
+  </delete>  
+
+<!-- 유저 신고 페이지 --> 
+  <select id="selectUserReport" resultType="UserDTO" parameterType="SearchItem">
+  	SELECT
+    u.user_no,
+    u.user_id,
+    u.user_nicknm,
+    COUNT(DISTINCT r.review_no) AS review_count,
+    COUNT(DISTINCT a.article_no) AS article_count,
+    COUNT(DISTINCT c.cmt_no) AS comment_count,
+    COALESCE(rp.report_count, 0) AS report_count,
+    u.block_yn
+	FROM
+    tb_user u
+    LEFT JOIN tb_review r ON u.user_no = r.user_no
+    LEFT JOIN tb_article a ON u.user_no = a.user_no
+    LEFT JOIN tb_comment c ON u.user_no = c.user_no
+    LEFT JOIN (
+        SELECT target_user_no, COUNT(*) AS report_count
+        FROM tb_report, tb_user u 
+        WHERE target_user_no = u.user_no 
+        GROUP BY target_user_no
+    ) rp ON u.user_no = rp.target_user_no
+    where report_count > 3 
+	GROUP BY
+    u.user_no,
+    u.user_id,
+    u.user_nicknm,
+    rp.report_count
+    order by report_count desc 
+	limit #{pageSize} offset #{offset}
+  </select>
+ 
+  </mapper>

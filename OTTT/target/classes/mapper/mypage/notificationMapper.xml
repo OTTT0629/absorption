@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+  
+	<mapper namespace="com.ottt.ottt.dao.mypage.NotificationMapper">
+
+
+		<select id="selectNoti" parameterType="int" resultType="NotificationDTO">
+			SELECT a.noti_no, a.user_no, a.target_user_no, a.review_no,
+				   a.article_no, a.qna_no, a.noti_check, a.noti_url, a.noti_message,
+				   b.user_nicknm AS user_nicknm, b.image AS image
+			FROM tb_notification a
+			JOIN tb_user b
+			ON a.user_no = b.user_no
+			WHERE a.target_user_no = #{a.target_user_no}
+			ORDER BY a.noti_no DESC
+		</select>
+		
+		
+		<insert id="insertReviewLike" parameterType="NotificationDTO">
+			INSERT INTO tb_notification
+			(user_no, target_user_no, review_no, noti_message, noti_url)
+			VALUES(#{user_no}, #{target_user_no}, #{review_no}, ' 님이 리뷰에 좋아요를 눌렀습니다.', #{noti_url})
+		</insert>
+
+
+		<insert id="insertReviewCmt" parameterType="NotificationDTO">
+			INSERT INTO tb_notification
+			(user_no, target_user_no, review_no, noti_message, noti_url)
+			VALUES(#{user_no}, #{target_user_no}, #{review_no}, ' 님이 리뷰에 댓글을 남겼습니다.', #{noti_url})
+		</insert>
+
+
+		<insert id="insertArticleLike" parameterType="NotificationDTO">
+			INSERT INTO tb_notification
+			(user_no, target_user_no, article_no, noti_message, noti_url)
+			VALUES(#{user_no}, #{target_user_no}, #{article_no}, ' 님이 게시글에 좋아요를 눌렀습니다.', #{noti_url})
+		</insert>
+
+
+		<insert id="insertArticleCmt" parameterType="NotificationDTO">
+			INSERT INTO tb_notification
+			(user_no, target_user_no, article_no, noti_message, noti_url)
+			VALUES(#{user_no}, #{target_user_no}, #{article_no}, ' 님이 게시글에 댓글을 남겼습니다.', #{noti_url})
+		</insert>
+		
+
+		<insert id="insertMessage" parameterType="NotificationDTO">
+			INSERT INTO tb_notification
+			(user_no, target_user_no, noti_message, noti_url)
+			VALUES(#{user_no}, #{target_user_no}, ' 님이 쪽지를 보냈습니다.', '/mypage/message')
+		</insert>
+		
+		
+		<insert id="insertQna" parameterType="NotificationDTO">
+			INSERT INTO tb_notification
+			(user_no, target_user_no, qna_no, noti_message, noti_url)
+			VALUES(#{user_no}, #{target_user_no}, #{qna_no}, ' 관리자가 질문에 답변을 달았습니다.', #{noti_url})
+		</insert>
+		
+		
+		<delete id="deleteNoti" parameterType="map">
+			DELETE FROM tb_notification
+			WHERE noti_no = #{noti_no} AND target_user_no = #{target_user_no}
+		</delete>
+		
+		<select id="notiCnt" parameterType="int" resultType="int">
+			SELECT COUNT(*) 
+			FROM tb_notification a
+			JOIN tb_user b
+			ON a.target_user_no = b.user_no
+			WHERE b.user_no = #{target_user_no}
+		</select>
+		
+		<!-- 읽지 않은 알림 개수 조회 -->
+		<select id="selectCheck" parameterType="int" resultType="int">
+	        SELECT count(*) FROM tb_notification a
+	        JOIN tb_user b
+	        ON a.target_user_no = b.user_no
+			WHERE a.noti_check = false
+			AND b.user_no = #{target_user_no}
+		</select>
+	
+		<!-- 읽음 여부를 true로 수정 -->
+		<update id="updateCheck" parameterType="NotificationDTO">
+			UPDATE tb_notification a
+			SET noti_check = true
+			FROM tb_user b
+			WHERE b.user_no = #{target_user_no}
+			AND a.noti_no = #{noti_no}
+		</update>
+		
+		<!-- 알림 하나 선택하기 -->
+		<select id="selectOneNoti" parameterType="Integer" resultType="NotificationDTO">
+			SELECT noti_no, target_user_no, noti_check
+			FROM tb_notification
+			WHERE noti_no = #{noti_no}
+		</select>
+
+	</mapper>

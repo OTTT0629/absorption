@@ -29,9 +29,9 @@
 	          				<span>${userDTO.user_nicknm }</span>
           				</li>
 		              	<li class="user-follow">
-		                	<span class="user-follow-l"><a href="<c:url value="/mypage/follower" />">팔로우</a></span>
+		                	<span class="user-follow-l"><a href="<c:url value="/mypage/follower?user=${userDTO.user_nicknm }" />">팔로워 ${followerCnt}</a></span>
 		                	&nbsp;|&nbsp;
-		                	<span class="user-follow-l"><a href="<c:url value="/mypage/following" />">팔로워</a></span>
+		                	<span class="user-follow-l"><a href="<c:url value="/mypage/following?user=${userDTO.user_nicknm }" />">팔로잉 ${followingCnt}</a></span>
 		              	</li>
 	              	</ul>
               	</div>
@@ -40,9 +40,18 @@
               		<ul>
               			<li>
               				<a href="<c:url value="/mypage/setting" />">
-              				<img class="set-img" src="${path}/resources/images/img/톱니.png" alt="설정이미지">
-            				</a>
+              				<img class="set-img" src="https://myottt.s3.ap-northeast-2.amazonaws.com/img/%ED%86%B1%EB%8B%88.png" alt="설정이미지"></a>
            				</li>
+           				<c:choose>
+						  <c:when test="${userDTO.admin.toString()=='Y'}">
+						    <li>
+						      <a href="<c:url value='/admin' />" class="admin">관리자 페이지</a>
+						    </li>
+						  </c:when>
+						  <c:otherwise>
+						    <!-- 아무것도 표시하지 않음 -->
+						  </c:otherwise>
+						</c:choose>
            				<li>
            					<a href='<c:url value="/logout" />' class="logout">로그 아웃</a>
        					</li>
@@ -51,45 +60,27 @@
 			</div>
 		</section>
 		
-		<nav class="mnb">
-			<ul>
-					<li>
-						<a href="<c:url value="/mypage/myreview" />" class="mreview">기록</a>
-					</li>
-					<li>
-					    <a href="<c:url value="/mypage/wishlist" />">찜목록</a>
-					</li>
-					<li>
-					    <a href="<c:url value="/mypage/watched" />">봤어요</a>
-					</li>
-					<li>
-					  	<a href="<c:url value="/mypage/alarm" />">알림함</a>
-					</li>
-					<li>
-					  	<a href="<c:url value="/mypage/message" />">쪽지함</a>
-					</li>
-				</ul>
-		</nav>
-		
+		<%@ include file="../../fix/mnb.jsp" %>
+				
 		<section class="sec02">
 			<div class="mymenu">
 				<div class="mycontent">
 					<ul>
 						<li class="mydiary">
-							<img class="mimg" src="${path}/resources/images/img/free-icon-diary-6393039.png" alt="다이어리">
-							<a href="<c:url value="/mypage/mydiary" />">나만의 다이어리</a>
+							<img class="mimg" src="${path}/resources/images/img/free-icon-diary-6393039.png" >
+							<a href="<c:url value="/mypage/mydiary?user=${userDTO.user_nicknm }" />">나만의 다이어리</a>
 						</li>
 			            <li class="myrivew">
-			            	<img class="mimg" src="${path}/resources/images/img/free-icon-review-3501894.png" alt="리뷰">
-			                <a href="<c:url value="/mypage/myreview" />">나의 리뷰</a>
+			            	<img class="mimg" src="${path}/resources/images/img/free-icon-review-3501894.png" >
+			                <a href="<c:url value="/mypage/myreview?user=${userDTO.user_nicknm }" />">나의 리뷰</a>
 			            </li>
 			            <li class="#">
-			                <img class="mimg" src="${path}/resources/images/img/free-icon-heart-6063477 2.png" alt="다이어리">
-			                <a href="#">좋아요 누른 리뷰</a>
+			                <img class="mimg" src="${path}/resources/images/img/heart_on.png" >
+			                <a href="<c:url value="/mypage/myreview?user=${userDTO.user_nicknm }&category=1" />">좋아요 누른 리뷰</a>
 			            </li>
 			            <li class="#">
-			                <img class="mimg" src="${path}/resources/images/img/comment.png" alt="리뷰">
-			                <a href="#">댓글 작성 리뷰</a>
+			                <img class="mimg" src="${path}/resources/images/img/comment.png" >
+			                <a href="<c:url value="/mypage/myreview?user=${userDTO.user_nicknm }&category=2" />">댓글 작성 리뷰</a>
 			            </li>
 		            </ul>
 	            </div>
@@ -98,19 +89,19 @@
 		        	<ul>
 		        		<li class="mywrite">
 		                	<img class="mimg" src="${path}/resources/images/img/KakaoTalk_20230411_161709664.png" alt="게시글">
-		                	<a href="<c:url value="/mycommynity/postcommu" />">내가 쓴 게시글</a>
+		                	<a href="<c:url value="/community/freecommunity?user=${userDTO.user_nicknm }&category=myPost" />">내가 쓴 게시글</a>
 		                </li>
 		              	<li class="mylike">
-		                	<img class="mimg" src="${path}/resources/images/img/free-icon-heart-6063477 2.png" alt="좋아요">
-		                	<a href="<c:url value="/mycommynity/likecommunity" />">좋아요 누른 게시글</a>
+		                	<img class="mimg" src="${path}/resources/images/img/heart_on.png" alt="좋아요">
+		                	<a href="<c:url value="/community/freecommunity?category=myLike" />">좋아요 누른 게시글</a>
 		              	</li>
 		              	<li class="mycomment">
 			                <img class="mimg" src="${path}/resources/images/img/comment.png" alt="댓글">
-			                <a href="<c:url value="/mycommynity/comment" />">나의 댓글</a>
+			                <a href="<c:url value="/community/freecommunity?category=myComment" />">나의 댓글</a>
 		                </li>
 	                </ul>
                 </div>
-               
+    
 			</div>
 		</section>
 	</div>

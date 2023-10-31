@@ -87,7 +87,7 @@
       </nav>
 
       <section class="sec02">
-      <div class="set" style="padding-bottom: 10px;"><img class="set-img2" src="${path}/resources/images/img/톱니.png" alt="설정이미지">
+      <div class="set" style="padding-bottom: 10px;"><img class="set-img2" src="https://myottt.s3.ap-northeast-2.amazonaws.com/img/%ED%86%B1%EB%8B%88.png" alt="설정이미지">
         <span class="set-message" style="font-size: 35px;">쪽지 설정</span>
       </div>
       </section>

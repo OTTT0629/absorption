@@ -20,7 +20,7 @@ public class ReviewDTO {
 
 	private Integer review_no;
 	private Integer content_no;			//이건 작품 번호임
-	private double rating;
+	private Double rating;
 	private Integer user_no;
 	private String review_content;
 	private Date review_create_dt;
@@ -28,43 +28,34 @@ public class ReviewDTO {
 	private Integer comment_cnt;
 	
 	private String user_nicknm;
+	private String user_id;
 	private String content_nm;
 	private String thumbnail;
 	
-	private int check_like_count;
+	private Integer check_like_count;
 	private Integer like_count;
 	
 	private String image;
+	private boolean spoiler;
+
+	private Integer report_count;
 	
-	public String getImage() {
-		return image;
-	}
-	public void setImage(String image) {
-		this.image = image;
-	}
-	public int getComment_cnt() {
-		return comment_cnt;
-	}
-	public void setComment_cnt(int comment_cnt) {
-		this.comment_cnt = comment_cnt;
-	}
-	private UserDTO userDTO;
 	public Integer getReview_no() {
 		return review_no;
 	}
 	public void setReview_no(Integer review_no) {
 		this.review_no = review_no;
 	}
-	public int getContent_no() {
+	public Integer getContent_no() {
 		return content_no;
 	}
-	public void setContent_no(int content_no) {
+	public void setContent_no(Integer content_no) {
 		this.content_no = content_no;
 	}
-	public double getRating() {
+	public Double getRating() {
 		return rating;
 	}
-	public void setRating(double rating) {
+	public void setRating(Double rating) {
 		this.rating = rating;
 	}
 	public Integer getUser_no() {
@@ -85,25 +76,30 @@ public class ReviewDTO {
 	public void setReview_create_dt(Date review_create_dt) {
 		this.review_create_dt = review_create_dt;
 	}
-	public String getUser_nicknm() {
-		return user_nicknm;
-	}
-	public void setUser_nicknm(String user_nicknm) {
-		this.user_nicknm = user_nicknm;
-	}
-	public UserDTO getUserDTO() {
-		return userDTO;
-	}
-	public void setUserDTO(UserDTO userDTO) {
-		this.userDTO = userDTO;
-	}
 	public Date getReview_mod_dt() {
 		return review_mod_dt;
 	}
 	public void setReview_mod_dt(Date review_mod_dt) {
 		this.review_mod_dt = review_mod_dt;
 	}
-		
+	public Integer getComment_cnt() {
+		return comment_cnt;
+	}
+	public void setComment_cnt(Integer comment_cnt) {
+		this.comment_cnt = comment_cnt;
+	}
+	public String getUser_nicknm() {
+		return user_nicknm;
+	}
+	public void setUser_nicknm(String user_nicknm) {
+		this.user_nicknm = user_nicknm;
+	}
+	public String getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
 	public String getContent_nm() {
 		return content_nm;
 	}
@@ -116,17 +112,10 @@ public class ReviewDTO {
 	public void setThumbnail(String thumbnail) {
 		this.thumbnail = thumbnail;
 	}
-	public void setContent_no(Integer content_no) {
-		this.content_no = content_no;
-	}
-	public void setComment_cnt(Integer comment_cnt) {
-		this.comment_cnt = comment_cnt;
-	}
-	
-	public int getCheck_like_count() {
+	public Integer getCheck_like_count() {
 		return check_like_count;
 	}
-	public void setCheck_like_count(int check_like_count) {
+	public void setCheck_like_count(Integer check_like_count) {
 		this.check_like_count = check_like_count;
 	}
 	public Integer getLike_count() {
@@ -135,21 +124,37 @@ public class ReviewDTO {
 	public void setLike_count(Integer like_count) {
 		this.like_count = like_count;
 	}
-
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	public boolean isSpoiler() {
+		return spoiler;
+	}
+	public void setSpoiler(boolean spoiler) {
+		this.spoiler = spoiler;
+	}
+	public Integer getReport_count() {
+		return report_count;
+	}
+	public void setReport_count(Integer report_count) {
+		this.report_count = report_count;
+	}
 	@Override
 	public String toString() {
 		return "ReviewDTO [review_no=" + review_no + ", content_no=" + content_no + ", rating=" + rating + ", user_no="
 				+ user_no + ", review_content=" + review_content + ", review_create_dt=" + review_create_dt
 				+ ", review_mod_dt=" + review_mod_dt + ", comment_cnt=" + comment_cnt + ", user_nicknm=" + user_nicknm
-				+ ", content_nm=" + content_nm + ", thumbnail=" + thumbnail + ", check_like_count=" + check_like_count
-				+ ", like_count=" + like_count + ", image=" + image + ", userDTO=" + userDTO + "]";
+				+ ", user_id=" + user_id + ", content_nm=" + content_nm + ", thumbnail=" + thumbnail
+				+ ", check_like_count=" + check_like_count + ", like_count=" + like_count + ", image=" + image
+				+ ", spoiler=" + spoiler + ", report_count=" + report_count + "]";
 	}
-	
 	@Override
 	public int hashCode() {
-		return Objects.hash(content_no, review_no, user_no);
+		return Objects.hash(content_no, review_no, user_nicknm, user_no);
 	}
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -160,7 +165,10 @@ public class ReviewDTO {
 			return false;
 		ReviewDTO other = (ReviewDTO) obj;
 		return Objects.equals(content_no, other.content_no) && Objects.equals(review_no, other.review_no)
-				&& Objects.equals(user_no, other.user_no);
+				&& Objects.equals(user_nicknm, other.user_nicknm) && Objects.equals(user_no, other.user_no);
 	}
+
+	
+	
 	
 }

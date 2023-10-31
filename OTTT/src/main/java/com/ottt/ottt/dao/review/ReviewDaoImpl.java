@@ -10,6 +10,12 @@ import org.springframework.stereotype.Repository;
 
 import com.ottt.ottt.domain.SearchItem;
 import com.ottt.ottt.dto.CommentDTO;
+import com.ottt.ottt.dto.ContentDirectorDTO;
+import com.ottt.ottt.dto.ContentPosterDTO;
+import com.ottt.ottt.dto.ContentTrailerDTO;
+import com.ottt.ottt.dto.DirectorDTO;
+import com.ottt.ottt.dto.EntertainerDTO;
+import com.ottt.ottt.dto.ReportDTO;
 import com.ottt.ottt.dto.ReviewDTO;
 import com.ottt.ottt.dto.ReviewLikeDTO;
 
@@ -44,6 +50,11 @@ public class ReviewDaoImpl implements ReviewDao {
 		return session.selectOne(namespace+"count",content_no);
 	}
 	@Override
+	public int reviewReport(ReportDTO reportDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return session.insert(namespace + "reviewReport", reportDTO);
+	}
+	@Override
 	public List<ReviewDTO> selectAll(int content_no) throws Exception {
 		
 		return session.selectList(namespace+"selectAll",content_no);
@@ -57,8 +68,9 @@ public class ReviewDaoImpl implements ReviewDao {
 	}
 	@Override
 	public double ratingAvg(Integer content_no) throws Exception {
-		Double average = session.selectOne(namespace + "ratingAvg", content_no);
-		return (average != null) ? average : 0.0;
+		double rating = session.selectOne(namespace + "ratingAvg", content_no) != null ?
+				session.selectOne(namespace + "ratingAvg", content_no) : 0;
+		return rating;
 	}
 	
 	@Override
@@ -135,17 +147,14 @@ public class ReviewDaoImpl implements ReviewDao {
 	}
 	@Override
 	public int selectLikeCount(ReviewLikeDTO dto) throws Exception {
-		// TODO Auto-generated method stub
 		return session.selectOne(namespace+"selectLikeCount", dto);
 	}
 	@Override
 	public int insertLike(ReviewLikeDTO dto) throws Exception {
-		// TODO Auto-generated method stub
 		return session.insert(namespace+"insertLike", dto);
 	}
 	@Override
 	public int deleteLike(ReviewLikeDTO dto) throws Exception {
-		// TODO Auto-generated method stub
 		return session.delete(namespace+"deleteLike", dto);
 	}
 	@Override
@@ -157,13 +166,51 @@ public class ReviewDaoImpl implements ReviewDao {
 	}
 	@Override
 	public int updateReplyReview(ReviewDTO reviewDTO) throws Exception {
-		// TODO Auto-generated method stub
 		return session.update(namespace + "updateReplyReview", reviewDTO);
 	}
 	@Override
 	public int updateReply(CommentDTO CommentDTO) throws Exception {
-		// TODO Auto-generated method stub
 		return session.update(namespace + "updateReply", CommentDTO);
+	}
+	@Override
+	public int replyReport(ReportDTO reportDTO) throws Exception {
+		return session.insert(namespace + "replyReport", reportDTO);
+	}
+	@Override
+	public List<ReviewDTO> likeReviewAll(SearchItem sc) throws Exception {
+		return session.selectList(namespace + "likeReviewAll" , sc);
+	}
+	@Override
+	public int likeReviewCnt(SearchItem sc) throws Exception {
+		return session.selectOne(namespace + "likeReviewCnt", sc);
+	}
+	@Override
+	public List<ReviewDTO> cmtReviewAll(SearchItem sc) throws Exception {
+		return session.selectList(namespace + "cmtReviewAll" , sc);
+	}
+	@Override
+	public int cmtReviewCnt(SearchItem sc) throws Exception {
+		return session.selectOne(namespace + "cmtReviewCnt", sc);
+	}
+	@Override
+	public List<ContentPosterDTO> selectPoster(int content_no) throws Exception {
+		
+		return session.selectList(namespace + "getPostersByContentNo", content_no);
+	}
+	@Override
+	public List<ContentTrailerDTO> selectTrailer(int content_no) throws Exception {
+		
+		return session.selectList(namespace + "getTrailerByContentNo", content_no);
+	}
+	@Override
+	public DirectorDTO selectDirector(int content_no) throws Exception {
+		
+		return session.selectOne(namespace + "getDirectorNM", content_no);
+	}
+	@Override
+	public List<EntertainerDTO> selectEntertainer(int content_no) throws Exception {
+		
+		return session.selectList(namespace + "getEntertainerNM", content_no);
 	}
 
 }

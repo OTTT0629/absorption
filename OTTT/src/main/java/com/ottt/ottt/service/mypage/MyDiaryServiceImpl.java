@@ -40,4 +40,19 @@ public class MyDiaryServiceImpl implements MyDiaryService {
 		return myDiaryDao.delete(content_no, user_no);
 	}
 
+	@Override
+	public int write(MyDiaryDTO myDiaryDTO) throws Exception {
+		return myDiaryDao.insert(myDiaryDTO);
+	}
+
+	@Override
+	public int diaryCnt(Integer content_no, Integer user_no) throws Exception {
+		return myDiaryDao.diaryCnt(content_no, user_no);
+	}
+
+	@Override
+	public List<MyDiaryDTO> getDiaryList(Integer user_no) throws Exception {
+		return myDiaryDao.diaryAll(user_no);
+	}
+
 }

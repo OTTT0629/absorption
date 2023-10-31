@@ -49,4 +49,22 @@ public class MyDiaryDaoImpl implements MyDiaryDao {
 		return session.delete(namespace  + "delete" , map);
 	}
 
+	@Override
+	public int insert(MyDiaryDTO mydiaryDTO) throws Exception {
+		return session.insert(namespace + "insert", mydiaryDTO);
+	}
+
+	@Override
+	public int diaryCnt(Integer content_no, Integer user_no) throws Exception {
+		Map map = new HashMap();
+		map.put("content_no", content_no);
+		map.put("user_no", user_no);
+		return session.selectOne(namespace + "diaryCnt", map);
+	}
+
+	@Override
+	public List<MyDiaryDTO> diaryAll(Integer user_no) throws Exception {
+		return session.selectList(namespace + "diaryAll", user_no);
+	}
+
 }

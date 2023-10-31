@@ -21,52 +21,13 @@
 </head>
 <body style="background-color: #202020;">
 	<div class="wrap">
-		<header>
-			<div class="logo">
-				 <a href="<c:url value="/" />">
-            <img src="${path}/resources/images/logo/OTTT.png" alt="로고">
-          </a>
-        </div>
-        <nav class="gnb">
-          <ul>
-            <li>
-              <a href="<c:url value="/genre/movie" />">영화</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/drama" />">드라마</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/interest" />">예능</a>
-            </li>
-            <li>
-              <a href="<c:url value="/genre/animation" />">애니</a>
-            </li>
-            <li>
-              <a href="<c:url value="/community/freecommunity" />">게시판</a>
-            </li>
-          </ul>
-        </nav>
-        <div class="h-icon">
-          <ul>
-            <li>
-              <a href="<c:url value='/search' />">
-                <!-- <img src="./images/icon/search02.png" alt="검색"> -->
-              </a>
-            </li>
-            <li>
-              <a href="<c:url value='/mypage' />">
-                <!-- <img src="./images/icon/user01.png" alt="내 정보"> -->
-              </a>
-            </li>
-          </ul>
-        	</div>
-		</header>
+		<%@ include file="../fix/header.jsp" %>
 		
 		<section class="sec00">
 			<form method="post" action="<c:url value='/signin/addInfo' />" id="membership">
 				<h1 style="font-size: 21px; display: inline-block;">필수 정보 입력</h1>
 				<div class="name">
-					<input type="email" id="name" title="NM" maxlength="20" placeholder="이름" >
+					<input type="email" id="name" title="name" maxlength="20" placeholder="이름" >
 						<span>
 							<select name="성별">
 								<option value="">선택</option>
@@ -77,7 +38,7 @@
 						</span>
 					
 					<div class="nname">
-						<input type="text" id="nname" title="NNM" maxlength="10"  placeholder="닉네임" >
+						<input type="text" id="nname" title="nickname" maxlength="10"  placeholder="닉네임" >
 					</div>
 				</div>
 				

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -26,7 +27,7 @@ import com.ottt.ottt.dto.SearchWordDTO;
 import com.ottt.ottt.dto.WishlistDTO;
 import com.ottt.ottt.service.content.ContentService;
 import com.ottt.ottt.service.content.SearchWordService;
-import com.ottt.ottt.service.content.WishlistService;
+import com.ottt.ottt.service.mypage.WishlistService;
 
 @Controller
 public class SearchController {
@@ -64,17 +65,19 @@ public class SearchController {
 		return "/search/search";
 	}
 	
-	@GetMapping("/searchList")
+	@RequestMapping("/searchList")
 	public String searchList(@RequestParam(value="content_nm", required = false) String content_nm,
 							 @RequestParam(value="ott_no", required = false) List<Integer> ott_no,
 							 @RequestParam(value="genre_no", required = false) List<Integer> genre_no,
 							 @RequestParam(value="category_no", required = false) List<Integer> category_no,
 							 @RequestParam(value="option", required = false) String option,
-			/* @RequestParam(value="page", required = false) Integer page, */
 							 Model m, SearchItem sc, HttpSession session) {
 		
 		sc.setPageSize(24);
-		/* sc.setPage(page); */
+		sc.setContent_nm(content_nm);
+		sc.setOtt_no(ott_no);
+		sc.setGenre_no(genre_no);
+		sc.setCategory_no(category_no);
 		
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 		searchMap.put("content_nm", content_nm);
@@ -114,61 +117,9 @@ public class SearchController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "/genre/index";
+		return "/content/index";
 	}
 	
-	@PostMapping("/searchList")
-	public String searchOptionList(@RequestParam(value="content_nm", required = false) String content_nm,
-			 @RequestParam(value="ott_no", required = false) List<Integer> ott_no,
-			 @RequestParam(value="genre_no", required = false) List<Integer> genre_no,
-			 @RequestParam(value="option", required = false) String option,
-			 @RequestParam(value="category_no", required = false) List<Integer> category_no,
-			/* @RequestParam(value="page", required = false) Integer page, */
-			 Model m, SearchItem sc, HttpSession session) {
-		
-		sc.setPageSize(24);
-		/* sc.setPage(page); */
-		
-		Map<String, Object> searchMap = new HashMap<String, Object>();
-		searchMap.put("content_nm", content_nm);
-		searchMap.put("ott_no", ott_no);
-		searchMap.put("genre_no", genre_no);
-		searchMap.put("category_no", category_no);
-		searchMap.put("SearchItem", sc);		
-		searchMap.put("option", option);
-
-		try {
-			
-			if(session.getAttribute("id") != null && content_nm != null) {
-				searchWordService.putSearchWord((int)session.getAttribute("user_no"), content_nm);
-			}
-			
-			List<ContentDTO> searchList = contentService.getSearchSelect(searchMap);
-			    
-			int totalCount = contentService.getSearchTotalCount(searchMap);
-			PageResolver pageResolver = new PageResolver(totalCount, sc);
-			m.addAttribute("searchList", searchList);
-			m.addAttribute("pr", pageResolver);
-			
-			Map<Integer, List<ContentOTTDTO>> map = new HashMap<Integer, List<ContentOTTDTO>>();
-			for(ContentDTO contentDTO : searchList) {				
-				List<ContentOTTDTO> ottList = contentService.getOttImg(contentDTO.getContent_no());
-				map.put(contentDTO.getContent_no(), ottList);
-			}
-			m.addAttribute("ottList", map);
-			
-			if(session.getAttribute("no") != null) {
-				Integer user_no = (Integer) session.getAttribute("no");
-				List<WishlistDTO> wishList = wishlistService.getWishlist(user_no);
-				m.addAttribute("wishList", wishList);
-			}
-	
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return "/genre/index";
-	}
 	
 	@PatchMapping("/searchjjim")
 	@ResponseBody

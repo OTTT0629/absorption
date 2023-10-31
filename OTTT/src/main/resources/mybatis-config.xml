@@ -22,6 +22,18 @@
 		<typeAlias type="com.ottt.ottt.dto.SearchWordDTO" alias="SearchWordDTO"/>
 		<typeAlias type="com.ottt.ottt.dto.ReviewLikeDTO" alias="ReviewLikeDTO"/>
 		<typeAlias type="com.ottt.ottt.dto.GenreDTO" alias="GenreDTO"/>
+		<typeAlias type="com.ottt.ottt.dto.WatchedDTO" alias="WatchedDTO"/>
+		<typeAlias type="com.ottt.ottt.dto.ReportDTO" alias="ReportDTO"/>
+		<typeAlias type="com.ottt.ottt.dto.EndServiceDTO" alias="EndServiceDTO"/>
+		<typeAlias type="com.ottt.ottt.dto.CategoryDTO" alias="CategoryDTO"/>
+  		<typeAlias type="com.ottt.ottt.dto.ContentGenreDTO" alias="ContentGenreDTO"/>
+  		<typeAlias type="com.ottt.ottt.dto.ContentCategoryDTO" alias="ContentCategoryDTO"/>
+  		<typeAlias type="com.ottt.ottt.dto.FollowDTO" alias="FollowDTO"/>
+		<typeAlias type="com.ottt.ottt.dto.ContentPosterDTO" alias="ContentPosterDTO"/>
+  		<typeAlias type="com.ottt.ottt.dto.ContentTrailerDTO" alias="ContentTrailerDTO"/>
+  		<typeAlias type="com.ottt.ottt.dto.DirectorDTO" alias="DirectorDTO"/>
+  		<typeAlias type="com.ottt.ottt.dto.EntertainerDTO" alias="EntertainerDTO"/>
+  		<typeAlias type="com.ottt.ottt.dto.NotificationDTO" alias="NotificationDTO"/>
   	</typeAliases>
   </configuration>
   

@@ -256,3 +256,15 @@ header{
     height: 30px;
     margin-right: 10px;
 }
+
+.admin {
+    margin-top: 10px;
+    width: 100px;
+    height: 30px;
+    background-color: #0B0C0B;
+    text-align: center;
+    line-height: 27px;
+    position: absolute;
+    top: 60%;
+    right: 100px;
+}

@@ -18,77 +18,72 @@
 		<%@ include file="../../fix/header.jsp" %>
 
 		<section class="sec01">
-			<nav class="mnb">
-				<ul>
-					<li>
-						<a href="<c:url value="/mypage/myreview" />" class="mreview">기록</a>
-					</li>
-					<li>
-					    <a href="<c:url value="/mypage/wishlist" />">찜목록</a>
-					</li>
-					<li>
-					    <a href="<c:url value="/mypage/watched" />">봤어요</a>
-					</li>
-					<li>
-					  	<a href="<c:url value="/mypage/alarm" />">알림함</a>
-					</li>
-					<li>
-					  	<a href="<c:url value="/mypage/message" />">쪽지함</a>
-					</li>
-				</ul>
-            </nav>
+			<c:choose>
+				<c:when test="${userChk eq true }"><%@ include file="../../fix/mnb.jsp" %></c:when>
+				<c:otherwise><%@ include file="../../fix/mnb2.jsp" %></c:otherwise>
+			</c:choose>
 		</section>
 
 		<section class="sec02">
 			<div class="main">
 				<div class="blank"></div>
 				<form action="" id="diary-main">
-					<input type="hidden" name="content_no" value="${myDiaryDTO.content_no }"/>
-					<input type="hidden" name="user_no" value="${myDiaryDTO.user_no }"/>
+					<input type="hidden" name="content_no" 
+							value="${mode== 'new' ? contentDTO.content_no : myDiaryDTO.content_no }"/>
+					<input type="hidden" name="user_no" 
+							value="${mode== 'new' ? sessionScope.user_no : myDiaryDTO.user_no }"/>
 					<div class="l-main">
-						<img class="poster" src="${myDiaryDTO.thumbnail }" >
-						<input type="hidden" name="thumbnail" value="${myDiaryDTO.thumbnail }"/>
+						<img class="poster" src="${myDiaryDTO.thumbnail == null ? contentDTO.thumbnail : myDiaryDTO.thumbnail }" >
+						<input type="hidden" name="thumbnail" 
+							value="${myDiaryDTO.thumbnail == null ? contentDTO.thumbnail : myDiaryDTO.thumbnail }"/>
+						
+						<div class="lBot">
+							<button id="listBtn" class="btn-write" type="button" >뒤로</button>
+						</div>
 					</div>
+					
 					
 					<div class="c-main">
 						<div class="c-title">
 							<input class="diary-title" readonly="readonly" name="content_nm" type="text"
-								value="${myDiaryDTO.content_nm }" />
+								value="${myDiaryDTO.content_nm == null ? contentDTO.content_nm : myDiaryDTO.content_nm}" />
+								
 						</div>
 						<div class="diary">
 							<label for="story"></label>
 							<textarea id="story" name="mydiary_content"
 								${mode=="new" ? "" : "readonly='readonly'" }
-							 spellcheck="false">${myDiaryDTO.mydiary_content }</textarea>
+							 spellcheck="false">${mode== 'new' ? '' : myDiaryDTO.mydiary_content }</textarea>
 						</div>
 					</div>
 					
 					<div class="r-main">
 						<div class="rTop">
-							<fieldset class="pnp-button">
-								<input type="radio" id="pub"
-								 name="public_yn_cd" value="1"
-								 ${myDiaryDTO.public_yn_cd.toString()=='1' ? "checked" : "" }>
-								<label for="pub">전체 공개</label><br>
-								
-			                    <input type="radio" id="Npub"
-			                    name="public_yn_cd" value="0"
-			                    ${myDiaryDTO.public_yn_cd.toString()=='0' ? "checked" : "" }>
-			                    <label for="Npub">비공개</label><br>
-	
-			                    <input type="radio" id="Fpub"
-			                    name="public_yn_cd" value="2"
-			                    ${myDiaryDTO.public_yn_cd.toString()=='2' ? "checked" : "" }>
-			                    <label for="Fpub">팔로워</label><br>
-	                		</fieldset>
+							<c:if test="${sessionScope.user_no eq myDiaryDTO.user_no || mode == 'new'}">
+								<fieldset class="pnp-button" >
+									<input type="hidden" id="pub" name="public_yn_cd" value="1" style="display: none">
+									<label for="pub">전체 공개</label><br>
+									
+				                    <input type="hidden" id="Npub" name="public_yn_cd" value="0" style="display: none">
+				                    <label for="Npub" >비공개</label><br>
+				                    
+				                    <input type="hidden" id="Fpub" name="public_yn_cd" value="2" style="display: none">
+				                    <label for="Fpub" >팔로워</label><br>
+				                    
+		                		</fieldset>
+	                		</c:if>
 						</div>
 						
 						<div class="rBot">
-							<c:if test="${sessionScope.user_no eq myDiaryDTO.user_no}">
-								<button id="writeBtn" class="btn-write" type="button" >수정</button>
-								&nbsp;/&nbsp;
-								<button id="removeBtn" class="btn-write" type="button" >삭제</button>
+							<c:if test="${mode == 'new' }">
+								<button id="writeBtn" class="btn-write" type="button" >등록</button>
 							</c:if>
+							
+							<c:if test="${sessionScope.user_no eq myDiaryDTO.user_no && mode != 'new'}">
+								<button id="modBtn" class="btn-write" type="button" >수정</button>
+								&nbsp;/&nbsp;
+								<button id="removeBtn" class="btn-write" type="button" >삭제</button>								
+							</c:if>								
 						</div>
 					</div>
 				</form>
@@ -98,24 +93,80 @@
 	 
 	<script type="text/javascript">
 	 	$(document).ready(function() {
+	 		
+	 		let inputs = document.querySelectorAll('input[name="public_yn_cd"]');
 
-	 		$('#writeBtn').on('click', function() {
-	 			let form = $('#diary-main')
-	 			
+	 		// 선택된 input 요소에 대해 반복문 실행
+	 		inputs.forEach(function(input) {
+		 	  	if (input.value === '${myDiaryDTO.public_yn_cd}') {
+		 	    	input.checked = true
+		 	    	document.querySelector('label[for="' + input.id + '"]').style.color = '#33ff33';
+		 	   	}
+	 		});	 		
+	 		
+ 			let isMode = function() {
+ 				let mode = '${mode}'
+ 				
+ 				if(mode == 'new') {
+ 					$(".pnp-button").attr('disabled',false)
+ 					$(".pnp-button input").attr('type', 'radio')
+ 					$(".pnp-button input").css('display', '');
+ 					$("#pub").attr("checked",true)
+ 				}
+ 					
+ 			}
+ 			
+ 			isMode()
+ 			
+ 			$('#writeBtn').on('click', function() {
+ 				let form = $("#diary-main")
+				form.attr("action", "<c:url value='/mypage/mydiary/write' />")
+				form.attr("method", "post")
+				
+				if(formCheck()) {
+					form.submit()
+				}
+				
+			})
+			
+			let formCheck = function() {
+    			let form = document.getElementById("diary-main")
+    			
+    			if(form.mydiary_content.value=="") {
+    				alert("내욜 입력해 주세요.")
+    				form.mydiary_content.focus();
+    				return false;
+    			}    			
+    			
+    			return true;
+			}
+	 		
+	 		$('#listBtn').on('click', function name() {
+	 			location.href = '<c:url value="/mypage/mydiary${searchItem.list}" />'
+			})
+
+	 		$('#modBtn').on('click', function() {
+	 			let form = $('#diary-main')	 			
 	 			let isReadonly = $("textarea[name=mydiary_content]").attr('readonly')
 	 			
 	 			//수정상태 변환
 	 			if(isReadonly == 'readonly') {
-	 				$("textarea[name=mydiary_content]").attr('readonly', false)
-	 				$("#writeBtn").html('등록')
+	 				$("textarea[name=mydiary_content]").attr('readonly', false);
+	 				
+	 				let inputs = document.querySelectorAll('input[name="public_yn_cd"]');
+	 				inputs.forEach(function(input) {
+	 					input.type = 'radio';
+	 					input.style.display = ''
+ 					});
+	 				
+	 				$("#modBtn").html('등록')
 	 				$("#removeBtn").html('취소')
 	 				return;
 	 			}
 	 			
 	 			if (!confirm("수정하시겠습니까?")) return;
-	 			alert("수정되었습니다")
 	 			
-	 			form.attr("action", "<c:url value='/mypage/mydiary/modify${searchItem.string}' />")
+	 			form.attr("action", "<c:url value='/mypage/mydiary/modify${searchItem.string}&page=${searchItem.page}' />")
 	 			form.attr("method", "post")
 	 			
 	 			
@@ -131,9 +182,7 @@
 	 			let isReadonly = $("textarea[name=mydiary_content]").attr('readonly')
 	 			
 	 			if(isReadonly != 'readonly') {
-	 				form.attr("action", "<c:url value='/mypage/mydiary/diary${searchItem.string}' />")
-		 			form.attr("method", "post")
-		 			form.submit()
+	 				location.href = "<c:url value='/mypage/mydiary/diary?user=${myDiaryDTO.user_nicknm}&content=${myDiaryDTO.content_no}' />";
 		 			
 		 			return false;
 	 			}
@@ -167,7 +216,9 @@
     	let msg = "${msg}"
     	if(msg == "WRT_ERR") alert("다이어리 등록에 실패했습니다. 다시 시도해 주세요")
     	if(msg == "MOD_ERR") alert("다이어리 수정에 실패했습니다. 다시 시도해 주세요")
-    	if(msg == "DEL_ERR") alert("다이어리 삭제에 실패했습니다. 다시 시도해 주세요") 	
+    	if(msg == "DEL_ERR") alert("다이어리 삭제에 실패했습니다. 다시 시도해 주세요")
+    	if(msg == "MOD_OK") alert("다이어리 수정에 성공했습니다")
+    	if(msg == "DEL_OK") alert("다이어리 삭제에 성공했습니다")
     </script>
 	 
 

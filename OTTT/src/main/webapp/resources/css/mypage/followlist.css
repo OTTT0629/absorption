@@ -66,42 +66,6 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
     padding-left: 2rem;
 }
 
-.h-icon > ul > li:first-child > a{
-    background:url("../../images/icon/search02.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 32px;
-    width: 32px;
-    height: 32px;
-}
-
-.h-icon > ul > li:last-child > a{
-    background:url("../../images/img/profile.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 32px;
-    width: 32px;
-    height: 32px;
-}
-
-.h-icon > ul > li:first-child > a:hover{
-    background: url("../../images/icon/search-h.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 32px;
-    width: 32px;
-    height: 32px;
-}
-
-/* .h-icon > ul > li:last-child > a:hover{
-    background: url("../images/icon/user-h.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 32px;
-    width: 32px;
-    height: 32px;
-} */
-
 #line-1 {
     width: 1200px;
     background-color: transparent;
@@ -142,29 +106,12 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
     clear:both; 
     display:block;}
 
-.search{
-        border: solid 1px black;
-        height: 40px;
-        border: 0;
-        border-radius: 15px;
-    }
-
-.searchicon{
-    position: relative;
-    left: 170px;
-    bottom: 37px;
-}
-
-.searchicon img{width: 35px;}
-
 .set-img {
     width: 60px;
     height: 60px;
     position: relative;
     border: none;
 }
-
-
 
 .sec01{
     width: 1200px;
@@ -175,92 +122,25 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
     box-sizing: border-box;
     margin-top: 20px;
     margin-bottom: 20px;
+    border-bottom: 2px solid #33ff33;
 }
 
-
 .sec02{
-    width: 650px;
+    width: 1000px;
     height: auto;
     margin: 0 auto;
-    display: flex;
-    margin-top: 20px;
+    margin-top: 25px;
+    text-align: center;
     /* background-color: #0B0C0B; */
 }
 
-.line-green{
-    width: 1200px;
-    height: auto;
-    margin: 0 auto;
-    display: flex;
-    border: 1px solid #33ff33;
-    box-sizing: border-box;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-.mymenu  {
-    font-size: 30px;
-    display: flex;
-    flex-direction: column;
- 
-}
-
-.mycontent {
-    margin: 0px;
-    width: 1000px;
-    height: 300px;
-    border-bottom: 1px solid #33ff33;
-    box-sizing: border-box;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    
-}
-
-.mycontent > ul {
-    margin-left: 10px;
-    
-}
-
-.mycontent > ul > li {
-    margin-top: 70px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.mypost {
-    margin: 0px;
-    width: 1000px;
-    height: 300px; 
-    position: relative;
-    display: flex;
-    flex-direction: column;
-}
-
-.mypost > ul {
-    margin-left: 10px;
-
-}
-
-.mypost > ul > li {
-    margin-top: 40px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-.mimg {
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
-}
 .mypage-info {
     display: flex;
     width: 1200px;
     height: 130px;
-    /* border: 1px solid red; */
     box-sizing: border-box;
     margin: 0 auto;
+    margin-bottom: 20px;
     position: relative;
     display: flex;
 }
@@ -295,30 +175,15 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
 
 }
 
-.alarm-1-1{
-    width: 125px;
-    height: 125px;
-}
-
 .profile{
     border-radius: 10px
-}
-
-.notice{
-    /* border-top: 20px; */
-    display: inline-block;
-    position: relative;
-    bottom: 45px;
-    left: 100px;
-    font-size: 20px;
-    width: 600px;
-    height: auto; 
 }
 
 .btn_more_div{
     display: inline-block;
     position: relative;
-    left: 885px;
+    left: 846px;
+    top: 10px;
 }
 
 .btn_more{
@@ -330,53 +195,20 @@ header{ width: 1200px; height: 130px;box-sizing: border-box;margin: 0 auto;posit
     background-color: #fff;
 }
 
-ul{
-    padding: 0;
-    list-style: none;
-}
-
-.form-check{
-    font-size: 25px;
-}
-
-.btn-outline-primary {
-    border-color: #33ff33;
-    color: #ffffff;
-    background-color: transparent;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    font-weight: bold;
-}
-
-.btn-outline-primary:active {
-    border-color: #33ff33;
-    color: #33FF33;
-    background-color: transparent;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    font-weight: bold;
-}
-
-
-.push{
+.follow{
     width: 800px;
     height: auto;
     margin: auto;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    position: relative;
 }
 
-.push-alarm{
-    width: 440px;
-    height: 30px;
+.follow-nm{
     /* border: 1px solid red; */
     font-size: 23px;
-    margin-top: 17px;
-    margin-left: 20px;
-}
-
-.push-alarm p{
-    display: flex;
-    justify-content: flex-end;
-    font-weight: bold;
+    margin-left: 40px;
 }
 
 .alarm-1-1 {
@@ -394,32 +226,71 @@ ul{
     border-radius: 10px;
 }
 
-
-.btn-delete {
-    width: 50px;
-    height: 50px;
+.user-follow {
+    margin-top: 35px;
+    margin-left: 10px;
+    font-size: 20px;
     display: flex;
-    margin: 25px 0px 0px 25px;
-    background-color: transparent;
-    text-align: center;
-    padding-left: 0px;
-    border: none;
+    flex-direction: row;
 }
 
-.btn_delete_div{
-    display: inline-block;
-    position: relative;
-    bottom: 30px;
-    left: 160px;
+.fol-pro {
+	height: 75px;
+	width: 75px; 
 }
 
-.btn-outline-primary {
-    border-color: #33FF33;
-    --bs-btn-active-color: #202020;
-    --bs-btn-active-bg: #33FF33;
-    --bs-btn-active-border-color: #33FF33;
-    --bs-btn-hover-border-color:  #33FF33;
-    --bs-btn-color: #33FF33;
-    --bs-btn-border-color: #33FF33;
+.nofollow {
+	width: 100%;
+	font-size: 22px;
+}
 
+.checkfollow {
+	width:13px;
+	height: 13px;
+	display: none;
+	position: absolute;
+    right: 5px;
+}
+
+.labelfollow {
+	width: 80px;
+	height: 40px;
+	padding: 6px 12px;
+	color: black;
+	border-radius: 5px;
+	background-color: #33ff33;
+    font-weight: bold;
+    position: absolute;
+    right: 5px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.labelCxlfollow {
+	width: 80px;
+	height: 40px;
+	padding: 6px 12px;
+	color: #fff;
+	border: 1px solid #33ff33;
+	border-radius: 5px;
+	background-color: #202020;
+    font-weight: bold;
+    position: absolute;
+    right: 5px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.labelCxlfollow:hover {
+	color: #33ff33;
+}
+
+.btn_check_div {
+	position: absolute;
+	right: 0px;
+	top: 60%;
+}
+
+.user-follow > span {
+	cursor: pointer;
 }

@@ -127,13 +127,7 @@
     	<%@ include file="../../fix/header.jsp" %>
 
         <div id="line-1" >
-          <nav class="nav">
-          <a class="nav-link1" href="<c:url value='/community/freecommunity' />">자유게시판</a>
-          <a class="nav-link1" href="<c:url value='/community/endmovie/tving' />">종료예정작</a>
-          <a class="nav-link1" href="<c:url value='/community/priceInfoTving' />">가격정보</a>
-          <a class="nav-link1" href="<c:url value='/community/QnA' />" style="color: #33ff33;">Q&A</a>
-          <a class="nav-link1" href="<c:url value='/community/notice' />">공지사항</a>
-        </nav>
+          <%@ include file="../../fix/nav.jsp" %>
         </div>
 
 		<script type="text/javascript">
@@ -202,7 +196,7 @@
 				
 				$.ajax({
 					type: 'post',
-					url: '/ottt/community/QnA/QnAcomments?article_no='+article_no,
+					url: '/community/QnA/QnAcomments?article_no='+article_no,
 					headers: {"content-type":"application/json"},
 					data: JSON.stringify({article_no:article_no, cmt_content:cmt_content}),
 					success: function(result){
@@ -240,7 +234,7 @@
 			let showList = function(article_no){
 				$.ajax({
 					type: 'GET',
-					url: '/ottt/community/QnA/QnAcomments?article_no='+article_no,
+					url: '/community/QnA/QnAcomments?article_no='+article_no,
 					success: function(result) {
 						if(result && result.length > 0){
 							$("#commentList").html(toHtml(result))
@@ -297,7 +291,7 @@
 				}
 				$.ajax({
 					type: 'DELETE',							//요청메서드
-					url: '/ottt/community/QnA/QnAcomments/' + cmt_no + '?article_no=' + article_no,	//요청URI
+					url: '/community/QnA/QnAcomments/' + cmt_no + '?article_no=' + article_no,	//요청URI
 					success: function(result) {				//서버로부터 응답이 도착하면 호출될 함수
 						$('#Modal').modal('show')	
 						$(".body").html("삭제되었습니다.");//result는 서버가 전송한 데이터
@@ -330,7 +324,7 @@
 				
 				$.ajax({
 					type: 'PATCH',
-					url: '/ottt/community/QnA/QnAcomments/'+cmt_no,
+					url: '/community/QnA/QnAcomments/'+cmt_no,
 					headers: {"content-type":"application/json"},
 					data: JSON.stringify({cmt_no:cmt_no, cmt_content:cmt_content}),
 					success: function(result) {

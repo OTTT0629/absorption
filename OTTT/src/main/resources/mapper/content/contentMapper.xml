@@ -6,7 +6,7 @@
   <mapper namespace="com.ottt.ottt.controller.ContentMapper">
 
   <select id="select" parameterType="int" resultType="ContentDTO">
-  	SELECT content_no, content_nm, content_info, content_runtime, main_img, age, country
+  	SELECT content_no, content_nm, content_info, content_runtime, main_img, age, country, thumbnail
   	,(SELECT round(avg(a.rating)) FROM tb_review a join tb_content b on a.content_no = b.content_no) as rating 
 	FROM tb_content
 	where content_no = #{content_no}
@@ -21,69 +21,150 @@
 		order by rating desc
 		limit 14
   </select>
+
+  <select id="jjimSelect" resultType="ContentDTO">
+	SELECT a.content_no, a.content_nm, a.thumbnail,
+	       COALESCE((SELECT ROUND(AVG(c.rating))/2 FROM tb_review c WHERE c.content_no = a.content_no), 0) AS rating,
+	       COUNT(d.content_no) AS jjimcount
+	FROM tb_content a
+	FULL OUTER JOIN tb_review c ON a.content_no = c.content_no
+	FULL OUTER JOIN tb_wishlist d ON a.content_no = d.content_no
+	group  by a.content_no 
+	ORDER BY jjimcount DESC
+	LIMIT 14  
+  </select>
+
+   <select id="watchedSelect" resultType="ContentDTO">
+	SELECT a.content_no, a.content_nm, a.thumbnail,
+	       COALESCE((SELECT ROUND(AVG(c.rating))/2 FROM tb_review c WHERE c.content_no = a.content_no), 0) AS rating,
+	       COUNT(d.content_no) as watchedcount
+	FROM tb_content a
+	FULL OUTER JOIN tb_review c ON a.content_no = c.content_no
+	FULL OUTER JOIN tb_watched d ON a.content_no = d.content_no
+	group  by a.content_no 
+	ORDER BY watchedcount desc, rating desc
+	LIMIT 14  
+  </select>
+
+  <select id="recomSelect" resultType="ContentDTO" parameterType="int">
+	select distinct a.content_no, a.thumbnail, 
+		COALESCE((SELECT ROUND(AVG(f.rating))/2 FROM tb_review f WHERE f.content_no = a.content_no), 0) AS rating
+	FROM tb_content a
+	full OUTER join tb_content_genre b on a.content_no = b.content_no 
+	full OUTER join tb_user_genre c on b.genre_no = c.genre_no 
+	full OUTER join tb_content_ott d on a.content_no = d.content_no 
+	full OUTER join tb_user_ott e on d.ott_no = e.ott_no 
+	FULL OUTER JOIN tb_review f ON a.content_no = f.content_no
+	where c.user_no = #{user_no} and e.user_no = #{user_no}
+	order by rating desc, content_no desc
+	limit 14   
+  </select>
   
 	<select id="ottNameSelect" parameterType="int" resultType="ContentOTTDTO">
 		SELECT a.content_no, b.ott_img 
 		FROM tb_content_ott a
 		JOIN tb_ott b ON a.ott_no = b.ott_no
-		where a.content_no = #{content_no}	
+		where a.content_no = #{content_no}
 	</select>
 	
-	<select id="movieSelect" parameterType="SearchItem" resultType="ContentDTO">
+	<select id="contentSelect" parameterType="SearchItem" resultType="ContentDTO">
 		SELECT distinct a.content_no, a.content_nm, a.thumbnail
-		,coalesce((select round(avg(d.rating))/2 FROM tb_review d where d.content_no = a.content_no),0) as rating  
-		FROM tb_content a JOIN tb_content_category b 
-		ON a.content_no = b.content_no 
-		JOIN tb_category c
-		ON b.category_no = c.category_no
-		full outer join tb_review d 
-		on a.content_no = d.content_no 
-		where b.category_no = 1
-		order by a.content_no desc
+		,coalesce((select round(avg(d.rating))/2 
+					FROM tb_review d
+					where d.content_no = a.content_no),0) as rating
+		FROM tb_content a
+		JOIN tb_content_category b 
+		ON a.content_no = b.content_no
+		full outer join tb_review c
+		on a.content_no = c.content_no
+		join tb_content_ott d
+		on a.content_no = d.content_no
+		<if test="category != null and category != 'interest' ">		
+			join tb_content_genre e
+			on a.content_no = e.content_no
+		</if>
+		 
+		where b.category_no =
+		<if test="category != null and category == 'movie' ">
+		1
+		</if>
+		
+		<if test="category != null and category == 'drama' ">
+		2
+		</if>
+		
+		<if test="category != null and category == 'interest' ">
+		3
+		</if>
+				
+		<if test="category != null and category == 'animation' ">
+		4
+		</if>		
+		 
+		<if test="ott_no != null">
+			and d.ott_no in <foreach item="ott_no" collection="ott_no" open="(" close=")" separator="," >
+								#{ott_no}
+							</foreach>
+		</if>
+		<if test="genre_no != null">
+			and e.genre_no  in <foreach item="genre_no" collection="genre_no" open="(" close=")" separator="," >
+									#{genre_no}
+								</foreach>
+		</if>
+		
+		<choose>
+			<when test="option == 'rating'">
+				order by rating desc
+			</when>
+			<otherwise>
+				order by a.content_no desc
+			</otherwise>
+		</choose>
 		limit #{pageSize} offset #{offset}
   	</select>
   	
-  	<select id="movieCount" parameterType="SearchItem" resultType="int">
-  		select count(*) 
-		from tb_content a
-		FROM tb_content a JOIN tb_content_category b 
-		ON a.content_no = b.content_no 
-		where b.category_no = 1
-  	</select>
-  	
-  	<!-- <select id="searchSelect" parameterType="map" resultType="ContentDTO">
-		SELECT a.content_no, a.content_nm, a.country, a.rating, a.thumbnail 
+  	<select id="contentCount" parameterType="SearchItem" resultType="int">
+  		SELECT count(distinct a.content_no)
 		FROM tb_content a
-		JOIN tb_content_genre c ON a.content_no = c.content_no
-		JOIN tb_content_ott d ON a.content_no = d.content_no
-		JOIN tb_content_category f ON a.content_no = f.content_no
-		WHERE 
-		<if test="content_nm != null and !content_nm.isEmpty()">
-			a.content_nm LIKE CONCAT('%', #{content_nm}, '%') 		
-		</if> 
-		<if test="(content_nm != null and !content_nm.isEmpty()) and ((ott_no != null and !ott_no.isEmpty()) || (gerne_no != null and !gerne_no.isEmpty()) || (category_no != null and !category_no.isEmpty()))">
-			and
+		JOIN tb_content_category b 
+		ON a.content_no = b.content_no
+		full outer join tb_review c
+		on a.content_no = c.content_no
+		join tb_content_ott d
+		on a.content_no = d.content_no
+		<if test="category != null and category != 'interest' ">		
+			join tb_content_genre e
+			on a.content_no = e.content_no
 		</if>
-		   <if test="ott_no != null and !ott_no.isEmpty()">		   		 
-		   		<foreach collection="ott_no" item="ottno" separator="," open="(" close=")">
-		   			d.ott_no in #{ottno} or
-		   		</foreach>		   
-		   </if>
-		   <if test="gerne_no != null and !gerne_no.isEmpty()">		   		
-		   		<foreach collection="gerne_no" item="gerneno" separator="," open="(" close=")">
-		   			c.genre_no in #{gerneno} or 
-		   		</foreach>		   
-		   </if>
-		   <if test="category_no != null and !category_no.isEmpty()">		   		 
-		   		<foreach collection="category_no" item="categoryno" separator="," open="(" close=")">
-		   			f.category_no in #{categoryno} or
-		   		</foreach>		   
-		   </if>		   
-		group by a.content_no  
-		<include refid="searchOption" />	
-		limit #{SearchItem.pageSize} offset #{SearchItem.offset}	
-  	</select> -->
-  	
+		where b.category_no = 
+		<if test="category != null and category == 'movie' ">
+		1
+		</if>
+		
+		<if test="category != null and category == 'drama' ">
+		2
+		</if>
+		
+		<if test="category != null and category == 'interest' ">
+		3
+		</if>
+		
+		<if test="category != null and category == 'animation' ">
+		4
+		</if>
+		
+		<if test="ott_no != null">
+			and d.ott_no in <foreach item="ott_no" collection="ott_no" open="(" close=")" separator="," >
+								#{ott_no}
+							</foreach>
+		</if>
+		<if test="genre_no != null">
+			and e.genre_no  in <foreach item="genre_no" collection="genre_no" open="(" close=")" separator="," >
+									#{genre_no}
+								</foreach>
+		</if>
+  	</select>
+  	  	
   	<select id="searchSelect" parameterType="map" resultType="ContentDTO">
 	    SELECT distinct a.content_no, a.content_nm, a.thumbnail
 		,coalesce((select round(avg(d.rating))/2 FROM tb_review d where d.content_no = a.content_no),0) as rating 
@@ -142,35 +223,6 @@
   		</choose>  	
   	</sql>
   	
-  	<!-- <select id="searchCount" parameterType="map" resultType="int">
-		SELECT COUNT(DISTINCT a.content_no)
-		FROM tb_content a
-		JOIN tb_content_genre c ON a.content_no = c.content_no
-		JOIN tb_content_ott d ON a.content_no = d.content_no
-		JOIN tb_content_category f ON a.content_no = f.content_no
-		WHERE 
-		<if test="content_nm != null and !content_nm.isEmpty()">
-			a.content_nm LIKE CONCAT('%', #{content_nm}, '%')  		
-		</if> 
-		<if test="(content_nm != null and !content_nm.isEmpty()) and ((ott_no != null and !ott_no.isEmpty()) || (gerne_no != null and !gerne_no.isEmpty()) || (category_no != null and !category_no.isEmpty()))">
-			and
-		</if>
-		   <if test="ott_no != null and !ott_no.isEmpty()">		   		  
-		   		<foreach collection="ott_no" item="ottno" separator="," open="(" close=")">
-		   			d.ott_no in #{ottno} or
-		   		</foreach>   
-		   </if>
-		   <if test="gerne_no != null and !gerne_no.isEmpty()">		   		 
-		   		<foreach collection="gerne_no" item="gerneno" separator="," open="(" close=")">
-		   			c.genre_no in #{gerneno} or
-		   		</foreach>		   
-		   </if>
-		   <if test="category_no != null and !category_no.isEmpty()">		   		 
-		   		<foreach collection="category_no" item="categoryno" separator="," open="(" close=")">
-		   			f.category_no in #{categoryno} or
-		   		</foreach>		   
-		   </if>		   
-	</select> -->
 	<select id="searchCount" parameterType="map" resultType="int">
 	    SELECT COUNT(DISTINCT a.content_no)
 	    FROM tb_content a

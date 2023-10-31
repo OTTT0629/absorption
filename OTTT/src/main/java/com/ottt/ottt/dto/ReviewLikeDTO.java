@@ -13,8 +13,8 @@ import java.util.Objects;
 public class ReviewLikeDTO {
 
 	private Integer review_like_no;
-	private int review_no;
-	private int user_no;
+	private Integer review_no;
+	private Integer user_no;
 	
 	public ReviewLikeDTO() {}
 
@@ -30,7 +30,7 @@ public class ReviewLikeDTO {
 		return review_no;
 	}
 
-	public void setReview_no(int review_no) {
+	public void setReview_no(Integer review_no) {
 		this.review_no = review_no;
 	}
 
@@ -38,7 +38,7 @@ public class ReviewLikeDTO {
 		return user_no;
 	}
 
-	public void setUser_no(int user_no) {
+	public void setUser_no(Integer user_no) {
 		this.user_no = user_no;
 	}
 
