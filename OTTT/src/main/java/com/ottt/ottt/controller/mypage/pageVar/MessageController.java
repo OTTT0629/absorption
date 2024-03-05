@@ -122,7 +122,7 @@ public class MessageController {
 				//디비에 저장하고
 				messageService.removeByReceiver(messageDTO);
 				//현재 값을 변경 - 일시적이라 컨틀로러에서만 돼서 디비에 저장 안 되니 위에랑 같이쓰기
-				//messageService로 이동햇ㄷ음
+				//messageService로 이동했음
 				//messageDTO.setDelete_by_receiver(true);
 					if(messageDTO.isDelete()) {
 						messageService.removeMsg(messageDTO.getMessage_no());
